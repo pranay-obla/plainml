@@ -1,0 +1,85 @@
+# Python API
+
+Everything is available as `plainml.<function>`. Functions print progress like the CLI; pass
+`verbose=False` to keep them quiet. Errors caused by the input (a missing column, an unreadable file) raise
+`plainml.PlainMLError`, whose `.message` and `.hint` explain what to do.
+
+## Training
+
+```python
+result = plainml.train(
+    "examples/churn.csv",       # path, URL, database URL, or a pandas DataFrame
+    target="churned",           # or a list for multi-label / multi-output
+    metric="roc_auc",           # any CLI option works as a keyword...
+    models=["rf", "lightgbm"],
+    time_budget="5m",
+    drop=["customer_id"],
+    verbose=False,
+)
+```
+
+`train` accepts every `plainml train` option (`task`, `metric`, `models`, `exclude`, `quick`, `cv`,
+`test_size`, `seed`, `time_budget`, `balance`, `threshold`, `log_target`, `ensemble`, `refit`,
+`save_all`, `zip`, `drop`, `keep`, `sample`, `n_jobs`, `out_dir`, `name`, `report`), plus
+`config="plainml.yaml"` and `progress=callback` (called with a 0–1 fraction and a message).
+
+It returns a `TrainResult`:
+
+| Attribute | |
+|---|---|
+| `best_model`, `best_key` | the winner's name and registry key |
+| `cv_score`, `metric` | its cross-validated score on the ranking metric |
+| `holdout_scores` | every metric on the held-out test rows |
+| `leaderboard` | DataFrame of all models |
+| `importance` | DataFrame of column importances |
+| `model` | the fitted model (a scikit-learn estimator) |
+| `profile` | data checks (`.issues`, `.columns_frame()`) |
+| `run_dir`, `model_path`, `report_path` | where things were saved |
+| `predict(data)` | shortcut for `plainml.predict(result.model, data)` |
+
+## Using models
+
+```python
+plainml.predict(model, data, proba=False, strict=False, output=None)  # -> DataFrame
+plainml.evaluate(model, data, report=None)                           # -> dict of scores
+plainml.explain(model, data=None, row=None, use_shap=False)          # -> Explanation
+model, meta = plainml.load_model("latest")
+```
+
+`model` can be a `.joblib` path, a run folder, part of a run name, `"latest"`, or a loaded model.
+
+`Explanation` has `.importance` (DataFrame), `.sentences` (plain English), `.effects`, `.shap` and, with
+`row=`, `.row_headline` and `.row`.
+
+## Data tools
+
+```python
+plainml.load_data("sales.xlsx", sheet="2026")
+plainml.profile("churn.csv", target="churned")                       # -> Profile
+plainml.clean("raw.csv", output="clean.csv", impute=True, outliers="clip")  # -> DataFrame
+plainml.select_features("data.csv", "price", k=10)                   # -> ranking DataFrame
+```
+
+## Other tasks
+
+```python
+plainml.tune("latest", trials=50, timeout="20m")                     # -> TrainResult
+plainml.cluster("customers.csv", k="2-8")                            # -> ClusterResult (.labels, .descriptions)
+plainml.detect_anomalies("payments.csv", contamination=0.01)         # -> AnomalyResult (.scores, .flags, .top)
+plainml.forecast("sales.csv", "revenue", horizon=30)                 # -> ForecastResult (.forecast, .insights)
+```
+
+## Runs
+
+```python
+plainml.list_runs()          # DataFrame of past runs
+run = plainml.load_run("latest")
+run.info, run.leaderboard, run.importance, run.load_model()
+```
+
+## Serving from your own app
+
+```python
+from plainml.serve import create_app   # needs the "serve" extra
+app = create_app("runs/20260925-125240_churn")   # a FastAPI app: mount it or run it with uvicorn
+```
