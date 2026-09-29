@@ -67,7 +67,7 @@ dev = [
     "pytest-cov>=5.0",
     "ruff>=0.5",
 ]
-docs = ["mkdocs-material>=9.5"]
+docs = ["mkdocs-material>=9.5", "mkdocs<2"]  # MkDocs 2 drops the plugin and theme system
 
 [project.scripts]
 plainml = "plainml.cli:main"

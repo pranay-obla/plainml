@@ -116,7 +116,9 @@ def load_options(func: Callable[..., Any]) -> Callable[..., Any]:
         func
     )
     func = click.option(
-        "--sheet", metavar="NAME", help="Excel sheet to read (default: the first)."
+        "--sheet",
+        metavar="NAME",
+        help="Excel sheet to read (default: the largest, named in a warning).",
     )(func)
     return func
 
@@ -601,7 +603,7 @@ def predict(
 @click.option(
     "--report", "report_path", type=click.Path(dir_okay=False), help="Also write an HTML report."
 )
-@click.option("--runs-dir", default="runs", show_default=True)
+@click.option("--runs-dir", default="runs", show_default=True, help="Where runs are saved.")
 @load_options
 def evaluate(model: str, data: str, report_path: str | None, runs_dir: str, **load: Any) -> None:
     """Check how MODEL does on DATA (which must include the target column).
@@ -632,7 +634,7 @@ def evaluate(model: str, data: str, report_path: str | None, runs_dir: str, **lo
     "--row", type=int, help="Explain the prediction for this row number (0-based) of DATA."
 )
 @click.option("-o", "--output", type=click.Path(dir_okay=False), help="Save the importance table.")
-@click.option("--runs-dir", default="runs", show_default=True)
+@click.option("--runs-dir", default="runs", show_default=True, help="Where runs are saved.")
 @load_options
 def explain(
     model: str,
@@ -720,7 +722,7 @@ def drift(
 @cli.command(short_help="Rebuild (and open) a run's HTML report.")
 @click.argument("run", default="latest")
 @click.option("--open/--no-open", "open_report", default=True, show_default=True)
-@click.option("--runs-dir", default="runs", show_default=True)
+@click.option("--runs-dir", default="runs", show_default=True, help="Where runs are saved.")
 def report(run: str, open_report: bool, runs_dir: str) -> None:
     """Regenerate report.html for RUN ('latest', a folder, or part of a run name)."""
     from plainml.report import write_report
@@ -750,7 +752,7 @@ def report(run: str, open_report: bool, runs_dir: str) -> None:
 @click.option("--cv", type=click.IntRange(2, 20), help="Cross-validation folds.")
 @click.option("--seed", type=int, help="Random seed.")
 @click.option("--open", "open_report", is_flag=True, help="Open the report when done.")
-@click.option("--runs-dir", default="runs", show_default=True)
+@click.option("--runs-dir", default="runs", show_default=True, help="Where runs are saved.")
 def tune(
     source: str,
     target: str | None,
@@ -824,7 +826,7 @@ IMPORTANCE_METHODS_HELP = (
     metavar="N",
     help="Use a random sample: a row count, or a fraction like 0.1.",
 )
-@click.option("--seed", type=int, default=42, show_default=True)
+@click.option("--seed", type=int, default=42, show_default=True, help="Random seed.")
 @click.option("--out", "out_dir", default="runs", show_default=True, help="Where to save the run.")
 @click.option("--name", help="Name for the run folder.")
 @click.option("--private", is_flag=True, help="Keep raw values out of the report.")
@@ -946,7 +948,7 @@ def select_command(
 @click.option(
     "-o", "--output", type=click.Path(dir_okay=False), help="Save DATA with a 'cluster' column."
 )
-@click.option("--seed", type=int, default=42, show_default=True)
+@click.option("--seed", type=int, default=42, show_default=True, help="Random seed.")
 @click.option("--out", "out_dir", default="runs", show_default=True, help="Where to save the run.")
 @click.option("--name", help="Name for the run folder.")
 @click.option("--private", is_flag=True, help="Keep raw values out of the report and run folder.")
@@ -1006,7 +1008,7 @@ def cluster(
 @click.option(
     "-o", "--output", type=click.Path(dir_okay=False), help="Save DATA with anomaly scores."
 )
-@click.option("--seed", type=int, default=42, show_default=True)
+@click.option("--seed", type=int, default=42, show_default=True, help="Random seed.")
 @click.option("--out", "out_dir", default="runs", show_default=True, help="Where to save the run.")
 @click.option("--name", help="Name for the run folder.")
 @click.option("--private", is_flag=True, help="Keep raw values out of the report and run folder.")
@@ -1086,7 +1088,7 @@ def anomaly(
 )
 @click.option("--country", help="Add public holidays for this country code (US, GB, IN, DE...).")
 @click.option("-o", "--output", type=click.Path(dir_okay=False), help="Save the forecast.")
-@click.option("--seed", type=int, default=42, show_default=True)
+@click.option("--seed", type=int, default=42, show_default=True, help="Random seed.")
 @click.option("--out", "out_dir", default="runs", show_default=True, help="Where to save the run.")
 @click.option("--name", help="Name for the run folder.")
 @click.option("--open", "open_report", is_flag=True, help="Open the report when done.")
@@ -1157,13 +1159,13 @@ def forecast(
     show_default=True,
     help="Use 0.0.0.0 to accept outside connections.",
 )
-@click.option("--port", type=int, default=8000, show_default=True)
+@click.option("--port", type=int, default=8000, show_default=True, help="Port to listen on.")
 @click.option(
     "--api-key",
     envvar="PLAINML_API_KEY",
     help="Require this key in the X-API-Key header (or set PLAINML_API_KEY).",
 )
-@click.option("--runs-dir", default="runs", show_default=True)
+@click.option("--runs-dir", default="runs", show_default=True, help="Where runs are saved.")
 def serve(model: str, host: str, port: int, api_key: str | None, runs_dir: str) -> None:
     """Start a prediction API for MODEL, with interactive docs at /docs.
 
@@ -1186,9 +1188,9 @@ def serve(model: str, host: str, port: int, api_key: str | None, runs_dir: str) 
     type=click.Path(file_okay=False),
     help="Folder to write.  [default: deploy/<run>]",
 )
-@click.option("--port", type=int, default=8000, show_default=True)
+@click.option("--port", type=int, default=8000, show_default=True, help="Port to listen on.")
 @click.option("--python", "python_version", help="Python version for the image, e.g. 3.12.")
-@click.option("--runs-dir", default="runs", show_default=True)
+@click.option("--runs-dir", default="runs", show_default=True, help="Where runs are saved.")
 def deploy(
     model: str, output: str | None, port: int, python_version: str | None, runs_dir: str
 ) -> None:
@@ -1208,7 +1210,12 @@ def deploy(
 @cli.command(short_help="Export a model to ONNX or MLflow format.")
 @click.argument("model", default="latest")
 @click.option(
-    "--format", "fmt", type=click.Choice(["onnx", "mlflow"]), default="onnx", show_default=True
+    "--format",
+    "fmt",
+    type=click.Choice(["onnx", "mlflow"]),
+    default="onnx",
+    show_default=True,
+    help="onnx: runs outside Python; mlflow: a folder for MLflow's model registry.",
 )
 @click.option(
     "-o",
@@ -1216,7 +1223,7 @@ def deploy(
     type=click.Path(dir_okay=False),
     help="Output file.  [default: next to the model]",
 )
-@click.option("--runs-dir", default="runs", show_default=True)
+@click.option("--runs-dir", default="runs", show_default=True, help="Where runs are saved.")
 def export(model: str, fmt: str, output: str | None, runs_dir: str) -> None:
     """Convert MODEL to ONNX (checked against the original) or save it as an MLflow model.
 
@@ -1242,7 +1249,7 @@ def export(model: str, fmt: str, output: str | None, runs_dir: str) -> None:
     show_default=True,
     help="Use 0.0.0.0 to let other machines connect (add --token).",
 )
-@click.option("--port", type=int, default=8765, show_default=True)
+@click.option("--port", type=int, default=8765, show_default=True, help="Port to listen on.")
 @click.option("--runs-dir", default="runs", show_default=True, help="Where runs are saved.")
 @click.option(
     "--token",
@@ -1303,8 +1310,8 @@ def ui(ctx: click.Context, port: int, runs_dir: str) -> None:
 
 
 @cli.command(short_help="List past runs, or delete old ones.")
-@click.option("--runs-dir", default="runs", show_default=True)
-@click.option("-n", "--limit", type=int, default=20, show_default=True)
+@click.option("--runs-dir", default="runs", show_default=True, help="Where runs are saved.")
+@click.option("-n", "--limit", type=int, default=20, show_default=True, help="Runs to list.")
 @click.option(
     "--prune", is_flag=True, help="Delete old runs (asks first). Use with --keep / --older-than."
 )
@@ -1406,7 +1413,7 @@ def _prune(
 
 @cli.command(short_help="Compare runs side by side.")
 @click.argument("run_refs", nargs=-1)
-@click.option("--runs-dir", default="runs", show_default=True)
+@click.option("--runs-dir", default="runs", show_default=True, help="Where runs are saved.")
 def compare(run_refs: tuple[str, ...], runs_dir: str) -> None:
     """Compare RUNs (default: the last five): data, target, best model and scores.
 
@@ -1512,7 +1519,8 @@ def models_command(task: str | None) -> None:
     note(
         esc(
             "For = classification / regression / both. Runs = when it's tried: always (and in --quick), "
-            'or only with --thorough or when named with --models. Missing ones: pip install "plainml[all]"'
+            'or only with --thorough or when named with --models. Missing ones: pip install "plainml[all]"; '
+            'PyTorch: pip install "plainml[torch]"'
         )
     )
     note("Use the keys with --models and --exclude, e.g. --models rf,lightgbm")

@@ -109,7 +109,7 @@ Options:
                                   results).
   --open                          Open the report when done.
   -c, --config FILE               YAML file of options (see: plainml init).
-  --sheet NAME                    Excel sheet to read (default: the first).
+  --sheet NAME                    Excel sheet to read (default: the largest, named in a warning).
   --query SQL                     SQL query to run (with a database URL).
   --table NAME                    Database table to read (with a database URL).
   --engine [auto|pandas|polars]   Reader for big CSV/Parquet files.  [default: auto]
@@ -141,7 +141,7 @@ Options:
   --keep COLUMNS                 Columns to use even if they look like IDs.
   --html FILE                    Also write an HTML version.
   --open                         Open the HTML version.
-  --sheet NAME                   Excel sheet to read (default: the first).
+  --sheet NAME                   Excel sheet to read (default: the largest, named in a warning).
   --query SQL                    SQL query to run (with a database URL).
   --table NAME                   Database table to read (with a database URL).
   --engine [auto|pandas|polars]  Reader for big CSV/Parquet files.  [default: auto]
@@ -170,7 +170,7 @@ Options:
   --encode                        One-hot encode text categories (for tools that need numbers).
   --drop-ids / --keep-ids         Remove ID-like and constant columns.  [default: drop-ids]
   --dry-run                       Show what would change without saving.
-  --sheet NAME                    Excel sheet to read (default: the first).
+  --sheet NAME                    Excel sheet to read (default: the largest, named in a warning).
   --query SQL                     SQL query to run (with a database URL).
   --table NAME                    Database table to read (with a database URL).
   --engine [auto|pandas|polars]   Reader for big CSV/Parquet files.  [default: auto]
@@ -202,7 +202,7 @@ Options:
                                  [x>=1000]
   --show INTEGER                 Rows to print.  [default: 10]
   --runs-dir TEXT                Where runs are saved.  [default: runs]
-  --sheet NAME                   Excel sheet to read (default: the first).
+  --sheet NAME                   Excel sheet to read (default: the largest, named in a warning).
   --query SQL                    SQL query to run (with a database URL).
   --table NAME                   Database table to read (with a database URL).
   --engine [auto|pandas|polars]  Reader for big CSV/Parquet files.  [default: auto]
@@ -224,8 +224,8 @@ Usage: plainml evaluate [OPTIONS] MODEL DATA
 
 Options:
   --report FILE                  Also write an HTML report.
-  --runs-dir TEXT                [default: runs]
-  --sheet NAME                   Excel sheet to read (default: the first).
+  --runs-dir TEXT                Where runs are saved.  [default: runs]
+  --sheet NAME                   Excel sheet to read (default: the largest, named in a warning).
   --query SQL                    SQL query to run (with a database URL).
   --table NAME                   Database table to read (with a database URL).
   --engine [auto|pandas|polars]  Reader for big CSV/Parquet files.  [default: auto]
@@ -251,8 +251,8 @@ Options:
   --shap                         Also compute SHAP values (pip install "plainml[explain]").
   --row INTEGER                  Explain the prediction for this row number (0-based) of DATA.
   -o, --output FILE              Save the importance table.
-  --runs-dir TEXT                [default: runs]
-  --sheet NAME                   Excel sheet to read (default: the first).
+  --runs-dir TEXT                Where runs are saved.  [default: runs]
+  --sheet NAME                   Excel sheet to read (default: the largest, named in a warning).
   --query SQL                    SQL query to run (with a database URL).
   --table NAME                   Database table to read (with a database URL).
   --engine [auto|pandas|polars]  Reader for big CSV/Parquet files.  [default: auto]
@@ -278,7 +278,7 @@ Options:
   --name TEXT                    Name for the run folder.
   --report / --no-report         Write report.html.  [default: report]
   --open                         Open the report when done.
-  --sheet NAME                   Excel sheet to read (default: the first).
+  --sheet NAME                   Excel sheet to read (default: the largest, named in a warning).
   --query SQL                    SQL query to run (with a database URL).
   --table NAME                   Database table to read (with a database URL).
   --engine [auto|pandas|polars]  Reader for big CSV/Parquet files.  [default: auto]
@@ -294,7 +294,7 @@ Usage: plainml report [OPTIONS] [RUN]
 
 Options:
   --open / --no-open  [default: open]
-  --runs-dir TEXT     [default: runs]
+  --runs-dir TEXT     Where runs are saved.  [default: runs]
   -h, --help          Show this message and exit.
 ```
 
@@ -324,7 +324,7 @@ Options:
   --cv INTEGER RANGE  Cross-validation folds.  [2<=x<=20]
   --seed INTEGER      Random seed.
   --open              Open the report when done.
-  --runs-dir TEXT     [default: runs]
+  --runs-dir TEXT     Where runs are saved.  [default: runs]
   -h, --help          Show this message and exit.
 ```
 
@@ -355,12 +355,12 @@ Options:
   -o, --output FILE              Also save DATA with only the recommended columns (+ target).
   --drop COLUMNS                 Columns to ignore.
   --sample N                     Use a random sample: a row count, or a fraction like 0.1.
-  --seed INTEGER                 [default: 42]
+  --seed INTEGER                 Random seed.  [default: 42]
   --out TEXT                     Where to save the run.  [default: runs]
   --name TEXT                    Name for the run folder.
   --private                      Keep raw values out of the report.
   --open                         Open the report when done.
-  --sheet NAME                   Excel sheet to read (default: the first).
+  --sheet NAME                   Excel sheet to read (default: the largest, named in a warning).
   --query SQL                    SQL query to run (with a database URL).
   --table NAME                   Database table to read (with a database URL).
   --engine [auto|pandas|polars]  Reader for big CSV/Parquet files.  [default: auto]
@@ -387,7 +387,7 @@ Options:
                                  drop_column, shap, forward, backward, exhaustive, stability.
   -o, --output FILE              Save DATA with only the selected columns (+ target).
   --drop COLUMNS                 Columns to ignore.
-  --sheet NAME                   Excel sheet to read (default: the first).
+  --sheet NAME                   Excel sheet to read (default: the largest, named in a warning).
   --query SQL                    SQL query to run (with a database URL).
   --table NAME                   Database table to read (with a database URL).
   --engine [auto|pandas|polars]  Reader for big CSV/Parquet files.  [default: auto]
@@ -412,12 +412,12 @@ Options:
   --algorithms TEXT              Subset of: kmeans, agglomerative, gmm, hdbscan, kmedoids.
   --drop COLUMNS                 Columns to ignore.
   -o, --output FILE              Save DATA with a 'cluster' column.
-  --seed INTEGER                 [default: 42]
+  --seed INTEGER                 Random seed.  [default: 42]
   --out TEXT                     Where to save the run.  [default: runs]
   --name TEXT                    Name for the run folder.
   --private                      Keep raw values out of the report and run folder.
   --open                         Open the report when done.
-  --sheet NAME                   Excel sheet to read (default: the first).
+  --sheet NAME                   Excel sheet to read (default: the largest, named in a warning).
   --query SQL                    SQL query to run (with a database URL).
   --table NAME                   Database table to read (with a database URL).
   --engine [auto|pandas|polars]  Reader for big CSV/Parquet files.  [default: auto]
@@ -442,12 +442,12 @@ Options:
   --algorithms TEXT              Subset of: iforest, lof, ocsvm, robust.
   --drop COLUMNS                 Columns to ignore.
   -o, --output FILE              Save DATA with anomaly scores.
-  --seed INTEGER                 [default: 42]
+  --seed INTEGER                 Random seed.  [default: 42]
   --out TEXT                     Where to save the run.  [default: runs]
   --name TEXT                    Name for the run folder.
   --private                      Keep raw values out of the report and run folder.
   --open                         Open the report when done.
-  --sheet NAME                   Excel sheet to read (default: the first).
+  --sheet NAME                   Excel sheet to read (default: the largest, named in a warning).
   --query SQL                    SQL query to run (with a database URL).
   --table NAME                   Database table to read (with a database URL).
   --engine [auto|pandas|polars]  Reader for big CSV/Parquet files.  [default: auto]
@@ -486,11 +486,11 @@ Options:
                                  group if used).
   --country TEXT                 Add public holidays for this country code (US, GB, IN, DE...).
   -o, --output FILE              Save the forecast.
-  --seed INTEGER                 [default: 42]
+  --seed INTEGER                 Random seed.  [default: 42]
   --out TEXT                     Where to save the run.  [default: runs]
   --name TEXT                    Name for the run folder.
   --open                         Open the report when done.
-  --sheet NAME                   Excel sheet to read (default: the first).
+  --sheet NAME                   Excel sheet to read (default: the largest, named in a warning).
   --query SQL                    SQL query to run (with a database URL).
   --table NAME                   Database table to read (with a database URL).
   --engine [auto|pandas|polars]  Reader for big CSV/Parquet files.  [default: auto]
@@ -517,7 +517,7 @@ Usage: plainml web [OPTIONS]
 Options:
   --host TEXT                    Use 0.0.0.0 to let other machines connect (add --token).  [default:
                                  127.0.0.1]
-  --port INTEGER                 [default: 8765]
+  --port INTEGER                 Port to listen on.  [default: 8765]
   --runs-dir TEXT                Where runs are saved.  [default: runs]
   --token TEXT                   Require this access token to use the site (or set
                                  PLAINML_WEB_TOKEN).
@@ -540,9 +540,9 @@ Usage: plainml serve [OPTIONS] [MODEL]
 
 Options:
   --host TEXT      Use 0.0.0.0 to accept outside connections.  [default: 127.0.0.1]
-  --port INTEGER   [default: 8000]
+  --port INTEGER   Port to listen on.  [default: 8000]
   --api-key TEXT   Require this key in the X-API-Key header (or set PLAINML_API_KEY).
-  --runs-dir TEXT  [default: runs]
+  --runs-dir TEXT  Where runs are saved.  [default: runs]
   -h, --help       Show this message and exit.
 ```
 
@@ -560,9 +560,9 @@ Usage: plainml deploy [OPTIONS] [MODEL]
 
 Options:
   -o, --output DIRECTORY  Folder to write.  [default: deploy/<run>]
-  --port INTEGER          [default: 8000]
+  --port INTEGER          Port to listen on.  [default: 8000]
   --python TEXT           Python version for the image, e.g. 3.12.
-  --runs-dir TEXT         [default: runs]
+  --runs-dir TEXT         Where runs are saved.  [default: runs]
   -h, --help              Show this message and exit.
 ```
 
@@ -578,9 +578,10 @@ Usage: plainml export [OPTIONS] [MODEL]
     plainml export latest --format mlflow -o churn_mlflow
 
 Options:
-  --format [onnx|mlflow]  [default: onnx]
+  --format [onnx|mlflow]  onnx: runs outside Python; mlflow: a folder for MLflow's model registry.
+                          [default: onnx]
   -o, --output FILE       Output file.  [default: next to the model]
-  --runs-dir TEXT         [default: runs]
+  --runs-dir TEXT         Where runs are saved.  [default: runs]
   -h, --help              Show this message and exit.
 ```
 
@@ -599,8 +600,8 @@ Usage: plainml runs [OPTIONS]
     plainml runs --prune --older-than 30d --kind drift
 
 Options:
-  --runs-dir TEXT       [default: runs]
-  -n, --limit INTEGER   [default: 20]
+  --runs-dir TEXT       Where runs are saved.  [default: runs]
+  -n, --limit INTEGER   Runs to list.  [default: 20]
   --prune               Delete old runs (asks first). Use with --keep / --older-than.
   --keep INTEGER RANGE  With --prune: keep the newest N runs.  [x>=0]
   --older-than AGE      With --prune: only runs older than this, e.g. 30d, 2w.
@@ -621,7 +622,7 @@ Usage: plainml compare [OPTIONS] [RUN_REFS]...
     plainml compare runs/*churn*
 
 Options:
-  --runs-dir TEXT  [default: runs]
+  --runs-dir TEXT  Where runs are saved.  [default: runs]
   -h, --help       Show this message and exit.
 ```
 

@@ -57,15 +57,20 @@ target: {target}        # column to predict (a list for multi-target)
 # models: [rf, lightgbm, xgboost]   # only these models (see: plainml models)
 # exclude: [svm]        # skip these models
 quick: false            # true = only fast models
+# thorough: true        # also the extra models (and PyTorch, if installed) plus a stacked ensemble
 cv: 5                   # cross-validation folds
 test_size: 0.2          # share of rows held out for the final test
 seed: 42                # random seed, for reproducible results
 # time_budget: 10m      # stop starting new models after this long
 balance: auto           # auto | none | weights | smote (classification only)
+# calibrate: true       # make predicted probabilities honest (classification only)
+# log_target: true      # model log(target): helps with skewed amounts like prices
 # drop: [customer_id]   # columns to ignore
 # keep: [zip_code]      # columns to use even if they look like IDs
 ensemble: true          # also try averaging the top 3 models
 report: true            # write report.html
+# private: true         # keep raw data values out of the report and saved files
+# mlflow: true          # also log the run to MLflow
 out_dir: runs
 """
 
