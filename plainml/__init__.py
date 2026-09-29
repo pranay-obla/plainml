@@ -40,19 +40,24 @@ _API = {
     "PlainMLError": "plainml.errors",
 }
 
-__all__ = ["__version__", *_API]
+_MODULES = ("datasets",)  # submodules reachable as plainml.<name>
+
+__all__ = ["__version__", *_API, *_MODULES]
 
 
 def __getattr__(name: str) -> Any:
-    if name in _API:
+    if name in _API or name in _MODULES:
         import importlib
 
+        if name in _MODULES:
+            return importlib.import_module(f"plainml.{name}")
         module = importlib.import_module(_API[name])
         return getattr(module, name)
     raise AttributeError(f"module 'plainml' has no attribute {name!r}")
 
 
 if TYPE_CHECKING:  # pragma: no cover
+    from plainml import datasets
     from plainml.anomaly import detect_anomalies
     from plainml.cleaning import clean
     from plainml.clustering import cluster
