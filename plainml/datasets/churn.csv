@@ -1,0 +1,1501 @@
+customer_id,signup_date,plan,contract,monthly_charges,tenure_months,support_calls,region,last_feedback,churned
+C100000,26/06/2021,standard,monthly,$68.50,61.0,1,east,love app fast love slow,no
+C100001,05/06/2025,basic,annual,$23.29,13.0,0,west,fast fast great confusing crash,no
+C100002,01/05/2026,premium,monthly,$103.50,2.0,0,east,helpful love helpful price slow price slow,no
+C100003,19/09/2022,basic,annual,$23.87,46.0,2,north,confusing support great slow support helpful,no
+C100004,11/05/2024,basic,monthly,$28.17,26.0,2,south,app crash slow great confusing support love,yes
+C100005,14/09/2023,basic,monthly,$31.97,34.0,1,west,confusing love slow helpful support confusing,no
+C100006,01/01/2026,standard,monthly,$50.90,6.0,3,east,cancel helpful price cancel fast crash slow,yes
+C100007,11/04/2024,standard,monthly,$56.68,27.0,2,south,love fast great cancel great billing cancel,no
+C100008,19/09/2022,premium,monthly,$99.03,46.0,1,east,app love slow,yes
+C100009,11/05/2024,standard,monthly,$62.03,26.0,1,west,confusing love love billing,no
+C100010,26/07/2021,premium,monthly,$97.66,60.0,1,south,confusing price price fast app,no
+C100011,24/10/2021,premium,annual,$115.92,57.0,1,north,crash love billing app slow app,no
+C100012,22/04/2022,standard,monthly,$70.29,51.0,2,north,support support support,no
+C100013,26/02/2021,standard,monthly,$45.79,65.0,0,west,confusing app fast great,no
+C100014,23/03/2022,premium,monthly,$99.71,52.0,1,east,confusing fast cancel fast,yes
+C100015,05/06/2025,standard,monthly,$62.32,13.0,0,east,fast billing billing,yes
+C100016,26/06/2021,basic,monthly,$31.05,61.0,0,north,confusing love slow price support,no
+C100017,20/08/2022,premium,monthly,$107.34,47.0,2,south,crash app billing cancel love price price,yes
+C100018,02/12/2025,basic,monthly,$11.84,7.0,1,east,slow crash crash,no
+C100019,08/09/2024,standard,monthly,$52.55,22.0,3,east,slow support crash price billing confusing,yes
+C100020,05/07/2025,premium,annual,$108.25,,1,,crash love confusing crash helpful slow cancel,no
+C100021,29/10/2020,standard,monthly,$66.29,,1,west,cancel great great confusing,no
+C100022,23/03/2022,standard,monthly,$72.71,52.0,0,north,fast price helpful helpful crash,no
+C100023,27/01/2021,basic,monthly,$38.93,66.0,0,south,confusing love price love,no
+C100024,08/10/2024,basic,monthly,$21.30,21.0,0,west,billing slow helpful billing price app app,no
+C100025,19/09/2022,standard,monthly,$65.21,46.0,0,west,great slow cancel,no
+C100026,18/12/2022,standard,annual,$57.30,43.0,1,north,app crash price slow fast helpful app,no
+C100027,22/01/2022,standard,annual,$60.25,54.0,2,east,confusing billing billing billing,no
+C100028,03/10/2025,standard,monthly,$59.34,9.0,1,east,billing app app cancel price slow crash,no
+C100029,16/06/2023,premium,monthly,$96.20,37.0,0,north,great slow helpful,no
+C100030,19/09/2022,standard,monthly,$55.98,46.0,1,south,fast cancel app crash,no
+C100031,25/08/2021,standard,monthly,$63.65,59.0,3,east,billing helpful slow crash app love helpful,no
+C100032,20/08/2022,standard,monthly,$55.73,,4,south,confusing support support price helpful love billing,no
+C100033,13/11/2023,standard,monthly,$60.29,32.0,1,east,crash great fast price,no
+C100034,14/10/2023,basic,monthly,$31.91,33.0,0,north,crash fast cancel billing crash app,no
+C100035,10/06/2024,standard,monthly,$55.80,25.0,2,east,love cancel helpful cancel,no
+C100036,05/07/2025,standard,monthly,$57.29,12.0,0,south,app slow love helpful,no
+C100037,07/11/2024,premium,monthly,$105.91,20.0,2,west,crash crash billing support price fast,yes
+C100038,04/08/2025,basic,monthly,$18.80,11.0,1,south,slow fast great confusing,yes
+C100039,05/02/2025,standard,annual,$54.96,17.0,1,,slow helpful support billing crash billing price,no
+C100040,26/06/2021,basic,monthly,$20.97,61.0,2,west,slow helpful cancel,no
+C100041,17/05/2023,basic,monthly,$30.30,38.0,0,east,cancel fast price billing,no
+C100042,02/12/2025,basic,monthly,$45.22,7.0,1,north,support great helpful slow,yes
+C100043,13/12/2023,basic,monthly,$21.63,31.0,0,west,app great price great great,no
+C100044,07/11/2024,premium,monthly,$106.36,20.0,4,north,love helpful support cancel,yes
+C100045,21/07/2022,standard,monthly,$67.52,48.0,3,north,love love billing love billing cancel,no
+C100046,25/08/2021,basic,annual,$16.17,59.0,0,,app confusing billing slow price,no
+C100047,31/05/2026,standard,monthly,$50.95,1.0,5,north,fast great billing cancel,yes
+C100048,14/09/2023,basic,monthly,$28.87,34.0,2,north,helpful price great cancel confusing cancel,no
+C100049,13/11/2023,basic,monthly,$23.07,32.0,2,east,fast love billing,yes
+C100050,30/08/2020,standard,monthly,$60.67,71.0,0,north,helpful cancel cancel slow,no
+C100051,11/05/2024,standard,annual,$67.20,26.0,2,west,love app slow cancel price fast crash,no
+C100052,05/07/2025,standard,monthly,$63.23,12.0,0,,slow slow app support,no
+C100053,06/05/2025,basic,monthly,$27.82,14.0,1,north,support confusing great,yes
+C100054,14/09/2023,basic,monthly,$32.40,34.0,1,east,fast slow slow billing fast love great,no
+C100055,18/12/2022,basic,monthly,$31.11,43.0,0,west,billing price cancel helpful app app,no
+C100056,10/07/2024,standard,monthly,$51.40,24.0,2,east,confusing great slow support price great helpful,no
+C100057,13/12/2023,standard,monthly,$55.39,31.0,0,east,support cancel price love crash great confusing,yes
+C100058,21/07/2022,premium,annual,$101.81,,0,north,cancel fast slow support price app,no
+C100059,08/09/2024,premium,monthly,$98.59,22.0,2,east,app love crash billing,yes
+C100060,29/10/2020,basic,monthly,$30.93,69.0,0,east,support app helpful price slow love support,no
+C100061,06/04/2025,standard,monthly,$64.34,15.0,1,west,support price price,yes
+C100062,28/12/2020,premium,monthly,$84.49,67.0,0,west,helpful support support app billing great support,no
+C100063,27/04/2021,basic,annual,$37.89,63.0,0,west,slow cancel crash cancel fast,yes
+C100064,28/11/2020,basic,annual,$17.55,68.0,0,west,great billing price confusing,no
+C100065,24/10/2021,basic,monthly,$29.07,57.0,1,north,cancel crash crash slow price,no
+C100066,17/05/2023,standard,annual,$59.92,38.0,0,east,helpful app billing cancel,no
+C100067,18/11/2022,standard,annual,$58.12,44.0,3,west,price cancel slow great fast helpful,no
+C100068,06/04/2025,basic,annual,$30.13,15.0,1,south,slow confusing fast support app support helpful,no
+C100069,10/06/2024,premium,monthly,$95.62,25.0,0,east,price support confusing confusing,no
+C100070,14/10/2023,basic,annual,$24.61,33.0,0,south,support slow great confusing,no
+C100071,28/11/2020,standard,monthly,$58.37,68.0,0,west,slow app fast price great fast helpful,no
+C100072,24/10/2021,basic,annual,$30.03,57.0,0,east,love billing crash slow helpful,no
+C100073,18/03/2023,standard,monthly,$54.86,40.0,2,north,slow slow cancel,yes
+C100074,18/12/2022,basic,monthly,$30.90,43.0,3,west,crash billing cancel billing,yes
+C100075,13/12/2023,standard,annual,$53.78,31.0,1,west,support crash love price,no
+C100076,12/01/2024,basic,annual,$25.44,30.0,0,south,slow slow love great,no
+C100077,28/03/2021,standard,annual,$57.51,64.0,0,north,billing support slow great,no
+C100078,31/05/2026,premium,annual,$101.63,1.0,3,north,fast cancel fast price,no
+C100079,09/08/2024,basic,monthly,$27.08,23.0,3,north,slow slow great helpful,no
+C100080,11/02/2024,premium,monthly,$101.29,29.0,0,south,great confusing cancel cancel app confusing confusing,yes
+C100081,22/05/2022,basic,annual,$38.61,50.0,1,west,crash love app confusing fast cancel confusing,no
+C100082,12/01/2024,basic,monthly,$26.08,30.0,0,east,slow slow confusing,no
+C100083,09/08/2024,basic,monthly,$36.74,23.0,3,north,support helpful great crash,yes
+C100084,01/01/2026,basic,annual,$21.00,6.0,2,north,crash billing confusing slow great crash slow,yes
+C100085,07/12/2024,basic,annual,$32.81,19.0,3,east,crash support support helpful,yes
+C100086,02/11/2025,premium,monthly,$97.77,8.0,1,south,support helpful love billing,yes
+C100087,22/05/2022,basic,annual,$41.58,50.0,0,west,helpful price crash price support,no
+C100088,13/12/2023,standard,monthly,$55.87,31.0,1,east,slow support cancel love confusing,no
+C100089,05/02/2025,standard,annual,$53.92,17.0,2,south,support app confusing app great cancel helpful,no
+C100090,17/04/2023,standard,monthly,$65.24,39.0,1,east,great billing crash,yes
+C100091,16/07/2023,basic,monthly,$31.38,36.0,0,south,billing helpful helpful cancel support,no
+C100092,14/09/2023,basic,annual,$29.37,34.0,0,west,price billing helpful helpful helpful confusing great,no
+C100093,17/01/2023,basic,monthly,$14.42,42.0,2,south,great billing great app,no
+C100094,19/10/2022,standard,monthly,$61.27,45.0,0,east,slow crash price love price cancel,no
+C100095,06/05/2025,premium,annual,$98.25,14.0,0,east,fast support support support support slow crash,no
+C100096,05/07/2025,basic,annual,$29.40,12.0,1,,crash slow great price confusing slow love,no
+C100097,23/03/2022,basic,annual,$24.21,52.0,0,east,app great great app love app cancel,no
+C100098,29/09/2020,standard,monthly,$66.71,70.0,1,east,price support fast,no
+C100099,17/04/2023,basic,monthly,$28.78,39.0,1,north,fast love confusing slow slow billing great,no
+C100100,14/10/2023,standard,annual,$57.39,33.0,0,east,slow helpful cancel great app billing,no
+C100101,19/10/2022,premium,monthly,$89.50,45.0,1,south,crash billing cancel support cancel,no
+C100102,01/04/2026,basic,annual,$27.65,3.0,1,south,price slow price billing,no
+C100103,11/04/2024,basic,monthly,$22.27,27.0,3,south,love helpful price slow confusing,no
+C100104,11/05/2024,basic,annual,$37.03,26.0,1,east,fast crash support app love helpful cancel,no
+C100105,12/01/2024,standard,monthly,$60.31,30.0,4,west,love price price fast,yes
+C100106,21/02/2022,premium,annual,$95.18,53.0,0,east,app price love fast crash,no
+C100107,16/07/2023,standard,monthly,$57.72,36.0,1,west,helpful crash fast love,no
+C100108,26/06/2021,basic,annual,$37.51,61.0,0,east,billing fast app,no
+C100109,14/09/2023,basic,monthly,$29.65,34.0,2,west,helpful confusing cancel great,no
+C100110,01/04/2026,standard,monthly,$58.73,3.0,3,west,billing billing app app,yes
+C100111,21/07/2022,standard,monthly,$69.95,48.0,2,south,cancel support great helpful price,no
+C100112,24/10/2021,basic,monthly,$31.03,57.0,0,west,support app price great great support confusing,no
+C100113,16/02/2023,standard,monthly,$64.23,41.0,0,west,billing support confusing crash crash slow,no
+C100114,28/12/2020,standard,monthly,$56.69,67.0,1,west,support price helpful,no
+C100115,12/01/2024,basic,monthly,$26.52,30.0,1,south,fast price confusing helpful confusing,no
+C100116,24/10/2021,standard,monthly,$63.87,57.0,0,east,billing great support cancel app slow billing,no
+C100117,31/05/2026,basic,annual,$28.52,1.0,0,west,support cancel great,no
+C100118,01/04/2026,basic,annual,$30.96,3.0,2,south,confusing support confusing fast,no
+C100119,24/10/2021,standard,monthly,$58.41,57.0,1,,confusing cancel app great love,no
+C100120,27/04/2021,standard,annual,$58.80,63.0,1,south,crash slow cancel great,no
+C100121,16/06/2023,standard,annual,$58.00,37.0,1,south,helpful cancel great slow confusing support,no
+C100122,22/01/2022,standard,annual,$50.91,54.0,2,east,cancel support helpful,no
+C100123,10/07/2024,basic,annual,$36.62,24.0,1,,cancel cancel price app,no
+C100124,23/03/2022,standard,monthly,$55.20,52.0,0,east,crash cancel price fast confusing,no
+C100125,16/07/2023,standard,annual,$51.62,36.0,0,north,love billing billing helpful cancel,no
+C100126,08/09/2024,basic,monthly,$29.28,22.0,2,south,crash price slow,no
+C100127,02/12/2025,standard,monthly,$54.86,7.0,1,east,confusing cancel love app,no
+C100128,05/06/2025,basic,monthly,$36.37,13.0,0,south,billing helpful great support price,no
+C100129,26/02/2021,basic,annual,$32.64,65.0,3,east,support great crash,no
+C100130,13/11/2023,basic,monthly,$25.28,32.0,4,north,fast cancel app support,yes
+C100131,30/08/2020,standard,annual,$53.49,71.0,3,south,fast great crash billing,no
+C100132,11/05/2024,premium,monthly,$102.66,26.0,2,west,confusing slow fast cancel love billing love,yes
+C100133,31/01/2026,standard,annual,$54.62,5.0,0,west,fast support cancel,no
+C100134,07/12/2024,basic,annual,$20.58,19.0,2,north,helpful crash cancel billing,yes
+C100135,11/05/2024,basic,annual,$18.83,26.0,1,west,price love crash support helpful support love,no
+C100136,22/05/2022,basic,monthly,$33.04,50.0,4,south,crash helpful cancel crash great,no
+C100137,23/03/2022,basic,monthly,$19.43,52.0,3,,crash great fast cancel slow cancel support,no
+C100138,21/02/2022,standard,annual,$51.72,53.0,0,south,cancel great app support great crash great,no
+C100139,09/08/2024,standard,monthly,$62.93,23.0,2,north,cancel cancel app,no
+C100140,11/04/2024,basic,monthly,$33.62,27.0,0,west,slow app great,yes
+C100141,16/02/2023,standard,monthly,$51.77,41.0,5,east,cancel great helpful,yes
+C100142,18/11/2022,basic,monthly,$25.12,44.0,3,east,great love billing helpful fast app cancel,no
+C100143,12/01/2024,premium,monthly,$104.63,30.0,1,south,app helpful crash cancel,no
+C100144,06/05/2025,standard,monthly,$60.04,14.0,1,east,helpful helpful support app confusing support support,yes
+C100145,23/12/2021,standard,monthly,$56.00,55.0,0,west,helpful slow billing app helpful billing app,no
+C100146,16/06/2023,premium,annual,$99.48,37.0,2,north,app fast great helpful app app helpful,no
+C100147,29/10/2020,standard,monthly,$61.28,69.0,1,north,cancel great great crash cancel helpful,no
+C100148,28/11/2020,standard,annual,$52.17,68.0,1,north,crash price app helpful great cancel billing,no
+C100149,28/03/2021,standard,annual,$52.68,64.0,0,south,slow app confusing great,no
+C100150,29/10/2020,standard,monthly,$65.46,69.0,1,south,billing love love love,no
+C100151,19/10/2022,premium,annual,$109.31,45.0,1,east,billing price fast,no
+C100152,08/09/2024,basic,monthly,$34.22,22.0,0,west,crash app price app slow love,no
+C100153,05/07/2025,basic,monthly,$27.66,12.0,1,east,billing great love confusing,no
+C100154,02/11/2025,basic,annual,$24.71,8.0,2,west,slow confusing support great support crash price,yes
+C100155,28/11/2020,premium,monthly,$99.15,68.0,0,east,cancel slow helpful crash cancel slow,no
+C100156,07/11/2024,basic,monthly,$35.11,20.0,2,south,slow slow confusing slow,yes
+C100157,01/05/2026,premium,monthly,$106.36,2.0,2,north,cancel confusing confusing fast app crash great,yes
+C100158,01/04/2026,basic,annual,$28.75,3.0,0,north,support crash cancel fast,no
+C100159,08/09/2024,premium,annual,$101.21,22.0,3,east,confusing billing great,no
+C100160,29/09/2020,basic,annual,$20.15,70.0,1,east,slow slow love confusing app slow,yes
+C100161,07/11/2024,basic,annual,$28.00,20.0,1,south,billing great crash,no
+C100162,02/11/2025,standard,annual,$67.58,8.0,0,south,helpful confusing love crash crash support slow,no
+C100163,21/07/2022,basic,annual,$27.97,48.0,1,west,price price app great love confusing,no
+C100164,31/01/2026,basic,monthly,$31.55,5.0,0,west,slow app fast price,no
+C100165,15/08/2023,basic,monthly,$34.20,35.0,2,east,support crash cancel app slow crash,no
+C100166,02/12/2025,basic,annual,$33.72,,1,east,slow fast confusing billing love,no
+C100167,02/12/2025,premium,monthly,$99.40,7.0,1,west,slow love helpful,no
+C100168,11/05/2024,standard,annual,$55.45,26.0,1,south,crash helpful helpful helpful support,no
+C100169,31/05/2026,standard,monthly,$45.84,1.0,1,south,cancel crash great price helpful fast slow,no
+C100170,26/06/2021,basic,monthly,$21.86,61.0,3,west,billing billing slow support billing app confusing,yes
+C100171,18/12/2022,basic,monthly,$26.96,43.0,2,north,great cancel crash love great,no
+C100172,28/12/2020,premium,annual,$103.10,67.0,4,east,price app billing billing fast,no
+C100173,15/08/2023,premium,annual,$100.04,35.0,2,east,cancel helpful app fast fast billing,no
+C100174,18/03/2023,standard,annual,$65.67,40.0,1,south,fast cancel billing app price great,no
+C100175,18/12/2022,standard,monthly,$51.51,43.0,0,north,cancel price billing,no
+C100176,14/09/2023,basic,monthly,$18.16,34.0,0,north,helpful support helpful crash crash fast,no
+C100177,16/02/2023,basic,monthly,$32.41,41.0,1,south,price support crash crash great,no
+C100178,16/02/2023,standard,monthly,$69.48,41.0,0,north,fast fast price confusing love,no
+C100179,28/03/2021,basic,monthly,$30.00,64.0,1,west,support cancel helpful fast,no
+C100180,08/09/2024,basic,annual,$25.53,22.0,2,east,support confusing great support billing,yes
+C100181,27/01/2021,standard,monthly,$64.12,66.0,0,north,confusing love love love billing love great,no
+C100182,05/06/2025,basic,monthly,$37.25,13.0,1,north,crash great confusing confusing app crash great,no
+C100183,06/05/2025,premium,monthly,$91.54,14.0,2,east,app helpful crash cancel fast great price,yes
+C100184,07/12/2024,basic,monthly,$26.76,19.0,2,east,billing confusing love,no
+C100185,28/12/2020,standard,monthly,$64.86,67.0,1,north,cancel love support confusing fast support great,no
+C100186,06/01/2025,basic,monthly,$30.30,18.0,2,north,support love app support billing,no
+C100187,23/11/2021,standard,annual,$54.05,56.0,2,east,billing slow fast helpful app,no
+C100188,17/01/2023,basic,monthly,$27.04,42.0,2,east,support helpful slow helpful,yes
+C100189,19/09/2022,basic,monthly,$23.54,46.0,3,north,crash app billing price confusing,no
+C100190,01/01/2026,standard,monthly,$50.09,6.0,1,east,crash slow crash love helpful support,yes
+C100191,20/08/2022,premium,annual,$100.70,47.0,1,west,crash cancel great billing helpful fast,no
+C100192,31/01/2026,standard,monthly,$51.08,5.0,1,south,support price confusing fast,no
+C100193,17/04/2023,basic,annual,$28.10,39.0,0,east,confusing confusing crash confusing price fast app,no
+C100194,23/11/2021,basic,monthly,$23.22,56.0,2,,billing billing fast helpful billing cancel,no
+C100195,27/01/2021,basic,monthly,$31.39,66.0,3,east,great helpful price helpful,no
+C100196,30/08/2020,basic,annual,$26.65,71.0,1,east,confusing billing billing billing support,no
+C100197,05/02/2025,basic,monthly,$27.23,17.0,0,east,crash love love,no
+C100198,23/12/2021,premium,monthly,$89.54,55.0,0,west,helpful helpful cancel cancel helpful,no
+C100199,18/12/2022,basic,monthly,$30.14,43.0,1,west,cancel love slow helpful,no
+C100200,21/02/2022,basic,monthly,$26.11,53.0,1,north,slow crash app confusing,no
+C100201,24/09/2021,basic,monthly,$23.94,58.0,2,north,great confusing fast billing crash,no
+C100202,14/09/2023,basic,monthly,$31.20,34.0,0,west,app crash confusing crash love,no
+C100203,03/09/2025,standard,monthly,$64.11,10.0,2,east,billing helpful love helpful,yes
+C100204,23/11/2021,basic,monthly,$38.74,56.0,5,south,price app fast confusing cancel,no
+C100205,18/11/2022,basic,monthly,$29.83,44.0,1,north,app love support price confusing,no
+C100206,03/09/2025,standard,annual,$60.07,10.0,1,south,confusing support great,yes
+C100207,11/02/2024,premium,annual,$93.08,29.0,1,north,confusing slow confusing cancel slow,yes
+C100208,04/08/2025,basic,monthly,$24.66,11.0,1,south,slow price crash love fast price,no
+C100209,23/12/2021,basic,monthly,$35.65,55.0,0,east,crash confusing great,no
+C100210,10/07/2024,standard,monthly,$56.04,24.0,2,west,confusing slow slow slow,yes
+C100211,31/01/2026,basic,annual,$39.55,5.0,3,north,love great crash great slow slow,yes
+C100212,08/10/2024,basic,monthly,$21.37,21.0,3,north,fast slow fast,no
+C100213,18/11/2022,basic,monthly,$27.86,44.0,0,north,confusing app support billing cancel slow price,no
+C100214,17/01/2023,premium,monthly,$97.68,42.0,2,east,price crash app love love support,no
+C100215,26/06/2021,standard,annual,$54.83,61.0,0,west,billing cancel price app support fast crash,no
+C100216,11/05/2024,standard,annual,$57.03,26.0,0,south,price billing great,no
+C100217,19/10/2022,basic,monthly,$27.72,45.0,1,south,cancel crash billing,no
+C100218,28/11/2020,premium,monthly,$99.89,68.0,2,east,price billing slow fast great,yes
+C100219,09/08/2024,basic,annual,$28.36,23.0,4,south,crash billing app app confusing,no
+C100220,01/04/2026,basic,annual,$35.09,3.0,1,south,confusing billing love love,no
+C100221,20/08/2022,standard,annual,$73.79,47.0,1,west,confusing support great crash helpful,no
+C100222,18/12/2022,standard,monthly,$63.36,43.0,0,east,slow billing cancel,no
+C100223,10/06/2024,basic,annual,$31.30,,1,west,confusing love great,no
+C100224,18/03/2023,standard,annual,$53.00,40.0,1,east,billing app slow crash great price,no
+C100225,21/07/2022,basic,monthly,$25.67,48.0,0,north,confusing support support price,no
+C100226,25/08/2021,premium,annual,$88.78,59.0,4,west,love billing billing slow crash,no
+C100227,03/09/2025,basic,annual,$31.85,10.0,1,east,slow confusing slow app slow,no
+C100228,14/09/2023,basic,annual,$20.09,34.0,3,south,support fast great,yes
+C100229,07/11/2024,standard,monthly,$63.05,20.0,3,east,love confusing helpful price fast,no
+C100230,10/07/2024,premium,annual,$94.44,24.0,0,west,support slow love helpful helpful great crash,no
+C100231,01/04/2026,standard,monthly,$61.13,3.0,0,west,great support app fast support,yes
+C100232,12/01/2024,standard,monthly,$62.10,30.0,1,north,fast love billing cancel cancel fast helpful,no
+C100233,01/01/2026,basic,annual,$17.69,6.0,1,west,helpful price slow crash great,no
+C100234,27/01/2021,basic,monthly,$24.23,66.0,2,north,helpful cancel fast helpful fast confusing,no
+C100235,18/03/2023,standard,monthly,$61.14,40.0,1,south,slow support fast billing billing confusing,no
+C100236,12/01/2024,basic,annual,$31.87,30.0,0,south,billing great confusing,no
+C100237,05/02/2025,premium,monthly,$103.79,17.0,2,west,fast billing support app confusing price crash,yes
+C100238,28/12/2020,premium,monthly,$96.95,67.0,2,south,slow confusing price great crash cancel love,no
+C100239,16/06/2023,standard,monthly,$58.44,37.0,1,south,app confusing price support fast cancel helpful,no
+C100240,29/09/2020,basic,annual,$39.71,70.0,1,south,slow love fast confusing confusing,yes
+C100241,20/08/2022,premium,annual,$100.20,47.0,2,south,app helpful great price,no
+C100242,30/08/2020,standard,annual,$63.93,,2,east,love price fast,no
+C100243,27/04/2021,standard,annual,$57.42,63.0,1,south,love crash billing confusing love love,no
+C100244,21/02/2022,basic,monthly,$19.97,53.0,0,south,helpful slow slow,no
+C100245,11/05/2024,standard,annual,$61.80,26.0,0,north,confusing love cancel,no
+C100246,23/11/2021,standard,monthly,$62.27,56.0,1,west,billing cancel crash price slow,yes
+C100247,09/08/2024,basic,annual,$34.66,23.0,2,south,confusing cancel helpful slow,no
+C100248,27/05/2021,basic,monthly,$23.60,62.0,0,west,cancel support slow love,no
+C100249,09/08/2024,basic,annual,$24.76,23.0,0,east,confusing confusing billing app billing app,no
+C100250,01/01/2026,standard,monthly,$46.04,6.0,2,west,great crash confusing love love,yes
+C100251,03/10/2025,basic,monthly,$32.36,9.0,1,north,price support helpful great love helpful crash,yes
+C100252,14/10/2023,standard,annual,$63.88,33.0,0,south,great helpful love helpful,no
+C100253,21/07/2022,standard,annual,$54.97,48.0,1,west,love crash slow billing cancel,no
+C100254,08/10/2024,standard,monthly,$56.36,21.0,0,west,confusing app price slow crash love,yes
+C100255,25/08/2021,basic,annual,$27.71,59.0,2,north,slow confusing crash,no
+C100256,07/12/2024,premium,monthly,$108.54,19.0,1,west,app support helpful crash,yes
+C100257,14/09/2023,basic,annual,$34.44,34.0,1,north,app helpful helpful,no
+C100258,10/07/2024,standard,annual,$65.84,24.0,1,south,price app fast confusing fast,no
+C100259,18/03/2023,basic,annual,$28.12,40.0,2,north,love confusing cancel crash,no
+C100260,06/05/2025,standard,annual,$56.33,14.0,4,south,love slow cancel fast cancel price crash,no
+C100261,29/10/2020,basic,monthly,$35.61,69.0,0,west,app love helpful cancel great helpful price,no
+C100262,27/01/2021,basic,monthly,$19.05,66.0,0,north,love billing price slow billing great,no
+C100263,22/05/2022,premium,monthly,$102.08,50.0,1,west,billing confusing helpful support love billing,yes
+C100264,17/05/2023,basic,monthly,$21.20,38.0,1,south,great cancel price,no
+C100265,21/02/2022,standard,monthly,$63.71,53.0,1,north,price crash app price,no
+C100266,14/09/2023,standard,monthly,$62.05,34.0,1,north,fast crash price helpful helpful app love,no
+C100267,28/03/2021,basic,annual,$23.67,64.0,0,south,app cancel fast price crash,no
+C100268,31/01/2026,standard,annual,$60.31,5.0,0,south,great billing slow support support cancel,no
+C100269,07/03/2025,premium,annual,$92.19,16.0,3,east,price cancel billing love cancel app fast,no
+C100270,14/10/2023,basic,annual,$22.70,33.0,0,east,cancel price slow great love,yes
+C100271,20/08/2022,standard,annual,$56.63,47.0,1,west,app love support support support,no
+C100272,22/04/2022,basic,monthly,$24.42,51.0,1,south,love crash helpful confusing price,no
+C100273,22/04/2022,standard,monthly,$64.91,51.0,1,north,billing app helpful confusing,no
+C100274,28/12/2020,basic,annual,$41.50,67.0,4,west,great price great price great,no
+C100275,26/07/2021,basic,annual,$29.00,60.0,4,east,app confusing cancel billing cancel helpful helpful,no
+C100276,27/01/2021,standard,annual,$58.95,,1,east,fast great billing price confusing fast fast,no
+C100277,10/06/2024,basic,monthly,$33.45,25.0,0,east,cancel support crash great fast app billing,no
+C100278,22/05/2022,premium,monthly,$97.05,50.0,1,west,fast app confusing support great,no
+C100279,21/06/2022,standard,monthly,$61.67,49.0,2,south,love love helpful billing cancel love billing,no
+C100280,18/12/2022,basic,monthly,$17.67,43.0,5,north,confusing price price price crash support app,no
+C100281,18/12/2022,standard,monthly,$54.78,43.0,0,east,crash helpful love fast,no
+C100282,17/05/2023,basic,annual,$19.69,38.0,0,south,billing cancel price helpful,no
+C100283,12/01/2024,standard,annual,$47.47,30.0,3,west,billing support crash confusing great slow app,no
+C100284,03/09/2025,standard,monthly,$64.63,10.0,2,south,billing crash love confusing confusing slow slow,no
+C100285,02/11/2025,standard,annual,$57.11,8.0,4,east,price confusing great slow price app love,no
+C100286,31/05/2026,basic,annual,$38.34,1.0,2,north,cancel app price support,no
+C100287,11/05/2024,basic,annual,$37.95,26.0,2,east,confusing cancel helpful love cancel confusing,no
+C100288,11/04/2024,standard,monthly,$58.54,27.0,2,,billing helpful billing billing,no
+C100289,29/10/2020,basic,monthly,$26.42,69.0,0,north,crash slow great cancel crash confusing,no
+C100290,06/01/2025,premium,monthly,$94.39,18.0,2,south,slow crash support,yes
+C100291,07/03/2025,standard,monthly,$44.27,16.0,1,north,love fast support love,no
+C100292,02/03/2026,standard,monthly,$55.71,4.0,3,west,app helpful fast helpful support great,yes
+C100293,03/10/2025,standard,monthly,$57.27,9.0,0,east,price cancel great slow helpful fast slow,no
+C100294,20/08/2022,premium,annual,$94.87,47.0,1,west,price app cancel cancel cancel,no
+C100295,11/04/2024,basic,monthly,$23.08,27.0,2,east,confusing love support,yes
+C100296,18/11/2022,standard,monthly,$58.38,44.0,2,west,billing crash confusing fast cancel,no
+C100297,02/11/2025,basic,monthly,$26.68,8.0,2,west,price cancel helpful app support billing,no
+C100298,23/12/2021,premium,annual,$99.71,55.0,1,south,support helpful helpful price confusing cancel,no
+C100299,07/12/2024,premium,annual,$92.97,19.0,0,east,support helpful cancel cancel love price love,no
+C100300,31/01/2026,basic,monthly,$40.17,5.0,1,west,billing cancel support,yes
+C100301,26/02/2021,basic,monthly,$32.13,65.0,2,south,cancel fast slow,no
+C100302,11/05/2024,premium,monthly,$97.92,26.0,5,south,support support helpful support love support,yes
+C100303,09/08/2024,standard,monthly,$54.19,23.0,4,west,app love fast app,yes
+C100304,02/03/2026,basic,monthly,$23.07,4.0,1,south,app app helpful,no
+C100305,17/01/2023,basic,annual,$33.61,42.0,1,south,billing crash cancel,no
+C100306,07/11/2024,standard,monthly,$56.42,20.0,0,north,support love cancel fast crash crash fast,no
+C100307,05/02/2025,standard,annual,$59.17,17.0,0,south,price great app billing,no
+C100308,21/06/2022,basic,annual,$31.35,49.0,2,west,price confusing fast support slow great,no
+C100309,21/07/2022,basic,monthly,$25.62,48.0,1,north,app price slow,no
+C100310,04/08/2025,standard,monthly,$60.41,11.0,1,south,helpful app great,no
+C100311,03/09/2025,standard,annual,$47.73,10.0,0,south,crash great fast app crash fast billing,no
+C100312,06/01/2025,standard,annual,$53.10,18.0,2,north,crash helpful confusing,no
+C100313,24/10/2021,standard,monthly,$47.29,57.0,0,north,crash helpful app great crash confusing fast,no
+C100314,07/12/2024,standard,monthly,$56.41,19.0,2,,support confusing price love,yes
+C100315,13/12/2023,standard,annual,$56.31,31.0,2,west,price cancel billing,no
+C100316,03/09/2025,basic,monthly,$39.37,10.0,3,east,confusing billing support helpful price,yes
+C100317,06/05/2025,basic,monthly,$24.14,14.0,1,south,price cancel app crash cancel support slow,no
+C100318,21/07/2022,basic,monthly,$29.70,48.0,1,east,cancel great love,no
+C100319,22/01/2022,standard,monthly,$61.32,54.0,0,south,confusing helpful slow,no
+C100320,27/05/2021,basic,annual,$37.17,62.0,0,north,confusing price crash slow crash helpful,no
+C100321,18/03/2023,standard,monthly,$61.53,40.0,3,east,price billing cancel,no
+C100322,07/11/2024,basic,annual,$33.26,20.0,1,south,support cancel support slow great,no
+C100323,13/11/2023,standard,annual,$69.53,32.0,4,north,price great app support,yes
+C100324,05/07/2025,basic,monthly,$18.77,12.0,1,east,slow slow great billing great slow,yes
+C100325,06/01/2025,basic,monthly,$25.32,,2,south,great slow crash,yes
+C100326,15/08/2023,basic,annual,$26.52,35.0,1,north,great billing love crash great,no
+C100327,23/11/2021,basic,monthly,$28.37,56.0,0,west,crash fast cancel slow app fast slow,no
+C100328,07/12/2024,basic,monthly,$24.98,,3,west,slow slow billing fast helpful helpful,yes
+C100329,11/05/2024,basic,monthly,$35.16,26.0,2,east,crash slow helpful support app price,yes
+C100330,01/04/2026,premium,annual,$95.05,3.0,1,east,great cancel app billing crash,no
+C100331,02/03/2026,basic,annual,$24.86,4.0,0,south,billing billing fast great app,no
+C100332,17/04/2023,standard,annual,$61.52,39.0,0,west,price support great billing fast cancel,no
+C100333,29/10/2020,basic,monthly,$24.32,69.0,5,north,slow app confusing fast fast love slow,no
+C100334,16/02/2023,basic,monthly,$22.46,41.0,3,east,love support helpful price,no
+C100335,01/04/2026,standard,annual,$50.93,3.0,2,north,crash confusing crash support,yes
+C100336,16/02/2023,basic,monthly,$27.92,41.0,1,east,fast fast app billing price billing billing,no
+C100337,03/10/2025,basic,monthly,$34.80,9.0,1,north,billing love support slow price slow,yes
+C100338,22/05/2022,basic,monthly,$33.47,50.0,1,west,fast confusing app,no
+C100339,14/09/2023,standard,monthly,$61.39,34.0,0,south,confusing app crash,no
+C100340,11/05/2024,premium,monthly,$99.40,26.0,2,west,billing helpful app,no
+C100341,06/04/2025,basic,monthly,$25.36,15.0,0,south,support great helpful crash,no
+C100342,05/06/2025,basic,annual,$28.12,13.0,2,north,great app support,no
+C100343,10/07/2024,basic,monthly,$21.36,24.0,1,east,love billing crash support,no
+C100344,13/11/2023,basic,monthly,$29.63,32.0,1,north,billing app app app app,no
+C100345,16/02/2023,basic,monthly,$34.68,41.0,2,west,helpful billing crash,no
+C100346,21/06/2022,standard,monthly,$48.97,49.0,3,east,billing slow confusing,no
+C100347,29/10/2020,basic,annual,$36.59,69.0,1,south,app fast billing cancel helpful confusing,no
+C100348,01/04/2026,standard,monthly,$45.76,3.0,0,east,support helpful billing,no
+C100349,28/12/2020,basic,annual,$24.04,67.0,0,south,app price cancel support love great,no
+C100350,18/03/2023,standard,monthly,$52.23,40.0,0,,slow billing crash app crash fast,no
+C100351,01/01/2026,standard,monthly,$54.38,6.0,3,north,great fast slow love great,no
+C100352,27/05/2021,basic,monthly,$26.54,62.0,2,north,support great support billing app slow,no
+C100353,26/06/2021,premium,monthly,$106.17,61.0,1,west,support cancel fast app,no
+C100354,08/10/2024,standard,monthly,$52.64,21.0,4,east,support slow cancel cancel billing,yes
+C100355,05/07/2025,standard,monthly,$53.13,12.0,0,south,great confusing great app,no
+C100356,08/09/2024,basic,annual,$24.21,22.0,3,north,crash crash helpful,no
+C100357,24/09/2021,basic,annual,$25.34,58.0,3,north,support price great,no
+C100358,27/01/2021,standard,monthly,$54.80,66.0,0,west,price slow cancel,no
+C100359,08/09/2024,basic,monthly,$20.66,22.0,1,north,fast support helpful slow fast,no
+C100360,14/09/2023,premium,annual,$100.15,34.0,1,north,app cancel crash support love cancel cancel,no
+C100361,22/04/2022,premium,annual,$97.83,51.0,0,east,support great slow helpful price billing,no
+C100362,05/06/2025,basic,monthly,$34.57,13.0,0,west,fast slow fast,no
+C100363,23/03/2022,standard,annual,$66.02,52.0,2,east,billing love app slow app,no
+C100364,07/03/2025,standard,monthly,$49.28,16.0,1,north,confusing love helpful price app,no
+C100365,26/06/2021,basic,annual,$38.05,61.0,0,south,cancel slow slow crash support great cancel,no
+C100366,03/09/2025,basic,monthly,$31.69,10.0,0,south,confusing crash love confusing app confusing,no
+C100367,29/09/2020,basic,annual,$36.22,70.0,0,east,slow cancel love billing,no
+C100368,23/03/2022,standard,monthly,$58.08,52.0,1,,support crash app support price,no
+C100369,07/11/2024,standard,monthly,$62.51,20.0,1,north,support confusing helpful love price helpful crash,no
+C100370,24/09/2021,standard,annual,$62.01,58.0,0,west,crash price cancel crash price cancel,no
+C100371,19/10/2022,basic,annual,$36.69,,1,west,app support great price great price,no
+C100372,14/09/2023,premium,monthly,$94.98,34.0,0,east,app price love,no
+C100373,21/02/2022,basic,monthly,$25.04,53.0,0,north,great price great,no
+C100374,21/06/2022,basic,annual,$27.14,49.0,1,south,price helpful confusing confusing slow crash app,no
+C100375,01/01/2026,basic,annual,$36.77,6.0,0,south,support billing cancel price crash great,no
+C100376,05/02/2025,basic,annual,$37.82,17.0,2,north,app love app,no
+C100377,21/07/2022,premium,annual,$92.00,48.0,0,west,crash love fast support slow,no
+C100378,11/02/2024,standard,annual,$61.92,29.0,1,west,cancel love cancel cancel confusing,no
+C100379,09/08/2024,basic,monthly,$28.54,23.0,2,north,helpful helpful slow cancel slow great,yes
+C100380,17/04/2023,premium,annual,$97.33,39.0,1,west,price love support price,no
+C100381,05/07/2025,premium,annual,$101.97,12.0,3,west,billing crash fast price helpful helpful,no
+C100382,29/09/2020,standard,monthly,$69.91,70.0,2,west,app helpful price app price,yes
+C100383,18/03/2023,standard,monthly,$62.32,40.0,1,west,helpful app crash love price price crash,no
+C100384,31/05/2026,premium,monthly,$96.06,1.0,2,west,fast app slow crash crash great,yes
+C100385,14/10/2023,basic,monthly,$25.04,33.0,2,south,price cancel crash support support crash crash,no
+C100386,21/02/2022,standard,monthly,$61.86,53.0,0,west,billing app price,no
+C100387,16/02/2023,standard,annual,$60.41,41.0,1,,price billing helpful,no
+C100388,16/06/2023,standard,annual,$65.66,,1,east,love billing helpful,no
+C100389,19/09/2022,basic,annual,$37.27,46.0,0,north,billing app crash slow,no
+C100390,01/05/2026,basic,monthly,$30.41,2.0,1,north,fast billing love love support love support,yes
+C100391,16/07/2023,premium,annual,$102.57,36.0,1,south,helpful great helpful confusing love,no
+C100392,11/02/2024,premium,monthly,$108.96,29.0,1,north,helpful great fast billing app support,no
+C100393,26/02/2021,basic,annual,$36.73,65.0,0,south,fast billing helpful billing crash,no
+C100394,17/01/2023,standard,monthly,$53.54,42.0,2,east,crash cancel confusing crash crash fast billing,no
+C100395,05/06/2025,standard,monthly,$50.38,13.0,1,south,price crash great app love slow fast,no
+C100396,26/06/2021,basic,monthly,$20.77,61.0,1,west,support great cancel,no
+C100397,08/10/2024,basic,monthly,$18.42,21.0,1,north,app crash billing cancel fast confusing,no
+C100398,30/08/2020,basic,monthly,$31.28,71.0,0,east,cancel helpful great price billing,no
+C100399,11/05/2024,standard,monthly,$51.43,26.0,2,west,billing cancel love price support,no
+C100400,26/06/2021,basic,monthly,$33.04,61.0,2,east,crash support helpful billing price cancel slow,no
+C100401,23/12/2021,standard,monthly,$54.02,55.0,2,east,great fast price love slow price,no
+C100402,23/03/2022,standard,annual,$64.67,52.0,1,east,love cancel fast billing,no
+C100403,20/08/2022,premium,monthly,$102.72,47.0,2,north,crash love love billing crash app,no
+C100404,01/05/2026,standard,annual,$59.87,2.0,3,south,confusing love support fast price slow confusing,yes
+C100405,06/04/2025,basic,monthly,$31.63,15.0,0,east,app cancel app price love app confusing,no
+C100406,27/04/2021,basic,monthly,$21.17,63.0,2,north,support price cancel fast fast,no
+C100407,21/02/2022,standard,annual,$44.08,53.0,2,north,confusing support cancel great support price,no
+C100408,14/10/2023,basic,monthly,$25.52,33.0,0,south,crash billing fast app price cancel,no
+C100409,23/12/2021,basic,annual,$31.46,55.0,1,north,price fast helpful price fast,no
+C100410,20/08/2022,basic,annual,$20.94,47.0,1,north,cancel support price price,no
+C100411,23/12/2021,basic,annual,$32.68,55.0,2,east,cancel confusing cancel love confusing great,no
+C100412,17/05/2023,basic,annual,$32.34,38.0,0,east,crash confusing price slow support cancel,no
+C100413,01/01/2026,basic,annual,$29.46,6.0,2,,slow fast fast fast cancel love,no
+C100414,11/02/2024,basic,monthly,$30.30,29.0,0,south,love billing support price great cancel confusing,no
+C100415,07/03/2025,premium,annual,$98.17,16.0,1,south,slow price price support,no
+C100416,27/05/2021,basic,monthly,$29.58,62.0,2,north,billing support helpful price,no
+C100417,28/03/2021,premium,monthly,$91.09,64.0,0,east,love great price fast,no
+C100418,06/04/2025,basic,monthly,$35.04,15.0,1,,love confusing great love fast billing cancel,no
+C100419,27/04/2021,standard,annual,$60.77,63.0,0,west,great price confusing cancel billing support crash,no
+C100420,10/07/2024,standard,monthly,$61.93,24.0,1,west,support price fast confusing slow,no
+C100421,06/04/2025,standard,monthly,$54.19,15.0,1,east,app great love,no
+C100422,07/11/2024,standard,monthly,$49.76,20.0,1,east,crash confusing helpful billing fast confusing,no
+C100423,18/03/2023,basic,monthly,$36.09,40.0,2,west,crash fast crash helpful,no
+C100424,06/01/2025,standard,monthly,$49.83,18.0,1,west,app billing confusing app support price,yes
+C100425,07/12/2024,basic,annual,$26.68,19.0,1,north,helpful slow crash great,no
+C100426,22/05/2022,standard,annual,$58.01,50.0,3,north,app billing support great love love fast,no
+C100427,12/01/2024,standard,monthly,$60.18,30.0,2,east,crash fast cancel,no
+C100428,22/05/2022,basic,monthly,$30.64,50.0,1,east,love slow great slow,no
+C100429,01/05/2026,basic,annual,$28.57,2.0,1,south,love fast slow,no
+C100430,02/12/2025,basic,annual,$20.08,7.0,1,west,helpful great support billing slow,yes
+C100431,08/10/2024,standard,annual,$57.02,21.0,1,south,fast price fast price cancel,no
+C100432,11/05/2024,basic,annual,$28.14,26.0,3,west,cancel slow fast cancel love helpful,no
+C100433,07/11/2024,standard,monthly,$61.91,20.0,3,east,cancel helpful fast love fast great,yes
+C100434,11/02/2024,standard,annual,$60.11,29.0,2,east,price crash confusing,yes
+C100435,27/01/2021,basic,monthly,$35.50,66.0,1,west,confusing billing crash helpful,no
+C100436,14/10/2023,premium,monthly,$103.73,33.0,3,north,fast helpful slow,no
+C100437,17/01/2023,standard,monthly,$51.02,42.0,2,south,love support confusing,no
+C100438,24/10/2021,standard,monthly,$59.09,57.0,0,south,app love fast helpful,no
+C100439,05/06/2025,basic,monthly,$31.34,13.0,1,north,cancel fast confusing,yes
+C100440,04/08/2025,basic,monthly,$25.64,11.0,0,east,helpful love price,yes
+C100441,13/12/2023,basic,monthly,$37.76,31.0,1,west,cancel cancel price,no
+C100442,19/10/2022,standard,monthly,$55.39,45.0,2,west,cancel price love fast,yes
+C100443,15/08/2023,basic,monthly,$20.94,35.0,1,north,fast support price support confusing app,no
+C100444,03/10/2025,basic,monthly,$18.04,9.0,0,south,price fast crash confusing,yes
+C100445,19/09/2022,standard,annual,$55.89,46.0,3,south,slow app helpful,no
+C100446,27/01/2021,basic,annual,$25.92,66.0,1,north,love support great cancel helpful,no
+C100447,17/05/2023,basic,monthly,$26.45,38.0,0,south,billing billing price crash crash confusing confusing,no
+C100448,28/03/2021,basic,annual,$15.44,64.0,1,south,billing helpful love slow confusing helpful crash,no
+C100449,12/01/2024,basic,annual,$28.81,30.0,2,north,fast app love cancel love app,no
+C100450,11/02/2024,basic,annual,$35.65,29.0,2,west,price fast love,no
+C100451,09/08/2024,basic,monthly,$24.90,23.0,3,north,great fast fast app,yes
+C100452,16/06/2023,premium,monthly,$102.40,37.0,2,south,crash crash billing confusing great app confusing,no
+C100453,16/02/2023,standard,annual,$55.08,41.0,1,north,app confusing billing great,yes
+C100454,02/11/2025,basic,monthly,$23.87,8.0,1,north,helpful cancel love,yes
+C100455,29/09/2020,standard,monthly,$66.91,70.0,0,north,app love love billing,no
+C100456,04/08/2025,basic,annual,$33.21,11.0,2,east,price app billing price confusing,no
+C100457,18/03/2023,standard,monthly,$64.20,40.0,0,north,love great helpful love,no
+C100458,09/08/2024,basic,monthly,$42.92,23.0,1,west,helpful support support price price great cancel,no
+C100459,27/04/2021,standard,monthly,$58.95,63.0,3,east,helpful confusing cancel confusing cancel slow,no
+C100460,19/09/2022,premium,monthly,$98.85,46.0,0,west,love price great app app price,no
+C100461,01/05/2026,premium,monthly,$99.82,2.0,2,,price billing crash helpful,no
+C100462,01/05/2026,standard,annual,$67.61,2.0,0,south,app fast support,no
+C100463,06/04/2025,basic,annual,$34.67,15.0,1,north,fast great fast price confusing billing,no
+C100464,25/08/2021,basic,monthly,$23.65,59.0,1,west,crash cancel fast,no
+C100465,27/05/2021,basic,annual,$24.06,62.0,3,west,confusing price price billing,no
+C100466,18/03/2023,basic,annual,$31.25,40.0,4,west,helpful slow love cancel,yes
+C100467,16/02/2023,basic,annual,$32.04,41.0,1,west,great support confusing,no
+C100468,19/09/2022,premium,monthly,$101.82,46.0,3,south,price fast cancel fast confusing crash fast,no
+C100469,15/08/2023,basic,monthly,$32.30,35.0,1,west,cancel slow price,no
+C100470,16/06/2023,basic,monthly,$27.86,37.0,1,east,billing app great,no
+C100471,11/04/2024,standard,monthly,$62.70,27.0,2,south,billing slow confusing slow,yes
+C100472,15/08/2023,standard,monthly,$62.87,35.0,0,east,crash fast app slow support crash,no
+C100473,08/10/2024,basic,annual,$23.63,21.0,1,south,price helpful billing love price,yes
+C100474,22/01/2022,standard,annual,$51.45,54.0,1,north,helpful support cancel billing price love,no
+C100475,21/06/2022,standard,monthly,$60.42,49.0,2,east,love slow crash love,no
+C100476,22/04/2022,standard,monthly,$56.55,51.0,0,west,fast confusing price,no
+C100477,11/05/2024,basic,annual,$20.36,26.0,2,east,confusing price fast great confusing slow great,yes
+C100478,11/02/2024,standard,monthly,$63.65,29.0,0,north,slow support app app confusing,yes
+C100479,13/12/2023,basic,monthly,$31.53,31.0,3,east,support support cancel great fast cancel,no
+C100480,18/12/2022,standard,monthly,$67.37,43.0,1,west,love confusing app love billing,no
+C100481,23/11/2021,premium,annual,$98.68,56.0,1,south,price slow crash confusing love support crash,no
+C100482,31/05/2026,basic,annual,$29.45,1.0,2,south,great confusing support cancel cancel,no
+C100483,28/11/2020,standard,annual,$50.34,68.0,3,west,price helpful fast confusing fast app support,no
+C100484,27/05/2021,basic,monthly,$37.46,62.0,0,south,billing helpful fast great confusing,no
+C100485,30/08/2020,basic,monthly,$32.70,71.0,1,east,billing cancel app love confusing support,no
+C100486,07/11/2024,standard,monthly,$64.36,20.0,1,south,fast great great slow slow fast,yes
+C100487,15/08/2023,basic,monthly,$27.49,35.0,2,east,love support support helpful billing,no
+C100488,17/04/2023,basic,annual,$28.63,39.0,2,south,app app helpful cancel great helpful crash,no
+C100489,03/09/2025,standard,annual,$60.95,10.0,0,south,app crash price cancel great love helpful,no
+C100490,11/05/2024,standard,annual,$54.43,26.0,3,east,fast app price love billing slow app,no
+C100491,01/05/2026,standard,annual,$54.31,2.0,1,north,confusing support cancel great fast,no
+C100492,03/10/2025,premium,annual,$110.95,9.0,2,east,great helpful great great great great,no
+C100493,16/07/2023,basic,annual,$31.02,36.0,1,east,app support great helpful helpful support love,no
+C100494,09/08/2024,premium,monthly,$94.81,23.0,2,north,confusing cancel helpful billing helpful,no
+C100495,01/01/2026,premium,annual,$90.40,6.0,1,north,fast support love support,no
+C100496,26/07/2021,basic,monthly,$21.88,60.0,1,west,crash support confusing helpful,no
+C100497,03/10/2025,basic,monthly,$30.91,9.0,1,south,crash price confusing price price slow cancel,no
+C100498,05/02/2025,basic,monthly,$23.18,17.0,0,west,confusing app crash support cancel cancel billing,no
+C100499,05/02/2025,standard,annual,$52.43,17.0,1,north,support great price billing cancel cancel billing,yes
+C100500,16/06/2023,standard,monthly,$57.66,37.0,4,east,cancel billing slow slow,no
+C100501,30/08/2020,basic,annual,$31.08,71.0,1,north,crash cancel confusing love slow crash,no
+C100502,01/05/2026,premium,annual,$106.63,2.0,1,north,great price great crash app app crash,yes
+C100503,05/07/2025,standard,monthly,$53.99,12.0,0,west,cancel slow crash support billing support app,no
+C100504,10/07/2024,basic,monthly,$24.73,24.0,2,,price crash helpful,no
+C100505,02/11/2025,standard,monthly,$61.13,8.0,1,west,helpful billing app,no
+C100506,31/05/2026,standard,monthly,$55.99,1.0,0,west,confusing great billing fast confusing fast,yes
+C100507,27/01/2021,basic,monthly,$33.93,66.0,0,north,cancel support app support great,no
+C100508,07/03/2025,standard,monthly,$56.10,16.0,2,south,helpful price confusing crash great,yes
+C100509,19/10/2022,standard,annual,$50.92,45.0,2,north,crash confusing app fast confusing,no
+C100510,27/04/2021,premium,annual,$94.62,63.0,3,east,app confusing love love,no
+C100511,21/02/2022,standard,monthly,$49.57,53.0,0,south,cancel cancel support support,no
+C100512,02/03/2026,basic,monthly,$25.71,4.0,1,,price price confusing support slow support,no
+C100513,11/05/2024,basic,monthly,$31.78,26.0,2,north,crash great billing fast great app crash,no
+C100514,02/03/2026,basic,monthly,$29.20,4.0,0,west,fast price slow,no
+C100515,28/12/2020,basic,monthly,$28.18,67.0,3,south,cancel confusing billing love,no
+C100516,14/10/2023,standard,monthly,$51.21,,3,west,billing great helpful crash,no
+C100517,29/09/2020,basic,annual,$24.32,70.0,1,north,great cancel billing app helpful support,no
+C100518,11/02/2024,standard,monthly,$56.55,29.0,0,south,love slow billing billing confusing support helpful,yes
+C100519,18/03/2023,basic,annual,$30.36,40.0,0,south,great app slow cancel,no
+C100520,31/01/2026,standard,monthly,$74.04,5.0,1,west,price slow helpful crash app,yes
+C100521,30/08/2020,basic,monthly,$24.75,71.0,2,north,cancel confusing great confusing billing,no
+C100522,26/06/2021,basic,annual,$34.52,61.0,4,south,great billing love slow slow crash great,no
+C100523,16/07/2023,basic,monthly,$21.94,36.0,0,west,great support great slow slow great great,no
+C100524,05/02/2025,premium,monthly,$92.64,17.0,3,,cancel love confusing support support,no
+C100525,13/11/2023,standard,monthly,$47.02,32.0,1,north,confusing price app love,yes
+C100526,13/11/2023,basic,monthly,$24.15,32.0,0,east,helpful price app support billing fast,no
+C100527,23/11/2021,basic,annual,$35.10,56.0,1,south,billing helpful crash billing billing great,no
+C100528,08/09/2024,basic,monthly,$28.70,22.0,2,west,slow great confusing fast slow cancel billing,no
+C100529,19/09/2022,standard,monthly,$66.15,46.0,0,east,app billing slow,no
+C100530,24/09/2021,premium,annual,$95.83,58.0,2,west,billing billing billing support slow crash support,no
+C100531,06/04/2025,standard,annual,$65.22,15.0,3,east,confusing slow confusing cancel great confusing fast,no
+C100532,23/11/2021,standard,annual,$55.48,56.0,2,,app crash crash app slow,no
+C100533,16/06/2023,basic,monthly,$34.14,37.0,1,east,price love slow helpful helpful,no
+C100534,06/04/2025,standard,monthly,$68.62,15.0,1,east,slow crash billing confusing,yes
+C100535,01/05/2026,basic,monthly,$27.44,2.0,3,south,fast helpful support love billing app price,no
+C100536,27/04/2021,standard,annual,$50.71,63.0,1,east,price price price great fast crash confusing,no
+C100537,27/04/2021,basic,annual,$39.84,63.0,0,,crash love fast cancel billing,no
+C100538,31/01/2026,standard,monthly,$53.59,5.0,0,east,helpful price fast cancel cancel,no
+C100539,17/04/2023,basic,annual,$25.42,39.0,0,north,confusing billing love app billing great slow,no
+C100540,02/12/2025,basic,monthly,$26.95,7.0,0,east,app love slow app support confusing crash,no
+C100541,02/03/2026,basic,monthly,$34.30,4.0,1,east,billing crash crash price price slow,no
+C100542,31/01/2026,basic,annual,$32.95,5.0,0,east,cancel confusing cancel fast crash cancel app,no
+C100543,28/12/2020,basic,annual,$32.74,67.0,0,east,confusing helpful support cancel crash cancel cancel,no
+C100544,16/07/2023,standard,monthly,$57.17,36.0,0,north,helpful slow helpful love great helpful confusing,yes
+C100545,30/08/2020,standard,monthly,$57.66,71.0,1,north,great app confusing great price slow,no
+C100546,23/12/2021,basic,monthly,$33.75,55.0,2,south,app crash great,no
+C100547,21/02/2022,standard,annual,$68.82,53.0,3,west,fast slow price slow confusing crash support,no
+C100548,02/11/2025,standard,monthly,$51.34,8.0,0,west,love slow price confusing price slow price,no
+C100549,13/12/2023,premium,monthly,$106.36,31.0,0,west,helpful crash fast price crash,yes
+C100550,18/03/2023,premium,monthly,$104.64,40.0,2,south,app price love helpful app,yes
+C100551,17/01/2023,premium,annual,$102.83,42.0,1,north,great confusing cancel,no
+C100552,03/09/2025,premium,annual,$94.70,10.0,2,east,app billing cancel,no
+C100553,31/05/2026,premium,annual,$99.49,1.0,2,south,love support great helpful,yes
+C100554,18/11/2022,premium,monthly,$101.24,44.0,2,west,crash helpful price,yes
+C100555,02/11/2025,premium,monthly,$95.08,8.0,1,west,support fast crash confusing love,no
+C100556,28/12/2020,basic,monthly,$36.02,67.0,1,west,slow love crash great love,yes
+C100557,10/07/2024,basic,monthly,$26.13,24.0,1,south,slow support slow,no
+C100558,27/01/2021,premium,annual,$108.19,66.0,2,south,helpful price helpful slow,no
+C100559,12/01/2024,basic,monthly,$19.98,30.0,0,west,fast fast billing helpful support,no
+C100560,13/12/2023,premium,monthly,$90.73,31.0,2,west,cancel price love price slow great,no
+C100561,22/01/2022,premium,monthly,$87.60,54.0,0,north,love love support,yes
+C100562,28/03/2021,standard,monthly,$63.25,64.0,1,south,cancel helpful slow crash price price,no
+C100563,05/06/2025,basic,monthly,$23.54,13.0,4,south,support billing confusing,yes
+C100564,13/11/2023,standard,annual,$54.04,32.0,1,east,fast helpful support billing support support,no
+C100565,03/10/2025,standard,monthly,$64.44,9.0,0,,confusing price helpful,no
+C100566,22/05/2022,basic,monthly,$39.39,50.0,0,south,fast slow price,no
+C100567,22/05/2022,premium,annual,$94.44,50.0,0,south,price cancel support price great support cancel,no
+C100568,04/08/2025,standard,annual,$67.16,11.0,0,west,love slow love confusing slow app crash,yes
+C100569,28/03/2021,premium,monthly,$102.20,64.0,1,south,app app cancel,no
+C100570,29/09/2020,basic,monthly,$28.88,70.0,3,south,slow slow slow slow price great confusing,no
+C100571,27/04/2021,premium,annual,$91.76,63.0,1,north,price slow support support,no
+C100572,24/10/2021,basic,monthly,$20.48,57.0,0,south,confusing app great cancel support app,no
+C100573,21/02/2022,standard,monthly,$59.32,53.0,0,north,fast slow fast price slow fast crash,no
+C100574,07/11/2024,premium,monthly,$99.74,20.0,0,north,cancel billing great helpful price cancel app,no
+C100575,29/09/2020,standard,monthly,$54.79,70.0,1,east,cancel cancel confusing helpful,no
+C100576,08/09/2024,basic,monthly,$22.98,22.0,2,west,billing fast confusing support billing love,no
+C100577,17/05/2023,premium,monthly,$91.03,38.0,4,south,slow helpful billing fast great love,no
+C100578,22/05/2022,standard,monthly,$61.07,50.0,1,west,billing fast fast fast helpful fast helpful,no
+C100579,23/12/2021,basic,annual,$32.99,55.0,0,north,love cancel support fast slow app,no
+C100580,10/07/2024,premium,monthly,$103.26,24.0,1,south,billing price confusing price cancel billing,no
+C100581,12/01/2024,standard,annual,$62.63,30.0,0,west,support slow great slow,no
+C100582,14/09/2023,premium,annual,$95.67,,4,south,support support app price great fast,yes
+C100583,11/05/2024,standard,monthly,$68.55,26.0,1,north,billing price price great fast,yes
+C100584,10/07/2024,basic,monthly,$22.88,24.0,0,east,fast crash slow price great cancel great,no
+C100585,26/02/2021,standard,monthly,$62.36,65.0,0,west,fast app slow support slow,no
+C100586,06/01/2025,standard,annual,$56.53,18.0,0,west,app great app billing great confusing,no
+C100587,13/12/2023,standard,annual,$52.23,31.0,1,south,love helpful crash,no
+C100588,04/08/2025,basic,monthly,$25.06,11.0,3,south,cancel app support,yes
+C100589,21/02/2022,basic,monthly,$32.22,53.0,2,west,crash billing price love great,yes
+C100590,24/09/2021,basic,monthly,$35.47,58.0,0,east,price love confusing,no
+C100591,16/07/2023,basic,monthly,$30.88,36.0,3,west,cancel cancel fast crash,no
+C100592,31/01/2026,basic,monthly,$11.33,5.0,0,west,cancel cancel app,no
+C100593,02/11/2025,basic,monthly,$33.36,8.0,1,north,support helpful crash great billing helpful,yes
+C100594,06/01/2025,standard,monthly,$46.19,18.0,3,north,support fast support,no
+C100595,03/09/2025,standard,annual,$70.52,10.0,0,west,billing great helpful crash confusing price cancel,no
+C100596,05/02/2025,basic,annual,$30.25,17.0,0,west,helpful confusing love app fast fast app,no
+C100597,16/06/2023,basic,annual,$29.83,37.0,0,south,fast price app confusing billing price,no
+C100598,17/01/2023,basic,monthly,$34.98,42.0,1,north,confusing helpful helpful crash billing,no
+C100599,22/04/2022,basic,annual,$27.25,51.0,1,north,price confusing slow helpful support helpful confusing,no
+C100600,28/12/2020,basic,monthly,$27.41,67.0,3,south,billing helpful slow confusing helpful app,no
+C100601,21/02/2022,basic,monthly,$26.66,53.0,1,,fast price app cancel cancel price slow,no
+C100602,14/09/2023,basic,monthly,$29.73,34.0,0,,cancel app billing support,no
+C100603,10/07/2024,basic,monthly,$29.45,24.0,0,,price great love billing cancel,no
+C100604,27/05/2021,basic,monthly,$30.33,62.0,2,north,great app price app,no
+C100605,31/05/2026,standard,monthly,$38.98,1.0,0,east,love price price billing,no
+C100606,23/03/2022,basic,annual,$28.39,52.0,1,south,price confusing app love,no
+C100607,17/05/2023,basic,annual,$19.37,38.0,2,south,fast billing helpful,no
+C100608,15/08/2023,standard,monthly,$75.34,35.0,2,north,fast slow cancel support slow cancel,no
+C100609,06/05/2025,standard,monthly,$63.74,14.0,1,south,price crash love price great fast,yes
+C100610,08/10/2024,standard,monthly,$64.55,21.0,0,west,support cancel support slow fast price,no
+C100611,09/08/2024,standard,monthly,$61.81,23.0,0,north,fast support slow fast,yes
+C100612,01/04/2026,basic,monthly,$32.99,3.0,3,east,confusing cancel love helpful app,no
+C100613,16/02/2023,premium,monthly,$93.56,41.0,2,west,app support cancel confusing helpful billing,no
+C100614,16/02/2023,standard,monthly,$63.69,41.0,1,north,helpful fast price support,no
+C100615,12/03/2024,premium,annual,$104.11,28.0,3,south,love support price,no
+C100616,28/03/2021,basic,monthly,$30.04,64.0,3,east,fast billing love,no
+C100617,14/10/2023,basic,monthly,$33.61,33.0,1,south,slow slow support great price love,no
+C100618,01/01/2026,premium,monthly,$105.35,6.0,2,north,crash great price,yes
+C100619,02/03/2026,basic,monthly,$29.06,4.0,1,east,app fast love cancel cancel,no
+C100620,11/04/2024,premium,annual,$92.25,27.0,1,east,slow crash helpful,no
+C100621,05/06/2025,standard,monthly,$63.92,13.0,1,,price price great helpful,no
+C100622,27/05/2021,basic,monthly,$38.17,62.0,4,south,billing crash fast cancel price helpful app,no
+C100623,26/07/2021,standard,monthly,$51.81,60.0,2,south,app great fast support fast billing,no
+C100624,29/10/2020,basic,annual,$36.00,69.0,1,,price confusing app crash,no
+C100625,16/06/2023,standard,annual,$60.56,37.0,2,north,helpful billing cancel,no
+C100626,15/08/2023,standard,monthly,$62.70,35.0,0,north,crash love great slow,yes
+C100627,27/04/2021,standard,monthly,$64.09,63.0,4,east,love helpful slow billing price slow confusing,yes
+C100628,19/09/2022,basic,annual,$22.63,46.0,0,west,crash love slow confusing support love,no
+C100629,26/06/2021,basic,annual,$30.76,61.0,1,east,helpful support slow price price,no
+C100630,06/05/2025,basic,annual,$35.15,14.0,2,north,helpful great cancel billing app,no
+C100631,06/05/2025,standard,monthly,$67.57,14.0,1,west,billing helpful support,no
+C100632,31/01/2026,premium,monthly,$104.26,5.0,2,south,crash app fast fast helpful,no
+C100633,11/02/2024,basic,annual,$23.41,29.0,2,north,slow helpful cancel helpful support,no
+C100634,23/11/2021,basic,annual,$30.24,56.0,2,east,fast slow great billing billing,no
+C100635,17/05/2023,premium,monthly,$97.52,38.0,3,south,slow great app,no
+C100636,17/04/2023,basic,monthly,$29.40,39.0,2,east,cancel helpful great app confusing slow,yes
+C100637,02/12/2025,standard,monthly,$65.70,7.0,1,east,fast app great confusing slow slow,yes
+C100638,03/09/2025,premium,monthly,$90.63,10.0,5,north,billing cancel love,yes
+C100639,02/12/2025,standard,monthly,$62.16,7.0,1,east,love billing cancel cancel,no
+C100640,11/04/2024,basic,monthly,$31.70,27.0,2,east,price app love,yes
+C100641,26/07/2021,standard,monthly,$53.17,60.0,3,south,love support support fast love,no
+C100642,21/02/2022,basic,monthly,$35.79,53.0,1,south,app fast fast,no
+C100643,25/08/2021,basic,monthly,$25.49,59.0,1,west,fast support helpful app cancel helpful,no
+C100644,08/09/2024,premium,monthly,$99.28,22.0,2,north,love support cancel helpful billing cancel,yes
+C100645,12/03/2024,standard,annual,$43.41,28.0,0,north,price price crash support confusing billing support,no
+C100646,29/10/2020,basic,monthly,$35.75,69.0,4,north,billing support fast slow app,no
+C100647,22/04/2022,standard,annual,$57.32,51.0,1,south,crash great cancel billing love billing confusing,no
+C100648,21/06/2022,standard,monthly,$57.11,49.0,4,south,helpful fast billing,no
+C100649,16/06/2023,standard,monthly,$67.81,37.0,1,east,fast fast love fast crash confusing,no
+C100650,02/11/2025,standard,monthly,$47.36,,1,north,app helpful price cancel price love price,no
+C100651,22/01/2022,standard,monthly,$64.25,54.0,0,north,helpful billing support helpful,no
+C100652,11/04/2024,standard,monthly,$65.38,27.0,1,east,great billing price app,no
+C100653,09/08/2024,basic,annual,$17.00,23.0,1,west,crash app love app love love,no
+C100654,23/03/2022,basic,monthly,$30.60,52.0,0,west,support support great,no
+C100655,14/09/2023,basic,monthly,$26.71,34.0,0,south,cancel slow billing app support support price,no
+C100656,05/06/2025,basic,monthly,$22.67,13.0,3,west,price slow slow,yes
+C100657,28/03/2021,basic,monthly,$21.22,64.0,5,,billing love price slow,no
+C100658,11/02/2024,basic,monthly,$33.39,29.0,1,east,confusing slow cancel,no
+C100659,24/09/2021,basic,monthly,$36.08,58.0,3,north,fast confusing support confusing confusing crash support,no
+C100660,11/02/2024,basic,monthly,$22.23,29.0,0,east,love love fast,no
+C100661,09/08/2024,premium,monthly,$93.29,23.0,1,west,great great billing support,no
+C100662,24/10/2021,basic,monthly,$33.99,57.0,3,north,support crash slow price crash,no
+C100663,27/04/2021,basic,monthly,$43.66,63.0,2,,confusing confusing crash,no
+C100664,09/08/2024,standard,monthly,$49.60,23.0,2,east,crash helpful love price cancel,no
+C100665,11/02/2024,basic,monthly,$20.17,29.0,2,west,crash great cancel support crash great,yes
+C100666,18/03/2023,basic,monthly,$22.41,40.0,4,north,crash crash support,yes
+C100667,21/06/2022,basic,annual,$22.51,49.0,1,west,great great great billing,no
+C100668,16/07/2023,premium,monthly,$106.10,36.0,1,,confusing great crash helpful billing,yes
+C100669,22/04/2022,basic,monthly,$22.77,51.0,3,east,slow support cancel,no
+C100670,25/08/2021,basic,monthly,$42.68,59.0,1,north,great helpful support love great cancel,yes
+C100671,11/02/2024,basic,annual,$31.86,29.0,1,south,billing great app,no
+C100672,26/06/2021,standard,monthly,$65.28,61.0,0,south,great confusing app great support fast,no
+C100673,25/08/2021,premium,monthly,$102.89,59.0,0,north,app billing support,no
+C100674,29/09/2020,standard,monthly,$52.69,70.0,2,north,great billing slow crash price helpful,no
+C100675,14/09/2023,premium,monthly,$90.47,34.0,0,south,love confusing price,no
+C100676,26/06/2021,standard,monthly,$64.85,61.0,2,north,great billing love cancel crash fast confusing,no
+C100677,29/10/2020,premium,annual,$106.54,69.0,2,south,love helpful support fast billing price,no
+C100678,28/12/2020,premium,annual,$101.71,67.0,2,north,slow fast price support confusing cancel great,no
+C100679,28/12/2020,premium,monthly,$99.09,67.0,2,north,app confusing crash confusing love,no
+C100680,12/03/2024,basic,monthly,$29.69,28.0,1,south,fast slow fast helpful,no
+C100681,28/03/2021,premium,monthly,$100.45,64.0,0,north,crash slow confusing confusing great,no
+C100682,13/11/2023,standard,monthly,$50.74,32.0,2,south,support crash slow great cancel great,no
+C100683,26/02/2021,basic,monthly,$29.46,65.0,1,west,app great helpful crash crash confusing,no
+C100684,24/09/2021,basic,annual,$29.10,58.0,4,east,support slow slow billing,no
+C100685,04/08/2025,basic,monthly,$18.11,11.0,3,south,billing crash slow,yes
+C100686,03/09/2025,basic,monthly,$12.43,10.0,1,south,helpful great fast cancel great slow,no
+C100687,20/08/2022,basic,annual,$27.48,47.0,0,north,fast support support slow fast confusing,no
+C100688,06/01/2025,basic,monthly,$16.43,18.0,4,south,slow crash helpful,yes
+C100689,21/02/2022,basic,monthly,$14.54,53.0,3,north,support slow helpful love,no
+C100690,23/11/2021,basic,monthly,$18.35,56.0,1,west,crash love crash,no
+C100691,17/05/2023,basic,annual,$30.22,38.0,0,east,price great confusing app app love,no
+C100692,23/11/2021,basic,annual,$28.75,56.0,4,west,billing price helpful,no
+C100693,17/05/2023,premium,monthly,$99.52,38.0,0,,billing app crash price,no
+C100694,16/02/2023,standard,monthly,$69.53,41.0,3,south,love love slow slow price,yes
+C100695,06/04/2025,standard,monthly,$62.26,15.0,0,east,app billing support great confusing,no
+C100696,17/01/2023,premium,monthly,$108.59,42.0,3,east,fast app fast support,yes
+C100697,05/07/2025,standard,annual,$60.21,12.0,1,west,cancel great helpful helpful,no
+C100698,19/10/2022,premium,monthly,$105.65,45.0,1,north,helpful cancel app,no
+C100699,23/11/2021,standard,monthly,$68.75,56.0,2,west,great confusing love,no
+C100700,23/12/2021,basic,annual,$41.35,55.0,0,east,crash slow billing app love,no
+C100701,04/08/2025,standard,monthly,$57.67,11.0,0,east,app billing cancel,no
+C100702,24/10/2021,basic,monthly,$21.56,57.0,4,south,cancel price app crash,no
+C100703,23/03/2022,basic,annual,$29.38,52.0,1,west,crash cancel helpful love helpful crash billing,no
+C100704,04/08/2025,basic,annual,$37.43,11.0,1,west,price slow helpful support fast,no
+C100705,01/01/2026,premium,monthly,$108.81,6.0,3,north,crash great support cancel billing confusing,yes
+C100706,20/08/2022,basic,annual,$29.81,47.0,1,south,fast price support,no
+C100707,12/01/2024,standard,monthly,$61.33,30.0,2,south,love app love billing price,no
+C100708,16/07/2023,basic,monthly,$38.90,36.0,3,north,helpful great billing fast helpful crash fast,no
+C100709,01/05/2026,basic,monthly,$30.11,2.0,0,east,slow confusing crash helpful love confusing fast,no
+C100710,05/02/2025,standard,monthly,$63.21,17.0,0,south,support love fast cancel fast,yes
+C100711,20/08/2022,basic,annual,$34.77,47.0,1,west,app app crash confusing fast price,no
+C100712,19/10/2022,standard,monthly,$57.63,45.0,0,south,app slow slow support price confusing cancel,no
+C100713,08/10/2024,basic,monthly,$23.72,21.0,0,east,fast love great price helpful cancel love,no
+C100714,10/06/2024,standard,monthly,$74.35,25.0,0,north,cancel cancel app confusing support,no
+C100715,14/09/2023,basic,monthly,$25.37,34.0,0,south,price love slow,no
+C100716,10/06/2024,basic,monthly,$22.39,25.0,0,west,helpful confusing cancel cancel app great,no
+C100717,08/10/2024,basic,monthly,$27.40,21.0,1,south,crash app billing price price billing billing,no
+C100718,09/08/2024,premium,annual,$99.99,23.0,2,north,app confusing love billing billing helpful fast,no
+C100719,16/06/2023,basic,monthly,$30.82,37.0,2,east,great cancel great cancel fast support,no
+C100720,18/03/2023,standard,annual,$56.98,40.0,3,,great fast helpful,no
+C100721,20/08/2022,basic,monthly,$32.12,47.0,0,west,support fast helpful fast billing,no
+C100722,06/01/2025,basic,monthly,$39.68,18.0,4,south,price confusing support billing confusing slow crash,no
+C100723,05/07/2025,basic,monthly,$26.95,12.0,3,north,billing love love great crash,no
+C100724,09/08/2024,standard,annual,$59.27,23.0,1,west,confusing confusing great cancel app,no
+C100725,23/11/2021,basic,annual,$37.69,56.0,3,west,slow price cancel love great,no
+C100726,26/07/2021,premium,monthly,$92.74,60.0,1,south,confusing price support billing helpful slow billing,no
+C100727,23/11/2021,standard,annual,$51.57,56.0,2,north,slow support love slow crash love fast,no
+C100728,12/03/2024,standard,monthly,$54.67,28.0,1,south,price slow helpful great cancel great,no
+C100729,28/12/2020,basic,monthly,$28.30,67.0,2,north,love app confusing confusing,no
+C100730,16/02/2023,basic,monthly,$34.59,41.0,1,,crash cancel support confusing,no
+C100731,12/03/2024,basic,monthly,$18.80,28.0,1,south,confusing support support,yes
+C100732,17/01/2023,standard,monthly,$54.80,42.0,0,south,fast support price helpful love helpful love,no
+C100733,27/05/2021,basic,monthly,$22.04,62.0,0,north,fast helpful slow billing app great,no
+C100734,13/12/2023,basic,monthly,$19.09,31.0,2,west,helpful price app price,no
+C100735,02/12/2025,basic,monthly,$20.96,7.0,2,,helpful price cancel love cancel support helpful,no
+C100736,08/09/2024,basic,annual,$33.66,22.0,1,west,fast helpful app app app,no
+C100737,30/08/2020,premium,monthly,$99.63,71.0,0,south,cancel slow app helpful love,no
+C100738,14/10/2023,standard,annual,$59.98,33.0,0,east,great fast support crash billing great support,yes
+C100739,07/03/2025,basic,monthly,$32.85,16.0,1,south,cancel confusing love price great,yes
+C100740,27/04/2021,standard,monthly,$61.73,63.0,3,west,confusing slow billing confusing price confusing,yes
+C100741,11/04/2024,basic,monthly,$31.68,27.0,3,west,confusing price cancel,no
+C100742,09/08/2024,standard,annual,$70.91,23.0,1,west,love slow fast,no
+C100743,02/12/2025,standard,monthly,$63.19,7.0,1,south,support slow love,yes
+C100744,28/11/2020,basic,annual,$11.96,68.0,4,west,love price price confusing,no
+C100745,26/07/2021,basic,annual,$32.56,60.0,2,west,helpful support fast slow cancel,no
+C100746,12/03/2024,basic,monthly,$35.06,28.0,1,,cancel crash support love crash cancel crash,no
+C100747,15/08/2023,basic,monthly,$32.11,35.0,1,south,helpful slow great love,no
+C100748,07/12/2024,basic,monthly,$25.24,19.0,3,south,price confusing helpful slow slow fast great,no
+C100749,29/10/2020,standard,monthly,$52.55,69.0,0,west,crash love cancel helpful great billing slow,no
+C100750,27/01/2021,basic,monthly,$29.28,66.0,2,north,cancel confusing helpful love fast confusing,no
+C100751,04/08/2025,standard,monthly,$63.25,11.0,3,north,love great fast,yes
+C100752,06/01/2025,basic,monthly,$34.45,18.0,0,west,fast fast confusing,no
+C100753,28/03/2021,standard,annual,$47.45,64.0,2,east,support price crash great cancel price price,no
+C100754,07/03/2025,standard,monthly,$61.10,16.0,1,west,crash slow crash billing helpful support,no
+C100755,11/05/2024,basic,annual,$37.02,26.0,2,east,crash love great price app price,no
+C100756,24/09/2021,standard,monthly,$63.82,58.0,2,south,love support confusing price confusing,no
+C100757,05/02/2025,basic,monthly,$44.97,17.0,0,south,fast confusing great billing slow billing,no
+C100758,26/06/2021,standard,monthly,$54.63,61.0,0,east,support great app helpful,no
+C100759,20/08/2022,basic,annual,$21.40,47.0,0,west,helpful price confusing,no
+C100760,06/05/2025,basic,monthly,$34.54,14.0,2,east,billing crash slow confusing,yes
+C100761,01/04/2026,premium,monthly,$108.44,3.0,4,east,helpful support support great love support,yes
+C100762,05/06/2025,premium,monthly,$92.67,13.0,1,west,confusing great billing cancel cancel,no
+C100763,17/05/2023,basic,annual,$29.30,,2,south,crash helpful support confusing,no
+C100764,29/10/2020,basic,monthly,$30.49,69.0,1,west,fast love confusing support confusing crash support,no
+C100765,14/09/2023,basic,monthly,$31.63,34.0,2,,cancel confusing cancel billing fast great confusing,no
+C100766,03/09/2025,basic,monthly,$36.88,10.0,5,north,crash cancel app fast app billing,yes
+C100767,02/03/2026,basic,annual,$43.70,4.0,2,south,great great price fast fast,no
+C100768,06/05/2025,basic,monthly,$25.42,14.0,1,south,fast cancel fast,no
+C100769,13/12/2023,basic,monthly,$27.06,31.0,0,south,crash confusing billing cancel helpful,no
+C100770,13/11/2023,basic,monthly,$19.61,32.0,1,north,great great app billing great app love,no
+C100771,08/09/2024,basic,monthly,$33.87,22.0,2,south,app helpful support app,no
+C100772,19/10/2022,premium,monthly,$91.95,45.0,1,south,confusing slow fast cancel slow support great,no
+C100773,06/01/2025,standard,monthly,$59.79,,2,west,cancel crash slow great support support slow,yes
+C100774,07/12/2024,standard,monthly,$61.89,19.0,2,south,great helpful crash love helpful slow,no
+C100775,28/12/2020,standard,monthly,$67.32,67.0,0,east,confusing helpful price helpful,no
+C100776,17/05/2023,basic,monthly,$28.68,38.0,0,south,helpful great helpful app slow,no
+C100777,18/12/2022,standard,annual,$55.96,43.0,3,east,slow support slow fast,no
+C100778,16/02/2023,premium,monthly,$95.01,41.0,3,east,support love price app great helpful crash,no
+C100779,04/08/2025,premium,annual,$105.13,11.0,1,west,crash crash great app fast crash,no
+C100780,17/01/2023,basic,monthly,$26.85,42.0,1,south,cancel crash price billing confusing cancel,no
+C100781,22/01/2022,premium,monthly,$99.35,54.0,1,east,confusing billing support,no
+C100782,02/03/2026,standard,monthly,$63.75,4.0,1,south,billing support fast,no
+C100783,11/04/2024,basic,annual,$37.09,,1,south,cancel love confusing great confusing,no
+C100784,07/11/2024,standard,monthly,$66.21,20.0,2,south,helpful price love love support,yes
+C100785,18/12/2022,basic,annual,$20.22,43.0,3,west,great price love confusing app fast,no
+C100786,26/02/2021,basic,monthly,$22.20,65.0,2,east,helpful app price billing love,no
+C100787,11/04/2024,basic,monthly,$31.23,27.0,0,east,confusing love billing confusing price price,no
+C100788,31/01/2026,standard,annual,$62.58,5.0,2,north,slow slow confusing fast fast,no
+C100789,19/09/2022,basic,annual,$30.71,46.0,2,west,support crash fast great,no
+C100790,08/09/2024,basic,monthly,$37.14,22.0,2,south,cancel love love,no
+C100791,21/06/2022,basic,annual,$38.60,49.0,1,east,cancel confusing price support price billing confusing,no
+C100792,03/09/2025,basic,monthly,$28.53,10.0,2,south,slow love great cancel confusing helpful,yes
+C100793,08/10/2024,standard,annual,$60.12,21.0,0,west,price cancel confusing,no
+C100794,12/03/2024,basic,annual,$35.78,28.0,1,east,price support price slow,no
+C100795,26/07/2021,standard,annual,$64.42,60.0,2,west,great love slow crash,no
+C100796,18/03/2023,standard,monthly,$52.74,40.0,0,south,slow helpful app crash slow crash,no
+C100797,18/11/2022,premium,annual,$90.93,44.0,0,,confusing price app cancel crash cancel,no
+C100798,22/04/2022,basic,monthly,$18.00,51.0,0,south,fast billing billing crash support,no
+C100799,18/12/2022,basic,annual,$28.90,,0,west,app billing helpful support,no
+C100800,27/04/2021,basic,monthly,$25.30,63.0,1,south,cancel helpful love,no
+C100801,07/03/2025,basic,annual,$24.73,16.0,2,west,confusing app slow crash billing cancel,no
+C100802,19/09/2022,basic,annual,$19.40,46.0,1,west,great helpful price,no
+C100803,07/12/2024,standard,monthly,$58.61,19.0,1,south,helpful slow crash,no
+C100804,18/03/2023,basic,annual,$19.56,40.0,1,north,crash app love app cancel,no
+C100805,11/02/2024,basic,monthly,$21.67,29.0,2,west,app crash price,yes
+C100806,27/01/2021,basic,monthly,$26.71,66.0,2,,cancel billing love support price fast app,no
+C100807,01/04/2026,basic,annual,$31.80,3.0,2,west,crash confusing fast fast love helpful fast,yes
+C100808,17/04/2023,standard,annual,$59.12,39.0,2,east,love great support crash price billing confusing,no
+C100809,02/03/2026,basic,monthly,$33.16,4.0,1,south,price billing fast crash,no
+C100810,11/05/2024,basic,monthly,$28.49,26.0,1,east,great slow great confusing,no
+C100811,21/07/2022,standard,monthly,$56.29,48.0,3,north,confusing fast slow support price confusing confusing,no
+C100812,05/02/2025,basic,annual,$26.88,17.0,1,east,helpful price slow,no
+C100813,09/08/2024,standard,monthly,$53.35,23.0,4,north,cancel support helpful confusing confusing love,no
+C100814,21/07/2022,basic,monthly,$29.07,48.0,0,north,great price cancel slow fast app,no
+C100815,23/03/2022,standard,monthly,$66.14,52.0,3,south,app crash crash,no
+C100816,19/09/2022,basic,monthly,$33.41,46.0,1,south,price helpful slow billing helpful,no
+C100817,01/01/2026,basic,annual,$33.30,6.0,1,north,cancel app helpful great billing billing,no
+C100818,10/06/2024,standard,monthly,$61.18,25.0,1,east,great helpful great support great confusing,yes
+C100819,21/02/2022,basic,annual,$30.28,53.0,1,west,cancel support app confusing,no
+C100820,27/05/2021,standard,monthly,$59.49,62.0,1,south,price fast love,no
+C100821,07/03/2025,premium,annual,$92.29,16.0,2,north,slow fast support helpful price billing,yes
+C100822,11/02/2024,basic,monthly,$22.01,29.0,0,east,fast great cancel great app,no
+C100823,27/05/2021,basic,monthly,$23.07,62.0,1,north,great fast helpful slow,yes
+C100824,03/10/2025,standard,annual,$64.56,9.0,2,east,confusing support support love slow app great,no
+C100825,26/02/2021,basic,monthly,$25.01,65.0,0,,billing app price billing crash cancel app,no
+C100826,11/04/2024,standard,monthly,$62.71,27.0,2,east,great great price crash,yes
+C100827,21/06/2022,basic,monthly,$21.90,49.0,2,south,price fast love helpful slow,no
+C100828,13/11/2023,basic,monthly,$27.18,32.0,0,north,crash price great fast confusing slow confusing,no
+C100829,12/03/2024,basic,monthly,$22.91,28.0,1,north,app app crash cancel price,no
+C100830,11/04/2024,standard,annual,$63.05,27.0,2,north,app billing crash crash,no
+C100831,01/05/2026,standard,annual,$70.84,2.0,2,south,price slow app love great,yes
+C100832,26/02/2021,standard,monthly,$51.33,65.0,2,east,love support price billing confusing support fast,no
+C100833,23/12/2021,premium,annual,$100.64,55.0,0,north,billing slow fast fast fast,no
+C100834,27/01/2021,premium,annual,$93.84,66.0,1,south,support support helpful fast cancel love,no
+C100835,18/03/2023,basic,annual,$33.20,40.0,1,north,great slow slow great support,no
+C100836,29/10/2020,standard,annual,$69.08,69.0,3,south,crash app app confusing slow fast,no
+C100837,01/01/2026,basic,monthly,$25.71,6.0,1,north,slow love cancel crash crash billing great,yes
+C100838,11/05/2024,basic,annual,$35.00,26.0,4,north,great billing app great,yes
+C100839,16/02/2023,standard,annual,$58.22,41.0,0,east,crash support price love love fast,no
+C100840,15/08/2023,standard,monthly,$54.52,35.0,3,east,price cancel cancel support price cancel,no
+C100841,31/05/2026,basic,monthly,$26.58,1.0,2,west,cancel cancel helpful crash billing confusing support,yes
+C100842,02/11/2025,basic,annual,$36.05,8.0,0,south,slow slow fast helpful support cancel,no
+C100843,14/10/2023,standard,annual,$61.57,33.0,0,north,love fast great billing,no
+C100844,25/08/2021,premium,annual,$98.52,,1,west,helpful cancel great billing fast,no
+C100845,18/11/2022,standard,monthly,$57.97,44.0,0,east,app cancel fast price app,no
+C100846,08/10/2024,standard,monthly,$55.23,21.0,0,,slow crash price price,yes
+C100847,24/10/2021,basic,annual,$32.99,57.0,1,east,confusing cancel helpful price support great,no
+C100848,28/03/2021,basic,monthly,$42.17,64.0,1,north,love support great slow support crash,no
+C100849,08/10/2024,basic,monthly,$28.01,21.0,1,east,fast crash cancel billing,no
+C100850,27/01/2021,standard,monthly,$52.70,66.0,1,north,crash fast cancel billing love great,no
+C100851,05/02/2025,basic,monthly,$31.37,17.0,0,east,price app great,no
+C100852,16/02/2023,basic,annual,$32.31,41.0,0,south,crash great price,no
+C100853,10/07/2024,premium,monthly,$105.65,24.0,0,east,fast app billing crash great,no
+C100854,23/03/2022,basic,annual,$21.64,52.0,2,north,fast support helpful fast confusing,no
+C100855,31/01/2026,standard,annual,$60.85,5.0,1,north,great love app support cancel great,no
+C100856,02/03/2026,basic,monthly,$23.84,4.0,0,east,great app love cancel,no
+C100857,28/12/2020,premium,monthly,$107.48,67.0,0,south,love slow cancel app billing,no
+C100858,05/06/2025,basic,annual,$33.68,13.0,0,north,support fast great,no
+C100859,27/04/2021,standard,monthly,$57.88,63.0,0,south,app app great love crash,no
+C100860,21/07/2022,premium,monthly,$91.59,48.0,0,west,slow great love helpful great,no
+C100861,18/12/2022,standard,monthly,$70.73,43.0,4,east,confusing helpful fast fast app,yes
+C100862,23/03/2022,basic,annual,$28.14,52.0,0,south,fast fast crash confusing price slow,no
+C100863,01/01/2026,premium,monthly,$104.60,6.0,1,north,great app helpful confusing app,yes
+C100864,02/03/2026,standard,monthly,$47.29,4.0,1,north,love love cancel,yes
+C100865,01/01/2026,standard,annual,$59.86,6.0,1,north,fast love crash confusing love,no
+C100866,01/05/2026,basic,annual,$33.81,2.0,4,north,cancel cancel love slow support,no
+C100867,28/12/2020,standard,monthly,$45.78,67.0,1,east,billing billing helpful support app fast app,no
+C100868,13/11/2023,premium,monthly,$100.73,32.0,1,north,great confusing slow,no
+C100869,03/10/2025,standard,monthly,$66.84,9.0,1,south,helpful helpful slow support confusing crash billing,yes
+C100870,09/08/2024,basic,monthly,$20.02,23.0,2,north,price billing slow app,yes
+C100871,04/08/2025,premium,monthly,$98.25,11.0,2,west,great fast billing price,no
+C100872,26/02/2021,basic,monthly,$26.90,65.0,1,east,price fast support price support slow cancel,no
+C100873,23/11/2021,basic,monthly,$25.18,56.0,0,south,price price helpful fast love,no
+C100874,31/05/2026,premium,monthly,$95.20,1.0,2,south,great app support cancel price helpful,no
+C100875,08/09/2024,standard,monthly,$53.53,22.0,1,east,confusing crash cancel great great,no
+C100876,20/08/2022,basic,monthly,$24.31,47.0,1,south,crash helpful slow app slow support,no
+C100877,12/01/2024,standard,monthly,$58.62,30.0,1,north,price love app crash,no
+C100878,07/03/2025,premium,annual,$99.48,16.0,0,north,crash helpful cancel slow crash slow love,no
+C100879,12/01/2024,premium,monthly,$90.85,30.0,1,south,app love helpful crash,no
+C100880,13/12/2023,basic,monthly,$25.33,31.0,0,north,confusing billing price slow app,no
+C100881,22/05/2022,basic,annual,$29.61,50.0,1,west,crash helpful fast confusing,no
+C100882,18/03/2023,basic,annual,$36.29,40.0,2,south,fast fast crash cancel,no
+C100883,14/09/2023,basic,monthly,$36.36,34.0,2,west,slow great confusing love love helpful,no
+C100884,18/11/2022,basic,monthly,$28.83,44.0,1,south,great confusing price confusing cancel,yes
+C100885,24/09/2021,basic,monthly,$29.70,58.0,0,west,app price great,no
+C100886,02/12/2025,standard,monthly,$50.38,7.0,0,east,billing billing app great support fast,no
+C100887,16/07/2023,standard,annual,$59.46,36.0,2,north,helpful great slow crash fast,no
+C100888,22/01/2022,basic,monthly,$17.51,54.0,0,south,great price confusing great,no
+C100889,08/10/2024,standard,monthly,$56.65,21.0,4,west,fast fast price helpful,no
+C100890,27/05/2021,basic,annual,$21.04,62.0,1,west,helpful great price great slow crash,no
+C100891,06/05/2025,basic,monthly,$24.36,14.0,0,south,fast fast helpful helpful,no
+C100892,01/04/2026,standard,monthly,$59.82,3.0,0,south,confusing billing great great helpful love app,yes
+C100893,22/01/2022,basic,monthly,$30.24,54.0,1,north,fast app fast,no
+C100894,23/12/2021,basic,monthly,$36.61,55.0,2,south,love great love,no
+C100895,07/03/2025,standard,monthly,$60.31,16.0,1,south,confusing fast slow crash,yes
+C100896,30/08/2020,basic,annual,$25.87,71.0,0,west,billing support price price love,no
+C100897,18/11/2022,standard,monthly,$62.84,44.0,0,east,confusing crash app,no
+C100898,01/04/2026,basic,monthly,$18.84,3.0,1,south,confusing slow great love helpful crash billing,no
+C100899,18/12/2022,premium,annual,$109.12,43.0,0,south,helpful love cancel fast love price,no
+C100900,10/06/2024,basic,annual,$15.99,,4,south,helpful confusing app slow support billing,no
+C100901,29/10/2020,premium,annual,$102.95,,2,east,billing confusing billing great slow billing,no
+C100902,07/11/2024,standard,monthly,$62.23,20.0,1,west,great price cancel app helpful fast,no
+C100903,02/12/2025,premium,monthly,$95.41,7.0,2,west,love helpful love support great crash fast,no
+C100904,27/04/2021,basic,annual,$26.23,63.0,0,south,cancel love support confusing,no
+C100905,06/04/2025,basic,monthly,$19.92,15.0,1,north,slow app fast support billing app support,no
+C100906,10/07/2024,basic,monthly,$29.58,24.0,3,west,fast slow crash,no
+C100907,20/08/2022,premium,annual,$102.19,47.0,3,east,fast love love great crash app,no
+C100908,10/07/2024,basic,monthly,$25.65,24.0,1,north,support cancel app price crash,no
+C100909,10/07/2024,basic,monthly,$31.49,24.0,1,north,confusing cancel cancel great,yes
+C100910,16/07/2023,standard,annual,$63.05,,2,north,slow love fast support crash billing,yes
+C100911,03/09/2025,premium,monthly,$94.29,10.0,1,east,fast cancel slow app slow love,no
+C100912,17/04/2023,standard,annual,$64.05,39.0,3,south,helpful slow slow price app cancel,yes
+C100913,28/03/2021,basic,monthly,$31.68,64.0,2,south,love helpful cancel billing app,no
+C100914,30/08/2020,basic,monthly,$29.36,71.0,1,east,confusing slow cancel great love helpful,no
+C100915,23/03/2022,standard,monthly,$63.55,52.0,5,west,billing helpful price fast love crash great,no
+C100916,18/12/2022,basic,annual,$30.80,43.0,0,west,price crash crash price fast crash,no
+C100917,07/03/2025,basic,monthly,$24.56,16.0,0,east,price billing confusing cancel fast,no
+C100918,27/05/2021,basic,monthly,$25.05,62.0,1,south,billing love crash helpful app,no
+C100919,02/12/2025,basic,annual,$30.27,7.0,1,east,great crash app crash helpful love confusing,no
+C100920,22/04/2022,basic,annual,$35.57,51.0,1,west,cancel support love support helpful,no
+C100921,26/07/2021,standard,annual,$60.00,60.0,1,west,billing price cancel love,no
+C100922,14/10/2023,premium,monthly,$96.56,33.0,2,south,love fast fast love,yes
+C100923,16/02/2023,basic,annual,$29.17,41.0,3,east,love support billing,no
+C100924,24/09/2021,standard,monthly,$51.86,58.0,1,north,support helpful great price,no
+C100925,28/12/2020,basic,annual,$35.79,67.0,1,north,great crash app,no
+C100926,01/04/2026,basic,monthly,$37.40,3.0,1,south,crash confusing price,yes
+C100927,16/06/2023,standard,annual,$68.92,37.0,1,west,app fast billing,no
+C100928,12/01/2024,basic,monthly,$34.23,30.0,1,north,price support confusing cancel fast,yes
+C100929,05/02/2025,basic,monthly,$24.84,17.0,1,south,love crash helpful,no
+C100930,27/05/2021,standard,annual,$58.10,62.0,2,north,great helpful helpful support billing confusing love,no
+C100931,03/09/2025,basic,monthly,$26.50,10.0,0,south,love price crash app love confusing price,no
+C100932,10/07/2024,premium,annual,$101.45,24.0,2,south,support great support,no
+C100933,12/01/2024,basic,monthly,$36.93,30.0,3,north,helpful love price slow,no
+C100934,05/02/2025,basic,annual,$14.18,17.0,2,north,helpful billing great slow crash crash helpful,no
+C100935,21/06/2022,standard,annual,$61.31,49.0,1,south,crash crash support fast confusing price slow,no
+C100936,19/09/2022,standard,annual,$60.35,46.0,0,east,great billing great price great,no
+C100937,31/05/2026,standard,monthly,$60.53,1.0,2,north,billing confusing cancel,yes
+C100938,05/07/2025,basic,monthly,$32.83,12.0,3,west,confusing app price,no
+C100939,11/02/2024,basic,annual,$23.65,29.0,1,east,great slow billing,no
+C100940,27/04/2021,basic,monthly,$34.47,63.0,1,west,app slow love cancel fast billing helpful,no
+C100941,11/02/2024,basic,annual,$30.78,29.0,0,west,confusing helpful support app slow helpful,no
+C100942,13/12/2023,basic,annual,$27.64,31.0,1,south,helpful fast billing great great billing,no
+C100943,21/07/2022,basic,monthly,$28.97,48.0,1,west,fast fast support,no
+C100944,23/11/2021,standard,annual,$56.27,56.0,2,west,price great great,yes
+C100945,06/05/2025,basic,annual,$29.39,14.0,0,north,crash support price cancel helpful app helpful,no
+C100946,21/07/2022,premium,monthly,$102.34,48.0,3,east,confusing great cancel,no
+C100947,27/04/2021,standard,monthly,$51.20,63.0,4,east,support app price,yes
+C100948,28/03/2021,basic,monthly,$26.79,64.0,0,south,cancel confusing cancel helpful crash billing,no
+C100949,10/07/2024,standard,annual,$56.06,24.0,2,east,love slow slow great support great,yes
+C100950,23/12/2021,basic,annual,$28.64,55.0,1,north,billing app helpful crash slow price support,no
+C100951,25/08/2021,basic,monthly,$27.16,59.0,1,north,price price app,no
+C100952,04/08/2025,basic,monthly,$18.33,11.0,1,south,cancel great helpful confusing fast billing helpful,no
+C100953,25/08/2021,basic,annual,$31.62,59.0,0,,billing support love great helpful great,no
+C100954,27/01/2021,premium,monthly,$105.96,66.0,4,south,crash billing slow,no
+C100955,27/04/2021,basic,monthly,$24.68,63.0,0,west,billing great helpful helpful confusing helpful,no
+C100956,27/05/2021,standard,monthly,$59.82,62.0,0,west,support support price cancel price fast love,no
+C100957,07/12/2024,basic,annual,$24.73,19.0,2,north,love cancel price slow cancel billing,no
+C100958,16/07/2023,standard,annual,$60.03,36.0,3,south,crash billing price,no
+C100959,26/07/2021,premium,annual,$97.58,60.0,1,west,price love slow helpful,no
+C100960,02/12/2025,basic,annual,$35.38,7.0,3,west,price app support,yes
+C100961,05/02/2025,basic,monthly,$25.53,17.0,2,south,love fast fast love,no
+C100962,06/04/2025,standard,monthly,$62.68,15.0,3,north,app love support,no
+C100963,11/02/2024,basic,monthly,$24.57,29.0,2,south,love support great app,no
+C100964,03/10/2025,standard,annual,$55.64,9.0,1,north,billing app fast great helpful cancel crash,no
+C100965,05/06/2025,premium,annual,$99.51,13.0,0,west,app app fast fast great,no
+C100966,29/09/2020,standard,monthly,$49.12,70.0,2,north,price helpful app support,no
+C100967,15/08/2023,standard,monthly,$53.58,35.0,0,south,slow app fast,no
+C100968,24/09/2021,basic,annual,$33.79,58.0,0,west,crash love price,no
+C100969,01/01/2026,basic,monthly,$24.76,6.0,0,east,fast fast slow,no
+C100970,02/03/2026,premium,monthly,$90.82,4.0,1,east,app billing price,no
+C100971,28/11/2020,standard,annual,$50.29,68.0,0,east,support slow confusing crash helpful confusing support,no
+C100972,29/10/2020,standard,monthly,$59.32,69.0,5,east,cancel app billing helpful billing billing,no
+C100973,31/05/2026,basic,monthly,$25.50,1.0,2,west,billing support confusing app confusing,no
+C100974,06/01/2025,basic,monthly,$29.13,18.0,3,south,crash love price support confusing support,no
+C100975,16/07/2023,standard,monthly,$42.13,36.0,2,south,confusing great confusing billing,no
+C100976,19/09/2022,standard,annual,$54.02,46.0,0,south,helpful love support slow,no
+C100977,26/07/2021,basic,annual,$24.13,60.0,3,west,crash crash love great slow helpful slow,no
+C100978,31/05/2026,basic,annual,$33.26,1.0,2,north,support price cancel love love,no
+C100979,03/09/2025,standard,monthly,$64.01,10.0,1,north,crash love confusing,yes
+C100980,01/05/2026,basic,monthly,$32.68,2.0,0,north,support fast slow support helpful,no
+C100981,18/12/2022,basic,monthly,$16.75,43.0,1,west,billing great helpful support,yes
+C100982,17/04/2023,basic,monthly,$33.77,39.0,2,,app great crash support,yes
+C100983,17/05/2023,standard,monthly,$65.88,38.0,5,east,fast app love cancel love,yes
+C100984,06/04/2025,basic,monthly,$23.94,15.0,0,south,confusing fast helpful app,no
+C100985,22/01/2022,standard,monthly,$60.35,54.0,4,north,great support app love support app price,no
+C100986,26/02/2021,basic,monthly,$31.23,65.0,1,north,great fast slow price,no
+C100987,22/05/2022,basic,monthly,$26.21,50.0,0,west,app great billing crash confusing crash confusing,no
+C100988,29/09/2020,basic,annual,$29.46,70.0,0,west,fast cancel helpful billing,no
+C100989,25/08/2021,basic,monthly,$23.86,59.0,1,west,crash confusing billing billing cancel cancel,no
+C100990,01/01/2026,premium,monthly,$99.62,6.0,0,south,billing helpful cancel,no
+C100991,24/10/2021,standard,monthly,$57.91,57.0,0,east,billing cancel price helpful crash fast,no
+C100992,18/11/2022,standard,annual,$60.28,44.0,1,north,great fast app price support app great,no
+C100993,17/01/2023,standard,annual,$70.02,42.0,1,east,confusing love app support,no
+C100994,06/04/2025,basic,annual,$22.39,15.0,3,north,support great helpful helpful love billing love,yes
+C100995,10/06/2024,standard,annual,$65.80,25.0,2,east,love love cancel great crash crash,no
+C100996,11/05/2024,standard,monthly,$59.29,26.0,1,west,great fast price slow great love love,no
+C100997,02/11/2025,standard,monthly,$58.82,8.0,1,north,crash great helpful helpful confusing helpful app,no
+C100998,10/07/2024,premium,monthly,$86.09,24.0,1,north,billing crash crash billing helpful fast helpful,no
+C100999,05/07/2025,basic,monthly,$34.57,12.0,1,west,cancel cancel slow confusing crash,yes
+C101000,14/10/2023,basic,monthly,$21.82,33.0,2,west,billing support billing,no
+C101001,27/05/2021,premium,monthly,$93.10,,1,north,crash fast crash app cancel,no
+C101002,21/02/2022,basic,monthly,$27.13,53.0,1,south,fast fast confusing price billing great fast,no
+C101003,07/12/2024,premium,monthly,$96.81,19.0,2,north,price love app love cancel fast app,yes
+C101004,17/01/2023,basic,monthly,$23.58,,1,west,app love billing great great,no
+C101005,28/03/2021,basic,monthly,$37.47,64.0,5,north,crash helpful helpful app,yes
+C101006,28/11/2020,standard,monthly,$62.80,68.0,0,south,confusing billing price crash,no
+C101007,08/09/2024,basic,annual,$43.24,22.0,1,west,price helpful great,no
+C101008,08/09/2024,basic,monthly,$24.36,22.0,1,west,cancel support billing crash cancel,no
+C101009,31/01/2026,basic,annual,$24.10,,0,north,fast crash fast,no
+C101010,23/12/2021,basic,annual,$40.63,55.0,1,south,price slow billing support helpful,no
+C101011,08/10/2024,premium,monthly,$91.26,21.0,0,south,support billing support,yes
+C101012,11/05/2024,premium,monthly,$100.56,26.0,4,north,slow helpful app price love helpful,no
+C101013,12/03/2024,basic,monthly,$27.08,28.0,2,south,cancel support price billing cancel crash,no
+C101014,02/11/2025,basic,monthly,$27.36,8.0,3,east,helpful cancel app support crash slow price,no
+C101015,02/11/2025,standard,monthly,$50.44,8.0,3,east,love love great,no
+C101016,17/01/2023,basic,annual,$24.87,42.0,1,north,confusing billing confusing helpful helpful helpful crash,no
+C101017,13/12/2023,basic,monthly,$40.70,31.0,1,west,crash price support fast confusing confusing,no
+C101018,10/07/2024,basic,annual,$29.93,24.0,4,west,helpful cancel support,no
+C101019,24/10/2021,premium,monthly,$108.05,57.0,0,east,cancel cancel billing love price cancel,no
+C101020,07/03/2025,basic,annual,$25.21,16.0,3,south,billing cancel great,yes
+C101021,12/01/2024,basic,annual,$29.83,30.0,0,west,love cancel price helpful,no
+C101022,09/08/2024,basic,annual,$32.91,23.0,2,west,slow great crash,no
+C101023,16/07/2023,basic,monthly,$32.82,36.0,1,west,support price billing great billing,no
+C101024,03/09/2025,standard,monthly,$57.89,10.0,0,north,billing fast price billing confusing confusing love,no
+C101025,30/08/2020,basic,monthly,$29.44,71.0,1,north,support app slow cancel,no
+C101026,08/10/2024,standard,annual,$65.60,21.0,0,south,love price app fast confusing great confusing,no
+C101027,07/03/2025,premium,annual,$100.96,16.0,0,west,helpful confusing price app helpful price,yes
+C101028,22/05/2022,standard,monthly,$48.41,50.0,1,south,helpful helpful cancel fast app crash slow,no
+C101029,17/04/2023,basic,annual,$25.38,39.0,1,south,confusing billing helpful,no
+C101030,21/02/2022,basic,annual,$22.41,53.0,1,north,slow love billing billing,no
+C101031,30/08/2020,basic,monthly,$18.88,71.0,0,east,slow fast cancel confusing slow love,no
+C101032,22/05/2022,basic,annual,$33.89,,1,east,billing support helpful app great billing crash,no
+C101033,16/07/2023,basic,monthly,$35.47,36.0,2,north,cancel billing love price slow,yes
+C101034,09/08/2024,basic,monthly,$24.42,23.0,2,east,price fast great confusing,no
+C101035,17/01/2023,standard,annual,$57.14,42.0,0,south,price confusing cancel,no
+C101036,26/02/2021,standard,annual,$70.93,65.0,1,west,cancel slow love great price slow,no
+C101037,17/04/2023,standard,annual,$58.10,39.0,3,west,crash crash price cancel app,no
+C101038,18/03/2023,basic,annual,$28.53,40.0,2,south,billing helpful great app helpful,no
+C101039,03/10/2025,basic,annual,$30.92,9.0,1,south,cancel fast confusing crash slow helpful,no
+C101040,13/11/2023,standard,monthly,$66.87,32.0,0,south,helpful fast great,no
+C101041,22/04/2022,basic,annual,$32.07,51.0,1,south,helpful love love,no
+C101042,25/08/2021,basic,annual,$35.50,59.0,1,west,billing billing confusing,no
+C101043,26/02/2021,premium,monthly,$93.27,65.0,0,west,cancel fast helpful crash helpful helpful,no
+C101044,20/08/2022,premium,monthly,$104.24,47.0,2,east,support helpful confusing support,no
+C101045,27/01/2021,standard,monthly,$58.56,66.0,0,west,crash love billing support,no
+C101046,31/01/2026,premium,annual,$94.26,5.0,1,north,support billing support app confusing,no
+C101047,17/01/2023,standard,monthly,$62.40,42.0,4,north,billing love confusing crash price,no
+C101048,07/12/2024,basic,annual,$44.32,19.0,0,east,crash support helpful billing love app love,no
+C101049,11/05/2024,standard,monthly,$60.40,26.0,2,south,slow crash billing great,no
+C101050,28/11/2020,standard,annual,$65.29,68.0,0,west,helpful crash support slow support cancel billing,no
+C101051,21/07/2022,basic,monthly,$27.52,48.0,0,,great billing crash crash,no
+C101052,13/11/2023,premium,monthly,$89.81,32.0,1,south,slow slow confusing,yes
+C101053,28/11/2020,premium,monthly,$102.39,68.0,2,north,slow billing price,no
+C101054,11/02/2024,basic,annual,$23.07,29.0,1,south,support love cancel,yes
+C101055,29/09/2020,basic,monthly,$27.77,70.0,1,north,support app fast support fast app billing,no
+C101056,08/10/2024,basic,monthly,$40.89,21.0,3,north,support slow confusing,no
+C101057,08/10/2024,standard,monthly,$48.31,21.0,1,west,billing crash billing slow cancel,no
+C101058,19/09/2022,basic,annual,$31.27,,3,east,slow great support billing crash support crash,yes
+C101059,28/12/2020,basic,monthly,$32.20,67.0,1,east,helpful slow slow helpful app,no
+C101060,01/01/2026,premium,annual,$101.05,6.0,0,west,app price crash crash app,no
+C101061,23/03/2022,standard,annual,$55.61,52.0,2,south,billing crash billing helpful support app,no
+C101062,12/01/2024,premium,annual,$100.25,30.0,0,south,slow cancel crash crash,no
+C101063,27/05/2021,standard,annual,$53.41,62.0,1,north,price billing love,no
+C101064,23/11/2021,basic,monthly,$38.42,56.0,0,south,support great slow cancel slow billing slow,no
+C101065,05/07/2025,standard,monthly,$60.10,12.0,2,south,love billing app crash,yes
+C101066,21/07/2022,basic,annual,$37.03,48.0,0,,app crash confusing crash love love,no
+C101067,29/09/2020,premium,monthly,$97.39,70.0,2,south,app price great,no
+C101068,04/08/2025,basic,monthly,$34.35,11.0,0,south,app fast confusing love support fast slow,no
+C101069,22/01/2022,basic,monthly,$33.28,54.0,1,south,support cancel helpful app,no
+C101070,02/11/2025,standard,annual,$52.28,8.0,2,west,price fast helpful cancel,no
+C101071,05/07/2025,basic,monthly,$38.65,12.0,1,north,love fast love,yes
+C101072,07/12/2024,basic,annual,$45.37,19.0,1,west,price crash cancel,no
+C101073,17/04/2023,basic,annual,$35.54,39.0,2,west,love confusing love love crash,no
+C101074,23/11/2021,basic,annual,$21.09,56.0,0,north,great price helpful support,no
+C101075,02/11/2025,standard,monthly,$54.11,8.0,0,north,love confusing great app great slow,yes
+C101076,01/04/2026,standard,annual,$45.79,3.0,0,,cancel price cancel support price,no
+C101077,23/03/2022,basic,annual,$24.29,52.0,0,north,price support slow,no
+C101078,09/08/2024,basic,monthly,$39.79,23.0,1,west,cancel love fast fast,no
+C101079,18/12/2022,basic,monthly,$35.36,43.0,0,east,support helpful great crash fast love,no
+C101080,13/12/2023,basic,monthly,$23.37,31.0,2,north,app slow app price love,no
+C101081,17/01/2023,standard,monthly,$51.57,42.0,1,north,slow app billing cancel,no
+C101082,10/07/2024,basic,monthly,$25.26,24.0,0,north,slow support crash app cancel,no
+C101083,26/06/2021,basic,monthly,$35.66,61.0,1,north,price price billing,no
+C101084,03/10/2025,basic,annual,$32.11,9.0,1,east,love helpful fast app app,no
+C101085,23/12/2021,basic,monthly,$38.12,55.0,0,north,fast cancel app app price slow slow,no
+C101086,13/12/2023,basic,monthly,$25.30,31.0,1,west,confusing helpful app,no
+C101087,02/12/2025,basic,annual,$29.90,7.0,1,east,crash cancel helpful love fast support,no
+C101088,28/03/2021,standard,monthly,$54.88,64.0,1,west,cancel cancel support fast slow,no
+C101089,23/12/2021,basic,monthly,$27.97,55.0,1,north,love confusing app,no
+C101090,04/08/2025,basic,annual,$27.30,11.0,1,east,price slow app app,no
+C101091,17/04/2023,basic,monthly,$27.38,39.0,0,east,price app billing confusing great,no
+C101092,05/07/2025,standard,monthly,$62.70,12.0,0,west,slow cancel crash love crash billing,yes
+C101093,06/05/2025,basic,monthly,$26.32,,1,south,confusing app crash,no
+C101094,08/09/2024,standard,monthly,$58.31,22.0,1,north,price app app support helpful,yes
+C101095,10/06/2024,standard,annual,$53.83,25.0,1,south,helpful support crash cancel support cancel slow,no
+C101096,29/09/2020,basic,monthly,$36.41,70.0,1,east,billing helpful crash great fast,no
+C101097,16/06/2023,basic,monthly,$39.52,37.0,2,north,app app app cancel billing,no
+C101098,12/01/2024,standard,annual,$70.92,30.0,3,west,crash fast price great great,no
+C101099,26/06/2021,standard,annual,$64.08,61.0,2,south,fast crash love support app,no
+C101100,01/04/2026,standard,monthly,$58.98,3.0,0,south,great price support billing helpful app,no
+C101101,27/04/2021,basic,annual,$23.62,63.0,0,east,helpful billing support love crash helpful love,no
+C101102,01/04/2026,standard,annual,$52.88,3.0,2,east,great great app billing billing billing billing,yes
+C101103,02/11/2025,basic,monthly,$28.74,8.0,1,west,love price helpful slow support app crash,no
+C101104,01/04/2026,basic,annual,$21.77,3.0,2,north,great confusing support,no
+C101105,13/11/2023,standard,annual,$63.78,32.0,1,north,great support helpful confusing crash,yes
+C101106,29/09/2020,standard,annual,$60.72,70.0,2,south,cancel app fast slow,no
+C101107,26/07/2021,standard,annual,$51.17,60.0,1,east,app billing price slow support,no
+C101108,01/01/2026,basic,monthly,$27.92,6.0,2,north,billing billing app slow,no
+C101109,18/12/2022,basic,monthly,$34.32,43.0,1,east,great fast cancel cancel,no
+C101110,28/12/2020,basic,monthly,$36.16,67.0,0,west,love billing support fast,no
+C101111,26/06/2021,basic,monthly,$30.55,61.0,1,west,app price love price support slow confusing,no
+C101112,07/11/2024,basic,monthly,$33.08,20.0,1,west,fast fast great cancel fast,no
+C101113,18/12/2022,basic,annual,$31.22,43.0,2,east,fast love confusing app,no
+C101114,11/05/2024,premium,monthly,$96.59,,2,south,crash love slow slow,no
+C101115,07/03/2025,standard,monthly,$60.21,16.0,0,east,crash crash support support crash,no
+C101116,27/04/2021,standard,annual,$60.07,63.0,1,,cancel billing app cancel,no
+C101117,16/07/2023,basic,monthly,$25.85,36.0,2,south,app fast slow confusing fast,no
+C101118,14/09/2023,basic,monthly,$30.82,,0,west,billing crash billing confusing fast,no
+C101119,16/06/2023,standard,monthly,$59.22,37.0,1,south,price cancel cancel app billing,no
+C101120,07/03/2025,premium,monthly,$101.63,16.0,0,south,app slow confusing app great love support,yes
+C101121,28/03/2021,standard,monthly,$59.42,64.0,1,west,great app great confusing confusing,no
+C101122,18/12/2022,basic,annual,$29.29,43.0,0,west,crash helpful love crash price,no
+C101123,11/05/2024,standard,monthly,$48.55,26.0,1,north,helpful cancel price helpful,no
+C101124,18/12/2022,basic,annual,$43.41,43.0,4,east,slow great price price love slow,no
+C101125,05/02/2025,basic,monthly,$33.66,17.0,0,west,slow great helpful crash billing,no
+C101126,15/08/2023,basic,monthly,$31.97,35.0,1,west,love app support confusing,yes
+C101127,22/01/2022,premium,monthly,$109.89,54.0,2,south,fast cancel great billing crash,yes
+C101128,25/08/2021,basic,annual,$35.32,59.0,0,east,great billing price,no
+C101129,12/01/2024,standard,monthly,$62.23,30.0,2,south,great app helpful fast helpful,yes
+C101130,22/04/2022,basic,monthly,$33.30,,1,east,helpful great fast app app helpful,yes
+C101131,15/08/2023,basic,monthly,$39.34,35.0,0,west,support app app great confusing confusing,no
+C101132,01/01/2026,standard,monthly,$60.95,6.0,1,west,price cancel cancel cancel fast support great,yes
+C101133,29/09/2020,basic,annual,$21.33,70.0,2,west,confusing fast price,no
+C101134,27/05/2021,basic,annual,$20.37,62.0,3,north,helpful love cancel crash cancel slow crash,no
+C101135,21/07/2022,standard,annual,$67.65,48.0,0,north,app cancel confusing support,no
+C101136,02/03/2026,standard,monthly,$58.20,4.0,2,east,crash support fast,no
+C101137,21/07/2022,basic,monthly,$32.60,48.0,0,south,great love helpful fast helpful,no
+C101138,05/02/2025,basic,monthly,$28.87,17.0,0,south,cancel billing helpful confusing great confusing cancel,no
+C101139,28/12/2020,standard,monthly,$62.06,67.0,1,north,love great helpful great great support helpful,no
+C101140,02/12/2025,standard,monthly,$54.33,7.0,2,east,support slow crash billing price,yes
+C101141,22/04/2022,basic,annual,$32.19,51.0,0,west,crash crash crash support,no
+C101142,12/03/2024,standard,monthly,$45.81,28.0,0,east,billing app price slow helpful,no
+C101143,28/11/2020,basic,monthly,$27.73,,1,south,support fast slow helpful,no
+C101144,23/11/2021,standard,monthly,$51.27,56.0,0,south,slow confusing cancel support app crash love,no
+C101145,19/10/2022,premium,annual,$99.38,45.0,2,west,crash crash cancel crash support helpful,yes
+C101146,16/06/2023,basic,monthly,$29.91,37.0,2,north,confusing price confusing confusing app billing price,no
+C101147,17/01/2023,basic,monthly,$28.42,42.0,0,east,love confusing cancel helpful support,no
+C101148,18/11/2022,standard,monthly,$60.22,44.0,0,north,confusing price support crash crash price support,no
+C101149,08/10/2024,premium,monthly,$88.80,21.0,1,south,cancel billing billing fast support confusing crash,yes
+C101150,17/04/2023,standard,monthly,$52.87,39.0,0,east,great app support app,no
+C101151,05/02/2025,standard,monthly,$58.01,17.0,0,east,helpful great love cancel,no
+C101152,07/11/2024,premium,annual,$101.58,20.0,1,north,fast support support cancel app billing love,no
+C101153,17/05/2023,basic,annual,$30.82,38.0,0,north,crash great love fast fast,no
+C101154,19/09/2022,standard,monthly,$49.04,46.0,1,east,fast support love support cancel cancel,no
+C101155,31/01/2026,standard,monthly,$67.02,5.0,0,west,crash cancel crash fast helpful fast cancel,no
+C101156,29/09/2020,basic,monthly,$28.57,70.0,2,east,cancel app love,no
+C101157,05/07/2025,standard,annual,$68.89,12.0,1,south,billing billing confusing support slow,no
+C101158,18/03/2023,basic,monthly,$33.28,40.0,1,north,slow app cancel fast price app confusing,no
+C101159,22/04/2022,basic,annual,$36.13,51.0,1,south,support crash cancel great crash billing cancel,no
+C101160,07/11/2024,basic,annual,$32.38,20.0,1,south,cancel crash crash crash love helpful,no
+C101161,21/06/2022,basic,annual,$26.43,49.0,3,west,price helpful crash,no
+C101162,16/06/2023,standard,monthly,$57.63,37.0,2,south,confusing cancel love confusing love slow app,no
+C101163,01/04/2026,premium,monthly,$104.40,3.0,0,south,price price helpful app app support slow,no
+C101164,27/05/2021,basic,annual,$27.04,62.0,1,south,crash fast support app,no
+C101165,05/07/2025,premium,annual,$87.80,12.0,1,east,great slow cancel helpful great,no
+C101166,03/10/2025,basic,annual,$29.15,9.0,3,west,fast cancel crash billing billing,no
+C101167,18/11/2022,basic,annual,$30.60,44.0,1,west,great helpful helpful,no
+C101168,06/05/2025,basic,annual,$31.85,14.0,0,south,app app love,no
+C101169,11/02/2024,basic,monthly,$33.33,29.0,1,east,confusing app slow crash crash support,no
+C101170,01/04/2026,standard,annual,$71.12,3.0,1,west,support billing app great app slow great,yes
+C101171,17/01/2023,standard,monthly,$50.18,,2,north,great support crash billing cancel app app,yes
+C101172,27/04/2021,basic,monthly,$39.73,63.0,2,south,billing app cancel app slow,no
+C101173,03/09/2025,basic,monthly,$33.43,10.0,2,south,price cancel helpful billing great price cancel,no
+C101174,16/02/2023,standard,monthly,$59.07,41.0,1,west,helpful app slow cancel slow helpful love,no
+C101175,27/05/2021,basic,monthly,$21.03,62.0,1,west,great crash support,no
+C101176,07/03/2025,standard,monthly,$59.55,16.0,0,south,love crash confusing support billing,no
+C101177,07/12/2024,basic,monthly,$32.71,19.0,1,east,slow fast support,no
+C101178,14/10/2023,standard,monthly,$58.86,33.0,0,east,app crash great app cancel,no
+C101179,11/04/2024,basic,monthly,$26.31,27.0,0,north,price great love,no
+C101180,01/01/2026,basic,monthly,$25.50,6.0,0,south,slow love great cancel confusing billing billing,no
+C101181,13/11/2023,basic,annual,$24.33,32.0,0,south,confusing confusing slow slow confusing,no
+C101182,27/01/2021,standard,annual,$62.93,66.0,4,north,helpful great price support price great,no
+C101183,18/12/2022,standard,monthly,$62.51,,3,south,cancel app app cancel love,no
+C101184,09/08/2024,basic,monthly,$34.82,23.0,0,north,support great cancel billing great app love,yes
+C101185,29/09/2020,basic,monthly,$24.42,70.0,1,south,slow great cancel app slow fast,no
+C101186,02/12/2025,basic,annual,$37.08,7.0,1,south,price confusing love cancel helpful,no
+C101187,06/04/2025,basic,monthly,$43.95,15.0,3,south,confusing crash love fast slow,no
+C101188,30/08/2020,standard,monthly,$59.66,71.0,1,west,crash confusing confusing great,no
+C101189,05/07/2025,standard,annual,$65.93,12.0,0,west,billing support cancel app,no
+C101190,24/09/2021,basic,monthly,$21.13,58.0,0,west,great love fast fast support confusing,no
+C101191,04/08/2025,basic,annual,$43.33,11.0,1,south,slow support slow price support helpful crash,no
+C101192,07/03/2025,basic,monthly,$32.83,16.0,0,east,app helpful price helpful cancel,no
+C101193,23/11/2021,standard,monthly,$66.45,56.0,1,south,slow great crash,no
+C101194,20/08/2022,basic,monthly,$30.82,47.0,1,east,helpful app support,no
+C101195,12/03/2024,standard,monthly,$49.56,28.0,1,north,fast helpful slow fast,yes
+C101196,07/11/2024,basic,annual,$32.02,20.0,1,west,great confusing crash crash support fast,no
+C101197,27/01/2021,basic,annual,$29.01,66.0,1,east,fast crash support app support helpful app,no
+C101198,14/10/2023,standard,monthly,$64.59,33.0,3,west,crash confusing billing app,no
+C101199,31/01/2026,standard,monthly,$54.03,5.0,2,west,app cancel support,yes
+C101200,24/10/2021,basic,monthly,$10.88,57.0,3,south,crash price crash,no
+C101201,17/05/2023,premium,monthly,$98.61,38.0,3,south,cancel confusing slow,no
+C101202,05/07/2025,premium,monthly,$97.03,12.0,0,south,fast crash price crash slow app,yes
+C101203,22/01/2022,standard,annual,$63.43,54.0,2,north,cancel fast slow cancel,no
+C101204,16/06/2023,basic,annual,$23.88,37.0,2,south,price price app confusing support support confusing,no
+C101205,16/06/2023,basic,annual,$26.76,37.0,0,east,great price price,no
+C101206,26/06/2021,basic,monthly,$26.82,61.0,1,north,billing cancel cancel fast slow,no
+C101207,11/02/2024,standard,monthly,$54.62,29.0,2,north,crash confusing confusing slow,no
+C101208,02/03/2026,basic,monthly,$32.41,4.0,0,north,app crash billing billing,no
+C101209,24/09/2021,standard,monthly,$57.36,58.0,1,south,fast slow support love cancel,no
+C101210,06/04/2025,premium,monthly,$96.08,15.0,1,north,price cancel fast,yes
+C101211,16/06/2023,standard,monthly,$54.93,37.0,2,north,billing helpful support,no
+C101212,13/12/2023,basic,monthly,$27.21,31.0,1,north,confusing support love,no
+C101213,26/02/2021,basic,annual,$38.26,,0,south,love support billing crash fast confusing love,no
+C101214,01/05/2026,basic,annual,$27.61,2.0,1,east,helpful fast billing confusing billing confusing,no
+C101215,05/02/2025,standard,monthly,$55.09,17.0,1,north,price support helpful cancel,no
+C101216,11/04/2024,basic,annual,$29.68,27.0,1,south,crash slow billing,no
+C101217,18/12/2022,basic,monthly,$33.84,43.0,0,west,cancel confusing support app app,yes
+C101218,07/03/2025,basic,annual,$29.10,16.0,1,south,love fast support,no
+C101219,19/09/2022,standard,monthly,$61.54,46.0,1,south,helpful confusing confusing,no
+C101220,05/06/2025,standard,monthly,$62.85,13.0,0,north,confusing app cancel app,yes
+C101221,26/02/2021,standard,monthly,$63.59,65.0,0,west,love confusing billing,no
+C101222,28/12/2020,basic,monthly,$30.41,67.0,2,west,love love support slow,no
+C101223,02/12/2025,standard,annual,$50.75,7.0,2,south,great crash cancel great helpful helpful app,no
+C101224,18/11/2022,premium,monthly,$98.35,44.0,2,north,great cancel great helpful fast,no
+C101225,24/09/2021,premium,monthly,$95.15,58.0,2,south,billing support crash,no
+C101226,11/05/2024,premium,annual,$103.43,26.0,0,south,helpful confusing billing price cancel,no
+C101227,21/06/2022,premium,annual,$106.74,49.0,1,east,crash fast great fast price confusing,no
+C101228,24/10/2021,standard,monthly,$56.81,57.0,1,,fast crash fast slow crash support,no
+C101229,27/05/2021,basic,monthly,$33.48,62.0,0,east,app helpful cancel price great support support,no
+C101230,17/01/2023,premium,annual,$101.29,42.0,1,east,fast price confusing helpful confusing great price,no
+C101231,18/11/2022,basic,annual,$27.67,44.0,2,north,fast great slow love app love,no
+C101232,04/08/2025,basic,monthly,$37.41,11.0,3,east,slow price billing support app love,yes
+C101233,14/10/2023,premium,annual,$96.29,33.0,4,east,love billing love slow support,no
+C101234,23/03/2022,premium,annual,$94.94,52.0,0,north,slow slow love slow slow,no
+C101235,24/10/2021,basic,monthly,$23.83,57.0,1,north,love support helpful,no
+C101236,10/06/2024,premium,annual,$105.35,25.0,1,south,love great fast confusing slow fast,no
+C101237,08/10/2024,basic,annual,$24.58,21.0,1,south,love billing fast billing love cancel,no
+C101238,22/04/2022,basic,monthly,$24.50,51.0,1,west,price fast helpful support,no
+C101239,02/03/2026,basic,annual,$35.44,4.0,1,west,cancel support app slow cancel,no
+C101240,07/03/2025,standard,annual,$61.13,16.0,2,north,fast app support fast,yes
+C101241,22/01/2022,basic,monthly,$28.08,54.0,1,south,crash price billing cancel,yes
+C101242,21/07/2022,standard,annual,$53.91,48.0,1,west,great confusing support support cancel great crash,no
+C101243,24/09/2021,basic,monthly,$30.41,58.0,1,west,confusing slow cancel,no
+C101244,23/11/2021,basic,annual,$22.65,56.0,1,south,crash price love slow crash support,no
+C101245,25/08/2021,standard,monthly,$60.17,59.0,0,north,slow price price confusing love,no
+C101246,09/08/2024,standard,monthly,$59.88,23.0,1,east,billing slow confusing support,no
+C101247,13/11/2023,basic,monthly,$28.58,32.0,2,west,crash confusing cancel price price,no
+C101248,18/11/2022,basic,monthly,$30.14,44.0,0,north,great support crash great crash confusing great,no
+C101249,21/02/2022,standard,annual,$62.66,53.0,2,south,helpful cancel app fast app price,no
+C101250,11/04/2024,standard,monthly,$48.23,27.0,3,,helpful confusing love,no
+C101251,22/04/2022,premium,monthly,$92.75,51.0,2,west,price helpful billing price billing love,no
+C101252,05/06/2025,basic,monthly,$33.33,13.0,0,east,cancel price crash billing,no
+C101253,08/10/2024,premium,monthly,$98.09,21.0,0,west,price price support price slow support,no
+C101254,21/07/2022,premium,monthly,$104.07,48.0,1,south,fast helpful slow support crash,no
+C101255,23/12/2021,premium,annual,$109.14,55.0,0,north,fast slow cancel cancel support great slow,no
+C101256,01/01/2026,basic,monthly,$38.28,6.0,0,south,crash fast confusing crash crash app,no
+C101257,29/10/2020,standard,annual,$64.92,69.0,1,north,fast cancel billing great support,no
+C101258,24/10/2021,basic,annual,$29.63,57.0,0,south,app confusing helpful billing,no
+C101259,10/06/2024,standard,monthly,$66.11,25.0,0,east,crash slow love,no
+C101260,20/08/2022,basic,monthly,$25.47,47.0,3,west,great support crash helpful price love helpful,no
+C101261,07/11/2024,standard,monthly,$60.22,20.0,2,south,price helpful slow crash,no
+C101262,03/10/2025,basic,monthly,$27.52,9.0,2,east,slow crash helpful confusing price support,yes
+C101263,17/01/2023,basic,monthly,$26.26,42.0,2,south,crash cancel slow confusing,no
+C101264,28/03/2021,basic,monthly,$24.66,64.0,0,north,price great cancel billing,no
+C101265,27/04/2021,basic,annual,$31.59,63.0,2,east,love great cancel cancel fast love,no
+C101266,01/01/2026,basic,monthly,$19.92,6.0,3,east,cancel fast confusing helpful slow slow,no
+C101267,18/11/2022,standard,monthly,$47.49,44.0,1,south,fast billing cancel,yes
+C101268,01/01/2026,standard,monthly,$65.01,6.0,2,north,fast billing slow helpful billing helpful support,yes
+C101269,29/10/2020,standard,monthly,$61.47,69.0,0,south,crash cancel helpful billing crash crash helpful,no
+C101270,12/01/2024,premium,annual,$103.96,30.0,1,south,cancel crash cancel great price helpful,yes
+C101271,27/01/2021,basic,annual,$28.34,66.0,1,south,slow slow love confusing,no
+C101272,16/06/2023,standard,monthly,$61.86,37.0,1,east,app love slow fast love love helpful,no
+C101273,22/04/2022,basic,monthly,$26.11,51.0,2,south,great price app,no
+C101274,01/05/2026,standard,monthly,$55.94,2.0,3,west,love helpful app slow slow,no
+C101275,22/04/2022,basic,monthly,$22.37,51.0,5,west,cancel price love,no
+C101276,18/12/2022,basic,monthly,$39.71,43.0,0,north,cancel crash billing slow app price great,yes
+C101277,05/06/2025,standard,annual,$53.32,13.0,2,west,support price fast confusing support slow app,yes
+C101278,13/11/2023,standard,annual,$68.40,32.0,0,west,confusing confusing support confusing,no
+C101279,10/06/2024,basic,annual,$21.83,25.0,0,south,slow crash helpful,no
+C101280,01/04/2026,standard,annual,$53.65,3.0,2,south,slow billing billing crash support billing,yes
+C101281,24/09/2021,basic,monthly,$36.30,58.0,2,east,great great price support,no
+C101282,21/07/2022,standard,monthly,$62.49,48.0,4,east,great confusing slow,no
+C101283,11/02/2024,standard,monthly,$61.49,29.0,3,east,great billing billing,yes
+C101284,08/09/2024,basic,monthly,$23.50,22.0,2,east,billing helpful app helpful,yes
+C101285,05/02/2025,basic,monthly,$34.78,17.0,1,south,price confusing helpful billing,no
+C101286,23/12/2021,basic,monthly,$23.90,55.0,0,east,love love confusing billing fast helpful,no
+C101287,31/01/2026,standard,annual,$60.83,5.0,0,east,app cancel support confusing billing,yes
+C101288,16/06/2023,basic,annual,$24.73,37.0,2,north,love crash crash,no
+C101289,07/03/2025,standard,annual,$68.24,16.0,1,,confusing cancel billing price app support love,yes
+C101290,01/01/2026,standard,annual,$61.40,6.0,0,north,helpful confusing slow,no
+C101291,16/02/2023,basic,annual,$37.03,41.0,2,south,billing slow love fast,yes
+C101292,07/11/2024,basic,monthly,$28.10,20.0,5,north,support great billing price cancel confusing helpful,yes
+C101293,27/01/2021,basic,monthly,$24.78,66.0,1,east,cancel cancel slow crash app,no
+C101294,22/04/2022,standard,annual,$50.88,51.0,1,east,love price crash support billing,yes
+C101295,12/03/2024,standard,annual,$60.53,,3,north,fast support support app crash fast support,no
+C101296,29/09/2020,standard,monthly,$66.12,70.0,2,east,love confusing helpful cancel,no
+C101297,24/10/2021,standard,annual,$62.20,57.0,1,south,confusing crash cancel price love slow,no
+C101298,16/07/2023,premium,monthly,$94.79,36.0,1,north,price confusing helpful,no
+C101299,03/09/2025,standard,monthly,$56.34,10.0,0,south,cancel cancel helpful slow support,no
+C101300,01/01/2026,basic,annual,$26.35,6.0,2,east,slow slow app crash confusing cancel,no
+C101301,25/08/2021,standard,annual,$58.85,59.0,0,east,helpful app love billing great,no
+C101302,14/09/2023,standard,annual,$63.17,34.0,1,east,slow confusing crash helpful great,no
+C101303,27/01/2021,basic,monthly,$29.85,66.0,1,east,slow helpful helpful billing,no
+C101304,15/08/2023,basic,monthly,$33.27,35.0,0,east,billing fast love great crash confusing app,no
+C101305,16/07/2023,basic,monthly,$31.66,36.0,4,east,crash crash great app,no
+C101306,25/08/2021,standard,annual,$52.96,59.0,0,east,great billing billing support,no
+C101307,14/10/2023,basic,monthly,$29.58,33.0,2,west,helpful crash billing crash price cancel love,no
+C101308,16/06/2023,standard,monthly,$53.05,37.0,3,east,slow confusing great helpful slow love,yes
+C101309,26/02/2021,premium,annual,$99.59,65.0,2,south,fast fast great support billing crash,no
+C101310,05/02/2025,standard,monthly,$61.62,17.0,2,south,slow fast app confusing great slow,yes
+C101311,05/02/2025,basic,monthly,$24.38,17.0,1,east,crash price great,no
+C101312,28/12/2020,standard,monthly,$51.15,67.0,1,south,slow fast helpful crash,yes
+C101313,27/01/2021,standard,annual,$60.29,66.0,0,north,crash love billing,no
+C101314,29/09/2020,standard,monthly,$58.32,70.0,2,north,confusing confusing price support price confusing love,no
+C101315,27/01/2021,basic,monthly,$35.97,66.0,2,west,slow app confusing fast,yes
+C101316,01/05/2026,premium,monthly,$95.13,2.0,0,south,great cancel love love,no
+C101317,28/11/2020,standard,monthly,$68.78,68.0,0,west,love love crash billing love,no
+C101318,05/07/2025,basic,annual,$32.95,12.0,1,north,great cancel price price great,yes
+C101319,28/03/2021,basic,monthly,$20.04,64.0,0,north,crash love love confusing confusing price price,no
+C101320,21/06/2022,basic,monthly,$25.02,49.0,1,north,app cancel great price crash fast price,no
+C101321,17/05/2023,basic,monthly,$29.21,38.0,3,,support fast price price confusing great slow,no
+C101322,14/10/2023,basic,annual,$28.32,33.0,0,,crash slow billing crash,no
+C101323,21/06/2022,basic,monthly,$23.74,49.0,1,west,cancel confusing support support love support confusing,no
+C101324,20/08/2022,premium,monthly,$88.20,47.0,2,south,support confusing crash,no
+C101325,17/05/2023,standard,annual,$57.18,38.0,0,west,crash love cancel billing billing billing cancel,no
+C101326,01/01/2026,basic,annual,$27.69,6.0,0,south,support great crash billing cancel,no
+C101327,08/09/2024,standard,monthly,$62.45,22.0,1,south,fast billing billing cancel app,yes
+C101328,05/06/2025,premium,monthly,$100.17,13.0,1,south,great support confusing,yes
+C101329,30/08/2020,basic,annual,$22.61,71.0,1,north,helpful fast app crash,no
+C101330,26/07/2021,basic,annual,$33.65,60.0,0,north,great support billing,no
+C101331,01/05/2026,basic,monthly,$25.49,2.0,1,south,app helpful cancel fast app,no
+C101332,19/10/2022,basic,annual,$34.73,45.0,1,west,great crash cancel crash billing great,no
+C101333,06/01/2025,basic,annual,$26.23,18.0,2,east,app love great cancel helpful,yes
+C101334,16/07/2023,standard,monthly,$55.75,36.0,2,west,fast billing slow app slow fast,no
+C101335,27/01/2021,standard,annual,$58.98,66.0,0,north,crash billing cancel,no
+C101336,17/01/2023,standard,annual,$63.61,42.0,2,south,app billing slow,yes
+C101337,28/11/2020,standard,monthly,$60.58,68.0,3,south,fast price app app,no
+C101338,10/07/2024,basic,monthly,$21.28,24.0,3,west,love slow crash great helpful,no
+C101339,07/11/2024,standard,monthly,$64.81,20.0,3,north,slow cancel price,yes
+C101340,26/07/2021,premium,monthly,$95.03,60.0,0,north,helpful app love app cancel great,no
+C101341,30/08/2020,standard,monthly,$50.41,71.0,2,south,slow great fast fast,no
+C101342,20/08/2022,standard,monthly,$48.88,47.0,1,south,cancel crash app support crash slow,no
+C101343,24/09/2021,standard,monthly,$66.79,58.0,1,south,billing helpful fast,no
+C101344,11/02/2024,basic,annual,$38.10,29.0,2,east,helpful billing price billing app app,no
+C101345,23/11/2021,premium,monthly,$95.77,56.0,3,north,great confusing fast helpful cancel,no
+C101346,05/06/2025,basic,annual,$27.28,13.0,2,east,support app price support support cancel,yes
+C101347,16/02/2023,basic,monthly,$28.69,41.0,0,north,helpful great crash app great slow slow,no
+C101348,21/02/2022,standard,monthly,$51.50,53.0,2,west,helpful slow cancel confusing confusing great,no
+C101349,12/03/2024,basic,monthly,$29.81,28.0,0,south,slow fast app app,no
+C101350,07/11/2024,basic,monthly,$32.30,,0,north,cancel confusing cancel helpful billing helpful,no
+C101351,31/05/2026,standard,monthly,$56.48,1.0,1,north,cancel app love,no
+C101352,14/10/2023,basic,annual,$30.44,33.0,0,east,helpful crash helpful price app support,no
+C101353,11/05/2024,premium,monthly,$96.53,26.0,0,west,love confusing crash crash billing fast,no
+C101354,20/08/2022,basic,monthly,$35.10,47.0,0,south,billing confusing helpful great app,no
+C101355,11/04/2024,standard,monthly,$53.52,27.0,4,west,great price great support,yes
+C101356,22/04/2022,standard,monthly,$56.21,51.0,1,,support app fast cancel helpful helpful billing,no
+C101357,01/01/2026,basic,monthly,$37.55,6.0,0,east,app support cancel app,no
+C101358,30/08/2020,premium,monthly,$100.10,71.0,0,west,crash billing cancel crash,no
+C101359,01/01/2026,standard,monthly,$73.41,6.0,0,south,billing billing cancel confusing support price love,no
+C101360,11/05/2024,standard,monthly,$63.44,26.0,2,east,helpful crash love billing,yes
+C101361,07/12/2024,standard,annual,$65.97,19.0,4,east,slow app fast helpful billing,yes
+C101362,24/10/2021,standard,monthly,$62.89,57.0,1,east,billing support cancel helpful love,no
+C101363,16/07/2023,basic,annual,$24.48,36.0,2,east,support great cancel billing support,no
+C101364,22/01/2022,premium,monthly,$104.61,54.0,0,west,price cancel billing confusing,no
+C101365,23/12/2021,basic,annual,$23.07,55.0,4,east,helpful love cancel confusing slow billing slow,no
+C101366,19/09/2022,basic,monthly,$19.19,46.0,1,south,slow confusing crash cancel cancel great crash,no
+C101367,17/01/2023,basic,monthly,$31.34,42.0,2,east,confusing confusing cancel,no
+C101368,16/06/2023,basic,annual,$34.98,37.0,3,east,confusing great helpful helpful support confusing love,no
+C101369,17/04/2023,premium,monthly,$106.43,39.0,0,south,helpful love great,no
+C101370,23/11/2021,basic,monthly,$31.48,56.0,1,west,slow fast helpful confusing,no
+C101371,24/10/2021,basic,monthly,$28.59,57.0,0,east,helpful love price,no
+C101372,14/10/2023,standard,annual,$58.19,33.0,0,west,price crash app,no
+C101373,26/06/2021,standard,monthly,$62.18,61.0,5,south,great crash fast price crash,no
+C101374,01/05/2026,basic,monthly,$35.01,2.0,1,east,crash slow fast app cancel,no
+C101375,13/11/2023,premium,annual,$99.16,32.0,2,south,confusing app billing confusing crash,no
+C101376,21/06/2022,basic,monthly,$32.81,49.0,1,east,app helpful price crash support app app,no
+C101377,18/11/2022,standard,annual,$65.95,44.0,0,east,slow helpful slow great slow,no
+C101378,11/02/2024,basic,monthly,$36.21,29.0,0,west,app confusing price billing love billing,no
+C101379,27/01/2021,basic,monthly,$36.00,66.0,1,north,great love slow billing fast helpful,no
+C101380,31/01/2026,premium,monthly,$104.02,5.0,4,,support helpful slow price helpful,yes
+C101381,01/01/2026,premium,monthly,$109.39,6.0,3,west,support fast love,no
+C101382,14/09/2023,standard,monthly,$53.74,34.0,2,north,confusing price cancel app great billing,no
+C101383,18/11/2022,basic,monthly,$39.08,44.0,0,east,confusing support app helpful,yes
+C101384,12/01/2024,premium,annual,$99.47,30.0,1,west,helpful crash helpful great support helpful,no
+C101385,23/11/2021,basic,annual,$19.76,56.0,1,south,confusing price slow crash great support,no
+C101386,19/09/2022,standard,monthly,$59.76,46.0,1,west,helpful great billing price cancel,no
+C101387,13/12/2023,basic,monthly,$30.93,31.0,2,south,great support confusing crash support love,no
+C101388,08/10/2024,standard,monthly,$51.09,21.0,0,north,confusing helpful price helpful cancel crash fast,yes
+C101389,22/01/2022,basic,monthly,$29.18,54.0,0,north,confusing helpful crash crash cancel price slow,no
+C101390,15/08/2023,basic,annual,$15.89,35.0,1,south,app crash helpful billing confusing,no
+C101391,26/07/2021,basic,monthly,$39.20,60.0,1,west,cancel great helpful,no
+C101392,06/04/2025,standard,monthly,$57.45,15.0,2,west,support fast price cancel cancel great,no
+C101393,23/12/2021,standard,monthly,$58.97,55.0,0,south,cancel crash support app fast support love,no
+C101394,22/04/2022,standard,monthly,$64.74,51.0,1,west,slow great great app price fast cancel,no
+C101395,17/04/2023,premium,monthly,$99.07,39.0,0,,app support fast,yes
+C101396,28/11/2020,basic,annual,$21.46,68.0,1,west,fast great price love app price app,no
+C101397,23/03/2022,premium,monthly,$87.42,52.0,1,east,crash price slow confusing,no
+C101398,27/01/2021,premium,annual,$102.97,66.0,2,south,app billing price billing app,no
+C101399,22/04/2022,basic,annual,$33.79,51.0,1,south,confusing great support crash fast billing,no
+C101400,08/10/2024,standard,monthly,$56.40,21.0,1,west,helpful support love billing support,no
+C101401,12/03/2024,basic,monthly,$16.98,28.0,4,north,app love cancel slow,yes
+C101402,27/04/2021,basic,monthly,$30.96,63.0,1,north,slow slow slow slow love fast,no
+C101403,01/05/2026,basic,monthly,$28.90,2.0,1,south,billing crash great support support,no
+C101404,26/02/2021,standard,monthly,$62.70,65.0,1,,cancel support love confusing love,no
+C101405,28/11/2020,basic,annual,$24.24,68.0,3,west,confusing slow app app slow,no
+C101406,26/07/2021,premium,monthly,$86.45,60.0,0,east,crash cancel support,no
+C101407,14/09/2023,premium,monthly,$95.71,34.0,1,east,price crash helpful billing app confusing great,no
+C101408,21/06/2022,basic,monthly,$33.63,49.0,2,east,helpful price support,no
+C101409,08/09/2024,standard,monthly,$65.24,22.0,1,west,price fast cancel cancel crash crash love,no
+C101410,05/06/2025,standard,monthly,$56.91,13.0,2,east,crash crash price billing confusing,no
+C101411,06/01/2025,basic,monthly,$25.62,18.0,3,east,billing support billing fast confusing love,yes
+C101412,28/03/2021,standard,annual,$48.16,64.0,0,east,price helpful great confusing cancel support support,no
+C101413,11/02/2024,basic,monthly,$36.13,29.0,0,east,support app app app app great,no
+C101414,22/04/2022,standard,annual,$56.28,51.0,1,west,price confusing price cancel love great,no
+C101415,17/01/2023,standard,monthly,$54.70,42.0,0,south,great love cancel confusing price support,no
+C101416,30/08/2020,basic,monthly,$23.63,71.0,0,east,slow slow confusing price,no
+C101417,16/06/2023,basic,annual,$26.60,37.0,2,west,fast confusing billing price crash helpful,no
+C101418,13/11/2023,basic,monthly,$31.48,32.0,0,east,price fast cancel,no
+C101419,12/03/2024,basic,annual,$26.70,28.0,2,south,great crash slow app love great billing,no
+C101420,21/07/2022,basic,annual,$37.08,48.0,0,north,price billing crash,no
+C101421,01/01/2026,standard,monthly,$62.87,6.0,0,west,billing fast love confusing,no
+C101422,29/10/2020,basic,annual,$31.19,69.0,2,west,crash crash crash slow,no
+C101423,29/09/2020,standard,monthly,$66.75,70.0,0,east,great slow helpful love fast helpful,no
+C101424,02/11/2025,basic,monthly,$21.76,8.0,1,south,fast fast confusing,no
+C101425,01/05/2026,basic,annual,$29.83,2.0,1,south,app app confusing app,no
+C101426,27/04/2021,standard,monthly,$63.73,63.0,4,north,app love cancel cancel app confusing billing,no
+C101427,27/01/2021,premium,annual,$103.90,66.0,0,north,love cancel fast confusing,no
+C101428,14/10/2023,basic,annual,$26.44,33.0,0,east,fast great crash slow cancel support love,no
+C101429,01/04/2026,basic,monthly,$21.80,3.0,0,south,helpful cancel app app great support,no
+C101430,02/11/2025,standard,monthly,$47.86,8.0,2,north,billing love app love,yes
+C101431,16/07/2023,basic,annual,$31.96,36.0,2,east,slow slow helpful great fast support,no
+C101432,28/11/2020,basic,annual,$28.49,68.0,0,south,helpful helpful great great,no
+C101433,23/11/2021,basic,monthly,$27.95,56.0,0,east,fast slow cancel crash slow,no
+C101434,01/04/2026,basic,monthly,$30.06,3.0,1,east,billing great crash crash great crash,yes
+C101435,21/07/2022,standard,annual,$58.70,48.0,1,north,price cancel slow support,no
+C101436,24/09/2021,standard,annual,$55.96,58.0,1,west,helpful crash support love,no
+C101437,22/04/2022,premium,monthly,$103.50,51.0,0,west,app great price support,no
+C101438,13/12/2023,basic,monthly,$20.94,31.0,3,north,slow slow slow price cancel cancel,no
+C101439,02/12/2025,standard,annual,$52.27,7.0,1,south,helpful cancel app cancel,no
+C101440,21/02/2022,standard,annual,$51.18,53.0,1,south,fast price love great slow great billing,no
+C101441,27/05/2021,premium,monthly,$96.95,62.0,1,east,price helpful crash confusing fast support,no
+C101442,17/04/2023,premium,monthly,$102.74,39.0,0,east,fast great helpful app,no
+C101443,20/08/2022,basic,monthly,$24.42,47.0,2,north,support support love,yes
+C101444,02/11/2025,basic,monthly,$29.87,8.0,1,south,confusing fast price,no
+C101445,28/12/2020,standard,monthly,$64.62,67.0,3,north,love crash price love helpful,no
+C101446,11/05/2024,basic,monthly,$39.60,26.0,3,north,cancel slow great helpful,no
+C101447,30/08/2020,standard,monthly,$64.12,,0,south,great love confusing,no
+C101448,04/08/2025,standard,monthly,$56.02,11.0,1,west,price great slow,no
+C101449,22/01/2022,premium,monthly,$90.09,54.0,1,north,app crash billing confusing,no
+C101450,22/01/2022,basic,annual,$14.07,54.0,1,west,price slow crash love cancel,no
+C101451,24/09/2021,standard,annual,$55.55,58.0,1,west,great great fast,no
+C101452,07/11/2024,basic,monthly,$29.72,20.0,2,north,slow crash billing great,no
+C101453,29/10/2020,basic,annual,$26.46,69.0,1,east,crash cancel fast support,no
+C101454,12/01/2024,standard,monthly,$70.72,30.0,0,west,cancel slow crash slow app cancel,no
+C101455,23/03/2022,basic,monthly,$21.36,52.0,1,west,great price cancel love cancel,no
+C101456,01/01/2026,standard,monthly,$55.42,6.0,1,north,confusing great crash confusing app cancel,no
+C101457,18/11/2022,basic,monthly,$15.37,44.0,1,east,billing slow confusing,no
+C101458,07/12/2024,basic,annual,$35.95,19.0,1,north,crash fast love love helpful app great,no
+C101459,17/05/2023,standard,monthly,$55.43,38.0,1,south,slow price billing cancel confusing,no
+C101460,21/02/2022,standard,annual,$48.21,,1,west,cancel great app billing,no
+C101461,17/05/2023,basic,annual,$28.01,38.0,2,south,price support cancel great love,no
+C101462,31/01/2026,standard,monthly,$67.72,5.0,0,east,love support great love crash app,no
+C101463,19/09/2022,basic,monthly,$40.79,46.0,1,east,crash cancel love fast,no
+C101464,11/05/2024,basic,monthly,$27.50,26.0,3,west,slow crash crash crash helpful cancel,no
+C101465,19/10/2022,basic,annual,$32.74,45.0,2,west,app great slow,no
+C101466,21/06/2022,standard,monthly,$56.45,49.0,0,south,billing love great helpful cancel,no
+C101467,31/05/2026,standard,annual,$57.66,1.0,0,,cancel price price price,no
+C101468,07/11/2024,basic,monthly,$25.87,20.0,0,east,confusing love love,no
+C101469,04/08/2025,basic,monthly,$38.37,11.0,0,west,slow fast great cancel app crash slow,no
+C101470,22/05/2022,basic,monthly,$24.79,50.0,2,south,great crash slow app confusing great support,no
+C101471,12/01/2024,basic,monthly,$16.87,30.0,1,south,cancel crash billing crash love,no
+C101472,02/11/2025,premium,monthly,$92.23,8.0,2,west,support helpful confusing love,no
+C101473,08/10/2024,basic,monthly,$25.30,21.0,1,east,billing fast billing crash slow cancel,no
+C101474,28/11/2020,basic,monthly,$30.01,68.0,0,south,cancel slow price billing great,no
+C101475,21/07/2022,premium,annual,$95.59,48.0,1,north,cancel price crash great,no
+C101476,11/02/2024,premium,monthly,$100.11,29.0,0,north,billing app great confusing crash,yes
+C101477,30/08/2020,basic,annual,$30.21,71.0,3,south,crash app great,no
+C101478,21/07/2022,basic,monthly,$26.74,48.0,1,east,love support price confusing crash,no
+C101479,07/12/2024,basic,annual,$32.98,19.0,0,north,love price great confusing app helpful app,no
+C101480,05/07/2025,standard,monthly,$53.43,12.0,0,,fast crash billing,no
+C101481,24/09/2021,basic,monthly,$22.87,58.0,2,south,support price app,no
+C101482,08/09/2024,basic,monthly,$34.56,22.0,1,north,helpful app billing app,yes
+C101483,11/04/2024,premium,monthly,$99.33,27.0,1,south,confusing helpful support great billing,no
+C101484,06/01/2025,basic,monthly,$11.69,18.0,1,,app love great slow love love helpful,no
+C101485,23/03/2022,basic,monthly,$26.28,52.0,1,south,support price love support,no
+C101486,04/08/2025,basic,monthly,$32.27,11.0,0,east,support helpful confusing price,no
+C101487,02/12/2025,basic,monthly,$37.73,7.0,2,north,app love helpful cancel,no
+C101488,17/01/2023,basic,monthly,$33.01,42.0,0,west,slow helpful app love,no
+C101489,19/10/2022,premium,annual,$100.89,45.0,2,east,slow great cancel billing,yes
+C101490,19/09/2022,premium,monthly,$105.11,46.0,1,west,support crash confusing slow crash,no
+C101491,16/06/2023,premium,monthly,$105.00,37.0,0,east,slow confusing helpful support crash billing,yes
+C101492,06/01/2025,basic,monthly,$35.82,18.0,3,west,support great slow,yes
+C101493,25/08/2021,premium,annual,$92.19,59.0,1,west,billing fast support crash support,no
+C101494,29/09/2020,premium,monthly,$98.44,70.0,1,east,great slow price confusing,no
+C101495,03/10/2025,basic,monthly,$19.96,9.0,3,east,crash price cancel billing,no
+C101496,08/09/2024,standard,monthly,$65.29,22.0,1,south,billing helpful love great,no
+C101497,17/05/2023,standard,annual,$54.95,38.0,2,east,price support billing,no
+C101498,12/01/2024,basic,monthly,$22.89,30.0,0,,cancel billing support price price slow app,no
+C101499,27/05/2021,standard,monthly,$69.73,62.0,2,west,confusing support billing cancel fast billing crash,no

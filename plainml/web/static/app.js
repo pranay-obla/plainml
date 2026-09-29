@@ -357,6 +357,7 @@ async function viewNew(view) {
           h("p", { class: "lead" }, "Upload a file, choose what you want to find out, and get a clear report, with every result ready to download."),
           bridge ? h("div", { class: "browser-note" }, icon("sparkle"), "Runs entirely in your browser: your data is never uploaded anywhere.") : null),
         dropZone({ onFile: async (summary) => { state.upload = summary; state.task = null; store.set("plainml-upload", summary.id); render(); } })),
+      samplesSection(),
     );
     recentRuns(view);
     return;
@@ -378,6 +379,44 @@ async function viewNew(view) {
   if (state.task) pick(TASKS.find((t) => t.key === state.task));
 }
 
+function samplesSection() {
+  const samples = state.info.samples || [];
+  if (!samples.length) return null;
+  const grid = h("div", { class: "tasks samples", role: "list" });
+  const use = async (sample, card) => {
+    if (grid.classList.contains("busy")) return;
+    grid.classList.add("busy");
+    card.classList.add("on");
+    const ico = card.querySelector(".ico");
+    const was = ico.firstChild;
+    ico.replaceChildren(h("span", { class: "spin", "aria-label": "Loading" }));
+    try {
+      const summary = await api(`/api/samples/${encodeURIComponent(sample.key)}`, { method: "POST" });
+      state.upload = summary;
+      state.task = summary.sample ? summary.sample.task : null;
+      store.set("plainml-upload", summary.id);
+      render();
+    } catch (error) {
+      toast(error.message, error.hint, true);
+      ico.replaceChildren(was);
+      card.classList.remove("on");
+      grid.classList.remove("busy");
+    }
+  };
+  for (const sample of samples) {
+    const task = TASKS.find((t) => t.key === sample.task) || TASKS[0];
+    const card = h("button", { class: "task", type: "button", role: "listitem", title: sample.about },
+      h("div", { class: "ico" }, icon(task.icon)),
+      h("div", {}, h("b", {}, sample.title), h("span", {}, sample.question), h("span", { class: "meta" }, `${task.title} · ${num(sample.rows)} rows`)));
+    card.addEventListener("click", () => use(sample, card));
+    grid.append(card);
+  }
+  return h("div", { class: "section" },
+    h("div", { class: "section-head" }, h("div", {}, h("h2", {}, "No data to hand? Try an example"),
+      h("p", { class: "sub" }, "Made-up datasets, ready to run. One click loads the data and fills in the settings."))),
+    grid);
+}
+
 function datasetPanel(upload) {
   const kinds = {};
   for (const column of upload.columns) kinds[column.kind] = (kinds[column.kind] || 0) + 1;
@@ -389,6 +428,7 @@ function datasetPanel(upload) {
       h("div", { class: "file-badge" }, icon("table")),
       h("div", { class: "grow" }, h("div", { class: "name" }, upload.name), h("div", { class: "sub" }, `${num(upload.rows)} rows · ${upload.columns.length} columns · ${bytes(upload.size)}`)),
       replace),
+    upload.sample ? h("p", { class: "sample-note" }, icon("sparkle"), h("span", {}, h("b", {}, "Example data. "), upload.sample.about)) : null,
     h("div", { class: "pills", style: "margin-top:16px" }, columnPills),
     h("div", { class: "legend" }, ["numeric", "categorical", "datetime", "text"].filter((k) => kinds[k]).map((k) => h("span", {}, h("i", { class: `dot k-${k}` }), `${KIND_LABEL[k]} (${kinds[k]})`)),
       Object.keys(kinds).some((k) => !["numeric", "categorical", "datetime", "text"].includes(k)) ? h("span", {}, h("i", { class: "dot" }), "not used as input") : null),
@@ -487,24 +527,31 @@ function toggle(name, label, about, checked = false) {
   return h("label", { class: "switch" }, input, h("div", {}, h("b", {}, label), about ? h("span", {}, about) : null));
 }
 
-function columnChips(name, kinds, exclude = []) {
-  return chips(name, columnsOf(kinds).filter((c) => !exclude.includes(c.name)).map((c) => ({ value: c.name, label: c.name })));
+function columnChips(name, kinds, exclude = [], selected = []) {
+  const choices = columnsOf(kinds).filter((c) => !exclude.includes(c.name)).map((c) => ({ value: c.name, label: c.name }));
+  return chips(name, choices, selected.filter((value) => choices.some((c) => c.value === value)));
 }
 
 function advanced(...fields) {
   return h("details", { class: "more field wide" }, h("summary", {}, "More options"), h("div", { class: "form", style: "margin-top:16px" }, fields));
 }
 
+function presets(task) {
+  const sample = state.upload.sample;
+  return sample && sample.task === task ? sample.options : {};
+}
+
 function optionsForm(task) {
   const upload = state.upload;
-  const target = upload.suggested_target;
+  const preset = presets(task);
+  const target = preset.target || upload.suggested_target;
   const predictable = columnsOf(["numeric", "categorical"]);
   switch (task) {
     case "train":
       return [
         field("Column to predict", columnSelect("target", ["numeric", "categorical", "text"], target), "Numbers give a regression; labels give a classification."),
         field("How hard to try", segmented("speed", [
-          { value: "quick", label: "Quick" }, { value: "standard", label: "Standard" }, { value: "thorough", label: "Thorough" }], "standard"),
+          { value: "quick", label: "Quick" }, { value: "standard", label: "Standard" }, { value: "thorough", label: "Thorough" }], preset.speed || "standard"),
           "Quick tries fast models only. Thorough adds more models" + (state.info.installed.torch ? " (including a neural network)" : "") + " and a stacked ensemble."),
         advanced(
           field("Time limit", textInput("time_budget", "e.g. 5m or 1h"), "Stop starting new models after this long."),
@@ -513,17 +560,21 @@ function optionsForm(task) {
           toggle("log_target", "Model the log of the target", "Helps with skewed positive amounts like prices."),
           toggle("private", "Private", "Keep raw data values out of the report and saved files.")),
       ];
-    case "forecast":
+    case "forecast": {
+      const holidays = state.info.installed.holidays;
+      const more = advanced(
+        field("Inputs known in advance", columnChips("inputs", ["numeric"], [], preset.inputs || []), "Promotions, prices… Rows after the last known value can hold their planned values.", true),
+        field("Public holidays", textInput("country", holidays ? "Country code, e.g. US, GB, IN" : "Needs: pip install holidays", "text", holidays ? preset.country || "" : ""), null),
+        field("Combine rows on the same date by", select("agg", [{ value: "sum", label: "Sum" }, { value: "mean", label: "Average" }, { value: "last", label: "Last value" }], "sum")));
+      more.open = Boolean(preset.inputs || preset.country);
       return [
         field("Value to forecast", columnSelect("target", ["numeric"], columnsOf(["numeric"]).some((c) => c.name === target) ? target : undefined)),
         field("Date column", columnSelect("date", ["datetime"], undefined, "Detect it for me")),
-        field("How far ahead", textInput("horizon", "Automatic", "number"), "In periods of the data's frequency (days, weeks, months…)."),
-        field("One forecast per", columnSelect("group", ["categorical"], undefined, "No groups (one series)"), "E.g. a store or product column."),
-        advanced(
-          field("Inputs known in advance", columnChips("inputs", ["numeric"]), "Promotions, prices… Rows after the last known value can hold their planned values.", true),
-          field("Public holidays", textInput("country", state.info.installed.holidays ? "Country code, e.g. US, GB, IN" : "Needs: pip install holidays"), null),
-          field("Combine rows on the same date by", select("agg", [{ value: "sum", label: "Sum" }, { value: "mean", label: "Average" }, { value: "last", label: "Last value" }], "sum"))),
+        field("How far ahead", textInput("horizon", "Automatic", "number", preset.horizon ? String(preset.horizon) : ""), "In periods of the data's frequency (days, weeks, months…)."),
+        field("One forecast per", columnSelect("group", ["categorical"], preset.group, "No groups (one series)"), "E.g. a store or product column."),
+        more,
       ];
+    }
     case "cluster":
       return [
         field("Number of groups", textInput("k", "Find the best number", "number"), "Leave blank to let plainml choose."),
@@ -534,7 +585,7 @@ function optionsForm(task) {
     case "anomaly":
       return [
         field("Expected share of unusual rows (%)", textInput("contamination", "Estimate it for me", "number"), "E.g. 1 for about one row in a hundred."),
-        field("Known labels (optional)", columnSelect("label", ["categorical", "numeric"], undefined, "None"), "A column marking known anomalies, to check the results against."),
+        field("Known labels (optional)", columnSelect("label", ["categorical", "numeric"], preset.label, "None"), "A column marking known anomalies, to check the results against."),
         advanced(
           field("Columns to ignore", columnChips("drop"), null, true),
           toggle("private", "Private", "Keep raw data values out of the report and saved files.")),
@@ -610,7 +661,9 @@ function optionsPanel(task) {
   });
   return h("div", { class: "panel pad" },
     h("div", { class: "options-title" }, h("div", { class: "ico" }, icon(task.icon)), h("div", {}, h("h2", {}, task.title), h("div", { class: "sub" }, task.about))),
-    form, h("div", { class: "actions" }, run, h("span", { class: "muted" }, "Results are saved as a run you can come back to.")));
+    form, h("div", { class: "actions" }, run, h("span", { class: "muted" }, state.upload.sample && state.upload.sample.task === task.key
+      ? "Filled in for this example: press Run, or change anything first."
+      : "Results are saved as a run you can come back to.")));
 }
 
 function cleanOptions(options) {

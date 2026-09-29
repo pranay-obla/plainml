@@ -17,6 +17,10 @@ the same `runs/` folder the command line uses, so both see the same history.
 
 1. **Upload.** Drag a CSV, Excel, Parquet, JSON or TSV file onto the page. You see every column's type
    (number, category, date, text, or not used) and a preview of the first rows.
+
+    No data to hand? Under the drop zone are six made-up example datasets (churn, house prices, store
+    sales, daily sales, customers and card payments). One click loads one, picks the task that suits it
+    and fills in its settings, so you only have to press **Run**.
 2. **Choose a task.**
 
     | Task | What you get |

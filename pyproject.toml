@@ -86,7 +86,7 @@ version = { attr = "plainml.__version__" }
 include = ["plainml*"]
 
 [tool.setuptools.package-data]
-plainml = ["py.typed", "web/static/*"]
+plainml = ["py.typed", "web/static/*", "datasets/*.csv"]
 
 [tool.ruff]
 line-length = 100

@@ -10,6 +10,7 @@ The page is plain HTML/CSS/JS in ``static/``; this module is its JSON API:
     POST /api/login                    {"token": ...} sets a cookie (only with --token)
     POST /api/uploads                  multipart file -> column summary and preview
     GET  /api/uploads/{id}             the same summary again
+    POST /api/samples/{key}            an example dataset, as if uploaded, with its suggested task
     POST /api/jobs                     {"task", "upload", "options"} -> a queued job
     GET  /api/jobs/{id}?log_from=N     status, stage, progress, new log lines, result
     GET  /api/jobs/{id}/files/{path}   a file a job wrote (predictions, cleaned data...)
@@ -39,7 +40,7 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from plainml import __version__
+from plainml import __version__, datasets
 from plainml.console import esc, fmt_num, fmt_pct, info, note, parse_duration
 from plainml.errors import PlainMLError, is_installed, require
 from plainml.importance import METHODS
@@ -690,6 +691,7 @@ def info_payload(
             for m in METHODS
         ],
         "max_upload_mb": max_upload_mb,
+        "samples": [sample.to_dict() for sample in datasets.SAMPLES.values()],
         "installed": {
             name: is_installed(module)
             for name, module in (
@@ -716,10 +718,12 @@ def start_upload(ws: Workspace, filename: str) -> tuple[str, Path]:
     return upload_id, folder / name
 
 
-def finish_upload(upload_id: str, path: Path) -> dict[str, Any]:
+def finish_upload(
+    upload_id: str, path: Path, sample: dict[str, Any] | None = None
+) -> dict[str, Any]:
     """Read a written upload and remember its summary (removing it if it can't be read)."""
     try:
-        summary = summarize_upload(path, upload_id)
+        summary = {**summarize_upload(path, upload_id), "sample": sample}
     except PlainMLError:
         shutil.rmtree(path.parent, ignore_errors=True)
         raise
@@ -727,6 +731,14 @@ def finish_upload(upload_id: str, path: Path) -> dict[str, Any]:
         json.dumps({"file": path.name, **summary}), encoding="utf-8"
     )
     return summary
+
+
+def sample_upload(ws: Workspace, key: str) -> dict[str, Any]:
+    """Start from one of plainml's example datasets, as though it had been uploaded."""
+    sample = datasets.get(key)
+    upload_id, path = start_upload(ws, sample.file)
+    shutil.copyfile(datasets.path(key), path)
+    return finish_upload(upload_id, path, sample.to_dict())
 
 
 def upload_payload(ws: Workspace, upload_id: str) -> dict[str, Any]:
@@ -859,6 +871,15 @@ def create_app(
             return upload_payload(ws, upload_id)
         except PlainMLError as exc:
             raise fail(exc, 404) from exc
+
+    @app.post("/api/samples/{key}")
+    def use_sample(key: str) -> dict[str, Any]:
+        if key not in datasets.SAMPLES:
+            raise HTTPException(404, {"message": f"No example dataset called '{key}'."})
+        try:
+            return sample_upload(ws, key)
+        except PlainMLError as exc:
+            raise fail(exc) from exc
 
     @app.post("/api/jobs")
     def start_job(payload: dict[str, Any]) -> dict[str, Any]:

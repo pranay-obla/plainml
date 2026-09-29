@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import zipfile
 from pathlib import Path
 from typing import Any
 
@@ -69,6 +70,17 @@ def test_backend_upload_checks(tmp_path: Path) -> None:
     assert answer["status"] == 200 and answer["body"]["rows"] == 2
 
 
+def test_backend_example_datasets(tmp_path: Path) -> None:
+    backend = Backend(tmp_path / "runs")
+    assert _call(backend, "GET", "/api/info")["body"]["samples"]
+    upload = _call(backend, "POST", "/api/samples/customers")["body"]
+    assert upload["name"] == "customers.csv" and upload["sample"]["task"] == "cluster"
+    job = _call(backend, "POST", "/api/jobs", {"task": "cluster", "upload": upload["id"]})["body"]
+    assert backend.run_pending()
+    assert _call(backend, "GET", f"/api/jobs/{job['id']}")["body"]["status"] == "done"
+    assert _call(backend, "POST", "/api/samples/nope")["status"] == 404
+
+
 def test_jobs_run_on_one_thread() -> None:
     from joblib.parallel import SequentialBackend, get_active_backend
 
@@ -94,3 +106,5 @@ def test_export_bundles_a_wheel_from_a_checkout(tmp_path: Path) -> None:
     out = export_static(tmp_path / "site", bundle_wheel=True)
     wheel = json.loads((out / "manifest.json").read_text())["wheel"]
     assert wheel.startswith("wheels/") and (out / wheel).is_file()
+    with zipfile.ZipFile(out / wheel) as archive:
+        assert "plainml/datasets/churn.csv" in archive.namelist()  # the example datasets ship too

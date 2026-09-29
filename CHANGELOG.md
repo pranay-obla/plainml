@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- **Example datasets in one click.** The website's home page offers the six example datasets. Clicking
+  one loads it and fills in the task and settings that suit it, so new visitors can try plainml without
+  their own data.
+  - The datasets now ship inside the package: `plainml.datasets.path("churn")`.
+  - A new API route, `POST /api/samples/{name}`, starts from one as if it had been uploaded.
+
 ## 0.1.1 (September 29, 2026)
 
 - **The website runs in the browser.** `plainml web --export DIR` writes the website as static files

@@ -2,17 +2,20 @@
 
 They're synthetic (no real people), realistic in shape, and deliberately a bit messy:
 blank cells, prices stored as text like "$79.00", day-first dates, an ID column,
-free-text notes, and imbalanced classes. Run:  python examples/make_datasets.py
+free-text notes, and imbalanced classes. A copy of each goes into plainml/datasets, which
+ships with the package. Run:  python examples/make_datasets.py
 """
 
 from __future__ import annotations
 
+import shutil
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
 HERE = Path(__file__).parent
+PACKAGED = HERE.parent / "plainml" / "datasets"  # a copy ships with plainml, for the website
 rng = np.random.default_rng(2026)
 
 
@@ -237,4 +240,5 @@ if __name__ == "__main__":
         "store_sales.csv": store_sales(),  # last, so the files above stay identical
     }.items():
         frame.to_csv(HERE / name, index=False)
+        shutil.copyfile(HERE / name, PACKAGED / name)
         print(f"wrote {name}: {len(frame):,} rows × {frame.shape[1]} columns")

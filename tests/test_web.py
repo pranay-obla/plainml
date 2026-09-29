@@ -48,6 +48,17 @@ def test_page_and_info(client: TestClient) -> None:
     assert any(m["default"] for m in info["importance_methods"])
 
 
+def test_example_datasets(client: TestClient) -> None:
+    samples = client.get("/api/info").json()["samples"]
+    assert [s["key"] for s in samples][:1] == ["churn"] and all(s["question"] for s in samples)
+    summary = client.post("/api/samples/churn").json()
+    assert summary["name"] == "churn.csv" and summary["rows"] == 1500
+    assert summary["sample"]["task"] == "train"
+    assert summary["sample"]["options"]["target"] == "churned"
+    assert client.get(f"/api/uploads/{summary['id']}").json()["sample"]["key"] == "churn"
+    assert client.post("/api/samples/nope").status_code == 404
+
+
 def test_upload_summary(client: TestClient, messy_csv: Path) -> None:
     summary = _upload(client, messy_csv)
     assert summary["rows"] > 0 and summary["preview"]["rows"]
@@ -55,6 +66,7 @@ def test_upload_summary(client: TestClient, messy_csv: Path) -> None:
     assert kinds["signup"] == "datetime"
     assert summary["suggested_target"] == "churned"
     assert client.get(f"/api/uploads/{summary['id']}").json()["rows"] == summary["rows"]
+    assert summary["sample"] is None
     bad = client.post(
         "/api/uploads", files={"file": ("notes.exe", b"MZ", "application/octet-stream")}
     )

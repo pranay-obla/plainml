@@ -2,7 +2,8 @@
 
 Six small, synthetic datasets (no real people) to try every part of plainml. They're deliberately a bit
 messy, like real exports: blank cells, prices stored as text, day-first dates, ID columns, free-text notes.
-Regenerate them with `python examples/make_datasets.py`.
+Regenerate them with `python examples/make_datasets.py`. A copy of each ships inside plainml
+(`plainml.datasets`), which is how the website offers them in one click.
 
 | File | Rows | Try it with |
 |---|---|---|
@@ -92,8 +93,9 @@ pip install "plainml[web]"
 plainml web
 ```
 
-Drag any of these files onto the page, pick a task, and download whichever result files you want. Or,
-with nothing to install, open [plainml-tpua.vercel.app](https://plainml-tpua.vercel.app) and drag them there.
+Click any of these datasets under the drop zone (or drag the file onto the page): the task and its
+settings are filled in, so you only press **Run**, then download whichever result files you want. Or,
+with nothing to install, open [plainml-tpua.vercel.app](https://plainml-tpua.vercel.app) and do the same there.
 
 ## Deploy
 

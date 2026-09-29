@@ -13,8 +13,8 @@ in plain English, and saves it with an HTML report and a model card. It also clu
 forecasts (many series, planned inputs, holidays), ranks columns with 19 importance methods, watches for
 drift, tunes, serves models as an API, packages them for Docker and exports them to ONNX or MLflow.
 
-Prefer clicking? **[Try plainml in your browser](https://plainml-tpua.vercel.app)**, with nothing to install, or run `plainml web`
-for the same website on your own machine.
+Prefer clicking? **[Try plainml in your browser](https://plainml-tpua.vercel.app)**, with nothing to install (one click
+loads an example dataset), or run `plainml web` for the same website on your own machine.
 
 - New here? Start with the [README quickstart](https://github.com/pranay-obla/plainml#30-second-quickstart),
   run `plainml` for guided mode, or `plainml web` for the website.

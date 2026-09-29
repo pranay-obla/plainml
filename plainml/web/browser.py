@@ -40,6 +40,7 @@ from plainml.web.server import (
     preview_payload,
     run_summary,
     runs_payload,
+    sample_upload,
     start_upload,
     upload_payload,
 )
@@ -98,6 +99,9 @@ class Backend:
             return models_payload(self.ws)
         if method == "POST" and route == "/api/jobs":
             return self._start_job(payload)
+        if method == "POST" and (m := re.fullmatch(r"/api/samples/([^/]+)", route)):
+            key = m.group(1)
+            return self._found(lambda: sample_upload(self.ws, key))
         if method == "GET" and (m := re.fullmatch(r"/api/uploads/([^/]+)", route)):
             upload_id = m.group(1)
             return self._found(lambda: upload_payload(self.ws, upload_id))

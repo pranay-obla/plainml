@@ -59,6 +59,7 @@ model, meta = plainml.load_model("latest")
 
 ```python
 plainml.load_data("sales.xlsx", sheet="2026")
+plainml.datasets.path("churn")  # -> Path to an example dataset that ships with plainml
 plainml.profile("churn.csv", target="churned")  # -> Profile
 plainml.clean("raw.csv", output="clean.csv", impute=True, outliers="clip")  # -> DataFrame
 plainml.select_features("data.csv", "price", k=10)  # -> ranking DataFrame

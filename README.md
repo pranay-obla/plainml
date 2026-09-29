@@ -85,7 +85,8 @@ pip install "plainml[all]"          # or pick: pip install "plainml[web,boost]"
 
 ## 30-second quickstart
 
-The repository ships with example datasets in [`examples/`](https://github.com/pranay-obla/plainml/tree/main/examples):
+The repository ships with example datasets in [`examples/`](https://github.com/pranay-obla/plainml/tree/main/examples)
+(installed with plainml too: `plainml.datasets.path("churn")` gives a copy's path):
 
 ```bash
 plainml train examples/churn.csv --target churned
@@ -108,7 +109,8 @@ pip install "plainml[web]"
 plainml web
 ```
 
-1. **Upload.** Drag in a file and see every column's type and a preview of the rows.
+1. **Upload.** Drag in a file, or click one of six example datasets, and see every column's type and a
+   preview of the rows. An example also fills in the task and settings that suit it.
 2. **Pick a task.** Predict a column, forecast, find groups, find unusual rows, rank columns, check drift,
    profile or clean. The main options are up front; the rest are under *More options*.
 3. **Watch it run.** A progress bar and a live log show each step.
@@ -122,7 +124,8 @@ The **Runs** page lists everything you've run (from the website or the command l
 any saved model on a new upload. The site works in light and dark mode and on phones. It only listens on
 your machine; to share it on a network, add a token: `plainml web --host 0.0.0.0 --token change-me`.
 
-**Try it now at [plainml-tpua.vercel.app](https://plainml-tpua.vercel.app)**, with nothing to install.
+**Try it now at [plainml-tpua.vercel.app](https://plainml-tpua.vercel.app)**, with nothing to install: click an example
+dataset and press Run.
 
 **No server needed:** `plainml web --export site` writes the same website as static files that run
 plainml inside the visitor's browser. Their data never leaves their computer, and the site can be hosted
