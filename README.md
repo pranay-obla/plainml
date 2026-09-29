@@ -6,6 +6,12 @@
 </p>
 
 <p align="center">
+  <a href="https://plainml-tpua.vercel.app"><b>Try it in your browser</b></a> ·
+  <a href="https://plainml-tpua.vercel.app/docs/">Documentation</a> ·
+  <a href="https://pypi.org/project/plainml/">PyPI</a>
+</p>
+
+<p align="center">
   <a href="https://pypi.org/project/plainml/"><img src="https://img.shields.io/pypi/v/plainml?color=blue&label=pypi" alt="PyPI version"></a>
   <a href="https://pypi.org/project/plainml/"><img src="https://img.shields.io/pypi/pyversions/plainml" alt="Python versions"></a>
   <a href="https://github.com/pranay-obla/plainml/actions/workflows/ci.yml"><img src="https://github.com/pranay-obla/plainml/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
@@ -116,11 +122,13 @@ The **Runs** page lists everything you've run (from the website or the command l
 any saved model on a new upload. The site works in light and dark mode and on phones. It only listens on
 your machine; to share it on a network, add a token: `plainml web --host 0.0.0.0 --token change-me`.
 
+**Try it now at [plainml-tpua.vercel.app](https://plainml-tpua.vercel.app)**, with nothing to install.
+
 **No server needed:** `plainml web --export site` writes the same website as static files that run
 plainml inside the visitor's browser. Their data never leaves their computer, and the site can be hosted
 for free on Vercel, GitHub Pages or a Hugging Face Static Space. See the
-[hosting guide](https://github.com/pranay-obla/plainml/blob/main/docs/hosting.md) and the
-[website guide](https://github.com/pranay-obla/plainml/blob/main/docs/website.md).
+[hosting guide](https://plainml-tpua.vercel.app/docs/hosting/) and the
+[website guide](https://plainml-tpua.vercel.app/docs/website/).
 
 ## What it can do
 
@@ -211,7 +219,7 @@ meant to travel with the model.
 | | `plainml export MODEL` | ONNX (for C#, Java, JavaScript, C++…) or MLflow |
 | **Housekeeping** | `plainml runs` / `compare` / `models` / `init` | List, compare and prune runs; list models; write a config |
 
-Every command has examples in `plainml COMMAND --help`, and the [command reference](https://github.com/pranay-obla/plainml/blob/main/docs/commands.md) lists
+Every command has examples in `plainml COMMAND --help`, and the [command reference](https://plainml-tpua.vercel.app/docs/commands/) lists
 every option.
 
 ## Examples
@@ -296,7 +304,7 @@ build doesn't need PyPI.
 JavaScript or C++. `--format mlflow` saves an MLflow model, and `plainml train --mlflow` logs runs to your
 MLflow tracking server.
 
-**Hosting.** The [hosting guide](https://github.com/pranay-obla/plainml/blob/main/docs/hosting.md) covers
+**Hosting.** The [hosting guide](https://plainml-tpua.vercel.app/docs/hosting/) covers
 putting the website online:
 - **In the browser, free:** on Vercel, next to the docs (`vercel.json` builds both), or on a Hugging Face
   Static Space.
@@ -345,7 +353,7 @@ model = joblib.load("runs/20260925-125240_churn/model.joblib")
 model.predict(pd.read_csv("new_customers.csv"))
 ```
 
-See the [Python API guide](https://github.com/pranay-obla/plainml/blob/main/docs/python-api.md).
+See the [Python API guide](https://plainml-tpua.vercel.app/docs/python-api/).
 
 ## Reproducible runs
 
@@ -378,7 +386,7 @@ or start your own commented config with `plainml init`.
    - the report and model card
    - a summary of the training data, for drift checks
 
-More detail, including forecasting, importance and drift, is in [docs/how-it-works.md](https://github.com/pranay-obla/plainml/blob/main/docs/how-it-works.md).
+More detail, including forecasting, importance and drift, is in [How it works](https://plainml-tpua.vercel.app/docs/how-it-works/).
 
 ## How plainml compares
 

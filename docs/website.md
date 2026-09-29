@@ -1,5 +1,10 @@
 # The website
 
+**Try it now at [plainml-tpua.vercel.app](https://plainml-tpua.vercel.app)**, with nothing to install. That's the in-browser
+version described below: everything runs on your own computer.
+
+To run the website on your own machine:
+
 ```bash
 pip install "plainml[web]"
 plainml web

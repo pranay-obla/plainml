@@ -154,6 +154,8 @@ them, so a shift in an important column stands out.
 - Free text gets simple word features, not language-model embeddings.
 - Forecasting uses backtested machine-learning models and simple baselines, not classical statistical
   models such as ARIMA or exponential smoothing.
-- The website runs one job at a time, in order, and keeps its job list in memory: restarting it forgets
-  running jobs (finished runs are saved as usual).
+- The website runs one job at a time, in order, and keeps its job list in memory: restarting it (or
+  reloading the page, in the in-browser version) stops a running job. Finished runs are saved as usual.
+- The in-browser version uses one CPU core and takes uploads of up to 200 MB. Very large jobs are faster
+  with the command line or the server version.
 - ONNX export covers scikit-learn models without free-text columns (not XGBoost, LightGBM, CatBoost or ensembles).

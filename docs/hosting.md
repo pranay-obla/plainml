@@ -42,7 +42,8 @@ Then open http://localhost:8000.
 ## On Vercel (website and docs)
 
 The repository's `vercel.json` builds both parts: the website at the root of the address and this
-documentation under `/docs`.
+documentation under `/docs`. plainml's own site is deployed exactly this way, at
+[plainml-tpua.vercel.app](https://plainml-tpua.vercel.app).
 
 ```json
 {

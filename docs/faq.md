@@ -81,6 +81,10 @@ the report before sending it: column names and category names can still be revea
 `plainml web --host 0.0.0.0 --token SOMETHING-LONG` and send people the address and token. Anyone with the
 token can upload data and run jobs, so only do this on a network you trust, or behind HTTPS.
 
+**Can I try it without installing anything?**
+Yes: open [plainml-tpua.vercel.app](https://plainml-tpua.vercel.app). plainml runs inside your browser, so your data isn't
+uploaded anywhere. The first visit downloads about 50 MB of Python libraries.
+
 **Can I put the website online?**
 Yes, for free. `plainml web --export site` writes a version that runs plainml inside each visitor's
 browser, as plain files. Host them on Vercel (the repository's `vercel.json` does it, docs included),

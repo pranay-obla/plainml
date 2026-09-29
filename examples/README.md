@@ -92,7 +92,8 @@ pip install "plainml[web]"
 plainml web
 ```
 
-Drag any of these files onto the page, pick a task, and download whichever result files you want.
+Drag any of these files onto the page, pick a task, and download whichever result files you want. Or,
+with nothing to install, open [plainml-tpua.vercel.app](https://plainml-tpua.vercel.app) and drag them there.
 
 ## Deploy
 

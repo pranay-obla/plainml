@@ -27,5 +27,6 @@ download button.
 data is never uploaded anywhere. The first visit downloads about 50 MB of Python libraries; later visits
 use the browser's cache. Runs are saved in this browser until you clear its site data.
 
-Made with [plainml](https://github.com/pranay-obla/plainml). To run it on your own machine:
+Made with [plainml](https://github.com/pranay-obla/plainml), which is also at
+[plainml-tpua.vercel.app](https://plainml-tpua.vercel.app). To run it on your own machine:
 `pip install "plainml[web]"` and `plainml web`.

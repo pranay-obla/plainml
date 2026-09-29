@@ -1,5 +1,6 @@
 # Documentation site:  pip install "plainml[docs]" && mkdocs serve
 site_name: plainml
+site_url: https://plainml-tpua.vercel.app/docs/
 site_description: From a spreadsheet to a trained, explained, deployable ML model in one command.
 repo_url: https://github.com/pranay-obla/plainml
 edit_uri: edit/main/docs/

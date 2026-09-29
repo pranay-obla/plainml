@@ -73,7 +73,8 @@ docs = ["mkdocs-material>=9.5", "mkdocs<2"]  # MkDocs 2 drops the plugin and the
 plainml = "plainml.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/pranay-obla/plainml"
+Homepage = "https://plainml-tpua.vercel.app/"
+Documentation = "https://plainml-tpua.vercel.app/docs/"
 Repository = "https://github.com/pranay-obla/plainml"
 Issues = "https://github.com/pranay-obla/plainml/issues"
 Changelog = "https://github.com/pranay-obla/plainml/blob/main/CHANGELOG.md"

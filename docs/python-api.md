@@ -108,6 +108,14 @@ from plainml.web.server import create_app  # needs the "web" extra
 app = create_app("runs", token="change-me")
 ```
 
+Or write the in-browser version, static files that need no server:
+
+```python
+from plainml.web.static_site import export_static
+
+export_static("site")  # the same as: plainml web --export site
+```
+
 ## Sharing and deploying
 
 ```python
