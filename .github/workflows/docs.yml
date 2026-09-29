@@ -1,12 +1,11 @@
-# Publishes the documentation site to GitHub Pages on every push to main that touches it.
-# One-time setup: Settings -> Pages -> Source: "GitHub Actions".
+# Publishes the documentation site to GitHub Pages, as an alternative to Vercel (vercel.json).
+# It only runs when started by hand (Actions tab -> Docs -> Run workflow), since the docs are
+# hosted on Vercel. To use GitHub Pages instead: Settings -> Pages -> Source: "GitHub Actions",
+# then add a `push: branches: [main]` trigger below.
 
 name: Docs
 
 on:
-  push:
-    branches: [main]
-    paths: ["docs/**", "mkdocs.yml", "plainml/cli.py", ".github/workflows/docs.yml"]
   workflow_dispatch:
 
 permissions:

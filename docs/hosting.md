@@ -31,9 +31,9 @@ The repository includes a `vercel.json` that builds this site with MkDocs:
 5. Put the address in `mkdocs.yml` (`site_url: https://…`) and in the `[project.urls]` of
    `pyproject.toml` (`Documentation = "https://…"`).
 
-The repository can also publish the same site to GitHub Pages (`.github/workflows/docs.yml`; turn it on
-under **Settings → Pages → Source: GitHub Actions**). Pick one host, and delete the other's setup if you
-don't need both.
+The repository can also publish the same site to GitHub Pages with `.github/workflows/docs.yml`. It only
+runs when started by hand from the **Actions** tab, since the docs live on Vercel. To switch, turn on
+**Settings → Pages → Source: GitHub Actions** and add a push trigger to that workflow.
 
 ## The website on Hugging Face Spaces
 
