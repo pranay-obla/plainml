@@ -320,7 +320,9 @@ class Forecaster(BaseEstimator):
                 series.to_numpy(dtype=float),
                 pd.DatetimeIndex(series.index),
                 self.config,
-                inputs[self.input_columns].to_numpy(dtype=float) if self.input_columns else None,
+                inputs[self.input_columns].to_numpy(dtype=float)
+                if inputs is not None and self.input_columns
+                else None,
             )
             target = (
                 y if self.key == "ridge" else y - previous
@@ -687,6 +689,7 @@ def _insights(
         else:
             out.append("Seasonality: no strong repeating pattern.")
     for column in list(inputs.columns) if inputs is not None else []:
+        assert inputs is not None
         values_in = inputs[column].to_numpy(dtype=float)
         if set(np.unique(values_in)) <= {0.0, 1.0} and 0 < values_in.mean() < 1:
             on, off = values[values_in == 1].mean(), values[values_in == 0].mean()

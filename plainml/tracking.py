@@ -50,9 +50,13 @@ def _signature(mlflow: Any, model: Any, meta: dict[str, Any]) -> tuple[Any, Any]
     # integers can't hold blanks, so declare them as floats or blanks later fail the schema
     frame = frame.astype(dict.fromkeys(frame.select_dtypes("integer").columns, float))
     try:
-        from mlflow.models import infer_signature
+        from mlflow.models import ModelSignature, infer_signature
+        from mlflow.types.schema import ColSpec, Schema
 
-        return infer_signature(frame, model.predict(frame)), frame
+        inferred = infer_signature(frame, model.predict(frame))
+        # plainml fills missing columns in as blanks, so no input column is required
+        optional = Schema([ColSpec(c.type, c.name, required=False) for c in inferred.inputs.inputs])
+        return ModelSignature(inputs=optional, outputs=inferred.outputs), frame
     except Exception:
         return None, None
 

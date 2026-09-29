@@ -31,7 +31,8 @@ ACTIONS = [
     Choice("Group similar rows (clustering)", "cluster"),
     Choice("Find unusual rows (anomaly detection)", "anomaly"),
     Choice("Forecast a value over time", "forecast"),
-    Choice("Open the web app", "ui"),
+    Choice("Find which columns matter (feature importance)", "importance"),
+    Choice("Open the website (upload, run, download in the browser)", "web"),
     Choice("Quit", "quit"),
 ]
 
@@ -127,7 +128,10 @@ def _wizard_train(path: str, df: pd.DataFrame) -> None:
             "How thorough?",
             choices=[
                 Choice("Quick: fast models only (seconds to a minute)", "quick"),
-                Choice("Full: every model plus an ensemble (a few minutes)", "full"),
+                Choice(
+                    "Standard: every regular model plus an ensemble (a few minutes)", "standard"
+                ),
+                Choice("Thorough: extra models and a stacked ensemble (longer)", "thorough"),
             ],
             style=STYLE,
         )
@@ -140,11 +144,52 @@ def _wizard_train(path: str, df: pd.DataFrame) -> None:
             style=STYLE,
         )
     )
-    result = train(path, target, task=task, quick=speed == "quick", drop=drop)
+    result = train(
+        path, target, task=task, quick=speed == "quick", thorough=speed == "thorough", drop=drop
+    )
     if _ask(questionary.confirm("Open the report in your browser?", default=True, style=STYLE)):
         import click
 
         click.launch(str(result.report_path))
+
+
+def _wizard_forecast(df: pd.DataFrame, target: str, date: str | None) -> None:
+    from plainml.forecasting import forecast
+    from plainml.schema import Kind, infer_column
+
+    kinds = {c: infer_column(df[c]).kind for c in df.columns if c not in (target, date)}
+    groups = [c for c, kind in kinds.items() if kind == Kind.CATEGORICAL]
+    group = None
+    if groups:
+        group = _ask(
+            questionary.select(
+                "Forecast each value of a column separately (a store, a product…)?",
+                choices=[Choice("No, one forecast for everything", ""), *groups],
+                style=STYLE,
+            )
+        )
+    numbers = [c for c, kind in kinds.items() if kind == Kind.NUMERIC and c != group]
+    inputs: list[str] = []
+    if numbers:
+        inputs = _ask(
+            questionary.checkbox(
+                "Any columns known in advance that affect it, like a promotion or price? "
+                "(space to tick, enter to skip)",
+                choices=numbers,
+                style=STYLE,
+            )
+        )
+    horizon = _ask(
+        questionary.text("How many periods ahead? (blank = automatic)", default="", style=STYLE)
+    )
+    forecast(
+        df,
+        target,
+        date=date,
+        group=group or None,
+        inputs=inputs or None,
+        horizon=int(horizon) if horizon.strip().isdigit() else None,
+    )
 
 
 def _wizard_predict() -> None:
@@ -188,11 +233,10 @@ def run_wizard(start: str | None = None) -> None:
     if action == "predict":
         _wizard_predict()
         return
-    if action == "ui":
-        import subprocess
-        import sys
+    if action == "web":
+        from plainml.web.server import run_web
 
-        subprocess.call([sys.executable, "-m", "plainml", "ui"])
+        run_web()
         return
     path, df = ask_data()
     if action == "train":
@@ -219,10 +263,15 @@ def run_wizard(start: str | None = None) -> None:
 
         detect_anomalies(df)
     elif action == "forecast":
-        from plainml.forecasting import forecast
-
         target = ask_target(df, "Which column should be forecast?")
         if target is None:
             raise KeyboardInterrupt
         date = ask_target(df, "Which column holds the date?")
-        forecast(df, target, date=date)
+        _wizard_forecast(df, target, date)
+    elif action == "importance":
+        from plainml.importance import feature_importance
+
+        target = ask_target(df, "Which column should the others predict?")
+        if target is None:
+            raise KeyboardInterrupt
+        feature_importance(path, target)

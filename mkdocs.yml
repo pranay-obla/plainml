@@ -15,6 +15,7 @@ theme:
   features: [content.code.copy, navigation.sections]
 nav:
   - Home: index.md
+  - Website: website.md
   - Commands: commands.md
   - Python API: python-api.md
   - How it works: how-it-works.md

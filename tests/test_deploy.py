@@ -73,6 +73,10 @@ def test_deploy_folder(churn_run: Path, tmp_path: Path) -> None:
     dockerfile = (folder / "Dockerfile").read_text()
     assert "USER plainml" in dockerfile and "HEALTHCHECK" in dockerfile
     assert (folder / "model.joblib").is_file() and (folder / "README.md").is_file()
+    from plainml.deploy import _local_plainml_source
+
+    if _local_plainml_source() is not None:  # a checkout: the image gets a wheel built from it
+        assert list((folder / "wheels").glob("plainml-*.whl"))
     with pytest.raises(plainml.PlainMLError, match="isn't empty"):
         deploy(churn_run, output=folder, verbose=False)
 
@@ -140,5 +144,5 @@ def test_mlflow_log_and_export(
     assert "test_f1" in logged.data.metrics and logged.data.tags["plainml.target"] == "churned"
     folder = export_mlflow(churn_run, output=tmp_path / "mlflow_model", verbose=False)
     loaded = mlflow.pyfunc.load_model(str(folder))
-    assert len(loaded.predict(pd.DataFrame([{"age": 40, "plan": "pro"}]))) == 1
+    assert len(loaded.predict(pd.DataFrame([{"age": 40.0, "plan": "pro"}]))) == 1
     os.environ.pop("MLFLOW_TRACKING_URI", None)

@@ -45,16 +45,19 @@ def calibration_summary(
     """
     truth = np.asarray(truth, dtype=float)
     probability = np.clip(np.asarray(probability, dtype=float), 0, 1)
-    edges = np.unique(np.quantile(probability, np.linspace(0, 1, bins + 1)))
-    which = np.clip(
-        np.searchsorted(edges, probability, side="right") - 1, 0, max(len(edges) - 2, 0)
-    )
+    order = np.argsort(probability, kind="stable")
+    groups: list[np.ndarray] = []
+    for group in np.array_split(order, min(bins, len(order))):
+        # a model that only says a few distinct values gives groups with the same prediction
+        if groups and np.isclose(probability[group].mean(), probability[groups[-1]].mean()):
+            groups[-1] = np.concatenate([groups[-1], group])
+        elif len(group):
+            groups.append(group)
     points, ece = [], 0.0
-    for b in np.unique(which):
-        mask = which == b
-        said, happened = float(probability[mask].mean()), float(truth[mask].mean())
-        ece += mask.mean() * abs(said - happened)
-        points.append({"predicted": said, "observed": happened, "rows": int(mask.sum())})
+    for group in groups:
+        said, happened = float(probability[group].mean()), float(truth[group].mean())
+        ece += len(group) / len(order) * abs(said - happened)
+        points.append({"predicted": said, "observed": happened, "rows": len(group)})
     return {
         "points": points,
         "brier": float(np.mean((probability - truth) ** 2)),
@@ -78,6 +81,19 @@ def predict_proba_safe(model: Any, X: pd.DataFrame) -> np.ndarray | None:
     except Exception:
         return None
     return proba if isinstance(proba, np.ndarray) else None
+
+
+def predicted_confidence(proba: np.ndarray, predicted: Any, classes: Any) -> np.ndarray:
+    """The probability the model gave its own answer, row by row.
+
+    Not simply the highest probability: with a tuned decision threshold a model can answer
+    'yes' at 45%, and its confidence in that answer is 45%, not the 55% it gave 'no'.
+    """
+    position = {c: i for i, c in enumerate(list(classes if classes is not None else []))}
+    picks = [position.get(p) for p in np.asarray(predicted).tolist()]
+    if not position or any(i is None for i in picks):
+        return np.asarray(proba.max(axis=1))
+    return np.asarray(proba[np.arange(len(picks)), np.asarray(picks, dtype=int)])
 
 
 def model_classes(model: Any) -> list[Any] | None:
@@ -112,7 +128,7 @@ def evaluate_model(
         rows[f"actual_{name}"] = np.asarray(y)
         rows[f"predicted_{name}"] = y_pred
         if proba is not None:
-            rows["confidence"] = proba.max(axis=1).round(4)
+            rows["confidence"] = predicted_confidence(proba, y_pred, classes).round(4)
         matrix = confusion_matrix(y, y_pred, labels=classes)
         result["confusion"] = {"labels": [str(c) for c in classes], "matrix": matrix.tolist()}
         per_class = []

@@ -24,6 +24,7 @@ from typing import Any
 
 import numpy as np
 import pandas as pd
+from rich.console import JustifyMethod
 from rich.table import Table
 
 from plainml import __version__
@@ -96,7 +97,7 @@ def describe_distribution(X: pd.DataFrame, schema: Schema) -> dict[str, Any]:
     return summary
 
 
-def psi(expected: np.ndarray, actual: np.ndarray) -> float:
+def psi(expected: Any, actual: Any) -> float:
     expected = np.clip(np.asarray(expected, dtype=float), EPSILON, None)
     actual = np.clip(np.asarray(actual, dtype=float), EPSILON, None)
     expected, actual = expected / expected.sum(), actual / actual.sum()
@@ -399,14 +400,15 @@ def _reference(
 def _render(result: DriftResult, source_label: str) -> None:
     heading(f"Drift against {source_label}")
     grid = Table(box=None, header_style="muted", pad_edge=False)
-    for column, justify in (
+    columns: list[tuple[str, JustifyMethod]] = [
         ("Column", "left"),
         ("Change", "left"),
         ("PSI", "right"),
         ("Unseen / out of range", "right"),
         ("Blanks", "right"),
         ("Importance", "right"),
-    ):
+    ]
+    for column, justify in columns:
         grid.add_column(column, justify=justify)
     styles = {
         "major": "[error]major[/]",

@@ -15,7 +15,7 @@ from rich.table import Table
 from plainml import __version__
 from plainml.console import console, esc, fmt_num, fmt_value, heading, info, note, success, warn
 from plainml.errors import PlainMLError, did_you_mean
-from plainml.evaluation import evaluate_model, predict_proba_safe
+from plainml.evaluation import evaluate_model, predict_proba_safe, predicted_confidence
 from plainml.io import load_data, save_table
 from plainml.runs import DEFAULT_RUNS_DIR, RUN_FILE, read_json, resolve_model_path
 from plainml.tasks import (
@@ -265,12 +265,14 @@ def predict_frame(
 
     if task == CLASSIFICATION:
         target = targets[0]
-        out[f"predicted_{target}"] = fitted.predict(frame)
+        predicted = fitted.predict(frame)
+        out[f"predicted_{target}"] = predicted
         probabilities = predict_proba_safe(fitted, frame)
         if probabilities is not None:
-            out["confidence"] = probabilities.max(axis=1).round(4)
+            classes = getattr(fitted, "classes_", meta.get("classes") or [])
+            out["confidence"] = predicted_confidence(probabilities, predicted, classes).round(4)
             if proba:
-                for i, label in enumerate(getattr(fitted, "classes_", meta.get("classes") or [])):
+                for i, label in enumerate(classes):
                     out[f"probability_{label}"] = probabilities[:, i].round(4)
     elif task == REGRESSION:
         out[f"predicted_{targets[0]}"] = np.asarray(fitted.predict(frame), dtype=float).ravel()

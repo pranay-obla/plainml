@@ -68,7 +68,6 @@ EXTRAS = {
     "uvicorn": "serve",
     "skl2onnx": "onnx",
     "onnxruntime": "onnx",
-    "streamlit": "ui",
     "pyarrow": "formats",
     "sqlalchemy": "formats",
     "polars": "fast",

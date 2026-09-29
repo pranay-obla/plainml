@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -134,3 +135,21 @@ def test_true_false_targets_with_blanks_stay_boolean() -> None:
     )
     result = plainml.train(frame, target="flag", quick=True, verbose=False, report=False)
     assert result.model.classes_.tolist() == [False, True]
+
+
+def test_confidence_is_for_the_predicted_answer() -> None:
+    """With a tuned threshold a model can answer 'yes' at 45%: its confidence is 45%, not 55%."""
+    from plainml.predicting import predict_frame
+
+    class Tuned:
+        classes_ = np.array(["no", "yes"])
+
+        def predict(self, X: Any) -> np.ndarray:
+            return np.array(["yes", "no"])
+
+        def predict_proba(self, X: Any) -> np.ndarray:
+            return np.array([[0.55, 0.45], [0.9, 0.1]])
+
+    frame = pd.DataFrame({"x": [1, 2]})
+    out = predict_frame(Tuned(), {"task": "classification", "targets": ["y"]}, frame, proba=True)
+    assert out["confidence"].tolist() == [0.45, 0.9]

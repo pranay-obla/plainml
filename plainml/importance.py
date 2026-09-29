@@ -326,9 +326,12 @@ class Workspace:
 
     def aggregate(self, values: np.ndarray, how: str = "max") -> pd.Series:
         values = np.nan_to_num(np.abs(np.asarray(values, dtype=float)))
-        pick = np.sum if how == "sum" else np.max
+        total = how == "sum"
         return pd.Series(
-            {c: float(pick(values[idx])) if idx else 0.0 for c, idx in self.blocks.items()}
+            {
+                c: float(values[idx].sum() if total else values[idx].max()) if idx else 0.0
+                for c, idx in self.blocks.items()
+            }
         )
 
     def columns_of(self, names: list[str]) -> np.ndarray:
@@ -642,7 +645,7 @@ def _backward(ws: Workspace, columns: list[str]) -> tuple[pd.Series, dict]:
     small = ws.small()
     current = list(columns)
     removed: list[str] = []
-    path = [
+    path: list[dict[str, Any]] = [
         {"columns": len(current), "removed": None, "score": ws.metric.display(small.score(current))}
     ]
     while len(current) > 1:
@@ -666,7 +669,7 @@ def _exhaustive(ws: Workspace, columns: list[str]) -> tuple[pd.Series, dict]:
     results.sort(key=lambda r: -r[0])
     top = results[: max(1, len(results) // 20)]  # the best 5% of combinations
     credit = {c: sum(1 for _, combo in top if c in combo) / len(top) for c in columns}
-    best_by_size = {}
+    best_by_size: dict[int, tuple[float, tuple[str, ...]]] = {}
     for score, combo in results:
         best_by_size.setdefault(len(combo), (score, combo))
     return pd.Series(credit), {

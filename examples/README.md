@@ -34,13 +34,14 @@ Then:
 plainml explain latest examples/churn.csv --row 0     # why this customer got their prediction
 plainml tune latest --trials 30                       # try to beat the default settings
 plainml predict latest examples/churn.csv -o predictions.csv --proba
+plainml importance examples/churn.csv -t churned --open  # which columns matter, by 8 methods and a consensus
 ```
 
 ## Regression: house prices
 
 ```bash
 plainml train examples/house_prices.csv -t price --metric mae
-plainml select examples/house_prices.csv -t price      # which columns carry the signal?
+plainml select examples/house_prices.csv -t price -o reduced.csv   # keep only the columns that matter
 ```
 
 Effects read like *"neighborhood = 'lakeview' gives the highest predicted price"*.
@@ -72,12 +73,22 @@ plainml forecast examples/daily_sales.csv -t units_sold --horizon 30 --open
 The history has an upward trend, busy weekends and a yearly cycle; the report shows the backtests and the
 forecast with its 80% range.
 
+## Everything in the browser
+
+```bash
+pip install "plainml[web]"
+plainml web
+```
+
+Drag any of these files onto the page, pick a task, and download whichever result files you want.
+
 ## Deploy
 
 ```bash
 plainml train examples/churn.csv -t churned --models rf,linear --no-ensemble
 plainml serve latest                          # then open http://localhost:8000/docs
 plainml export latest -o churn.onnx           # needs: pip install "plainml[onnx]"
+plainml deploy latest                         # a Docker build folder for the API, with a README
 ```
 
 ## From Python

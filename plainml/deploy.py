@@ -12,6 +12,7 @@ import json
 import shutil
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 from typing import Any
 
@@ -87,6 +88,30 @@ def _local_plainml_source() -> Path | None:
     return None
 
 
+def _build_wheel(source: Path, into: Path) -> bool:
+    """Build plainml's wheel from a clean copy of the checkout.
+
+    Building in place would leave ``build/`` and ``*.egg-info`` folders in the user's source tree.
+    """
+    with tempfile.TemporaryDirectory(prefix="plainml-wheel-") as scratch:
+        copy = Path(scratch) / "src"
+        copy.mkdir()
+        for name in ("pyproject.toml", "README.md", "LICENSE"):
+            if (source / name).is_file():
+                shutil.copy2(source / name, copy / name)
+        shutil.copytree(
+            source / "plainml",
+            copy / "plainml",
+            ignore=shutil.ignore_patterns("__pycache__", "*.pyc"),
+        )
+        built = subprocess.run(
+            [sys.executable, "-m", "pip", "wheel", "--no-deps", "-q", "-w", str(into), str(copy)],
+            capture_output=True,
+            text=True,
+        )
+    return built.returncode == 0
+
+
 def requirements(model: Any, saved: dict[str, str]) -> tuple[list[str], set[str]]:
     """Pinned requirement lines for serving ``model``, and the pip names they cover."""
     libraries = model_libraries(model)
@@ -109,7 +134,7 @@ def _dockerfile(python: str, needs_openmp: bool, port: int) -> str:
     return f"""# Built by `plainml deploy`. Build:  docker build -t my-model .
 FROM python:{python}-slim
 
-ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PIP_DISABLE_PIP_VERSION_CHECK=1
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PIP_DISABLE_PIP_VERSION_CHECK=1 PIP_ROOT_USER_ACTION=ignore
 WORKDIR /app
 
 {system}COPY requirements.txt ./
@@ -226,27 +251,12 @@ def deploy(
     if "torch" in covered:
         header.append("--extra-index-url https://download.pytorch.org/whl/cpu  # CPU-only torch")
     source = _local_plainml_source()
-    if source is not None:  # installed from a checkout: ship a wheel so the build needs no PyPI
-        built = subprocess.run(
-            [
-                sys.executable,
-                "-m",
-                "pip",
-                "wheel",
-                "--no-deps",
-                "-q",
-                "-w",
-                str(wheels),
-                str(source),
-            ],
-            capture_output=True,
-            text=True,
+    # installed from a checkout: ship a wheel so the image build doesn't need plainml on PyPI
+    if source is not None and not _build_wheel(source, wheels):
+        warn(
+            "Couldn't build a plainml wheel from your checkout; the image will install "
+            f"plainml {__version__} from PyPI instead."
         )
-        if built.returncode != 0:
-            warn(
-                "Couldn't build a plainml wheel from your checkout; the image will install "
-                f"plainml {__version__} from PyPI instead."
-            )
     (wheels / ".keep").write_text("", encoding="utf-8")
     (target / "requirements.txt").write_text("\n".join([*header, *lines]) + "\n", encoding="utf-8")
     shutil.copy2(model_path, target / "model.joblib")

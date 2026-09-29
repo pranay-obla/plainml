@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>plainml</title>
+<meta name="description" content="Upload data, find out what's in it, and download every result.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%232a78d6'/%3E%3Cpath d='M9 22V14M16 22V9M23 22v-5' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="app.css">
+<script>
+  // Apply the saved theme before the page paints (shared with the HTML reports).
+  try { var t = localStorage.getItem("plainml-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
+</head>
+<body>
+<header class="bar">
+  <a class="brand" href="#/" aria-label="plainml home">
+    <span class="mark"><svg viewBox="0 0 24 24"><path d="M6 17v-6M12 17V7M18 17v-4"/></svg></span>
+    <span class="word">plainml</span>
+  </a>
+  <nav class="tabs" aria-label="Sections">
+    <a href="#/" data-tab="new">New</a>
+    <a href="#/runs" data-tab="runs">Runs</a>
+    <a href="#/predict" data-tab="predict">Predict</a>
+  </nav>
+  <span class="spacer"></span>
+  <span class="version" id="version"></span>
+  <button class="theme" id="theme" type="button" title="Switch light / dark / auto"></button>
+</header>
+<main id="view" tabindex="-1"></main>
+<div id="toasts" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>

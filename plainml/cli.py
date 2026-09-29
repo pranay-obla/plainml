@@ -672,7 +672,14 @@ def explain(
 @click.argument("reference")
 @click.argument("data")
 @click.option("-t", "--target", help="Target column to leave out (when REFERENCE is a data file).")
-@click.option("--out", "out_dir", default="runs", show_default=True, help="Where to save the run.")
+@click.option(
+    "--out",
+    "--runs-dir",
+    "out_dir",
+    default="runs",
+    show_default=True,
+    help="Where runs are found (for REFERENCE) and this one is saved.",
+)
 @click.option("--name", help="Name for the run folder.")
 @click.option("--report/--no-report", default=True, show_default=True, help="Write report.html.")
 @click.option("--open", "open_report", is_flag=True, help="Open the report when done.")
@@ -1228,31 +1235,68 @@ def export(model: str, fmt: str, output: str | None, runs_dir: str) -> None:
     export_onnx(model, output=output, out_dir=runs_dir)
 
 
-@cli.command(short_help="Open the point-and-click web app (Streamlit).")
-@click.option("--port", type=int, default=8501, show_default=True)
-@click.option("--runs-dir", default="runs", show_default=True)
-def ui(port: int, runs_dir: str) -> None:
-    """Upload data, pick a target, train, and download results, all in the browser."""
-    from plainml.errors import require
+@cli.command(short_help="Open the plainml website: upload data, run anything, download results.")
+@click.option(
+    "--host",
+    default="127.0.0.1",
+    show_default=True,
+    help="Use 0.0.0.0 to let other machines connect (add --token).",
+)
+@click.option("--port", type=int, default=8765, show_default=True)
+@click.option("--runs-dir", default="runs", show_default=True, help="Where runs are saved.")
+@click.option(
+    "--token",
+    envvar="PLAINML_WEB_TOKEN",
+    help="Require this access token to use the site (or set PLAINML_WEB_TOKEN).",
+)
+@click.option(
+    "--max-upload-mb",
+    type=click.IntRange(1),
+    default=500,
+    show_default=True,
+    help="Largest upload.",
+)
+@click.option("--no-browser", is_flag=True, help="Don't open a browser tab.")
+def web(
+    host: str,
+    port: int,
+    runs_dir: str,
+    token: str | None,
+    max_upload_mb: int,
+    no_browser: bool,
+) -> None:
+    """Start a local website for everything plainml does.
 
-    require("streamlit", "The web app")
-    import subprocess
+    Drag in a file, choose a task (predict a column, forecast, find groups or anomalies,
+    rank columns, check drift, profile or clean), watch it run, then read the report and
+    download any result file.
 
-    app = Path(__file__).with_name("ui_app.py")
-    info(f"Starting the plainml app on http://localhost:{port} (Ctrl-C to stop)")
-    env = {**os.environ, "PLAINML_RUNS_DIR": runs_dir}
-    command = [
-        sys.executable,
-        "-m",
-        "streamlit",
-        "run",
-        str(app),
-        "--server.port",
-        str(port),
-        "--browser.gatherUsageStats",
-        "false",
-    ]
-    raise SystemExit(subprocess.call(command, env=env))
+    \b
+    Examples:
+      plainml web
+      plainml web --port 9000 --runs-dir projects/churn/runs
+      plainml web --host 0.0.0.0 --token change-me      (share on your network)
+    """
+    from plainml.web.server import run_web
+
+    run_web(
+        host=host,
+        port=port,
+        runs_dir=runs_dir,
+        token=token,
+        max_upload_mb=max_upload_mb,
+        open_browser=not no_browser,
+    )
+
+
+@cli.command(hidden=True)
+@click.option("--port", type=int, default=8765)
+@click.option("--runs-dir", default="runs")
+@click.pass_context
+def ui(ctx: click.Context, port: int, runs_dir: str) -> None:
+    """Old name for `plainml web`."""
+    note("'plainml ui' is now 'plainml web'.")
+    ctx.invoke(web, port=port, runs_dir=runs_dir)
 
 
 # --- housekeeping ---------------------------------------------------------------------------

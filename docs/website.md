@@ -1,0 +1,66 @@
+# The website
+
+```bash
+pip install "plainml[web]"
+plainml web
+```
+
+A browser tab opens at `http://localhost:8765`. Everything runs on your machine, and results are saved in
+the same `runs/` folder the command line uses, so both see the same history.
+
+## Using it
+
+1. **Upload.** Drag a CSV, Excel, Parquet, JSON or TSV file onto the page. You see every column's type
+   (number, category, date, text, or not used) and a preview of the first rows.
+2. **Choose a task.**
+
+    | Task | What you get |
+    |---|---|
+    | Predict a column | Models compared and the best one explained, as with `plainml train` |
+    | Forecast over time | A forecast with an 80% range, optionally one per store/product, with inputs and holidays |
+    | Find groups | Segments and what sets each apart |
+    | Find unusual rows | Every row scored, the unusual ones flagged with reasons |
+    | Rank the columns | Which columns matter, by several importance methods and a consensus |
+    | Check for drift | Whether this data differs from a model's training data or another file |
+    | Profile the data | Every column summarised, with warnings |
+    | Clean the data | A tidied copy to download |
+
+    Each task has its main options up front and the rest under **More options**.
+3. **Watch it run.** A progress bar and a live log show each step. Jobs run one at a time, in order.
+4. **Read the results.** Headline numbers, the key findings in plain English, and the full report.
+5. **Download what you need.** Every file the run wrote is listed with what it is and its size, each
+   with its own **Download** button. Tables can be previewed first.
+
+**Runs** lists everything you've run (from the website or the command line), with search and filters.
+**Predict** uses any saved model on a new upload, or continues a forecast.
+
+## Options
+
+```text
+plainml web --port 9000                   # another port
+plainml web --runs-dir projects/churn     # keep runs somewhere else
+plainml web --max-upload-mb 2000          # allow bigger uploads (default 500 MB)
+plainml web --no-browser                  # don't open a tab
+```
+
+## Sharing it on a network
+
+By default only your own machine can open the site. To let colleagues use it:
+
+```bash
+plainml web --host 0.0.0.0 --token SOMETHING-LONG-AND-RANDOM
+```
+
+Visitors enter the token once (their browser remembers it for 30 days). Anyone with it can upload data and run jobs, so share it only on a
+network you trust, or put the site behind HTTPS (for example a reverse proxy). The token can also come from
+the `PLAINML_WEB_TOKEN` environment variable, which keeps it out of your shell history.
+
+## Embedding it
+
+The site is a FastAPI app, so you can mount it inside another one:
+
+```python
+from plainml.web.server import create_app
+
+app = create_app("runs", token="change-me")
+```

@@ -7,13 +7,18 @@ pip install plainml
 plainml train examples/churn.csv --target churned
 ```
 
-plainml checks your data, picks classification or regression, compares up to 15 models fairly
-(cross-validation, a held-out test set, a do-nothing baseline), explains the winner in plain English,
-and saves it with an HTML report. It also clusters, finds anomalies, forecasts, tunes, serves models as
-an API and exports them to ONNX.
+plainml checks your data, picks classification or regression, compares up to 17 models fairly
+(30 with `--thorough`; cross-validation, a held-out test set, a do-nothing baseline), explains the winner
+in plain English, and saves it with an HTML report and a model card. It also clusters, finds anomalies,
+forecasts (many series, planned inputs, holidays), ranks columns with 19 importance methods, watches for
+drift, tunes, serves models as an API, packages them for Docker and exports them to ONNX or MLflow.
+
+Prefer clicking? `plainml web` opens a local website where you upload a file, pick a task and download
+each result.
 
 - New here? Start with the [README quickstart](https://github.com/pranay-obla/plainml#30-second-quickstart),
-  or run `plainml` for guided mode.
+  run `plainml` for guided mode, or `plainml web` for the website.
+- [The website](website.md): upload, run and download in the browser.
 - [Command reference](commands.md): every command and option.
 - [Python API](python-api.md): use plainml from scripts and notebooks.
 - [How it works](how-it-works.md): what happens to your data, and why the scores can be trusted.

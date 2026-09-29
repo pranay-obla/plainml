@@ -41,7 +41,12 @@ Before training you see warnings such as:
    leaks from the scoring rows into training.
 3. **A baseline.** A do-nothing model (always the most common class, or always the average) is scored the same
    way. plainml warns if nothing clearly beats it, or if ROC-AUC or R² shows the columns barely predict the target.
-4. **An ensemble.** The top three models are averaged and scored like any other model.
+4. **Ensembles.** The top three models are averaged and scored like any other model. With `--thorough`,
+   they're also stacked (a simple model learns how much to trust each one), and the extra tier of models
+   runs too: AdaBoost, bagging, Gaussian processes, robust and generalised linear regressions, and a
+   PyTorch network when the `torch` extra is installed. Models that can't suit the data are skipped with a
+   reason (Poisson and Gamma regression need non-negative or positive targets, for example), and with
+   `--time-budget`, slow models are timed on a sample first and skipped if they wouldn't finish in time.
 5. **Overfitting check.** Each model's score on its own training rows is compared with its cross-validated score;
    a big gap is flagged.
 
@@ -70,7 +75,11 @@ The best model (ties go to the steadier, then the faster one) is:
 1. trained on the training rows and scored on the **held-out test rows**; these are the numbers to quote.
 2. explained: **permutation importance** (how much the score drops when a column is shuffled) and **effect
    curves** (the average prediction as one column sweeps across its typical range).
-3. **retrained on all rows** (`--no-refit` to skip) and saved with its whole preprocessing pipeline.
+3. checked for **calibration**: do rows given "70%" turn out positive about 70% of the time? The report
+   shows a reliability curve with the Brier score and the average gap (ECE). `--calibrate` fixes poorly
+   calibrated probabilities (Platt scaling on small data, isotonic regression on larger data).
+4. **retrained on all rows** (`--no-refit` to skip) and saved with its whole preprocessing pipeline, plus a
+   summary of each column's training distribution for drift checks.
 
 ## 5. What's saved
 
@@ -82,12 +91,26 @@ runs/20260925-125240_churn/
   evaluation.json          test-set details used by the report
   importance.csv           which columns mattered
   holdout_predictions.csv  test rows with actual and predicted values
+  model_card.md            a one-page summary: data, scores, drivers, caveats, how to use it
   run.json                 settings, library versions, data fingerprint, timings
   config.yaml              rerun with: plainml train --config .../config.yaml
 ```
 
+With `--private`, the report, run folder and model keep only file names, column names and summary
+numbers: no example rows, raw values or data paths.
+
 `plainml predict` checks new data against the columns the model expects. Missing columns are treated as
-blank (with a warning, or an error with `--strict`), and extra columns are ignored.
+blank (with a warning, or an error with `--strict`), and extra columns are ignored. It also compares the
+new rows with the training data and warns when they look clearly different. `--chunk-size` streams files
+too big for memory.
+
+## Drift
+
+`plainml drift` compares new data with a model's training data (or with an older file) column by column.
+Numbers and dates are compared with the **population stability index** (PSI) over the training data's
+deciles; categories by their shares, with brand-new categories called out. A PSI under 0.1 is stable,
+0.1–0.25 a moderate shift, and over 0.25 a major one. Columns are listed by how much the model relies on
+them, so a shift in an important column stands out.
 
 ## Other tasks
 
@@ -102,6 +125,20 @@ blank (with a warning, or an error with `--strict`), and extra columns are ignor
   features, and **backtests** each model: it forecasts several past windows using only earlier data. Two simple
   rules ("same as last period", "same as last season") are always included. Tree models learn period-to-period
   changes so they can follow trends. The 80% range comes from the backtest errors.
+  - `--group store` forecasts each store separately. The model type is chosen on the largest series using an
+    error relative to "same as last period", so big stores don't drown out small ones; then each series gets
+    its own fitted model.
+  - `--inputs promo,price` adds columns known in advance. Rows after the last known target value (in the same
+    file, or a `--future` file) hold their planned values; without them the last values are carried forward,
+    with a warning.
+  - `--country US` adds public holidays (and the days either side) as features.
+- **Feature importance** (`plainml importance`) runs up to 19 methods in four families: filters (mutual
+  information, F-test, correlation, chi², variance), model-based (random forest, extra trees, gradient
+  boosting, L1, linear coefficients), model-agnostic (permutation, drop-column, SHAP) and searches (RFE,
+  forward and backward selection, exhaustive search, Boruta, stability selection). Tree importances are
+  corrected against shuffled copies of each column, since trees otherwise favour wide columns such as free
+  text. The methods' ranks are combined into a consensus, a curve shows the score with the top 1, 2, 3…
+  columns, and redundant groups of columns are pointed out.
 - **Tuning** searches each model's key settings (Optuna's TPE when installed, random search otherwise) using the
   same folds as the original run, and re-scores the defaults on those folds so the before/after comparison is fair.
 
@@ -109,6 +146,5 @@ blank (with a warning, or an error with `--strict`), and extra columns are ignor
 
 - Everything runs in memory on one machine. For very large files use `--sample` (e.g. `--sample 200000`) and
   `--quick`; files over 200 MB are read with polars when it's installed.
-- Forecasting handles one series at a time and doesn't use other columns as inputs yet.
 - Free text gets simple word features, not language-model embeddings.
 - ONNX export covers scikit-learn models without free-text columns (not XGBoost, LightGBM, CatBoost or ensembles).
