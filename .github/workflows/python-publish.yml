@@ -1,5 +1,11 @@
 # Publishes to PyPI when a GitHub release is published, but only after the tests pass.
-# Uses the PYPI_API_TOKEN repository secret, as before.
+#
+# Uses PyPI Trusted Publishing: PyPI checks that the upload comes from this workflow in this
+# repository, so no API token or GitHub secret is needed. One-time setup on pypi.org
+# (before the first release: Your account -> Publishing -> "Add a new pending publisher"):
+#   PyPI project name: plainml   Owner: pranay-obla   Repository: plainml
+#   Workflow name: python-publish.yml   Environment name: pypi
+# See RELEASING.md for the whole release procedure.
 
 name: Upload Python Package
 
@@ -26,15 +32,15 @@ jobs:
       - run: pip install -e ".[dev]"
       - run: pytest -q
 
-  deploy:
-    name: Build and publish
+  build:
+    name: Build the package
     needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
         with:
-          python-version: "3.12"
+          python-version: "3.13"
       - name: Check the release tag matches the package version
         run: |
           version=$(python -c "import re;print(re.search(r'__version__ = \"(.+?)\"', open('plainml/__init__.py').read()).group(1))")
@@ -45,8 +51,26 @@ jobs:
       - run: python -m pip install --upgrade pip build twine
       - run: python -m build
       - run: twine check dist/*
-      - name: Publish package
-        uses: pypa/gh-action-pypi-publish@release/v1
+      - uses: actions/upload-artifact@v7
         with:
-          user: __token__
-          password: ${{ secrets.PYPI_API_TOKEN }}
+          name: dist
+          path: dist/
+          if-no-files-found: error
+
+  publish:
+    name: Publish to PyPI
+    needs: build
+    runs-on: ubuntu-latest
+    # Add required reviewers to this environment (Settings -> Environments -> pypi) for a
+    # final manual approval before anything is published.
+    environment:
+      name: pypi
+      url: https://pypi.org/project/plainml/
+    permissions:
+      id-token: write # lets PyPI verify that this workflow is the trusted publisher
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: dist
+          path: dist/
+      - uses: pypa/gh-action-pypi-publish@release/v1

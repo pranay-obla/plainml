@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "python3 -m pip install \"mkdocs-material>=9.5\" \"mkdocs<2\"",
+  "buildCommand": "python3 -m mkdocs build",
+  "outputDirectory": "site"
+}

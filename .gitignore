@@ -17,6 +17,7 @@ env/
 coverage.xml
 htmlcov/
 site/
+.vercel/
 
 # plainml output
 runs/

@@ -183,6 +183,50 @@ def transactions(n: int = 3000) -> pd.DataFrame:
     return frame
 
 
+def store_sales() -> pd.DataFrame:
+    """Daily sales for three stores, with promotions planned two weeks ahead.
+
+    Forecasting many series with inputs: each store has its own level and growth, promotions
+    lift sales by about a third, and a few public holidays halve them. The last 14 rows of each
+    store have a planned promo but no sales yet: that's what gets forecast.
+    """
+    days = pd.date_range("2025-01-01", "2026-06-30", freq="D")
+    holidays = pd.to_datetime(
+        ["2025-01-01", "2025-07-04", "2025-11-27", "2025-12-25", "2026-01-01"]
+    )
+    weekly = np.array([0.9, 0.95, 1.0, 1.0, 1.1, 1.35, 1.2])[days.dayofweek]
+    holiday = np.where(days.isin(holidays), 0.5, 1.0)
+    future = pd.date_range(days[-1] + pd.Timedelta(days=1), periods=14, freq="D")
+    frames = []
+    for store, level, growth in (("north", 520, 0.25), ("south", 310, 0.10), ("east", 140, 0.40)):
+        promo = (rng.random(len(days)) < 0.12).astype(int)
+        trend = 1 + growth * np.arange(len(days)) / len(days)
+        noise = rng.normal(1, 0.06, len(days))
+        sales = level * trend * weekly * holiday * (1 + 0.35 * promo) * noise
+        frames.append(
+            pd.DataFrame(
+                {
+                    "date": days.strftime("%Y-%m-%d"),
+                    "store": store,
+                    "promo": promo,
+                    "sales": sales.round(),
+                }
+            )
+        )
+        planned = (future.dayofweek == 4).astype(int)  # promotions planned for the next two Fridays
+        frames.append(
+            pd.DataFrame(
+                {
+                    "date": future.strftime("%Y-%m-%d"),
+                    "store": store,
+                    "promo": planned,
+                    "sales": np.nan,
+                }
+            )
+        )
+    return pd.concat(frames, ignore_index=True)
+
+
 if __name__ == "__main__":
     for name, frame in {
         "churn.csv": churn(),
@@ -190,6 +234,7 @@ if __name__ == "__main__":
         "daily_sales.csv": daily_sales(),
         "customers.csv": customers(),
         "transactions.csv": transactions(),
+        "store_sales.csv": store_sales(),  # last, so the files above stay identical
     }.items():
         frame.to_csv(HERE / name, index=False)
         print(f"wrote {name}: {len(frame):,} rows × {frame.shape[1]} columns")
