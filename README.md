@@ -9,10 +9,10 @@
   <a href="https://pypi.org/project/plainml/"><img src="https://img.shields.io/pypi/v/plainml?color=blue&label=pypi" alt="PyPI version"></a>
   <a href="https://pypi.org/project/plainml/"><img src="https://img.shields.io/pypi/pyversions/plainml" alt="Python versions"></a>
   <a href="https://github.com/pranay-obla/plainml/actions/workflows/ci.yml"><img src="https://github.com/pranay-obla/plainml/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT license"></a>
+  <a href="https://github.com/pranay-obla/plainml/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT license"></a>
 </p>
 
-<p align="center"><img src="assets/train.svg" alt="plainml train output: data checks, models compared, the best one explained and saved" width="900"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/pranay-obla/plainml/main/assets/train.svg" alt="plainml train output: data checks, models compared, the best one explained and saved" width="900"></p>
 
 Point plainml at a CSV (or Excel, Parquet, JSON, a URL or a database) and name the column you want to
 predict. It works out whether that's classification or regression, checks the data for problems, fairly
@@ -79,7 +79,7 @@ pip install "plainml[all]"          # or pick: pip install "plainml[web,boost]"
 
 ## 30-second quickstart
 
-The repository ships with example datasets in [`examples/`](examples):
+The repository ships with example datasets in [`examples/`](https://github.com/pranay-obla/plainml/tree/main/examples):
 
 ```bash
 plainml train examples/churn.csv --target churned
@@ -110,12 +110,13 @@ plainml web
 5. **Download what you need.** Every file the run produced is listed with its own **Download** button,
    and tables can be previewed first.
 
-<p align="center"><img src="assets/web.png" alt="The plainml website: a finished run with headline scores, key findings, the embedded report and a list of files, each with its own download button" width="900"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/pranay-obla/plainml/main/assets/web.png" alt="The plainml website: a finished run with headline scores, key findings, the embedded report and a list of files, each with its own download button" width="900"></p>
 
 The **Runs** page lists everything you've run (from the website or the command line), and **Predict** uses
 any saved model on a new upload. The site works in light and dark mode and on phones. It only listens on
-your machine; to share it on a network, add a token: `plainml web --host 0.0.0.0 --token change-me`. More in
-the [website guide](docs/website.md).
+your machine; to share it on a network, add a token: `plainml web --host 0.0.0.0 --token change-me`. To put
+it online, see the [hosting guide](https://github.com/pranay-obla/plainml/blob/main/docs/hosting.md). More in
+the [website guide](https://github.com/pranay-obla/plainml/blob/main/docs/website.md).
 
 ## What it can do
 
@@ -176,7 +177,7 @@ For a trained model, it has:
 
 Forecasts, clusters, anomalies, importance and drift get reports of their own.
 
-<p align="center"><img src="assets/report.png" alt="plainml HTML report: headline scores, plain-English summary, and a model comparison chart" width="800"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/pranay-obla/plainml/main/assets/report.png" alt="plainml HTML report: headline scores, plain-English summary, and a model comparison chart" width="800"></p>
 
 Each trained model also gets a `model_card.md`: a one-page summary of what it predicts, the data it
 learned from, how well it does (per class, too), what drives it, its caveats, and how to use it. It's
@@ -206,7 +207,7 @@ meant to travel with the model.
 | | `plainml export MODEL` | ONNX (for C#, Java, JavaScript, C++…) or MLflow |
 | **Housekeeping** | `plainml runs` / `compare` / `models` / `init` | List, compare and prune runs; list models; write a config |
 
-Every command has examples in `plainml COMMAND --help`, and the [command reference](docs/commands.md) lists
+Every command has examples in `plainml COMMAND --help`, and the [command reference](https://github.com/pranay-obla/plainml/blob/main/docs/commands.md) lists
 every option.
 
 ## Examples
@@ -239,7 +240,7 @@ plainml anomaly examples/transactions.csv --label is_fraud
 plainml forecast examples/daily_sales.csv -t units_sold --horizon 30
 
 # One forecast per store, using planned promotions and public holidays
-plainml forecast stores.csv -t sales --group store --inputs promo --future plans.csv --country US
+plainml forecast examples/store_sales.csv -t sales --group store --inputs promo --country US --horizon 14
 
 # Has this month's data drifted from what the model learned on?
 plainml drift latest this_month.csv
@@ -251,7 +252,7 @@ plainml predict latest huge.csv -o predictions.csv --chunk-size 200000
 plainml runs --prune --keep 10
 ```
 
-A walkthrough of every example dataset is in [examples/README.md](examples/README.md).
+A walkthrough of every example dataset is in [examples/README.md](https://github.com/pranay-obla/plainml/blob/main/examples/README.md).
 
 ## Deploying
 
@@ -290,6 +291,11 @@ build doesn't need PyPI.
 **Files.** `plainml export MODEL` writes ONNX (checked against the original model), for C#, Java,
 JavaScript or C++. `--format mlflow` saves an MLflow model, and `plainml train --mlflow` logs runs to your
 MLflow tracking server.
+
+**Hosting.** The [hosting guide](https://github.com/pranay-obla/plainml/blob/main/docs/hosting.md) covers
+putting the website online on Hugging Face Spaces (free) or another container host, using the ready-made
+Dockerfile in [`hosting/huggingface/`](https://github.com/pranay-obla/plainml/tree/main/hosting/huggingface).
+It also covers publishing the documentation on Vercel.
 
 ## Trust and privacy
 
@@ -333,7 +339,7 @@ model = joblib.load("runs/20260925-125240_churn/model.joblib")
 model.predict(pd.read_csv("new_customers.csv"))
 ```
 
-See the [Python API guide](docs/python-api.md).
+See the [Python API guide](https://github.com/pranay-obla/plainml/blob/main/docs/python-api.md).
 
 ## Reproducible runs
 
@@ -366,7 +372,7 @@ or start your own commented config with `plainml init`.
    - the report and model card
    - a summary of the training data, for drift checks
 
-More detail, including forecasting, importance and drift, is in [docs/how-it-works.md](docs/how-it-works.md).
+More detail, including forecasting, importance and drift, is in [docs/how-it-works.md](https://github.com/pranay-obla/plainml/blob/main/docs/how-it-works.md).
 
 ## How plainml compares
 
@@ -419,12 +425,15 @@ pytest
 | `plainml/report.py`, `card.py`, `runs.py` | HTML reports, model cards, run folders |
 | `plainml/web/` | The website: API server, job runner, and the page itself (`static/`) |
 | `tests/`, `docs/`, `examples/` | Tests, the documentation site, example datasets |
+| `hosting/`, `vercel.json`, `.github/workflows/` | Hosting the website and docs, CI and releases |
 
 </details>
 
 CI runs the tests on Python 3.10 to 3.14 (Linux, macOS, Windows), with every optional extra (PyTorch
 included), against the oldest supported library versions, and weekly against the newest releases, so a
-library update can't silently break plainml. The docs site is published to GitHub Pages from `docs/`.
+library update can't silently break plainml. Publishing a GitHub release sends the package to PyPI (see
+[RELEASING.md](https://github.com/pranay-obla/plainml/blob/main/RELEASING.md)), and the documentation in
+`docs/` can be hosted on Vercel or GitHub Pages.
 
 ## Author
 
@@ -445,4 +454,4 @@ Built on [scikit-learn](https://scikit-learn.org/), [pandas](https://pandas.pyda
 [skl2onnx](https://onnx.ai/sklearn-onnx/), [holidays](https://github.com/vacanza/holidays) and
 [MLflow](https://mlflow.org/).
 
-[MIT licensed](LICENSE).
+[MIT licensed](https://github.com/pranay-obla/plainml/blob/main/LICENSE).

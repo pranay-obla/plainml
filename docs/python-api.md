@@ -79,8 +79,8 @@ plainml.detect_anomalies(
     "payments.csv", contamination=0.01
 )  # -> AnomalyResult (.scores, .flags, .top)
 plainml.forecast("sales.csv", "revenue", horizon=30)  # -> ForecastResult (.forecast, .insights)
-plainml.forecast(
-    "stores.csv", "sales", group="store", inputs=["promo"], future="plans.csv", country="US"
+plainml.forecast(  # one forecast per store, with planned promotions and public holidays
+    "examples/store_sales.csv", "sales", group="store", inputs=["promo"], country="US", horizon=14
 )
 ```
 

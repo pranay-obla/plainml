@@ -28,15 +28,32 @@ It looked like an ID (a different value in every row) or a constant. Force it in
 
 **It's slow.**
 Use `--quick`, `--time-budget 5m`, `--models rf,lightgbm`, or `--sample 50000`. Slow models (SVM on large
-data, for example) are skipped automatically, and the reason is shown.
+data, for example) are skipped automatically, and the reason is shown. `--thorough` is the slow option: it
+adds more models and a stacked ensemble.
+
+**My file is too big.**
+Files over 200 MB load faster with the `fast` extra (polars). Train on a sample (`--sample 200000`); a
+few hundred thousand rows is usually plenty. Then predict on the whole file in pieces:
+`plainml predict latest huge.csv -o predictions.csv --chunk-size 200000`.
+
+**Does it do deep learning?**
+Install the `torch` extra and a PyTorch neural network joins the `--thorough` models (or run it alone with
+`--models torch`). It trains on the CPU unless you set `PLAINML_TORCH_DEVICE=cuda` or `mps`. On
+spreadsheet-style data, gradient boosting usually wins; the network helps most inside ensembles.
 
 **Can I stop training early?**
 Press Ctrl-C once: plainml finishes with the models trained so far. Press it again to quit.
 
 **How do I use the model in production?**
-`plainml serve MODEL` gives you a REST API (add `--api-key` to require a key). In Python, `joblib.load("model.joblib").predict(dataframe)`
-works on raw rows. For other languages, `plainml export MODEL` writes ONNX. Only load model files you trust:
-loading a joblib/pickle file can run code.
+- `plainml serve MODEL` gives you a REST API. Add `--api-key` to require a key.
+- `plainml deploy MODEL` writes a Docker build folder for that API: pinned library versions, a non-root
+  image and a health check. `docker build` it and run it anywhere containers run, with
+  `-e PLAINML_API_KEY=...`.
+- In Python, `joblib.load("model.joblib").predict(dataframe)` works on raw rows.
+- For other languages, `plainml export MODEL` writes ONNX. `--format mlflow` saves it for an MLflow model
+  registry.
+
+Only load model files you trust: loading a joblib/pickle file can run code.
 
 **How do I know when to retrain?**
 Without labels, run `plainml drift MODEL recent_data.csv`: it shows which columns have shifted from the
@@ -64,10 +81,10 @@ the report before sending it: column names and category names can still be revea
 `plainml web --host 0.0.0.0 --token SOMETHING-LONG` and send people the address and token. Anyone with the
 token can upload data and run jobs, so only do this on a network you trust, or behind HTTPS.
 
-**How do I put a model into production?**
-`plainml deploy MODEL` writes a Docker build folder (pinned library versions, a non-root image, a health
-check). `docker build` it and run it anywhere containers run, with `-e PLAINML_API_KEY=...` to require a key.
-`plainml export MODEL --format mlflow` saves it for an MLflow model registry.
+**Can I put the website online?**
+Yes, on a host that runs containers: Hugging Face Spaces (free), Render, Railway or Fly.io. The repository
+has a ready-made Dockerfile. Vercel suits the documentation but not the website itself, which needs large
+uploads and long-running jobs. See [Hosting](hosting.md).
 
 **Is it reproducible?**
 Yes: fixed seeds, and each run saves its settings, library versions and a fingerprint of the data.

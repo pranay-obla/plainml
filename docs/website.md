@@ -55,6 +55,11 @@ Visitors enter the token once (their browser remembers it for 30 days). Anyone w
 network you trust, or put the site behind HTTPS (for example a reverse proxy). The token can also come from
 the `PLAINML_WEB_TOKEN` environment variable, which keeps it out of your shell history.
 
+## Putting it online
+
+The website needs a host that runs an always-on container, such as Hugging Face Spaces (free), Render,
+Railway or Fly.io. The repository includes a Dockerfile for it. See [Hosting](hosting.md) for the steps.
+
 ## Embedding it
 
 The site is a FastAPI app, so you can mount it inside another one:

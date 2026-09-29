@@ -5,8 +5,12 @@ This page explains what happens under the hood, so you can trust (and question) 
 ## 1. Reading and profiling the data
 
 plainml reads CSV, TSV, Excel, Parquet, JSON/JSONL and Feather files, `http(s)` URLs, and databases
-(`sqlite:///shop.db --table orders`, or any SQLAlchemy URL with `--query`). Semicolon-separated "CSV"
-files are detected automatically.
+(`sqlite:///shop.db --table orders`, or any SQLAlchemy URL with `--query`). It also handles common export
+quirks:
+- semicolon-separated "CSV" files
+- Excel's UTF-8 files with a byte-order mark, and older Windows encodings
+- dates with mixed time zones
+- workbooks with several sheets: the largest is used and named in a warning (pick another with `--sheet`)
 
 Every column is classified as one of:
 
@@ -144,7 +148,12 @@ them, so a shift in an important column stands out.
 
 ## Limitations
 
-- Everything runs in memory on one machine. For very large files use `--sample` (e.g. `--sample 200000`) and
-  `--quick`; files over 200 MB are read with polars when it's installed.
+- Everything runs in memory on one machine. For very large files, train with `--sample` (e.g.
+  `--sample 200000`) and `--quick`, and predict with `--chunk-size`. Files over 200 MB are read with polars
+  when it's installed.
 - Free text gets simple word features, not language-model embeddings.
+- Forecasting uses backtested machine-learning models and simple baselines, not classical statistical
+  models such as ARIMA or exponential smoothing.
+- The website runs one job at a time, in order, and keeps its job list in memory: restarting it forgets
+  running jobs (finished runs are saved as usual).
 - ONNX export covers scikit-learn models without free-text columns (not XGBoost, LightGBM, CatBoost or ensembles).

@@ -22,4 +22,5 @@ each result.
 - [Command reference](commands.md): every command and option.
 - [Python API](python-api.md): use plainml from scripts and notebooks.
 - [How it works](how-it-works.md): what happens to your data, and why the scores can be trusted.
+- [Hosting](hosting.md): the docs on Vercel, the website on Hugging Face Spaces or another container host.
 - [FAQ](faq.md)

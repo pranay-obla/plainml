@@ -1,6 +1,6 @@
 # Examples
 
-Five small, synthetic datasets (no real people) to try every part of plainml. They're deliberately a bit
+Six small, synthetic datasets (no real people) to try every part of plainml. They're deliberately a bit
 messy, like real exports: blank cells, prices stored as text, day-first dates, ID columns, free-text notes.
 Regenerate them with `python examples/make_datasets.py`.
 
@@ -11,6 +11,7 @@ Regenerate them with `python examples/make_datasets.py`.
 | `customers.csv` | 600 | clustering: which customer segments exist? |
 | `transactions.csv` | 3,000 | anomaly detection: which payments look suspicious? (`is_fraud` marks the truth) |
 | `daily_sales.csv` | 912 days | forecasting: how many units will sell next month? |
+| `store_sales.csv` | 3 stores × 546 days | forecasting many series, with planned promotions and holidays |
 
 Run these from the repository root.
 
@@ -72,6 +73,17 @@ plainml forecast examples/daily_sales.csv -t units_sold --horizon 30 --open
 
 The history has an upward trend, busy weekends and a yearly cycle; the report shows the backtests and the
 forecast with its 80% range.
+
+## Forecasting many series: store sales
+
+```bash
+plainml forecast examples/store_sales.csv -t sales --group store --inputs promo --country US --horizon 14 --open
+```
+
+Three stores, each with its own size and growth. Promotions lift sales by about a third, and public
+holidays cut them. The last 14 rows of each store have a promotion planned but no sales yet. plainml reads
+those rows as plans, so the forecast jumps on the planned promotion days. The report shows the total and a
+chart for each store; `forecast.csv` has one row per store and day.
 
 ## Everything in the browser
 
