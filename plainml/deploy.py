@@ -10,15 +10,14 @@ from __future__ import annotations
 import importlib.metadata
 import json
 import shutil
-import subprocess
 import sys
-import tempfile
 from pathlib import Path
 from typing import Any
 
 import joblib
 
 from plainml import __version__
+from plainml._wheel import build_wheel
 from plainml.card import CARD_FILE
 from plainml.console import esc, heading, info, note, success, warn
 from plainml.errors import PlainMLError
@@ -89,27 +88,7 @@ def _local_plainml_source() -> Path | None:
 
 
 def _build_wheel(source: Path, into: Path) -> bool:
-    """Build plainml's wheel from a clean copy of the checkout.
-
-    Building in place would leave ``build/`` and ``*.egg-info`` folders in the user's source tree.
-    """
-    with tempfile.TemporaryDirectory(prefix="plainml-wheel-") as scratch:
-        copy = Path(scratch) / "src"
-        copy.mkdir()
-        for name in ("pyproject.toml", "README.md", "LICENSE"):
-            if (source / name).is_file():
-                shutil.copy2(source / name, copy / name)
-        shutil.copytree(
-            source / "plainml",
-            copy / "plainml",
-            ignore=shutil.ignore_patterns("__pycache__", "*.pyc"),
-        )
-        built = subprocess.run(
-            [sys.executable, "-m", "pip", "wheel", "--no-deps", "-q", "-w", str(into), str(copy)],
-            capture_output=True,
-            text=True,
-        )
-    return built.returncode == 0
+    return build_wheel(source, into) is not None
 
 
 def requirements(model: Any, saved: dict[str, str]) -> tuple[list[str], set[str]]:

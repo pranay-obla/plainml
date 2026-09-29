@@ -62,8 +62,9 @@ anywhere.
    /tmp/plainml-check/bin/plainml --version
    ```
 
-8. If you host the website on a Hugging Face Space, bump `PLAINML_VERSION` in
-   `hosting/huggingface/Dockerfile` and upload it to the Space.
+8. The Vercel site rebuilds from `main` by itself. If you host the website elsewhere, update it: re-run
+   `plainml web --export` and re-upload (Hugging Face Static Space), or bump `PLAINML_VERSION` in
+   `hosting/docker/Dockerfile` (server version).
 
 PyPI never accepts the same version twice. If something is wrong with a release, fix it and publish the
 next version (e.g. `0.1.2`); a broken release can be *yanked* on PyPI so installs skip it.

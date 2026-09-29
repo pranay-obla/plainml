@@ -4,20 +4,51 @@ Where each part of plainml can live online:
 
 | What | Where | Why |
 |---|---|---|
-| The Python package | [PyPI](https://pypi.org/project/plainml/) | `pip install plainml`. The release steps are in [RELEASING.md](https://github.com/pranay-obla/plainml/blob/main/RELEASING.md) |
-| This documentation | Vercel (or GitHub Pages) | Static pages, free, redeployed on every push |
-| The website (`plainml web`) | Hugging Face Spaces, Render, Railway, Fly.io | Needs an always-on container with room for uploads and long jobs |
+| The website, in the browser | Vercel (free), or any static host | plainml runs in the visitor's browser, so plain files are enough |
+| This documentation | Vercel, next to the website | Static pages, rebuilt on every push |
+| The Python package | [PyPI](https://pypi.org/project/plainml/) | `pip install plainml`. Release steps are in [RELEASING.md](https://github.com/pranay-obla/plainml/blob/main/RELEASING.md) |
+| The website, on a server | Render, Railway, Fly.io | For big files and long jobs: see below |
 | A trained model's API | Any container host | `plainml deploy` builds the image |
 
-## The documentation on Vercel
+## The website in the browser
 
-The repository includes a `vercel.json` that builds this site with MkDocs:
+`plainml web --export DIR` writes the website as static files: no server needed. When someone opens it,
+a background worker in their browser starts Python (via [Pyodide](https://pyodide.org)), installs
+plainml, and does all the work right there:
+- **Free to host anywhere:** Vercel, GitHub Pages, Netlify, a Hugging Face Static Space.
+- **Private:** visitors' data never leaves their computer.
+- **Always on:** it never sleeps, and runs are saved in each visitor's browser between visits.
+- **Complete:** every task works, including LightGBM and XGBoost.
+- **Trade-offs:**
+  - The first visit downloads about 50 MB of Python libraries (cached afterwards).
+  - Uploads are limited to 200 MB.
+  - Training uses one CPU core, so it's slower than the command line on big data.
+
+From a plainml source checkout, the export includes plainml built from that code. Otherwise the browser
+installs the same plainml version from PyPI.
+
+To try it locally:
+
+```bash
+plainml web --export site
+```
+
+```bash
+python -m http.server --directory site
+```
+
+Then open http://localhost:8000.
+
+## On Vercel (website and docs)
+
+The repository's `vercel.json` builds both parts: the website at the root of the address and this
+documentation under `/docs`.
 
 ```json
 {
   "framework": null,
   "installCommand": "python3 -m pip install \"mkdocs-material>=9.5\" \"mkdocs<2\"",
-  "buildCommand": "python3 -m mkdocs build",
+  "buildCommand": "python3 -m plainml.web.static_site site && python3 -m mkdocs build -d site/docs",
   "outputDirectory": "site"
 }
 ```
@@ -25,58 +56,50 @@ The repository includes a `vercel.json` that builds this site with MkDocs:
 1. Sign in at [vercel.com](https://vercel.com) with GitHub.
 2. Choose **Add New → Project** and import `pranay-obla/plainml`. The settings come from `vercel.json`,
    so you don't need to change anything.
-3. Click **Deploy**. The site appears at a `*.vercel.app` address. To use your own domain, go to
-   **Settings → Domains**.
-4. Every push to `main` redeploys the site, and pull requests get their own preview link.
-5. Put the address in `mkdocs.yml` (`site_url: https://…`) and in the `[project.urls]` of
-   `pyproject.toml` (`Documentation = "https://…"`).
+3. Click **Deploy**. The site appears at a `*.vercel.app` address, with the docs at `/docs`. To use your
+   own domain, go to **Settings → Domains**.
+4. Every push to `main` redeploys both, and pull requests get their own preview link.
+5. Put the addresses in `mkdocs.yml` (`site_url: https://…/docs/`) and in the `[project.urls]` of
+   `pyproject.toml` (`Homepage` and `Documentation`).
 
-The repository can also publish the same site to GitHub Pages with `.github/workflows/docs.yml`. It only
-runs when started by hand from the **Actions** tab, since the docs live on Vercel. To switch, turn on
-**Settings → Pages → Source: GitHub Actions** and add a push trigger to that workflow.
+The documentation can also go to GitHub Pages with `.github/workflows/docs.yml`. That workflow only runs
+when started by hand from the **Actions** tab. To use it, turn on **Settings → Pages → Source: GitHub
+Actions**.
 
-## The website on Hugging Face Spaces
+## On a Hugging Face Static Space
 
-[Hugging Face Spaces](https://huggingface.co/spaces) runs a Docker container for free (2 vCPUs, 16 GB of
-memory). That's enough for a public plainml demo. The files are in
-[`hosting/huggingface/`](https://github.com/pranay-obla/plainml/tree/main/hosting/huggingface).
+Static Spaces are free on Hugging Face.
 
-1. Publish plainml to PyPI first: the Space runs `pip install plainml`. Before that, switch to the
-   commented-out line in the Dockerfile that installs from GitHub.
-2. On huggingface.co, choose **New Space**. Name it (e.g. `plainml`), choose the **Docker** SDK with a
-   **Blank** template, and keep the free **CPU basic** hardware.
-3. Upload `hosting/huggingface/Dockerfile` and `hosting/huggingface/README.md` to the Space: **Files → Add
-   file → Upload files**, or `git push` to the Space's repository. The README's header tells Hugging Face
-   to use Docker and port 7860.
-4. To limit who can use it, go to **Settings → Variables and secrets → New secret** and add
-   `PLAINML_WEB_TOKEN` with a long random value. Visitors then enter that token once.
-5. The Space builds and starts in a few minutes. Open it at `https://<owner>-<space-name>.hf.space`.
-   Signing in and uploading work more reliably there than inside the Hugging Face page.
+1. Export the website:
 
-Things to know:
-- **Runs are wiped when the Space restarts**, unless you add persistent storage (Settings → Persistent
-  storage). With it, the Dockerfile keeps runs in `/data` automatically.
-- **Free Spaces sleep** after a while without visitors and wake up on the next visit.
-- **Upgrading:** change `PLAINML_VERSION` in the Dockerfile and the Space rebuilds.
+   ```bash
+   plainml web --export space
+   ```
 
-## The website on Render, Railway or Fly.io
+2. Copy [`hosting/huggingface/README.md`](https://github.com/pranay-obla/plainml/blob/main/hosting/huggingface/README.md)
+   into the `space` folder. Its header tells Hugging Face to serve the folder as a static site.
+3. On huggingface.co, choose **New Space**, give it a name, and choose **Static** with a **Blank** template.
+4. Upload everything in `space/` to it (**Files → Add file → Upload files**, keeping the `wheels` folder),
+   or `git push` it to the Space's repository.
 
-The same `hosting/huggingface/Dockerfile` works on any host that runs containers:
+Export again and re-upload whenever you want a newer plainml.
+
+## On a server (Render, Railway, Fly.io)
+
+The server version (`plainml web`) suits big files and long jobs, and keeps runs on the server.
+[`hosting/docker/Dockerfile`](https://github.com/pranay-obla/plainml/tree/main/hosting/docker) runs it on
+any host that runs containers:
 - Tell the host the app listens on **port 7860**.
-- Set `PLAINML_WEB_TOKEN` as a secret environment variable.
+- Set `PLAINML_WEB_TOKEN` as a secret environment variable to require an access token.
 - Attach a **persistent disk at `/data`** so runs survive restarts and redeploys.
+- Upgrade by changing `PLAINML_VERSION` in the Dockerfile.
 
-Expect to pay a few dollars a month for a small always-on instance with a disk.
+Render has a free plan that sleeps after 15 minutes without visitors and has no disk. That's fine for a
+demo, since runs are lost on restart. An always-on instance with a disk costs a few dollars a month.
 
-## Why not the website on Vercel?
-
-Vercel runs Python apps as short-lived functions, which doesn't fit a tool that trains models:
-- Request bodies (and so uploads) are limited to 4.5 MB.
-- Each request is stopped after 5 minutes on the free plan (about 13 on paid plans).
-- Nothing kept in memory or on disk survives between requests, but plainml's jobs run in the background
-  and its runs live in a folder.
-
-Static pages, like this documentation, are what Vercel does best.
+The server version can't run on Vercel itself: Vercel runs Python only as short request handlers, with
+4.5 MB request bodies, at most 5 minutes per request on the free plan, and nothing kept between requests.
+That's why Vercel hosts the in-browser version instead.
 
 ## A model's prediction API
 

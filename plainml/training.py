@@ -46,6 +46,7 @@ from sklearn.model_selection import (
 from plainml import __version__
 from plainml.card import CARD_FILE, write_model_card
 from plainml.console import (
+    LIVE_REFRESH,
     console,
     esc,
     fmt_duration,
@@ -615,6 +616,7 @@ def run_candidates(
         TextColumn("[muted]{task.completed}/{task.total}[/]"),
         TimeElapsedColumn(),
         console=console,
+        auto_refresh=LIVE_REFRESH,
         transient=True,
     )
     stopped = False

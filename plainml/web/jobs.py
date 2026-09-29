@@ -4,6 +4,9 @@ Tasks run one at a time. plainml's console is shared by every module, so while a
 its output is redirected into that job's log, and ``console.status`` messages ("Testing
 Random forest…") become the job's current stage. Training and importance also report a
 progress fraction.
+
+``run_job`` is shared with the in-browser version (``plainml.web.browser``), which runs jobs
+on the page's own Python and gets told about each change through ``Job.listener``.
 """
 
 from __future__ import annotations
@@ -25,6 +28,7 @@ from plainml.errors import PlainMLError
 
 MAX_LOG_LINES = 400
 MAX_JOBS_KEPT = 200
+LISTEN_EVERY = 0.25  # seconds between progress updates sent to a listener
 
 
 @dataclass
@@ -41,6 +45,18 @@ class Job:
     created: float = field(default_factory=time.time)
     started: float | None = None
     finished: float | None = None
+    # Called (at most every LISTEN_EVERY seconds, and always at the end) when the job changes.
+    listener: Callable[[Job], None] | None = field(default=None, repr=False, compare=False)
+    _told: float = field(default=0.0, repr=False, compare=False)
+
+    def touch(self, force: bool = False) -> None:
+        """Tell the listener, if any, that the job changed."""
+        if self.listener is None:
+            return
+        now = time.time()
+        if force or now - self._told >= LISTEN_EVERY:
+            self._told = now
+            self.listener(self)
 
     def to_dict(self, log_from: int = 0) -> dict[str, Any]:
         now = time.time()
@@ -85,6 +101,7 @@ class _LogWriter(io.TextIOBase):
         self.job.log.append(line)
         if len(self.job.log) > MAX_LOG_LINES:
             del self.job.log[: len(self.job.log) - MAX_LOG_LINES]
+        self.job.touch()
 
     def isatty(self) -> bool:
         return False
@@ -104,6 +121,7 @@ class _Status:
         if plain and plain != self.job.stage:
             self.job.stage = plain
             self.job.log.append(f"▸ {plain}")
+            self.job.touch()
 
     def __enter__(self) -> _Status:
         return self
@@ -147,29 +165,36 @@ class JobRunner:
                 self._queue.task_done()
 
     def _run(self, job: Job, work: Callable[[Job], dict[str, Any]]) -> None:
-        job.status, job.started, job.stage = "running", time.time(), "Starting"
-        writer = _LogWriter(job)
-        # rich keeps "not set" as None (then follows the terminal), so save the raw values
-        saved_file, saved_width = console._file, console._width
-        console.file = writer  # type: ignore[assignment]
-        console.width = 100
-        console.status = lambda message, **_: _Status(job, message)  # type: ignore[method-assign,assignment]
-        set_quiet(False)
-        try:
-            job.result = work(job)
-            job.status, job.stage, job.progress = "done", "Done", 1.0
-        except PlainMLError as exc:
-            job.status = "failed"
-            job.error = {"message": exc.message, "hint": exc.hint}
-        except Exception as exc:  # show the error in the browser instead of killing the worker
-            job.status = "failed"
-            job.error = {
-                "message": f"Unexpected error: {type(exc).__name__}: {exc}",
-                "hint": "The details are in the log below. Please report it if it looks like a bug.",
-            }
-            job.log.extend(traceback.format_exc().splitlines()[-12:])
-        finally:
-            writer.flush()
-            del console.status  # back to the real spinner
-            console._file, console._width = saved_file, saved_width
-            job.finished = time.time()
+        run_job(job, work)
+
+
+def run_job(job: Job, work: Callable[[Job], dict[str, Any]]) -> None:
+    """Run one job, capturing plainml's console output into its log. Never raises."""
+    job.status, job.started, job.stage = "running", time.time(), "Starting"
+    job.touch(force=True)
+    writer = _LogWriter(job)
+    # rich keeps "not set" as None (then follows the terminal), so save the raw values
+    saved_file, saved_width = console._file, console._width
+    console.file = writer  # type: ignore[assignment]
+    console.width = 100
+    console.status = lambda message, **_: _Status(job, message)  # type: ignore[method-assign,assignment]
+    set_quiet(False)
+    try:
+        job.result = work(job)
+        job.status, job.stage, job.progress = "done", "Done", 1.0
+    except PlainMLError as exc:
+        job.status = "failed"
+        job.error = {"message": exc.message, "hint": exc.hint}
+    except Exception as exc:  # show the error in the browser instead of killing the worker
+        job.status = "failed"
+        job.error = {
+            "message": f"Unexpected error: {type(exc).__name__}: {exc}",
+            "hint": "The details are in the log below. Please report it if it looks like a bug.",
+        }
+        job.log.extend(traceback.format_exc().splitlines()[-12:])
+    finally:
+        writer.flush()
+        del console.status  # back to the real spinner
+        console._file, console._width = saved_file, saved_width
+        job.finished = time.time()
+        job.touch(force=True)

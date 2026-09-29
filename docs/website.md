@@ -55,10 +55,29 @@ Visitors enter the token once (their browser remembers it for 30 days). Anyone w
 network you trust, or put the site behind HTTPS (for example a reverse proxy). The token can also come from
 the `PLAINML_WEB_TOKEN` environment variable, which keeps it out of your shell history.
 
-## Putting it online
+## In the browser, with no server
 
-The website needs a host that runs an always-on container, such as Hugging Face Spaces (free), Render,
-Railway or Fly.io. The repository includes a Dockerfile for it. See [Hosting](hosting.md) for the steps.
+```bash
+plainml web --export site
+```
+
+This writes the same website as static files. Opened in a browser, it starts Python (Pyodide) in the
+background, installs plainml, and runs every task on the visitor's own computer, so their data is never
+uploaded:
+- The first visit downloads about 50 MB of Python libraries; after that they're cached.
+- Runs are saved in that browser.
+- Downloads are saved straight from the page.
+- Uploads are limited to 200 MB, and training uses one CPU core, so very large jobs are better with the
+  command line or the server version.
+
+Host the folder anywhere that serves static files. The repository's `vercel.json` publishes it on
+Vercel together with these docs. See [Hosting](hosting.md) for the steps, including a free Hugging Face
+Static Space.
+
+## Putting the server version online
+
+The server version needs a host that runs an always-on container, such as Render, Railway or Fly.io.
+The repository includes a Dockerfile for it. See [Hosting](hosting.md).
 
 ## Embedding it
 

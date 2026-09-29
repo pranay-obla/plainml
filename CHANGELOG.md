@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased
+
+- **The website runs in the browser.** `plainml web --export DIR` writes the website as static files
+  that run plainml in the visitor's browser with Pyodide: no server, and data never leaves their
+  computer.
+  - Runs are kept in the browser between visits.
+  - Every task works, including LightGBM and XGBoost.
+  - `vercel.json` publishes it with the documentation (docs under `/docs`), and it also works as a free
+    Hugging Face Static Space.
+- **Fix:** progress bars no longer need a background thread, which browsers don't allow.
+
 ## 0.1.0 (September 28, 2026)
 
 First release of plainml, which grew out of [curdrice](https://github.com/pranay-obla/curdrice-v2).

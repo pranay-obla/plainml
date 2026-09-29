@@ -1,5 +1,5 @@
-# plainml's website as a Hugging Face Space (Docker SDK).
-# Put this file and the README.md next to it into a new Docker Space. Full steps: docs/hosting.md.
+# plainml's website in a container, for Render, Railway, Fly.io or any Docker host.
+# Build it with: docker build -t plainml-web hosting/docker   Full steps: docs/hosting.md.
 FROM python:3.13-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 \
@@ -15,7 +15,7 @@ RUN pip install "plainml[web,boost,forecast]==${PLAINML_VERSION}"
 # Before plainml is on PyPI, install straight from GitHub instead:
 # RUN pip install "plainml[web,boost,forecast] @ https://github.com/pranay-obla/plainml/archive/refs/heads/main.zip"
 
-# Spaces run the container as user 1000
+# Run as a normal user (uid 1000, which Hugging Face Docker Spaces also require)
 RUN useradd --create-home --uid 1000 user
 USER user
 ENV HOME=/home/user
@@ -23,7 +23,7 @@ WORKDIR /home/user/app
 
 EXPOSE 7860
 
-# Runs are kept in /data when the Space has persistent storage; otherwise in the app folder,
-# which is wiped when the Space restarts. Set PLAINML_WEB_TOKEN as a Space secret to require
-# an access token.
+# Runs are kept in /data when a persistent disk is mounted there; otherwise in the app folder,
+# which is wiped when the container restarts. Set PLAINML_WEB_TOKEN (a secret environment
+# variable) to require an access token.
 CMD ["sh", "-c", "runs=/home/user/app/runs; if [ -d /data ] && [ -w /data ]; then runs=/data/runs; fi; exec plainml web --host 0.0.0.0 --port 7860 --no-browser --runs-dir \"$runs\" --max-upload-mb 200"]

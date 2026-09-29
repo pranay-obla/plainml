@@ -1264,6 +1264,13 @@ def export(model: str, fmt: str, output: str | None, runs_dir: str) -> None:
     help="Largest upload.",
 )
 @click.option("--no-browser", is_flag=True, help="Don't open a browser tab.")
+@click.option(
+    "--export",
+    "export_dir",
+    type=click.Path(file_okay=False),
+    help="Instead of starting a server, write a static version that runs plainml in the "
+    "visitor's browser (for Vercel, GitHub Pages...).",
+)
 def web(
     host: str,
     port: int,
@@ -1271,6 +1278,7 @@ def web(
     token: str | None,
     max_upload_mb: int,
     no_browser: bool,
+    export_dir: str | None,
 ) -> None:
     """Start a local website for everything plainml does.
 
@@ -1283,7 +1291,21 @@ def web(
       plainml web
       plainml web --port 9000 --runs-dir projects/churn/runs
       plainml web --host 0.0.0.0 --token change-me      (share on your network)
+      plainml web --export site                          (static, runs in the browser)
     """
+    if export_dir:
+        from plainml.web.static_site import ExportError, export_static
+
+        try:
+            out = export_static(export_dir)
+        except ExportError as exc:
+            raise PlainMLError(str(exc)) from exc
+        success(f"Wrote the in-browser website to {esc(out)}")
+        info("Try it locally:   python -m http.server --directory " + esc(out))
+        info(
+            "Host it anywhere that serves static files (Vercel, GitHub Pages...): see docs/hosting.md"
+        )
+        return
     from plainml.web.server import run_web
 
     run_web(

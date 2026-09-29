@@ -114,9 +114,13 @@ plainml web
 
 The **Runs** page lists everything you've run (from the website or the command line), and **Predict** uses
 any saved model on a new upload. The site works in light and dark mode and on phones. It only listens on
-your machine; to share it on a network, add a token: `plainml web --host 0.0.0.0 --token change-me`. To put
-it online, see the [hosting guide](https://github.com/pranay-obla/plainml/blob/main/docs/hosting.md). More in
-the [website guide](https://github.com/pranay-obla/plainml/blob/main/docs/website.md).
+your machine; to share it on a network, add a token: `plainml web --host 0.0.0.0 --token change-me`.
+
+**No server needed:** `plainml web --export site` writes the same website as static files that run
+plainml inside the visitor's browser. Their data never leaves their computer, and the site can be hosted
+for free on Vercel, GitHub Pages or a Hugging Face Static Space. See the
+[hosting guide](https://github.com/pranay-obla/plainml/blob/main/docs/hosting.md) and the
+[website guide](https://github.com/pranay-obla/plainml/blob/main/docs/website.md).
 
 ## What it can do
 
@@ -293,9 +297,11 @@ JavaScript or C++. `--format mlflow` saves an MLflow model, and `plainml train -
 MLflow tracking server.
 
 **Hosting.** The [hosting guide](https://github.com/pranay-obla/plainml/blob/main/docs/hosting.md) covers
-putting the website online on Hugging Face Spaces (free) or another container host, using the ready-made
-Dockerfile in [`hosting/huggingface/`](https://github.com/pranay-obla/plainml/tree/main/hosting/huggingface).
-It also covers publishing the documentation on Vercel.
+putting the website online:
+- **In the browser, free:** on Vercel, next to the docs (`vercel.json` builds both), or on a Hugging Face
+  Static Space.
+- **On a server:** on any container host, using the Dockerfile in
+  [`hosting/docker/`](https://github.com/pranay-obla/plainml/tree/main/hosting/docker).
 
 ## Trust and privacy
 

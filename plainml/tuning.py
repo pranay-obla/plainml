@@ -21,7 +21,18 @@ from sklearn.base import clone
 from sklearn.compose import TransformedTargetRegressor
 from sklearn.model_selection import RandomizedSearchCV, cross_val_score
 
-from plainml.console import console, esc, fmt_num, heading, info, note, parse_duration, quiet, warn
+from plainml.console import (
+    LIVE_REFRESH,
+    console,
+    esc,
+    fmt_num,
+    heading,
+    info,
+    note,
+    parse_duration,
+    quiet,
+    warn,
+)
 from plainml.errors import PlainMLError, is_installed
 from plainml.metrics import SafeScorer
 from plainml.registry import REGISTRY, ModelSpec, Space, estimator_param_prefix, resolve_keys
@@ -298,6 +309,7 @@ def tune(
                 TextColumn("[muted]{task.completed}/{task.total}[/]"),
                 TimeElapsedColumn(),
                 console=console,
+                auto_refresh=LIVE_REFRESH,
                 transient=True,
             )
             try:

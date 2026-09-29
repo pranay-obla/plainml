@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import math
 import re
+import sys
 from collections.abc import Iterator
 from contextlib import contextmanager
 
@@ -25,6 +26,10 @@ THEME = Theme(
 )
 
 console = Console(theme=THEME, highlight=False)
+
+# Rich redraws spinners and progress bars from a background thread. Browsers (Pyodide, where
+# sys.platform is "emscripten") can't start threads, so there bars only redraw on updates.
+LIVE_REFRESH = sys.platform != "emscripten"
 
 
 def set_quiet(enabled: bool) -> None:

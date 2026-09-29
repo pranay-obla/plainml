@@ -274,3 +274,6 @@ table.data th.hl{background:linear-gradient(var(--accent-wash),var(--accent-wash
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 .files-wide{margin-top:28px;max-width:640px}
+.boot{max-width:660px;margin:8vh auto 0}
+.boot .lead{margin-bottom:8px}
+.browser-note{display:inline-flex;gap:8px;align-items:center;margin-top:12px;font-size:13px;color:var(--good);background:var(--good-wash);border-radius:99px;padding:4px 12px}

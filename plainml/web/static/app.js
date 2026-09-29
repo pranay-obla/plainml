@@ -105,7 +105,82 @@ function apiError(status, body) {
   return new ApiError(typeof detail === "string" ? detail : `Request failed (${status}).`, null, status);
 }
 
+// ---------- in-browser mode --------------------------------------------------------------------
+// The static site (`plainml web --export`) has no server: worker.js runs plainml with Pyodide in
+// this browser, and the bridge sends it the same requests the server would get.
+
+const BROWSER = document.querySelector('meta[name="plainml-mode"]')?.content === "browser";
+const bridge = BROWSER ? makeBridge() : null;
+
+function makeBridge() {
+  const worker = new Worker("worker.js", { type: "module" });
+  const waiting = new Map();
+  const jobs = new Map();
+  const bootListeners = [];
+  let next = 1;
+  worker.onmessage = (event) => {
+    const message = event.data;
+    if (message.kind === "boot") return bootListeners.forEach((listener) => listener(message));
+    if (message.kind === "job") return void jobs.set(message.job.id, message.job);
+    const pending = waiting.get(message.id);
+    if (!pending) return;
+    waiting.delete(message.id);
+    message.ok ? pending.resolve(message.result) : pending.reject(new ApiError("Python in this page hit an error.", message.error));
+  };
+  worker.onerror = (event) => {
+    for (const pending of waiting.values()) pending.reject(new ApiError("Couldn't start Python in this browser.", event.message));
+    waiting.clear();
+  };
+  const call = (message, transfer = []) => new Promise((resolve, reject) => {
+    const id = next++;
+    waiting.set(id, { resolve, reject });
+    worker.postMessage({ id, ...message }, transfer);
+  });
+  const answer = (reply) => {
+    if (reply.status >= 400) throw apiError(reply.status, reply.body);
+    return reply.body;
+  };
+  return {
+    onBoot(listener) { bootListeners.push(listener); },
+    async request(method, path, json) {
+      const job = path.match(/^\/api\/jobs\/([0-9a-f]{12})(?:\?log_from=(\d+))?$/);
+      if (method === "GET" && job && jobs.has(job[1])) {  // progress is pushed here while a job runs
+        const current = jobs.get(job[1]);
+        return { ...current, log: current.log.slice(Number(job[2] || 0)) };
+      }
+      const body = answer(await call({ kind: "request", method, path, body: json === undefined ? null : JSON.stringify(json) }));
+      if (method === "POST" && path === "/api/jobs") jobs.set(body.id, body);
+      return body;
+    },
+    async upload(file) {
+      const buffer = await file.arrayBuffer();
+      return answer(await call({ kind: "upload", name: file.name, buffer }, [buffer]));
+    },
+    async read(path) {
+      const { data, type } = await call({ kind: "read", path });
+      return new Blob([data], { type });
+    },
+  };
+}
+
+async function saveFile(url, name) {
+  const blob = await bridge.read(url);
+  const link = h("a", { href: URL.createObjectURL(blob), download: name });
+  document.body.append(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(link.href), 60000);
+}
+
+async function openFile(url) {
+  const tab = window.open("", "_blank"); // opened during the click, so pop-up blockers allow it
+  const href = URL.createObjectURL(await bridge.read(url));
+  if (tab) tab.location.href = href;
+  else location.href = href;
+}
+
 async function api(path, options = {}) {
+  if (bridge) return bridge.request(options.method || (options.json !== undefined ? "POST" : "GET"), path, options.json);
   const init = { headers: {}, credentials: "same-origin", ...options };
   if (options.json !== undefined) {
     init.method = init.method || "POST";
@@ -124,6 +199,10 @@ async function api(path, options = {}) {
 }
 
 function uploadFile(file, onProgress) {
+  if (bridge) {
+    onProgress(1);
+    return bridge.upload(file);
+  }
   return new Promise((resolve, reject) => {
     const form = new FormData();
     form.append("file", file);
@@ -275,7 +354,8 @@ async function viewNew(view) {
       h("div", { class: "hero" },
         h("div", {},
           h("h1", {}, "What's in your data?"),
-          h("p", { class: "lead" }, "Upload a file, choose what you want to find out, and get a clear report, with every result ready to download.")),
+          h("p", { class: "lead" }, "Upload a file, choose what you want to find out, and get a clear report, with every result ready to download."),
+          bridge ? h("div", { class: "browser-note" }, icon("sparkle"), "Runs entirely in your browser: your data is never uploaded anywhere.") : null),
         dropZone({ onFile: async (summary) => { state.upload = summary; state.task = null; store.set("plainml-upload", summary.id); render(); } })),
     );
     recentRuns(view);
@@ -644,9 +724,13 @@ function fileRow(file) {
     });
     actions.append(button);
   } else if (["html", "md", "txt", "json", "yaml"].includes(file.type)) {
-    actions.append(h("a", { class: "btn ghost small", href: file.url, target: "_blank", rel: "noopener", title: `Open ${file.name} in a new tab` }, icon("external"), "Open"));
+    actions.append(bridge
+      ? h("button", { class: "btn ghost small", type: "button", title: `Open ${file.name} in a new tab`, onclick: () => openFile(file.url).catch((e) => toast(e.message, e.hint, true)) }, icon("external"), "Open")
+      : h("a", { class: "btn ghost small", href: file.url, target: "_blank", rel: "noopener", title: `Open ${file.name} in a new tab` }, icon("external"), "Open"));
   }
-  actions.append(h("a", { class: "btn small", href: file.download, download: file.name, title: `Download ${file.name}` }, icon("download"), "Download"));
+  actions.append(bridge
+    ? h("button", { class: "btn small", type: "button", title: `Download ${file.name}`, onclick: () => saveFile(file.download, file.name).catch((e) => toast(e.message, e.hint, true)) }, icon("download"), "Download")
+    : h("a", { class: "btn small", href: file.download, download: file.name, title: `Download ${file.name}` }, icon("download"), "Download"));
   return h("div", { class: "file" },
     h("div", { class: `ft ${file.type}` }, file.type.slice(0, 4) || "file"),
     h("div", { class: "t" }, h("b", {}, file.label), file.description ? h("span", {}, file.description) : null, h("span", { class: "fname" }, `${file.name} · ${bytes(file.size)}`)),
@@ -662,7 +746,8 @@ function syncFrame(frame) {
 }
 
 function reportPanel(url) {
-  const frame = h("iframe", { class: "report-frame", src: url, title: "Report", loading: "lazy" });
+  const frame = h("iframe", { class: "report-frame", src: bridge ? null : url, title: "Report" });
+  if (bridge) bridge.read(url).then((blob) => blob.text()).then((html) => { frame.srcdoc = html; }).catch((e) => toast(e.message, e.hint, true));
   frame.addEventListener("load", () => {
     const doc = frame.contentDocument;
     if (!doc) return;
@@ -673,7 +758,9 @@ function reportPanel(url) {
     new ResizeObserver(fit).observe(doc.body);
   });
   return h("div", { class: "panel" },
-    h("div", { class: "panel-head" }, h("h3", {}, "Report"), h("a", { class: "btn ghost small", href: url, target: "_blank", rel: "noopener" }, icon("external"), "Open in a new tab")),
+    h("div", { class: "panel-head" }, h("h3", {}, "Report"), bridge
+      ? h("button", { class: "btn ghost small", type: "button", onclick: () => openFile(url).catch((e) => toast(e.message, e.hint, true)) }, icon("external"), "Open in a new tab")
+      : h("a", { class: "btn ghost small", href: url, target: "_blank", rel: "noopener" }, icon("external"), "Open in a new tab")),
     frame);
 }
 
@@ -806,13 +893,29 @@ async function viewPredict(view, preselected) {
 
 // ---------- start -----------------------------------------------------------------------------------
 
+function bootScreen() {
+  const stage = h("div", { class: "stage" }, "Starting");
+  const bar = h("div", { class: "progress", role: "progressbar", "aria-label": "Setting up" }, h("i"));
+  bridge.onBoot(({ stage: text, progress }) => {
+    stage.textContent = text;
+    bar.firstChild.style.width = `${Math.round(progress * 100)}%`;
+  });
+  $("#view").replaceChildren(h("div", { class: "boot panel pad" },
+    h("h1", {}, "Setting up plainml in your browser"),
+    h("p", { class: "lead" }, "Everything runs on this computer, so your data never leaves it. The first visit downloads Python and its data-science libraries (about 50 MB); after that they're cached and start in seconds."),
+    stage, bar));
+}
+
 (async function start() {
   applyTheme(currentTheme());
+  if (bridge) bootScreen();
   try {
     state.info = await api("/api/info");
-    $("#version").textContent = `v${state.info.version}`;
+    $("#version").textContent = `v${state.info.version}${bridge ? " · in your browser" : ""}`;
   } catch (error) {
-    return fail($("#view"), new ApiError("Can't reach the plainml app.", "Start it with: plainml web"));
+    return fail($("#view"), bridge
+      ? new ApiError("Couldn't start plainml in this browser.", error.hint || error.message)
+      : new ApiError("Can't reach the plainml app.", "Start it with: plainml web"));
   }
   render();
 })();

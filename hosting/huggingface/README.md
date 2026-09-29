@@ -3,8 +3,8 @@ title: plainml
 emoji: 📊
 colorFrom: blue
 colorTo: indigo
-sdk: docker
-app_port: 7860
+sdk: static
+app_file: index.html
 pinned: false
 license: mit
 short_description: Upload a spreadsheet, get an explained ML model
@@ -23,11 +23,9 @@ Upload a CSV or Excel file and choose what to find out:
 You get headline numbers, plain-English findings and a full report, and every result file has its own
 download button.
 
-**Tip:** open the app on its own page, at `https://<owner>-<space-name>.hf.space`, instead of inside the
-Hugging Face page. Uploads and sign-in work best there.
-
-Runs made here are wiped when the Space restarts, unless it has persistent storage. Download what you
-want to keep.
+**Everything runs in your browser.** Python and plainml run on your own computer (via Pyodide), so your
+data is never uploaded anywhere. The first visit downloads about 50 MB of Python libraries; later visits
+use the browser's cache. Runs are saved in this browser until you clear its site data.
 
 Made with [plainml](https://github.com/pranay-obla/plainml). To run it on your own machine:
 `pip install "plainml[web]"` and `plainml web`.

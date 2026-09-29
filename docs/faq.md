@@ -82,9 +82,11 @@ the report before sending it: column names and category names can still be revea
 token can upload data and run jobs, so only do this on a network you trust, or behind HTTPS.
 
 **Can I put the website online?**
-Yes, on a host that runs containers: Hugging Face Spaces (free), Render, Railway or Fly.io. The repository
-has a ready-made Dockerfile. Vercel suits the documentation but not the website itself, which needs large
-uploads and long-running jobs. See [Hosting](hosting.md).
+Yes, for free. `plainml web --export site` writes a version that runs plainml inside each visitor's
+browser, as plain files. Host them on Vercel (the repository's `vercel.json` does it, docs included),
+GitHub Pages or a Hugging Face Static Space. Visitors' data never leaves their computer. For very large
+files or long jobs, run the server version on Render, Railway or Fly.io with the included Dockerfile.
+See [Hosting](hosting.md).
 
 **Is it reproducible?**
 Yes: fixed seeds, and each run saves its settings, library versions and a fingerprint of the data.

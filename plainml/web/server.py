@@ -18,6 +18,9 @@ The page is plain HTML/CSS/JS in ``static/``; this module is its JSON API:
     GET  /api/runs/{run}/files/{path}  a run's file (add ?download=1 to save it)
     GET  /api/runs/{run}/preview/{path} the first rows of a CSV, as JSON
     GET  /api/models                   runs whose model can predict
+
+The same functions also run inside the browser (``plainml.web.browser``) for the static,
+serverless version of the site, so both behave the same.
 """
 
 # No `from __future__ import annotations` here: FastAPI reads the endpoint annotations
@@ -29,7 +32,6 @@ import re
 import secrets
 import shutil
 import uuid
-import webbrowser
 from datetime import date, datetime
 from pathlib import Path
 from typing import Any
@@ -421,6 +423,7 @@ def build_work(ws: Workspace, task: str, upload: str | None, options: dict[str, 
             def progress(fraction: float, message: str) -> None:
                 job.progress = max(0.02, min(0.97, fraction))
                 job.stage = message
+                job.touch()
 
             return ran(
                 train(
@@ -500,6 +503,7 @@ def build_work(ws: Workspace, task: str, upload: str | None, options: dict[str, 
             def progress(fraction: float, message: str) -> None:
                 job.progress = max(0.02, min(0.97, fraction))
                 job.stage = message
+                job.touch()
 
             return ran(
                 feature_importance(
@@ -657,6 +661,110 @@ def output_result(
     }
 
 
+# --- the API's answers, shared by the server and the in-browser version -----------------------------
+
+
+def info_payload(
+    ws: Workspace,
+    *,
+    needs_token: bool = False,
+    signed_in: bool = True,
+    max_upload_mb: int = 500,
+    mode: str = "server",
+) -> dict[str, Any]:
+    return {
+        "version": __version__,
+        "mode": mode,
+        "needs_token": needs_token,
+        "signed_in": signed_in,
+        "runs_dir": str(ws.runs),
+        "upload_types": UPLOAD_SUFFIXES,
+        "importance_methods": [
+            {
+                "key": m.key,
+                "label": m.label,
+                "about": m.about,
+                "default": m.default,
+                "family": m.family,
+            }
+            for m in METHODS
+        ],
+        "max_upload_mb": max_upload_mb,
+        "installed": {
+            name: is_installed(module)
+            for name, module in (
+                ("boost", "lightgbm"),
+                ("torch", "torch"),
+                ("holidays", "holidays"),
+                ("tune", "optuna"),
+                ("imbalance", "imblearn"),
+            )
+        },
+    }
+
+
+def start_upload(ws: Workspace, filename: str) -> tuple[str, Path]:
+    """A new upload folder for ``filename``: returns (upload id, path to write the file to)."""
+    name = _safe_name(filename or "data.csv")
+    if Path(name).suffix.lower() not in READERS:
+        raise PlainMLError(
+            f"Can't read '{name}'.", hint="Upload one of: " + ", ".join(UPLOAD_SUFFIXES)
+        )
+    upload_id = uuid.uuid4().hex[:12]
+    folder = ws.uploads / upload_id
+    folder.mkdir(parents=True)
+    return upload_id, folder / name
+
+
+def finish_upload(upload_id: str, path: Path) -> dict[str, Any]:
+    """Read a written upload and remember its summary (removing it if it can't be read)."""
+    try:
+        summary = summarize_upload(path, upload_id)
+    except PlainMLError:
+        shutil.rmtree(path.parent, ignore_errors=True)
+        raise
+    (path.parent / "upload.json").write_text(
+        json.dumps({"file": path.name, **summary}), encoding="utf-8"
+    )
+    return summary
+
+
+def upload_payload(ws: Workspace, upload_id: str) -> dict[str, Any]:
+    stored = read_json(ws.upload_path(upload_id).parent / "upload.json")
+    stored.pop("file", None)
+    return stored
+
+
+def runs_payload(ws: Workspace) -> list[dict[str, Any]]:
+    frame = list_runs(ws.runs)
+    if frame.empty:
+        return []
+    return [{k: _plain(v) for k, v in row.items()} for row in frame.iloc[::-1].to_dict("records")]
+
+
+def models_payload(ws: Workspace) -> list[dict[str, Any]]:
+    return [
+        row
+        for row in runs_payload(ws)
+        if row["kind"] in PREDICTABLE and (ws.runs / row["run"] / MODEL_FILE).is_file()
+    ]
+
+
+def preview_payload(path: Path) -> dict[str, Any]:
+    return table_json(pd.read_csv(path, nrows=PREVIEW_ROWS))
+
+
+def media_type(path: Path) -> str | None:
+    return {
+        ".md": "text/markdown; charset=utf-8",
+        ".yaml": "text/plain; charset=utf-8",
+        ".txt": "text/plain; charset=utf-8",
+        ".html": "text/html; charset=utf-8",
+        ".csv": "text/csv; charset=utf-8",
+        ".json": "application/json",
+    }.get(path.suffix)
+
+
 # --- the app -----------------------------------------------------------------------------------
 
 
@@ -705,34 +813,9 @@ def create_app(
         signed_in = not token or secrets.compare_digest(
             request.cookies.get(COOKIE, "").encode(), token.encode()
         )
-        return {
-            "version": __version__,
-            "needs_token": bool(token),
-            "signed_in": signed_in,
-            "runs_dir": str(ws.runs),
-            "upload_types": UPLOAD_SUFFIXES,
-            "importance_methods": [
-                {
-                    "key": m.key,
-                    "label": m.label,
-                    "about": m.about,
-                    "default": m.default,
-                    "family": m.family,
-                }
-                for m in METHODS
-            ],
-            "max_upload_mb": max_upload_mb,
-            "installed": {
-                name: is_installed(module)
-                for name, module in (
-                    ("boost", "lightgbm"),
-                    ("torch", "torch"),
-                    ("holidays", "holidays"),
-                    ("tune", "optuna"),
-                    ("imbalance", "imblearn"),
-                )
-            },
-        }
+        return info_payload(
+            ws, needs_token=bool(token), signed_in=signed_in, max_upload_mb=max_upload_mb
+        )
 
     @app.post("/api/login")
     def login(payload: dict[str, Any]) -> JSONResponse:
@@ -745,19 +828,10 @@ def create_app(
 
     @app.post("/api/uploads")
     def upload(file: UploadFile = File(...)) -> dict[str, Any]:
-        name = _safe_name(file.filename or "data.csv")
-        if Path(name).suffix.lower() not in READERS:
-            raise HTTPException(
-                415,
-                {
-                    "message": f"Can't read '{name}'.",
-                    "hint": "Upload one of: " + ", ".join(UPLOAD_SUFFIXES),
-                },
-            )
-        upload_id = uuid.uuid4().hex[:12]
-        folder = ws.uploads / upload_id
-        folder.mkdir(parents=True)
-        path = folder / name
+        try:
+            upload_id, path = start_upload(ws, file.filename or "data.csv")
+        except PlainMLError as exc:
+            raise fail(exc, 415) from exc
         limit = max_upload_mb * 1024 * 1024
         written = 0
         with path.open("wb") as handle:
@@ -765,7 +839,7 @@ def create_app(
                 written += len(chunk)
                 if written > limit:
                     handle.close()
-                    shutil.rmtree(folder, ignore_errors=True)
+                    shutil.rmtree(path.parent, ignore_errors=True)
                     raise HTTPException(
                         413,
                         {
@@ -775,22 +849,16 @@ def create_app(
                     )
                 handle.write(chunk)
         try:
-            summary = summarize_upload(path, upload_id)
+            return finish_upload(upload_id, path)
         except PlainMLError as exc:
-            shutil.rmtree(folder, ignore_errors=True)
             raise fail(exc) from exc
-        (folder / "upload.json").write_text(json.dumps({"file": name, **summary}), encoding="utf-8")
-        return summary
 
     @app.get("/api/uploads/{upload_id}")
     def get_upload(upload_id: str) -> dict[str, Any]:
         try:
-            path = ws.upload_path(upload_id)
+            return upload_payload(ws, upload_id)
         except PlainMLError as exc:
             raise fail(exc, 404) from exc
-        stored = read_json(path.parent / "upload.json")
-        stored.pop("file", None)
-        return stored
 
     @app.post("/api/jobs")
     def start_job(payload: dict[str, Any]) -> dict[str, Any]:
@@ -810,11 +878,7 @@ def create_app(
         return job.to_dict(max(0, log_from))
 
     def send(path: Path, download: bool) -> FileResponse:
-        media = {
-            ".md": "text/markdown; charset=utf-8",
-            ".yaml": "text/plain; charset=utf-8",
-            ".txt": "text/plain; charset=utf-8",
-        }.get(path.suffix)
+        media = media_type(path) if path.suffix in (".md", ".yaml", ".txt") else None
         if download:
             return FileResponse(
                 path, filename=path.name, media_type=media or "application/octet-stream"
@@ -833,21 +897,13 @@ def create_app(
     @app.get("/api/jobs/{job_id}/preview/{relative:path}")
     def job_preview(job_id: str, relative: str) -> dict[str, Any]:
         try:
-            return table_json(
-                pd.read_csv(inside(ws.outputs / job_id, relative), nrows=PREVIEW_ROWS)
-            )
+            return preview_payload(inside(ws.outputs / job_id, relative))
         except PlainMLError as exc:
             raise fail(exc, 404) from exc
 
     @app.get("/api/runs")
     def runs() -> list[dict[str, Any]]:
-        frame = list_runs(ws.runs)
-        if frame.empty:
-            return []
-        items = []
-        for row in frame.iloc[::-1].to_dict(orient="records"):
-            items.append({k: _plain(v) for k, v in row.items()})
-        return items
+        return runs_payload(ws)
 
     @app.get("/api/runs/{name}")
     def run(name: str) -> dict[str, Any]:
@@ -866,19 +922,13 @@ def create_app(
     @app.get("/api/runs/{name}/preview/{relative:path}")
     def run_preview(name: str, relative: str) -> dict[str, Any]:
         try:
-            return table_json(pd.read_csv(inside(ws.run_dir(name), relative), nrows=PREVIEW_ROWS))
+            return preview_payload(inside(ws.run_dir(name), relative))
         except PlainMLError as exc:
             raise fail(exc, 404) from exc
 
     @app.get("/api/models")
     def models() -> list[dict[str, Any]]:
-        items = []
-        frame = list_runs(ws.runs)
-        for row in [] if frame.empty else frame.iloc[::-1].to_dict(orient="records"):
-            folder = ws.runs / row["run"]
-            if row["kind"] in PREDICTABLE and (folder / MODEL_FILE).is_file():
-                items.append({k: _plain(v) for k, v in row.items()})
-        return items
+        return models_payload(ws)
 
     app.mount("/", StaticFiles(directory=STATIC, html=True), name="static")
     return app
@@ -907,6 +957,7 @@ def run_web(
         )
     if open_browser:
         import threading
+        import webbrowser
 
         threading.Timer(1.0, lambda: webbrowser.open(url)).start()
     uvicorn.run(app, host=host, port=port, log_level="warning")

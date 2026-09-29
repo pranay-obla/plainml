@@ -513,6 +513,7 @@ Usage: plainml web [OPTIONS]
     plainml web
     plainml web --port 9000 --runs-dir projects/churn/runs
     plainml web --host 0.0.0.0 --token change-me      (share on your network)
+    plainml web --export site                          (static, runs in the browser)
 
 Options:
   --host TEXT                    Use 0.0.0.0 to let other machines connect (add --token).  [default:
@@ -523,6 +524,8 @@ Options:
                                  PLAINML_WEB_TOKEN).
   --max-upload-mb INTEGER RANGE  Largest upload.  [default: 500; x>=1]
   --no-browser                   Don't open a browser tab.
+  --export DIRECTORY             Instead of starting a server, write a static version that runs
+                                 plainml in the visitor's browser (for Vercel, GitHub Pages...).
   -h, --help                     Show this message and exit.
 ```
 
