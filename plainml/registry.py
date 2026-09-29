@@ -237,11 +237,38 @@ def _histgb(task: str, o: BuildOptions) -> Any:
     return HistGradientBoostingRegressor(random_state=o.seed)
 
 
+class TextLabelMLPClassifier(MLPClassifier):
+    """scikit-learn's MLPClassifier, able to early-stop on text class labels.
+
+    scikit-learn 1.6 to 1.8 check each epoch's validation predictions with ``np.isnan``,
+    which raises a TypeError when the classes are strings ("yes"/"no"). So single-column text
+    labels are trained as integer codes and turned back into labels in ``predict``;
+    ``classes_`` and ``predict_proba`` keep the original labels and their order.
+    """
+
+    def fit(self, X: Any, y: Any, *args: Any, **kwargs: Any) -> TextLabelMLPClassifier:
+        labels = np.asarray(y)
+        if labels.ndim != 1 or labels.dtype.kind not in "OUS":
+            self.label_encoder_ = None  # numbers or a multi-label matrix: nothing to do
+            return super().fit(X, y, *args, **kwargs)
+        self.label_encoder_ = LabelEncoder().fit(labels)
+        super().fit(X, self.label_encoder_.transform(labels), *args, **kwargs)
+        self.classes_ = self.label_encoder_.classes_
+        return self
+
+    def predict(self, X: Any) -> np.ndarray:
+        predicted = super().predict(X)
+        encoder = getattr(self, "label_encoder_", None)
+        if encoder is None:
+            return predicted
+        return encoder.inverse_transform(np.asarray(predicted, dtype=int))
+
+
 def _mlp(task: str, o: BuildOptions) -> Any:
     common: dict[str, Any] = dict(
         hidden_layer_sizes=(64, 32), early_stopping=True, max_iter=500, random_state=o.seed
     )
-    return MLPClassifier(**common) if task == CLASSIFICATION else MLPRegressor(**common)
+    return TextLabelMLPClassifier(**common) if task == CLASSIFICATION else MLPRegressor(**common)
 
 
 def _xgboost(task: str, o: BuildOptions) -> Any:

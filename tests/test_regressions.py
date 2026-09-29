@@ -153,3 +153,21 @@ def test_confidence_is_for_the_predicted_answer() -> None:
     frame = pd.DataFrame({"x": [1, 2]})
     out = predict_frame(Tuned(), {"task": "classification", "targets": ["y"]}, frame, proba=True)
     assert out["confidence"].tolist() == [0.45, 0.9]
+
+
+def test_mlp_trains_on_text_labels() -> None:
+    """scikit-learn 1.6 to 1.8 crashed in MLP early stopping when the classes were strings."""
+    from sklearn.base import clone
+    from sklearn.datasets import make_classification
+
+    from plainml.registry import TextLabelMLPClassifier
+
+    X, y = make_classification(200, 5, random_state=0)
+    labels = np.where(y == 1, "yes", "no")
+    model = TextLabelMLPClassifier(early_stopping=True, max_iter=200, random_state=0).fit(X, labels)
+    assert list(model.classes_) == ["no", "yes"]
+    assert set(model.predict(X)) <= {"no", "yes"}
+    assert (model.predict(X) == model.classes_[model.predict_proba(X).argmax(axis=1)]).all()
+    numeric = TextLabelMLPClassifier(max_iter=200, random_state=0).fit(X, y)  # untouched path
+    assert set(numeric.predict(X)) <= {0, 1}
+    assert clone(model).get_params()["early_stopping"] is True
