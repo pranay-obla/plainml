@@ -47,11 +47,14 @@ documentation under `/docs`.
 ```json
 {
   "framework": null,
-  "installCommand": "python3 -m pip install \"mkdocs-material>=9.5\" \"mkdocs<2\"",
-  "buildCommand": "python3 -m plainml.web.static_site site && python3 -m mkdocs build -d site/docs",
+  "installCommand": "python3 -m venv .venv && .venv/bin/python -m pip install --quiet \"mkdocs-material>=9.5\" \"mkdocs<2\"",
+  "buildCommand": ".venv/bin/python -m plainml.web.static_site site && .venv/bin/python -m mkdocs build -d site/docs",
   "outputDirectory": "site"
 }
 ```
+
+The build tools go into a throwaway virtual environment (`.venv`) because Vercel's own Python refuses
+package installs (it's managed by uv, per PEP 668).
 
 1. Sign in at [vercel.com](https://vercel.com) with GitHub.
 2. Choose **Add New → Project** and import `pranay-obla/plainml`. The settings come from `vercel.json`,
