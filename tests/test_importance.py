@@ -82,3 +82,33 @@ def test_method_names() -> None:
     assert "chi2" not in resolve_methods(["all"], "regression")
     with pytest.raises(PlainMLError, match="Unknown importance method"):
         resolve_methods(["magic"], "classification")
+
+
+def test_column_count_ignores_gains_within_the_noise() -> None:
+    """A slightly higher score with more columns only counts if it beats the scores' wobble."""
+    from plainml.importance import enough_columns
+    from plainml.metrics import metrics_for, resolve_metric
+
+    f1 = resolve_metric(
+        "f1", "classification", metrics_for("classification", pd.Series(["a", "b"]))
+    )
+    points = [(1, 0.7259), (2, 0.7111), (3, 0.8647), (5, 0.8748)]
+    assert enough_columns(points, f1) == 5  # a fixed margin alone lets noise columns in
+    assert enough_columns(points, f1, [0.003, 0.0129, 0.0204, 0.0078]) == 3
+
+
+def test_methods_do_not_depend_on_global_random_state(signal_csv: Path) -> None:
+    """Every method is seeded: results can't change with numpy's global random state."""
+    from plainml.importance import _l1, build_workspace
+    from plainml.io import load_data
+    from plainml.schema import infer_schema
+
+    frame = load_data(signal_csv)
+    X, y = frame.drop(columns="y"), frame["y"]
+    schema, _ = infer_schema(X)
+    ws = build_workspace(X, y, schema, "classification", 42)
+    np.random.seed(0)
+    first = _l1(ws)[0]
+    np.random.seed(1)
+    second = _l1(ws)[0]
+    pd.testing.assert_series_equal(first, second)

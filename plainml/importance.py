@@ -529,7 +529,9 @@ def _l1_weights(ws: Workspace, X: np.ndarray, y: np.ndarray) -> np.ndarray:
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         if ws.task == C:
-            model = LinearSVC(penalty="l1", dual=False, C=0.1, max_iter=5000).fit(X, y)
+            model = LinearSVC(
+                penalty="l1", dual=False, C=0.1, max_iter=5000, random_state=ws.seed
+            ).fit(X, y)
             return np.abs(np.atleast_2d(model.coef_)).sum(axis=0)
         return np.abs(LassoCV(cv=3, random_state=ws.seed, n_jobs=-1).fit(X, y).coef_)
 
@@ -821,8 +823,12 @@ def redundancy(ws: Workspace, threshold: float = 0.9) -> dict[str, Any]:
 
 def columns_curve(
     X: pd.DataFrame, y: Any, schema: Schema, ranked: list[str], task: str, seed: int
-) -> list[tuple[int, float]]:
-    """Cross-validated score using the top-n columns, for a few values of n."""
+) -> tuple[list[tuple[int, float]], list[float]]:
+    """Cross-validated score using the top-n columns, for a few values of n.
+
+    Returns the (n, score) points and, for each, the standard error of its score across the
+    folds: how much of a difference between two points could be luck.
+    """
     metric = resolve_metric(None, task, metrics_for(task, y))
     if len(X) > CURVE_ROWS:
         index = X.sample(CURVE_ROWS, random_state=seed).index
@@ -839,7 +845,7 @@ def columns_curve(
     else:
         cv = KFold(n_splits=3, shuffle=True, random_state=seed)
         estimator = HistGradientBoostingRegressor(random_state=seed, max_iter=150)
-    points = []
+    points, spreads = [], []
     for size in sizes:
         columns = ranked[:size]
         pipeline = Pipeline(
@@ -853,17 +859,29 @@ def columns_curve(
             scores = cross_val_score(
                 pipeline, X[columns], y, cv=cv, scoring=SafeScorer(metric.scorer())
             )
-        points.append((size, metric.display(float(np.nanmean(scores)))))
-    return points
+        shown = np.array([metric.display(float(v)) for v in scores if np.isfinite(v)])
+        points.append((size, float(shown.mean()) if len(shown) else float("nan")))
+        spreads.append(float(shown.std(ddof=1) / np.sqrt(len(shown))) if len(shown) > 1 else 0.0)
+    return points, spreads
 
 
-def enough_columns(points: list[tuple[int, float]], metric: Metric) -> int:
+def enough_columns(
+    points: list[tuple[int, float]], metric: Metric, spreads: list[float] | None = None
+) -> int:
+    """The fewest top columns that score about as well as the best number of columns.
+
+    "About as well" means within a small fixed margin or, when it's larger, one standard error
+    of the difference between the two scores: a gain smaller than the scores' own
+    fold-to-fold wobble could be luck, and would bring in columns that don't help.
+    """
     values = [p[1] for p in points]
-    best = max(values) if metric.greater_is_better else min(values)
-    for size, value in points:
+    best_at = int(np.nanargmax(values) if metric.greater_is_better else np.nanargmin(values))
+    best = values[best_at]
+    margin = 0.01 if metric.bounded else 0.02 * max(abs(best), 1e-9)
+    for at, (size, value) in enumerate(points):
         gap = (best - value) if metric.greater_is_better else (value - best)
-        tolerance = 0.01 if metric.bounded else 0.02 * max(abs(best), 1e-9)
-        if gap <= tolerance:
+        noise = float(np.hypot(spreads[best_at], spreads[at])) if spreads else 0.0
+        if gap <= max(margin, noise):
             return size
     return points[-1][0]
 
@@ -1049,9 +1067,9 @@ def feature_importance(
         if progress:
             progress(len(ordered) / (len(ordered) + 1), "Testing how many columns you need")
         with console.status("Testing how many columns you need…"):
-            points = columns_curve(X, y, schema, ranked, task, seed)
+            points, spreads = columns_curve(X, y, schema, ranked, task, seed)
         if k is None:
-            k = enough_columns(points, ws.metric)
+            k = enough_columns(points, ws.metric, spreads)
         table["selected"] = table.index < k
         selected = ranked[:k]
         sentences = _sentences(table, used, selected, details, points, ws.metric)
