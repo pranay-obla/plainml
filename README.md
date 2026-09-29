@@ -443,9 +443,11 @@ pytest
 
 </details>
 
-CI runs the tests on Python 3.10 to 3.14 (Linux, macOS, Windows), with every optional extra (PyTorch
-included), against the oldest supported library versions, and weekly against the newest releases, so a
-library update can't silently break plainml. Publishing a GitHub release sends the package to PyPI (see
+CI runs the tests on every Python from 3.10 to 3.14 on Linux, macOS and Windows. It also tests with
+every optional extra (PyTorch included), against the oldest supported library versions, and weekly
+against the newest releases, so a library update can't silently break plainml.
+
+Publishing a GitHub release sends the package to PyPI (see
 [RELEASING.md](https://github.com/pranay-obla/plainml/blob/main/RELEASING.md)), and the documentation in
 `docs/` can be hosted on Vercel or GitHub Pages.
 

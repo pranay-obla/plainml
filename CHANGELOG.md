@@ -12,6 +12,7 @@
 - **Live at [plainml-tpua.vercel.app](https://plainml-tpua.vercel.app)**, with the documentation at `/docs`. The package's
   home page and documentation links now point there.
 - **Fix:** progress bars no longer need a background thread, which browsers don't allow.
+- **CI** now tests every Python from 3.10 to 3.14 on Linux, macOS and Windows (15 combinations).
 
 ## 0.1.0 (September 28, 2026)
 

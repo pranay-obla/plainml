@@ -39,13 +39,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest]
+        # Every supported Python on every system: library versions differ by Python version,
+        # and some problems only show up on one system with one of them.
+        os: [ubuntu-latest, macos-latest, windows-latest]
         python: ["3.10", "3.11", "3.12", "3.13", "3.14"]
-        include:
-          - os: macos-latest
-            python: "3.14"
-          - os: windows-latest
-            python: "3.12"
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
