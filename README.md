@@ -114,7 +114,9 @@ plainml web
 2. **Pick a task.** Predict a column, forecast, find groups, find unusual rows, rank columns, check drift,
    profile or clean. The main options are up front; the rest are under *More options*.
 3. **Watch it run.** A progress bar and a live log show each step.
-4. **Get the results.** Headline numbers, the key findings in plain English, and the full report.
+4. **Get the results.** Headline numbers, the key findings in plain English, an interactive 3D view
+   (every model side by side, which columns matter, customer groups, unusual rows or forecast lanes),
+   and the full report.
 5. **Download what you need.** Every file the run produced is listed with its own **Download** button,
    and tables can be previewed first.
 
@@ -426,6 +428,16 @@ pre-commit install
 pytest
 ```
 
+The website is a Next.js app in `frontend/` (Node.js 20.9 or newer). Its built files ship inside the
+package, so build them once in a source checkout:
+
+```bash
+cd frontend && npm ci && npm run build
+```
+
+While working on it, run `plainml web --no-browser` in one terminal and `npm run dev` in `frontend/` in
+another: the dev site at http://localhost:3000 talks to the running plainml.
+
 <details>
 <summary>Where things live</summary>
 
@@ -440,7 +452,8 @@ pytest
 | `plainml/importance.py`, `drift.py` | Feature importance and drift |
 | `plainml/predicting.py`, `serve.py`, `deploy.py`, `export.py`, `tracking.py` | Predicting, the API, Docker, ONNX, MLflow |
 | `plainml/report.py`, `card.py`, `runs.py` | HTML reports, model cards, run folders |
-| `plainml/web/` | The website: API server, job runner, and the page itself (`static/`) |
+| `plainml/web/` | The website's API server, job runner and in-browser backend |
+| `frontend/` | The website itself (Next.js and React, 3D with three.js), built into `plainml/web/static/` |
 | `tests/`, `docs/`, `examples/` | Tests, the documentation site, example datasets |
 | `hosting/`, `vercel.json`, `.github/workflows/` | Hosting the website and docs, CI and releases |
 

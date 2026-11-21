@@ -401,17 +401,18 @@ def cluster(
 
         rng = np.random.default_rng(seed)
         index = np.sort(rng.choice(n_rows, min(n_rows, 1200), replace=False))
+        dims = min(3, X.shape[1])
         projection = (
-            PCA(n_components=2, random_state=seed).fit_transform(X)
-            if X.shape[1] >= 2
-            else np.c_[X[:, 0], np.zeros(n_rows)]
+            PCA(n_components=dims, random_state=seed).fit_transform(X) if dims >= 2 else X[:, :1]
         )
+        projection = np.c_[projection, np.zeros((n_rows, 3 - projection.shape[1]))]
         evaluation = {
             "profiles": profiles,
             "sentences": sentences,
             "projection": {
                 "x": projection[index, 0].tolist(),
                 "y": projection[index, 1].tolist(),
+                "z": projection[index, 2].tolist(),
                 "labels": labels[index].tolist(),
             },
             "means": _group_means(df, labels, schema),

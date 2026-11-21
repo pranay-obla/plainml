@@ -1,7 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "installCommand": "python3 -m venv .venv && .venv/bin/python -m pip install --quiet \"mkdocs-material>=9.5\" \"mkdocs<2\"",
-  "buildCommand": ".venv/bin/python -m plainml.web.static_site site && .venv/bin/python -m mkdocs build -d site/docs",
-  "outputDirectory": "site"
+  "installCommand": "npm ci --prefix frontend && python3 -m venv .venv && .venv/bin/python -m pip install --quiet \"mkdocs-material>=9.5\" \"mkdocs<2\"",
+  "buildCommand": "npm run build --prefix frontend && .venv/bin/python -m plainml.web.static_site site && .venv/bin/python -m mkdocs build -d site/docs",
+  "outputDirectory": "site",
+  "trailingSlash": true
 }

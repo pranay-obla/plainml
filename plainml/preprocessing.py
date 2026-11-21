@@ -114,7 +114,7 @@ class ColumnPrep(TransformerMixin, BaseEstimator):
                 parsed = parse_dates(frame[column], getattr(self, "date_formats_", {}).get(column))
             else:
                 parsed = pd.Series(pd.NaT, index=frame.index, dtype="datetime64[ns]")
-            dayofweek = parsed.dt.dayofweek.astype(float)
+            dayofweek = parsed.dt.day_of_week.astype(float)
             parts = {
                 "year": parsed.dt.year.astype(float),
                 "month": parsed.dt.month.astype(float),

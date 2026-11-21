@@ -1,5 +1,5 @@
 /* plainml in the browser: this Web Worker runs Python (Pyodide) with plainml installed.
-   The page (app.js) sends it the same API requests the server would get; plainml.web.browser
+   The page (lib/api.ts) sends it the same API requests the server would get; plainml.web.browser
    answers them. Runs are kept in the browser's IndexedDB, so they survive a reload.
    Used only by the static site that `plainml web --export` writes. It's a module worker:
    Pyodide is loaded with import(), which works everywhere importScripts may not. */

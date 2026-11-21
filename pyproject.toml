@@ -61,6 +61,7 @@ all = [
 ]
 dev = [
     "httpx>=0.27",
+    "httpx2>=2; python_version >= '3.11'",  # Starlette's test client needs it from 1.10
     "mypy>=1.10",
     "pre-commit>=3.5",
     "pytest>=8.0",
@@ -86,7 +87,7 @@ version = { attr = "plainml.__version__" }
 include = ["plainml*"]
 
 [tool.setuptools.package-data]
-plainml = ["py.typed", "web/static/*", "datasets/*.csv"]
+plainml = ["py.typed", "web/static/**/*", "datasets/*.csv"]
 
 [tool.ruff]
 line-length = 100

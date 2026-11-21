@@ -19,6 +19,14 @@ def checkout_root() -> Path | None:
     return root if (root / "pyproject.toml").is_file() and (root / "plainml").is_dir() else None
 
 
+def _skip(folder: str, names: list[str]) -> set[str]:
+    """Leave out caches, and the built website (the browser already has it; Docker doesn't need it)."""
+    skipped = {n for n in names if n == "__pycache__" or n.endswith(".pyc")}
+    if Path(folder).name == "web" and "static" in names:
+        skipped.add("static")
+    return skipped
+
+
 def build_wheel(source: Path, into: Path) -> Path | None:
     """Build plainml's wheel from a clean copy of ``source`` into ``into``. None if it fails.
 
@@ -35,7 +43,7 @@ def build_wheel(source: Path, into: Path) -> Path | None:
         shutil.copytree(
             source / "plainml",
             copy / "plainml",
-            ignore=shutil.ignore_patterns("__pycache__", "*.pyc"),
+            ignore=_skip,
         )
         built = subprocess.run(
             [sys.executable, "-m", "pip", "wheel", "--no-deps", "-q", "-w", str(into), str(copy)],

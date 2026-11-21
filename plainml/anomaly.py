@@ -397,6 +397,7 @@ def detect_anomalies(
                 ],
                 "columns": [] if private else shown_columns,
                 "labelled": truth is not None,
+                "projection": _projection(X, combined, flags, seed),
             },
         )
         write_json(
@@ -461,6 +462,33 @@ def detect_anomalies(
     if verbose:
         _render(result, truth is not None, output)
     return result
+
+
+def _projection(
+    X: np.ndarray, scores: np.ndarray, flags: np.ndarray, seed: int, limit: int = 1500
+) -> dict[str, list[Any]]:
+    """Rows squeezed onto three axes (PCA), with every flagged row and a sample of the rest."""
+    from sklearn.decomposition import PCA
+
+    rng = np.random.default_rng(seed)
+    flagged = np.flatnonzero(flags)[:300]
+    rest = np.setdiff1d(np.arange(len(X)), flagged)
+    sample = rng.choice(rest, min(len(rest), max(limit - len(flagged), 0)), replace=False)
+    index = np.sort(np.r_[flagged, sample]).astype(int)
+    dims = min(3, X.shape[1])
+    if dims >= 2:
+        fit_rows = rng.choice(len(X), min(len(X), 5000), replace=False)
+        coords = PCA(n_components=dims, random_state=seed).fit(X[fit_rows]).transform(X[index])
+    else:
+        coords = X[index, :1]
+    coords = np.c_[coords, np.zeros((len(index), 3 - coords.shape[1]))]
+    return {
+        "x": coords[:, 0].round(4).tolist(),
+        "y": coords[:, 1].round(4).tolist(),
+        "z": coords[:, 2].round(4).tolist(),
+        "score": scores[index].round(3).tolist(),
+        "flag": flags[index].astype(int).tolist(),
+    }
 
 
 def _json_value(value: Any) -> Any:

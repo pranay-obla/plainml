@@ -1,0 +1,81 @@
+[
+  {
+    "key": "churn",
+    "file": "churn.csv",
+    "title": "Customer churn",
+    "question": "Which subscribers will cancel?",
+    "about": "Made-up subscribers, 18% of whom cancel. Look for how support calls and monthly contracts raise the risk.",
+    "rows": 1500,
+    "task": "train",
+    "options": {
+      "target": "churned",
+      "speed": "quick"
+    }
+  },
+  {
+    "key": "house_prices",
+    "file": "house_prices.csv",
+    "title": "House prices",
+    "question": "What will a house sell for?",
+    "about": "Made-up house sales. Size, neighborhood and condition drive the price.",
+    "rows": 1200,
+    "task": "train",
+    "options": {
+      "target": "price",
+      "speed": "quick"
+    }
+  },
+  {
+    "key": "store_sales",
+    "file": "store_sales.csv",
+    "title": "Store sales",
+    "question": "What will each store sell in the next two weeks?",
+    "about": "Three made-up stores. Promotions lift sales by about a third, and the last two weeks hold planned promotions but no sales yet.",
+    "rows": 1680,
+    "task": "forecast",
+    "options": {
+      "target": "sales",
+      "group": "store",
+      "inputs": [
+        "promo"
+      ],
+      "country": "US",
+      "horizon": 14
+    }
+  },
+  {
+    "key": "daily_sales",
+    "file": "daily_sales.csv",
+    "title": "Daily sales",
+    "question": "How many units will sell next month?",
+    "about": "Two and a half years of one shop's daily sales, with a trend, busy weekends and a yearly cycle.",
+    "rows": 912,
+    "task": "forecast",
+    "options": {
+      "target": "units_sold",
+      "horizon": 30
+    }
+  },
+  {
+    "key": "customers",
+    "file": "customers.csv",
+    "title": "Customer segments",
+    "question": "What kinds of customers are there?",
+    "about": "Made-up shoppers with three hidden segments: young app users, big-spending store shoppers and frequent web visitors.",
+    "rows": 600,
+    "task": "cluster",
+    "options": {}
+  },
+  {
+    "key": "transactions",
+    "file": "transactions.csv",
+    "title": "Card payments",
+    "question": "Which payments look suspicious?",
+    "about": "Made-up card payments, 30 of them fraud. The is_fraud column marks those, so you can see how many the detectors catch.",
+    "rows": 3000,
+    "task": "anomaly",
+    "options": {
+      "label": "is_fraud"
+    }
+  }
+]

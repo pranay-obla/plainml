@@ -48,3 +48,15 @@ def test_reachable_from_the_package() -> None:
     import plainml
 
     assert plainml.datasets.path("churn").is_file()
+
+
+def test_the_websites_copy_matches() -> None:
+    import json
+
+    copy = Path(__file__).parent.parent / "frontend" / "lib" / "samples.json"
+    if not copy.is_file():
+        pytest.skip("not running from a source checkout")
+    expected = [sample.to_dict() for sample in datasets.SAMPLES.values()]
+    assert json.loads(copy.read_text(encoding="utf-8")) == expected, (
+        "update it: python -m plainml.datasets > frontend/lib/samples.json"
+    )

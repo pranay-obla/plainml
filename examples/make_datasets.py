@@ -121,8 +121,8 @@ def daily_sales() -> pd.DataFrame:
     """How much will we sell each day? (forecasting: trend + weekly + yearly pattern)"""
     days = pd.date_range("2024-01-01", "2026-06-30", freq="D")
     t = np.arange(len(days))
-    weekly = np.array([0.85, 0.9, 0.95, 1.0, 1.15, 1.4, 1.2])[days.dayofweek]
-    yearly = 1 + 0.18 * np.sin(2 * np.pi * (days.dayofyear - 100) / 365.25)
+    weekly = np.array([0.85, 0.9, 0.95, 1.0, 1.15, 1.4, 1.2])[days.day_of_week]
+    yearly = 1 + 0.18 * np.sin(2 * np.pi * (days.day_of_year - 100) / 365.25)
     sales = (1200 + 0.9 * t) * weekly * yearly * rng.normal(1, 0.07, len(days))
     return pd.DataFrame(
         {"date": days.strftime("%Y-%m-%d"), "store": "downtown", "units_sold": sales.round()}
@@ -197,7 +197,7 @@ def store_sales() -> pd.DataFrame:
     holidays = pd.to_datetime(
         ["2025-01-01", "2025-07-04", "2025-11-27", "2025-12-25", "2026-01-01"]
     )
-    weekly = np.array([0.9, 0.95, 1.0, 1.0, 1.1, 1.35, 1.2])[days.dayofweek]
+    weekly = np.array([0.9, 0.95, 1.0, 1.0, 1.1, 1.35, 1.2])[days.day_of_week]
     holiday = np.where(days.isin(holidays), 0.5, 1.0)
     future = pd.date_range(days[-1] + pd.Timedelta(days=1), periods=14, freq="D")
     frames = []
@@ -216,7 +216,7 @@ def store_sales() -> pd.DataFrame:
                 }
             )
         )
-        planned = (future.dayofweek == 4).astype(int)  # promotions planned for the next two Fridays
+        planned = (future.day_of_week == 4).astype(int)  # promotions planned for the next two Fridays
         frames.append(
             pd.DataFrame(
                 {

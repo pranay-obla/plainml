@@ -19,6 +19,9 @@ htmlcov/
 site/
 .vercel/
 
+# The built website (from frontend/, `npm run build`); PyPI packages include it
+plainml/web/static/
+
 # plainml output
 runs/
 *.joblib

@@ -13,9 +13,12 @@ pytest.importorskip("fastapi")
 pytest.importorskip("httpx")
 pytest.importorskip("multipart")
 
-from fastapi.testclient import TestClient
+try:
+    from fastapi.testclient import TestClient
+except RuntimeError as exc:  # Starlette 1.10+ wants httpx2 for its test client
+    pytest.skip(str(exc), allow_module_level=True)
 
-from plainml.web.server import create_app
+from plainml.web.server import STATIC, create_app
 
 
 @pytest.fixture()
@@ -41,8 +44,12 @@ def _finish(client: TestClient, job: dict[str, Any], timeout: float = 120) -> di
 
 def test_page_and_info(client: TestClient) -> None:
     page = client.get("/")
-    assert page.status_code == 200 and "app.js" in page.text
-    assert client.get("/app.css").status_code == 200
+    assert page.status_code == 200 and "plainml" in page.text
+    if (STATIC / "index.html").is_file():  # the built website (otherwise: how to build it)
+        assert client.get("/runs/").status_code == 200
+        assert client.get("/worker.js").status_code == 200
+    else:
+        assert "isn't built" in page.text
     info = client.get("/api/info").json()
     assert info["needs_token"] is False and ".csv" in info["upload_types"]
     assert any(m["default"] for m in info["importance_methods"])
@@ -172,3 +179,15 @@ def test_token(tmp_path: Path) -> None:
     assert client.post("/api/login", json={"token": "nope"}).status_code == 401
     assert client.post("/api/login", json={"token": "s3cret"}).status_code == 200
     assert client.get("/api/runs").status_code == 200  # the cookie is now set
+
+
+def test_job_log_is_plain_text_even_with_force_color(monkeypatch: pytest.MonkeyPatch) -> None:
+    from plainml.console import console, info
+    from plainml.web.jobs import Job, run_job
+
+    monkeypatch.setattr(console, "_force_terminal", True)  # what FORCE_COLOR=1 does
+    job = Job(id="0123456789ab", task="profile", title="Test")
+    run_job(job, lambda j: (info("hello [b]there[/b]"), {"kind": "output"})[1])
+    assert job.status == "done" and any("hello there" in line for line in job.log)
+    assert not any("\x1b[" in line for line in job.log)
+    assert console._force_terminal is True  # put back afterwards

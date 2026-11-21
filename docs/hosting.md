@@ -24,8 +24,12 @@ plainml, and does all the work right there:
   - Uploads are limited to 200 MB.
   - Training uses one CPU core, so it's slower than the command line on big data.
 
-From a plainml source checkout, the export includes plainml built from that code. Otherwise the browser
-installs the same plainml version from PyPI.
+From a plainml source checkout, the export includes plainml built from that code (build the website
+first: `cd frontend && npm ci && npm run build`). Otherwise the browser installs the same plainml version
+from PyPI.
+
+Serve the folder from the root of a domain: its pages load `/_next/...` and `/worker.js`. Vercel,
+Netlify and Hugging Face Static Spaces do this; on GitHub Pages, use a user site or your own domain.
 
 To try it locally:
 
@@ -48,14 +52,17 @@ documentation under `/docs`. plainml's own site is deployed exactly this way, at
 ```json
 {
   "framework": null,
-  "installCommand": "python3 -m venv .venv && .venv/bin/python -m pip install --quiet \"mkdocs-material>=9.5\" \"mkdocs<2\"",
-  "buildCommand": ".venv/bin/python -m plainml.web.static_site site && .venv/bin/python -m mkdocs build -d site/docs",
-  "outputDirectory": "site"
+  "installCommand": "npm ci --prefix frontend && python3 -m venv .venv && .venv/bin/python -m pip install --quiet \"mkdocs-material>=9.5\" \"mkdocs<2\"",
+  "buildCommand": "npm run build --prefix frontend && .venv/bin/python -m plainml.web.static_site site && .venv/bin/python -m mkdocs build -d site/docs",
+  "outputDirectory": "site",
+  "trailingSlash": true
 }
 ```
 
-The build tools go into a throwaway virtual environment (`.venv`) because Vercel's own Python refuses
-package installs (it's managed by uv, per PEP 668).
+The build first builds the website (Next.js, in `frontend/`), then turns it into the in-browser version
+with plainml built from the same commit, then builds these docs. The Python tools go into a throwaway
+virtual environment (`.venv`) because Vercel's own Python refuses package installs (it's managed by uv,
+per PEP 668).
 
 1. Sign in at [vercel.com](https://vercel.com) with GitHub.
 2. Choose **Add New → Project** and import `pranay-obla/plainml`. The settings come from `vercel.json`,

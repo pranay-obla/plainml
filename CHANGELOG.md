@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.0.0 (unreleased)
+
+- **A new website.** Rebuilt in Next.js and React with a USC-inspired look: cardinal and gold, light and
+  dark, on phones too. The same site runs as `plainml web` and fully in the browser.
+  - **A landing page** with a 3D hero (a spreadsheet's rows sorting themselves into groups), a ticker,
+    scroll-revealed sections, and the example datasets next to the upload box.
+  - **3D results**, which you can turn, zoom and hover: every model's score with the baseline, which
+    columns matter, customer groups, unusual rows, forecast lanes and drift by column. Each has a table
+    view too.
+  - Python loads in the background while you read the page, with its progress in the header.
+  - Pages have their own addresses (`/runs/`, `/run/?name=…`, `/predict/`…), so the back button and
+    bookmarks work.
+- **API:** `GET /api/runs/{name}` includes a `visual` field with the data behind the 3D view. Cluster
+  runs save a third projected axis, and anomaly runs save where every flagged row (and a sample of the
+  rest) sits.
+- **For contributors:** the website lives in `frontend/` and needs Node.js 20.9+ to build; packages
+  from PyPI include it already. `plainml web` explains how to build it when it's missing.
+- **Fix:** the website's live log no longer fills with terminal color codes when `FORCE_COLOR` is set.
+- **Fix:** no more pandas deprecation warnings for `dayofweek` and `dayofyear`.
+- The tests work with Starlette 1.10's test client (`httpx2`).
+
 ## 0.1.2 (November 20, 2026)
 
 - **Example datasets in one click.** The website's home page offers the six example datasets. Clicking

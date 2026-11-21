@@ -1,5 +1,9 @@
 """``plainml web --export``: the website as static files that run plainml in the browser.
 
+The website itself is built from ``frontend/`` (Next.js) and ships inside plainml; this copies
+it and marks every page as the in-browser version. The folder must be served from the root of a
+domain (Vercel, Netlify, a Hugging Face Static Space, or GitHub Pages with its own domain).
+
 The folder needs no server. A Web Worker (``worker.js``) starts Pyodide, installs plainml and
 answers the page's requests inside the visitor's browser, so their data never leaves their
 computer. Host it anywhere that serves static files: Vercel, GitHub Pages, Netlify, a Hugging
@@ -17,6 +21,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import shutil
 import sys
 from pathlib import Path
@@ -32,21 +37,33 @@ class ExportError(RuntimeError):
     pass
 
 
-def export_static(out_dir: str | Path, *, bundle_wheel: bool | None = None) -> Path:
+def export_static(
+    out_dir: str | Path,
+    *,
+    bundle_wheel: bool | None = None,
+    site_files: str | Path | None = None,
+) -> Path:
     """Write the in-browser website to ``out_dir``. Returns the folder.
 
-    ``bundle_wheel`` defaults to True when running from a source checkout.
+    ``bundle_wheel`` defaults to True when running from a source checkout. ``site_files`` is the
+    built website to start from (default: the one inside plainml).
     """
+    source_files = Path(site_files) if site_files is not None else STATIC
+    if not (source_files / "index.html").is_file():
+        raise ExportError(
+            "plainml's website isn't built in this copy of plainml. "
+            "Build it first: cd frontend && npm ci && npm run build"
+        )
+    if not (source_files / "worker.js").is_file():
+        raise ExportError(f"{source_files} has no worker.js, so it can't run in the browser.")
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
-    for file in STATIC.iterdir():
-        if file.is_file():
-            shutil.copy2(file, out / file.name)
-    index = out / "index.html"
-    page = index.read_text(encoding="utf-8")
-    if MODE not in page:
-        page = page.replace('<meta charset="utf-8">', f'<meta charset="utf-8">\n{MODE}', 1)
-    index.write_text(page, encoding="utf-8")
+    shutil.copytree(source_files, out, dirs_exist_ok=True)
+    for page_path in out.rglob("*.html"):  # every page says: answer requests in this browser
+        page = page_path.read_text(encoding="utf-8")
+        if MODE not in page:
+            page = re.sub(r"<head[^>]*>", lambda m: m.group(0) + MODE, page, count=1)
+            page_path.write_text(page, encoding="utf-8")
 
     manifest: dict[str, str | None] = {"version": __version__, "wheel": None}
     source = checkout_root()

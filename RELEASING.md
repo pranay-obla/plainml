@@ -45,7 +45,9 @@ anywhere.
 6. The *Upload Python Package* workflow then:
    - runs the tests on Python 3.10 and 3.14
    - checks the tag matches the version
-   - builds the wheel and source archive, checks them, and publishes them
+   - builds the website (`frontend/`, with Node.js), which ships inside the package
+   - builds the wheel and source archive, checks them (including that the website is in the wheel), and
+     publishes them
 
    Follow it under the **Actions** tab.
 7. Check the result in a fresh environment:
@@ -72,7 +74,11 @@ next version (e.g. `0.1.3`); a broken release can be *yanked* on PyPI so install
 ## Publishing by hand (fallback)
 
 If Actions is unavailable, create an API token on PyPI (**Account settings → API tokens**, scoped to the
-`plainml` project), then:
+`plainml` project), then build the website first, since it ships inside the package:
+
+```bash
+cd frontend && npm ci && npm run build && cd ..
+```
 
 ```bash
 python -m pip install --upgrade build twine

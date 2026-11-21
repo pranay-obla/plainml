@@ -175,8 +175,10 @@ def run_job(job: Job, work: Callable[[Job], dict[str, Any]]) -> None:
     writer = _LogWriter(job)
     # rich keeps "not set" as None (then follows the terminal), so save the raw values
     saved_file, saved_width = console._file, console._width
+    saved_terminal = console._force_terminal
     console.file = writer  # type: ignore[assignment]
     console.width = 100
+    console._force_terminal = False  # plain lines, even when FORCE_COLOR is set
     console.status = lambda message, **_: _Status(job, message)  # type: ignore[method-assign,assignment]
     set_quiet(False)
     try:
@@ -196,5 +198,6 @@ def run_job(job: Job, work: Callable[[Job], dict[str, Any]]) -> None:
         writer.flush()
         del console.status  # back to the real spinner
         console._file, console._width = saved_file, saved_width
+        console._force_terminal = saved_terminal
         job.finished = time.time()
         job.touch(force=True)

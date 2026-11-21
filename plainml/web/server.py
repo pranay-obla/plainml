@@ -56,7 +56,14 @@ from plainml.runs import (
 from plainml.schema import Kind, infer_column
 from plainml.web.jobs import Job, JobRunner
 
-STATIC = Path(__file__).with_name("static")
+STATIC = Path(__file__).with_name("static")  # the built website (frontend/, `npm run build`)
+NOT_BUILT = """<!doctype html><meta charset="utf-8"><title>plainml</title>
+<body style="font:16px/1.6 system-ui,sans-serif;max-width:640px;margin:12vh auto;padding:0 16px">
+<h1>plainml's website isn't built</h1>
+<p>This plainml comes from a source checkout without the website's files. Build them with Node.js:</p>
+<pre>cd frontend &amp;&amp; npm ci &amp;&amp; npm run build</pre>
+<p>Or install plainml from PyPI, which includes them: <code>pip install "plainml[web]"</code>.
+The API itself is running.</p></body>"""
 WEB_DIR = ".web"  # inside the runs folder: uploads and job outputs
 COOKIE = "plainml_token"
 PREVIEW_ROWS = 50
@@ -328,6 +335,180 @@ def run_tiles(run: dict[str, Any], evaluation: dict[str, Any]) -> list[dict[str,
     return [_tile("Rows", rows)]
 
 
+LOWER_IS_BETTER = {"log_loss", "rmse", "mae", "mape", "mse", "hamming"}
+MAX_BARS = 15
+
+
+def _finite(value: Any) -> float | None:
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return None
+    return number if math.isfinite(number) else None
+
+
+def _bars_visual(
+    title: str, caption: str, value_label: str, bars: list[dict[str, Any]], **extra: Any
+) -> dict[str, Any] | None:
+    bars = [b for b in bars if b["value"] is not None][:MAX_BARS]
+    if not bars:
+        return None
+    return {
+        "type": "bars",
+        "title": title,
+        "caption": caption,
+        "value_label": value_label,
+        "bars": bars,
+        **extra,
+    }
+
+
+def run_visual(
+    folder: Path, run: dict[str, Any], evaluation: dict[str, Any]
+) -> dict[str, Any] | None:
+    """The data behind a run's 3D view on the website, or None when there's nothing to draw."""
+    kind = run.get("kind", "train")
+    try:
+        if kind in ("train", "tune") and (folder / "leaderboard.csv").is_file():
+            metric = str(run.get("metric") or "")
+            board = pd.read_csv(folder / "leaderboard.csv")
+            if metric not in board.columns:
+                return None
+            if "status" in board.columns:
+                board = board[board["status"].fillna("ok") == "ok"]
+            if "key" in board.columns:  # the do-nothing baseline is drawn as a line instead
+                board = board[board["key"] != "baseline"]
+            best = (run.get("best") or {}).get("name")
+            label = run.get("metric_label", metric)
+            lower = metric in LOWER_IS_BETTER
+            baseline = _finite((run.get("baseline") or {}).get("cv_score"))
+            return _bars_visual(
+                "Every model, side by side",
+                f"Cross-validated {label} for each model ({'lower' if lower else 'higher'} is better)."
+                + (" The dashed line is a do-nothing baseline." if baseline is not None else ""),
+                str(label),
+                [
+                    {
+                        "label": str(row["model"]),
+                        "value": _finite(row[metric]),
+                        "tone": "best" if row["model"] == best else "plain",
+                        "note": "the winner" if row["model"] == best else None,
+                    }
+                    for _, row in board.iterrows()
+                ],
+                lines=[{"value": baseline, "label": "Baseline"}] if baseline is not None else [],
+                lower_is_better=lower,
+            )
+        if kind == "importance" and (folder / "rankings.csv").is_file():
+            table = pd.read_csv(folder / "rankings.csv")
+            if "consensus_score" not in table.columns:
+                return None
+            table = table.sort_values("consensus_score", ascending=False)
+            picked = "selected" in table.columns
+            return _bars_visual(
+                "Which columns matter",
+                f"Consensus importance across {len(run.get('methods') or [])} methods, from 0 to 1."
+                + (" Highlighted columns are worth keeping." if picked else ""),
+                "Consensus importance",
+                [
+                    {
+                        "label": str(row["column"]),
+                        "value": _finite(row["consensus_score"]),
+                        "tone": "picked" if picked and bool(row["selected"]) else "plain",
+                        "note": "worth keeping" if picked and bool(row["selected"]) else None,
+                    }
+                    for _, row in table.iterrows()
+                ],
+            )
+        if kind == "drift" and (folder / "drift.csv").is_file():
+            table = pd.read_csv(folder / "drift.csv")
+            if "psi" not in table.columns:
+                return None
+            table = table.sort_values("psi", ascending=False)
+            tones = {"major": "bad", "moderate": "warn"}
+            return _bars_visual(
+                "How much each column changed",
+                "Population Stability Index per column: under 0.1 is stable, over 0.25 is a major change.",
+                "PSI",
+                [
+                    {
+                        "label": str(row["column"]),
+                        "value": _finite(row["psi"]) or 0.0,
+                        "tone": tones.get(str(row["status"]), "plain"),
+                        "note": str(row["status"]),
+                    }
+                    for _, row in table.iterrows()
+                ],
+                lines=[{"value": 0.1, "label": "Moderate"}, {"value": 0.25, "label": "Major"}],
+            )
+        if kind == "cluster" and evaluation.get("projection"):
+            projection = evaluation["projection"]
+            labels = [int(v) for v in projection["labels"]]
+            names = {
+                p["cluster"]: p.get("label", f"Group {p['cluster']}")
+                for p in evaluation.get("profiles") or []
+            }
+            order = sorted(set(labels))
+            position = {label: i for i, label in enumerate(order)}
+            return {
+                "type": "points",
+                "title": "The groups, in 3D",
+                "caption": "Every row squeezed onto three axes (PCA). Groups that overlap here may still differ in the full data.",
+                "x": projection["x"],
+                "y": projection["y"],
+                "z": projection.get("z") or [0.0] * len(labels),
+                "group": [position[v] for v in labels],
+                "groups": [
+                    ("Noise" if v == -1 else str(names.get(v, f"Group {v}"))) for v in order
+                ],
+            }
+        if kind == "anomaly" and evaluation.get("projection"):
+            projection = evaluation["projection"]
+            return {
+                "type": "points",
+                "title": "Unusual rows, in 3D",
+                "caption": "Every flagged row and a sample of the rest, squeezed onto three axes (PCA).",
+                "x": projection["x"],
+                "y": projection["y"],
+                "z": projection["z"],
+                "group": projection["flag"],
+                "groups": ["Typical rows", "Unusual rows"],
+                "size": projection["flag"],
+                "hover": [f"Anomaly score {s:.2f}" for s in projection["score"]],
+            }
+        if kind == "forecast" and evaluation.get("forecast"):
+
+            def lane(name: str, history: dict[str, Any], future: dict[str, Any]) -> dict[str, Any]:
+                return {
+                    "name": name,
+                    "history": {"x": history["x"], "y": history["y"]},
+                    "forecast": {
+                        "x": future["x"],
+                        "y": future["y"],
+                        "lower": future.get("lo"),
+                        "upper": future.get("hi"),
+                    },
+                }
+
+            groups = evaluation.get("groups") or []
+            lanes = [lane(str(g["name"]), g["history"], g["forecast"]) for g in groups[:6]]
+            if not lanes:
+                lanes = [
+                    lane(str(run.get("target")), evaluation["history"], evaluation["forecast"])
+                ]
+            return {
+                "type": "series",
+                "title": "History and forecast" + (", one lane per series" if groups else ""),
+                "caption": "Recent history, then the forecast with its 80% range."
+                + (" All lanes share one scale." if len(lanes) > 1 else ""),
+                "value_label": str(run.get("target")),
+                "lanes": lanes,
+            }
+    except (KeyError, ValueError, TypeError, OSError):
+        return None  # an older or unusual run: the page still shows everything else
+    return None
+
+
 def run_summary(ws: Workspace, name: str) -> dict[str, Any]:
     folder = ws.run_dir(name)
     run = read_json(folder / RUN_FILE)
@@ -364,6 +545,7 @@ def run_summary(ws: Workspace, name: str) -> dict[str, Any]:
         "files": file_list(folder, base),
         "report": f"{base}/files/{REPORT_FILE}" if (folder / REPORT_FILE).is_file() else None,
         "predictable": kind in PREDICTABLE and (folder / MODEL_FILE).is_file(),
+        "visual": run_visual(folder, run, evaluation),
     }
 
 
@@ -951,7 +1133,15 @@ def create_app(
     def models() -> list[dict[str, Any]]:
         return models_payload(ws)
 
-    app.mount("/", StaticFiles(directory=STATIC, html=True), name="static")
+    if (STATIC / "index.html").is_file():
+        app.mount("/", StaticFiles(directory=STATIC, html=True), name="static")
+    else:
+        from fastapi.responses import HTMLResponse
+
+        @app.get("/", include_in_schema=False)
+        def not_built() -> HTMLResponse:
+            return HTMLResponse(NOT_BUILT)
+
     return app
 
 

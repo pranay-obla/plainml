@@ -189,9 +189,9 @@ def _holiday_features(dates: pd.DatetimeIndex, unit: str, country: str | None) -
 def _calendar(dates: pd.DatetimeIndex, unit: str, country: str | None = None) -> np.ndarray:
     columns: list[Any] = []
     if unit in ("min", "h"):
-        columns += [dates.hour, dates.dayofweek]
+        columns += [dates.hour, dates.day_of_week]
     if unit in ("D", "B"):
-        columns += [dates.dayofweek, dates.month, dates.dayofyear]
+        columns += [dates.day_of_week, dates.month, dates.day_of_year]
     if unit == "W":
         columns += [dates.isocalendar().week.to_numpy(dtype=float), dates.month]
     if unit == "M":
@@ -653,7 +653,7 @@ def _insights(
     names: list[str] = []
     if unit in ("D", "B") and len(values) >= 21:
         position, names = (
-            index.dayofweek,
+            index.day_of_week,
             ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
         )
     elif unit == "h" and len(values) >= 72:
