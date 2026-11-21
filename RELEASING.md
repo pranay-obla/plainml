@@ -40,8 +40,8 @@ anywhere.
    ```
 
 4. Commit and push to `main`, and wait for CI to pass.
-5. On GitHub, go to **Releases → Draft a new release**, create the tag `v0.1.2` (it must match
-   `__version__`), paste the changelog entry and **Publish release**.
+5. On GitHub, go to **Releases → Draft a new release**, create the tag `0.1.2` (it must match
+   `__version__`; a leading `v` also works), paste the changelog entry and **Publish release**.
 6. The *Upload Python Package* workflow then:
    - runs the tests on Python 3.10 and 3.14
    - checks the tag matches the version

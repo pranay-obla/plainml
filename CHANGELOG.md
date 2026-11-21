@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.2 (September 29, 2026)
+## 0.1.2 (November 20, 2026)
 
 - **Example datasets in one click.** The website's home page offers the six example datasets. Clicking
   one loads it and fills in the task and settings that suit it, so new visitors can try plainml without
