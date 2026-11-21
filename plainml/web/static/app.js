@@ -357,8 +357,9 @@ async function viewNew(view) {
           h("p", { class: "lead" }, "Upload a file, choose what you want to find out, and get a clear report, with every result ready to download."),
           bridge ? h("div", { class: "browser-note" }, icon("sparkle"), "Runs entirely in your browser: your data is never uploaded anywhere.") : null),
         dropZone({ onFile: async (summary) => { state.upload = summary; state.task = null; store.set("plainml-upload", summary.id); render(); } })),
-      samplesSection(),
     );
+    const samples = samplesSection();
+    if (samples) view.append(samples);
     recentRuns(view);
     return;
   }
@@ -821,7 +822,7 @@ async function viewRun(view, name) {
   view.append(loading());
   let run;
   try { run = await api(`/api/runs/${encodeURIComponent(name)}`); } catch (error) { return fail(view, error); }
-  view.replaceChildren(
+  view.replaceChildren(...[
     h("div", { class: "crumbs" }, h("a", { href: "#/runs" }, "Runs"), "/", name),
     h("div", { class: "job-head" },
       h("div", {}, h("h1", {}, run.title), h("p", { class: "sub" }, run.subtitle)),
@@ -830,7 +831,8 @@ async function viewRun(view, name) {
     run.sentences.length ? h("div", { class: "section panel pad" }, h("h3", { style: "margin-bottom:6px" }, "Key findings"), h("ul", { class: "findings" }, run.sentences.map((s) => h("li", {}, s)))) : null,
     run.report
       ? h("div", { class: "result-grid" }, reportPanel(run.report), h("aside", {}, filesPanel(run.files)))
-      : h("div", { class: "files-wide" }, filesPanel(run.files)));
+      : h("div", { class: "files-wide" }, filesPanel(run.files)),
+  ].filter(Boolean));  // the DOM would print a null as the text "null"
 }
 
 // ---------- runs ----------------------------------------------------------------------------------
