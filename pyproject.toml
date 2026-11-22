@@ -13,7 +13,7 @@ requires-python = ">=3.10"
 authors = [{ name = "Pranay Obla" }]
 keywords = ["machine learning", "automl", "cli", "scikit-learn", "no-code", "explainable ai", "tabular data", "forecasting", "feature importance"]
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
     "Environment :: Web Environment",
     "Intended Audience :: Developers",

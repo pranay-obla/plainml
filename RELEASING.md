@@ -26,7 +26,7 @@ anywhere.
 
 ## Each release
 
-1. Update the version in `plainml/__init__.py` (for example `__version__ = "0.1.2"`). The package reads its version
+1. Update the version in `plainml/__init__.py` (for example `__version__ = "1.0.0"`). The package reads its version
    from there.
 2. In `CHANGELOG.md`, give the release a date and list what changed.
 3. Check everything locally:
@@ -40,13 +40,13 @@ anywhere.
    ```
 
 4. Commit and push to `main`, and wait for CI to pass.
-5. On GitHub, go to **Releases → Draft a new release**, create the tag `0.1.2` (it must match
+5. On GitHub, go to **Releases → Draft a new release**, create the tag `1.0.0` (it must match
    `__version__`; a leading `v` also works), paste the changelog entry and **Publish release**.
 6. The *Upload Python Package* workflow then:
    - runs the tests on Python 3.10 and 3.14
    - checks the tag matches the version
    - builds the website (`frontend/`, with Node.js), which ships inside the package
-   - builds the wheel and source archive, checks them (including that the website is in the wheel), and
+   - builds the wheel and source archive, checks them (including installing the wheel in a fresh environment and loading the website from it), and
      publishes them
 
    Follow it under the **Actions** tab.
@@ -57,7 +57,7 @@ anywhere.
    ```
 
    ```bash
-   /tmp/plainml-check/bin/pip install "plainml[web]==0.1.2"
+   /tmp/plainml-check/bin/pip install "plainml[web]==1.0.0"
    ```
 
    ```bash
@@ -69,7 +69,7 @@ anywhere.
    `hosting/docker/Dockerfile` (server version).
 
 PyPI never accepts the same version twice. If something is wrong with a release, fix it and publish the
-next version (e.g. `0.1.3`); a broken release can be *yanked* on PyPI so installs skip it.
+next version (e.g. `1.0.1`); a broken release can be *yanked* on PyPI so installs skip it.
 
 ## Publishing by hand (fallback)
 

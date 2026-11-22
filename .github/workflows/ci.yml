@@ -166,5 +166,5 @@ jobs:
       - run: python -m pip install --upgrade pip build twine
       - run: python -m build
       - run: twine check dist/*
-      - name: Check the wheel includes the website
-        run: unzip -l dist/*.whl | grep -q "plainml/web/static/index.html"
+      - name: Check the website works when installed from the wheel
+        run: bash .github/scripts/check-wheel.sh

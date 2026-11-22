@@ -137,3 +137,13 @@ def test_export_bundles_a_wheel_from_a_checkout(tmp_path: Path) -> None:
         names = archive.namelist()
     assert "plainml/datasets/churn.csv" in names  # the example datasets ship too
     assert not any(n.startswith("plainml/web/static/") for n in names)  # the site is already there
+
+
+def test_website_version_matches_the_package() -> None:
+    import plainml
+
+    root = Path(__file__).parent.parent
+    package = json.loads((root / "frontend" / "package.json").read_text(encoding="utf-8"))
+    assert package["version"] == plainml.__version__, "bump frontend/package.json with the release"
+    lock = json.loads((root / "frontend" / "package-lock.json").read_text(encoding="utf-8"))
+    assert lock["version"] == lock["packages"][""]["version"] == plainml.__version__

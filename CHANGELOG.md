@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.0 (unreleased)
+## 1.0.0 (November 21, 2026)
 
 - **A new website.** Rebuilt in Next.js and React with a USC-inspired look: cardinal and gold, light and
   dark, on phones too. The same site runs as `plainml web` and fully in the browser.
@@ -20,6 +20,8 @@
 - **Fix:** the website's live log no longer fills with terminal color codes when `FORCE_COLOR` is set.
 - **Fix:** no more pandas deprecation warnings for `dayofweek` and `dayofyear`.
 - The tests work with Starlette 1.10's test client (`httpx2`).
+- CI and the release workflow install the built wheel in a fresh environment and check the website
+  loads from it, and a test keeps `frontend/package.json` on the same version as the package.
 
 ## 0.1.2 (November 20, 2026)
 
