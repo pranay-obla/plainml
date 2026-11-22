@@ -46,7 +46,8 @@ def test_page_and_info(client: TestClient) -> None:
     page = client.get("/")
     assert page.status_code == 200 and "plainml" in page.text
     if (STATIC / "index.html").is_file():  # the built website (otherwise: how to build it)
-        assert client.get("/runs/").status_code == 200
+        for page_path in ("/analyze/", "/jobs/", "/run/", "/runs/", "/predict/"):
+            assert client.get(page_path).status_code == 200, page_path
         assert client.get("/worker.js").status_code == 200
     else:
         assert "isn't built" in page.text

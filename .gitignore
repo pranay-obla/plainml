@@ -22,8 +22,9 @@ site/
 # The built website (from frontend/, `npm run build`); PyPI packages include it
 plainml/web/static/
 
-# plainml output
+# plainml output (but not the website's /runs/ page)
 runs/
+!frontend/app/runs/
 *.joblib
 *.onnx
 plainml-output/

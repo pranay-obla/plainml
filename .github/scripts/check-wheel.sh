@@ -28,6 +28,8 @@ assert info["samples"], "no example datasets"
 print(f"plainml {info['version']}: API answers, {len(info['samples'])} example datasets")
 PY
 curl -fs http://127.0.0.1:8765/ | grep -q "<title>plainml" || { echo "The page isn't served"; exit 1; }
-curl -fs http://127.0.0.1:8765/runs/ | grep -q "<title>plainml" || { echo "/runs/ isn't served"; exit 1; }
+for page in analyze jobs run runs predict; do
+  curl -fs "http://127.0.0.1:8765/$page/" | grep -q "<title>plainml" || { echo "/$page/ isn't served"; exit 1; }
+done
 curl -fs -o /dev/null http://127.0.0.1:8765/worker.js || { echo "worker.js isn't served"; exit 1; }
 echo "The website works from the wheel."
