@@ -1,10 +1,16 @@
 # Changelog
 
+## 1.0.1 (unreleased)
+
+- **Reports match the website.** The HTML reports use the same cardinal and gold, on cream or near-black,
+  instead of blue, so the report embedded on a run page no longer clashes with the page around it.
+- The landing page no longer has a scrolling banner.
+
 ## 1.0.0 (November 21, 2026)
 
 - **A new website.** Rebuilt in Next.js and React with a USC-inspired look: cardinal and gold, light and
   dark, on phones too. The same site runs as `plainml web` and fully in the browser.
-  - **A landing page** with a 3D hero (a spreadsheet's rows sorting themselves into groups),
+  - **A landing page** with a 3D hero (a spreadsheet's rows sorting themselves into groups), a ticker,
     scroll-revealed sections, and the example datasets next to the upload box.
   - **3D results**, which you can turn, zoom and hover: every model's score with the baseline, which
     columns matter, customer groups, unusual rows, forecast lanes and drift by column. Each has a table
