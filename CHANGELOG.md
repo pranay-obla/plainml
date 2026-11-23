@@ -4,7 +4,7 @@
 
 - **A new website.** Rebuilt in Next.js and React with a USC-inspired look: cardinal and gold, light and
   dark, on phones too. The same site runs as `plainml web` and fully in the browser.
-  - **A landing page** with a 3D hero (a spreadsheet's rows sorting themselves into groups), a ticker,
+  - **A landing page** with a 3D hero (a spreadsheet's rows sorting themselves into groups),
     scroll-revealed sections, and the example datasets next to the upload box.
   - **3D results**, which you can turn, zoom and hover: every model's score with the baseline, which
     columns matter, customer groups, unusual rows, forecast lanes and drift by column. Each has a table

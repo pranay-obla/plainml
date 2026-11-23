@@ -17,19 +17,6 @@ import { RunRow } from "./Runs";
 
 const HeroScene = dynamic(() => import("./three/HeroScene"), { ssr: false });
 
-const TICKER = [
-  "Predict a column",
-  "Forecast over time",
-  "Find groups",
-  "Spot unusual rows",
-  "Rank the columns",
-  "Check for drift",
-  "52 models",
-  "Plain-English findings",
-  "Runs in your browser",
-  "Free and open source",
-];
-
 function goTo(router: ReturnType<typeof useRouter>, upload: Upload) {
   router.push(`/analyze/?upload=${upload.id}`);
 }
@@ -75,19 +62,6 @@ function Hero() {
         </div>
       </div>
     </section>
-  );
-}
-
-function Ticker() {
-  const items = [...TICKER, ...TICKER];
-  return (
-    <div className="ticker" aria-hidden="true">
-      <div className="ticker-track">
-        {items.map((item, i) => (
-          <span key={i}>{item}</span>
-        ))}
-      </div>
-    </div>
   );
 }
 
@@ -278,7 +252,6 @@ export function Landing() {
   return (
     <main className="page flush">
       <Hero />
-      <Ticker />
       <Examples />
       <RecentRuns />
       <Statement />

@@ -296,13 +296,6 @@ table.data .hl { background: var(--accent-wash); }
 .privacy-note { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; color: var(--ink-2); padding: 12px 14px; border-radius: 16px; background: var(--glass); border: 1px solid var(--line); backdrop-filter: blur(10px); }
 .privacy-note .i { color: var(--ok); margin-top: 1px; }
 
-.ticker { border-block: 1px solid var(--line); background: var(--cardinal); color: #fff6e3; overflow: hidden; padding: 14px 0; }
-.ticker-track { display: flex; width: max-content; animation: ticker 38s linear infinite; }
-.ticker:hover .ticker-track { animation-play-state: paused; }
-.ticker span { font: 700 14px/1 var(--font-mono), monospace; letter-spacing: 0.14em; text-transform: uppercase; padding: 0 22px; white-space: nowrap; display: inline-flex; gap: 22px; align-items: center; }
-.ticker span::after { content: "✦"; color: var(--gold); }
-@keyframes ticker { to { transform: translateX(-50%); } }
-
 .statement { padding: 120px 16px 80px; max-width: 1040px; margin: 0 auto; }
 .statement p { margin: 0; font: 800 clamp(28px, 4.4vw, 56px)/1.08 var(--font-display), sans-serif; letter-spacing: -0.035em; }
 .statement .w { transition: color 0.2s; }
