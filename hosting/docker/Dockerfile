@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends libgomp1 \
     && rm -rf /var/lib/apt/lists/*
 
 # The plainml release to run. Change it (and rebuild the Space) to upgrade.
-ARG PLAINML_VERSION=1.0.0
+ARG PLAINML_VERSION=1.0.1
 RUN pip install "plainml[web,boost,forecast]==${PLAINML_VERSION}"
 # To run unreleased changes instead, install straight from GitHub:
 # RUN pip install "plainml[web,boost,forecast] @ https://github.com/pranay-obla/plainml/archive/refs/heads/main.zip"

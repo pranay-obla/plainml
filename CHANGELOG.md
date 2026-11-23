@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.1 (unreleased)
+## 1.0.1 (November 22, 2026)
 
 - **Reports match the website.** The HTML reports use the same cardinal and gold, on cream or near-black,
   instead of blue, so the report embedded on a run page no longer clashes with the page around it.

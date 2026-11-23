@@ -1,6 +1,6 @@
 {
   "name": "plainml-web",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "plainml's website: the page served by `plainml web` and the in-browser version",
   "license": "MIT",
