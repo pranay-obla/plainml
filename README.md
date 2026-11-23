@@ -120,7 +120,7 @@ plainml web
 5. **Download what you need.** Every file the run produced is listed with its own **Download** button,
    and tables can be previewed first.
 
-<p align="center"><img src="https://raw.githubusercontent.com/pranay-obla/plainml/main/assets/web.png" alt="The plainml website: a finished run with headline scores, key findings, the embedded report and a list of files, each with its own download button" width="900"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/pranay-obla/plainml/main/assets/web.png" alt="The plainml website: a finished run with headline scores, key findings in plain English, a 3D view of every model's score against the baseline, the report and its files" width="900"></p>
 
 The **Runs** page lists everything you've run (from the website or the command line), and **Predict** uses
 any saved model on a new upload. The site works in light and dark mode and on phones. It only listens on

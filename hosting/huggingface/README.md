@@ -1,8 +1,8 @@
 ---
 title: plainml
 emoji: 📊
-colorFrom: blue
-colorTo: indigo
+colorFrom: red
+colorTo: yellow
 sdk: static
 app_file: index.html
 pinned: false
@@ -20,8 +20,11 @@ Upload a CSV or Excel file and choose what to find out:
 - check for drift
 - profile or clean the data
 
-You get headline numbers, plain-English findings and a full report, and every result file has its own
-download button.
+No data to hand? Click one of six example datasets and press Run.
+
+You get headline numbers, plain-English findings, a 3D view you can turn and zoom (every model side by
+side, which columns matter, customer groups, unusual rows or forecast lanes) and a full report, and every
+result file has its own download button.
 
 **Everything runs in your browser.** Python and plainml run on your own computer (via Pyodide), so your
 data is never uploaded anywhere. The first visit downloads about 50 MB of Python libraries; later visits

@@ -93,7 +93,7 @@ pip install "plainml[web]"
 plainml web
 ```
 
-Click any of these datasets under the drop zone (or drag the file onto the page): the task and its
+Click any of these datasets next to the drop zone (or drag the file onto the page): the task and its
 settings are filled in, so you only press **Run**, then download whichever result files you want. Or,
 with nothing to install, open [plainml-tpua.vercel.app](https://plainml-tpua.vercel.app) and do the same there.
 
