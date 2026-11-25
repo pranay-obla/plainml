@@ -909,15 +909,37 @@ def start_upload(ws: Workspace, filename: str) -> tuple[str, Path]:
     return upload_id, folder / name
 
 
+def _upload_error(name: str, exc: PlainMLError) -> PlainMLError:
+    """The reader's error, for a browser: the file's own name (never the server's path to it),
+    what is wrong in plain words, and what to do next."""
+    cause = exc.__cause__
+    if isinstance(cause, pd.errors.EmptyDataError) or "no columns" in str(exc).lower() or "is empty" in str(exc).lower():
+        return PlainMLError(
+            f"'{name}' is empty: it has no columns or rows.",
+            hint="Check that the sheet was saved with its data, then upload it again.",
+        )
+    if isinstance(cause, (pd.errors.ParserError, UnicodeDecodeError, ValueError)):
+        return PlainMLError(
+            f"'{name}' doesn't read as a table.",
+            hint="Save it from your spreadsheet app as CSV or Excel, then upload it again.",
+        )
+    if exc.hint:
+        return PlainMLError(exc.message.replace(str(Path(name).resolve()), name), hint=exc.hint)
+    return PlainMLError(
+        f"Couldn't read '{name}'.",
+        hint="Upload a CSV, Excel, Parquet, JSON or TSV file.",
+    )
+
+
 def finish_upload(
     upload_id: str, path: Path, sample: dict[str, Any] | None = None
 ) -> dict[str, Any]:
     """Read a written upload and remember its summary (removing it if it can't be read)."""
     try:
         summary = {**summarize_upload(path, upload_id), "sample": sample}
-    except PlainMLError:
+    except PlainMLError as exc:
         shutil.rmtree(path.parent, ignore_errors=True)
-        raise
+        raise _upload_error(path.name, exc) from exc
     (path.parent / "upload.json").write_text(
         json.dumps({"file": path.name, **summary}), encoding="utf-8"
     )

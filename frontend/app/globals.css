@@ -220,8 +220,8 @@ details.more > summary::-webkit-details-marker { display: none; }
 details.more > summary::before { content: "›"; display: inline-block; transition: transform 0.15s; font-size: 16px; }
 details.more[open] > summary::before { transform: rotate(90deg); }
 
-.pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 99px; border: 1px solid var(--line); background: var(--surface); font-size: 12.5px; color: var(--ink-2); }
-.pill b { color: var(--ink); font-weight: 600; }
+.pill { display: inline-flex; align-items: center; gap: 6px; max-width: 100%; min-width: 0; padding: 4px 10px; border-radius: 99px; border: 1px solid var(--line); background: var(--surface); font-size: 12.5px; color: var(--ink-2); }
+.pill b { color: var(--ink); font-weight: 600; min-width: 0; overflow-wrap: anywhere; }
 .pills { display: flex; flex-wrap: wrap; gap: 6px; }
 .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex: none; background: var(--muted); }
 .k-numeric { background: var(--kind-numeric); }
