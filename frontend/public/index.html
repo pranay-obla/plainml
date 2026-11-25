@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en" data-type="software" data-radius="soft" data-ground="sky" data-buttons="arrow" data-motion>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>plainml: machine learning for spreadsheets, in your browser</title>
+<meta name="description" content="Upload a CSV or Excel file and plainml compares up to 17 models, tests the best on rows it never saw and explains it in plain English. Free and open source.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="plainml: machine learning for spreadsheets">
+<meta property="og:description" content="Up to 17 models compared, tested and explained in plain English, running in your browser.">
+<meta property="og:image" content="/share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#fbf6ec">
+<!-- <link rel="canonical" href="https://[the project's own domain]/"> -->
+<meta name="site-kind" content="software">
+<meta name="page-type" content="software">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400..500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/system.css">
+<link rel="stylesheet" href="assets/ui/cards.css">
+<link rel="stylesheet" href="assets/motion/motion.css">
+<link rel="stylesheet" href="assets/backgrounds/backgrounds.css">
+<link rel="stylesheet" href="assets/layout/layout.css">
+<link rel="stylesheet" href="assets/icons/icon.css">
+<style>
+:root {
+  --p-bg: #fbf6ec; --p-surface: #efe8df; --p-ink: #1d0808; --p-muted: #725f5b;
+  --p-accent: #990000; --p-accent-ink: #fbf6ec; --p-action: #990000; --p-action-ink: #fbf6ec;
+  --p-inv-bg: #1d0808; --p-inv-surface: #2a1514; --p-inv-ink: #fbf6ec; --p-inv-muted: #a0918b;
+  --p-inv-accent: #fbf6ec; --p-inv-accent-ink: #1d0808; --p-inv-action: #fbf6ec; --p-inv-action-ink: #1d0808;
+  --font-display: "Geist", system-ui, sans-serif;
+  --font-text: "Geist", system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --display-weight: 500;
+  --display-tracking: -0.035em;
+  --display-tracking-xl: -0.045em;
+}
+</style>
+<link rel="stylesheet" href="assets/ui/base.css">
+<link rel="stylesheet" href="assets/ui/window/fragment.css">
+<link rel="stylesheet" href="assets/ui/checklist/fragment.css">
+<link rel="stylesheet" href="assets/diagrams/diagram.css">
+<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<script src="assets/backgrounds/backgrounds.js"></script>
+<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+<link rel="modulepreload" href="assets/moments/moments.js">
+<link rel="modulepreload" href="assets/moments/lib.js">
+<link rel="modulepreload" href="assets/moments/letters-assemble/moment.js">
+<link rel="modulepreload" href="assets/moments/line-carries-colour/moment.js">
+<script>document.documentElement.classList.add('sc-js');setTimeout(()=>document.documentElement.classList.add('sc-safe'),2500)</script>
+<style>
+/* the logo: plainml's own mark */
+.nav__logo img { width: 28px; height: 28px; flex: none; }
+
+/* hero collage: its pieces sized in % of the collage, their text in container units */
+.ly-collage { container-type: inline-size; }
+.ly-collage .ly-piece { box-shadow: 0 1px 2px rgb(29 8 8 / .08), 0 24px 48px -24px rgb(29 8 8 / .38); }
+.ly-collage .ly-piece > img { background: #fbf4e6; }
+.pc { background: #fff; color: #1d0808; padding: 3.4cqw 3.8cqw; display: grid; align-content: start; gap: 1.8cqw; font: 400 max(13px, 2cqw)/1.35 var(--font-text); }
+.pc .pc__lbl { color: #725f5b; font-size: max(13px, 1.8cqw); }
+.pc .pc__big { font: 500 max(22px, 6.4cqw)/1 var(--font-display); letter-spacing: -0.03em; color: #990000; font-variant-numeric: tabular-nums; }
+.pc .pc__row { display: flex; justify-content: space-between; gap: 2cqw; padding-top: 1.4cqw; border-top: 1px solid #efe3cc; font-variant-numeric: tabular-nums; }
+.pc .pc__row em { font-style: normal; color: #725f5b; }
+.pc ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 1.4cqw; }
+.pc li { display: grid; grid-template-columns: auto 1fr; gap: 1.6cqw; align-items: baseline; }
+.pc li::before { content: ""; width: 1.4cqw; min-width: 8px; height: 1.4cqw; min-height: 8px; border-radius: 50%; background: var(--dot, #990000); transform: translateY(-.1em); }
+.pc .pc__title { font-weight: 500; }
+@media (max-width: 639px) { .pc .pc__more { display: none; } }
+
+/* app-frame (sections-library.md, app-frame) */
+.app.ui { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); margin-top: var(--s-7); background: var(--u-bg); border: 1px solid var(--u-border); border-radius: var(--u-r); box-shadow: var(--u-shadow); }
+.app > .app__pane { position: relative; min-width: 0; min-height: 0; overflow: hidden; }
+.app > .app__pane + .app__pane { border-left: 1px solid var(--u-line); }
+.app > .app__pane > .ui-panel { width: 100%; border: 0; border-radius: 0; box-shadow: none; }
+.app > .app__pane::after { content: ""; position: absolute; inset: auto 0 0 0; height: 64px; background: linear-gradient(transparent, var(--u-bg)); pointer-events: none; }
+@media (min-width: 1024px) and (max-width: 1279px) { .app.ui { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); } }
+@media (max-width: 1023px) {
+  .app.ui { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+  .app > .app__pane--list { max-height: 252px; }
+  .app > .app__pane--list::after { display: none; }
+  .app .ui-win__side { display: none; }
+  .app .ui-win__body { grid-template-columns: minmax(0, 1fr); }
+  .app > .app__pane + .app__pane { border-left: 0; border-top: 1px solid var(--u-line); }
+}
+@media (max-width: 639px) {
+  .app.ui { grid-template-rows: minmax(0, 1fr); }
+  .app > .app__pane--list { display: none; }
+  .app > .app__pane + .app__pane { border-top: 0; }
+}
+/* the open run: plainml's results page, drawn in the window's tokens */
+.run { padding: 20px 24px; display: grid; gap: 16px; color: var(--u-ink); font-size: 13px; line-height: 1.45; }
+.run__crumb { color: var(--u-muted); }
+.run__title { font: 500 22px/1.15 var(--font-display); letter-spacing: -0.02em; margin: 0; }
+.run__sub { color: var(--u-muted); margin-top: 2px; }
+.run__tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.run__tile { border: 1px solid var(--u-line); border-radius: 10px; padding: 10px 12px; display: grid; gap: 2px; }
+.run__tile b { font: 500 18px/1.2 var(--font-display); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.run__tile.is-hero { background: #990000; border-color: #990000; color: #fbf6ec; }
+.run__tile.is-hero b { color: #ffcc00; }
+.run__tile span { color: inherit; opacity: .75; }
+.run__h { font-weight: 500; margin: 0; }
+.bars-mini { display: grid; gap: 6px; position: relative; }
+.bars-mini__row { display: grid; grid-template-columns: 150px minmax(0, 1fr) 48px; gap: 10px; align-items: center; font-variant-numeric: tabular-nums; }
+.bars-mini__row i { display: block; height: 10px; border-radius: 0 4px 4px 0; background: #c4b4a3; width: calc(var(--v) * 100%); }
+.bars-mini__row.is-best i { background: #990000; }
+.bars-mini__row.is-base i { background: #e6dccd; }
+.bars-mini__row em { font-style: normal; text-align: right; color: var(--u-muted); }
+.run__find { margin: 0; padding-left: 16px; display: grid; gap: 4px; }
+@media (max-width: 639px) { .run__tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } .bars-mini__row { grid-template-columns: 110px minmax(0, 1fr) 44px; } }
+
+/* features on the dark band: one panel height for the group, the capture fills it */
+#tasks .panel { --p-h: 336px; }
+#tasks .panel > img { object-fit: cover; object-position: 50% 45%; }
+@media (max-width: 639px) { #tasks .panel { --p-h: 120px; } }
+
+/* the open run in a narrower frame: fewer rows, so none is cut at the pane's edge */
+@media (max-width: 1279px) { .bars-mini__row:nth-child(n+4):not(.is-base) { display: none; } }
+@media (min-width: 640px) and (max-width: 1279px) { .run__findings { display: none; } }
+.run__findings { display: grid; gap: 16px; }
+@media (max-width: 639px) {
+  .bars-mini__row:nth-child(n+4):not(.is-base) { display: none; }
+  .run__find li:nth-child(n+3) { display: none; }
+}
+/* headings keep "spreadsheet" whole: no hyphen breaks in English headings */
+:is(h1, h2, h3) { hyphens: manual; -webkit-hyphens: manual; }
+@media (min-width: 1024px) and (max-width: 1279px) { #hero-h { letter-spacing: var(--display-tracking-xl); } }
+
+/* the hero's figures stay figures, not headings */
+.pc .pc__big { font-size: max(20px, 4.6cqw); }
+/* the checks frame fills its half of the screen */
+#checks .frame--split { --ratio: 100%; }
+/* the letters moment: body text in the ink, the type set larger on a phone */
+#tested .mo-la__sub { color: var(--ink); }
+@media (max-width: 639px) { #tested .mo-la__type { font-size: 19vw; } }
+/* the held-out split under the letters */
+#tested .split { margin-top: var(--s-7); max-width: 720px; display: grid; gap: 12px; font-variant-numeric: tabular-nums; }
+#tested .split__bar { display: grid; grid-template-columns: 4fr 1fr; gap: 4px; height: 48px; }
+#tested .split__bar i { display: block; border-radius: 10px; }
+#tested .split__train { background: var(--p-surface); border: 1px solid rgb(29 8 8 / .12); }
+#tested .split__test { background: var(--p-accent); }
+#tested .split__keys { display: flex; justify-content: space-between; gap: 16px; font-size: 15px; color: var(--ink); }
+#tested .split__key-test { color: var(--p-accent); text-align: right; }
+
+/* the privacy diagram */
+#private .panel { --p-h: 600px; }
+@media (max-width: 1023px) { #private .panel { --p-h: 440px; margin-top: var(--s-7); } }
+/* a phone: each section one screen (two for the questions and the close), the collage on the container's lines */
+@media (max-width: 639px) {
+  #questions, footer.closing { --hm: 2; }
+  #checks .frame--split { --ratio: 72%; }
+  #private .panel, #files .panel { --p-h: 316px; }
+  .ly-collage .ly-piece:not(.pc) { left: 0 !important; width: 100% !important; top: 0 !important; height: 52% !important; }
+  .ly-collage .ly-piece:not(.pc) + .pc, .ly-collage__set > .pc:first-child { left: 0 !important; width: 48% !important; top: 55% !important; height: 45% !important; }
+  .ly-collage .pc + .pc { left: 52% !important; width: 48% !important; top: 55% !important; height: 45% !important; }
+  .ly-collage__set > .pc:first-child + .pc + .ly-piece:not(.pc) { top: 0 !important; }
+}
+/* a narrow phone: the header keeps the logo and the menu */
+@media (max-width: 380px) {
+  header.nav .nav__bar > .nav__actions { display: none; }
+  footer.closing .closing__cta .btn.btn--wide { min-width: 0; width: 100%; padding-inline: 20px; font-size: 16px; }
+}
+
+/* the files diagram */
+#files .panel { --p-h: 488px; margin-top: var(--s-7); }
+@media (max-width: 1023px) { #files .panel { --p-h: 440px; } }
+@media (max-width: 639px) { #files .panel { --p-h: 420px; } }
+</style>
+</head>
+<body>
+<!-- type: software (an AutoML tool: app and Python package)
+     deal: hero triptych, nav-mega, close close-type, footer footer-dark, rhythm dark-band, buttons arrow,
+     mark: the client's own logo (in place of the dealt dots), palette: the client's own USC cardinal on cream
+     through start.mjs brand, type geist, radius soft, lit ground sky
+     effect: none (the 3D captures carry the visuals); moments: letters-assemble (#tested),
+     line-carries-colour (#tasks, the dark band) -->
+<header class="nav">
+  <div class="wrap nav__bar">
+    <a class="skip-link" href="#top">Skip to content</a>
+    <a class="nav__logo" href="#top"><img src="/favicon.svg" alt="" width="28" height="28">plainml</a>
+    <nav class="nav__links" aria-label="Main">
+      <div class="nav__item">
+        <a class="nav__link" href="#tasks">Product <svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="nav__menu">
+          <div class="wrap grid">
+            <div class="menu-col span-3">
+              <p class="t-label">Jobs</p>
+              <a href="#tasks">Predict a column<span>The best of 17 models</span></a>
+              <a href="#tasks">Forecast over time<span>One forecast per store</span></a>
+              <a href="#tasks">Find groups<span>Segments and what sets them apart</span></a>
+              <a href="#tasks">Rank the columns<span>Up to 19 importance methods</span></a>
+            </div>
+            <div class="menu-col span-3">
+              <p class="t-label">Checks</p>
+              <a href="#checks">Data checks<span>IDs, text numbers, rare classes</span></a>
+              <a href="#tested">Held-out rows<span>A fifth kept back for the test</span></a>
+              <a href="#runs">Baseline<span>Every model has to beat it</span></a>
+            </div>
+            <a class="menu-card span-3 start-10" href="#runs">
+              <div class="panel"><img class="frame__img" src="/img/importance-light.webp" alt="plainml's 3D view of which columns matter for predicting churn" loading="lazy" data-source="client" data-subject="plainml importance result, 3D view"></div>
+              <span class="t-card">New in 1.0</span>
+              <span class="t-small muted">Every result opens in 3D</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="nav__item"><a class="nav__link" href="#checks">Checks</a></div>
+      <div class="nav__item"><a class="nav__link" href="#files">Files</a></div>
+      <div class="nav__item"><a class="nav__link" href="#questions">Questions</a></div>
+      <div class="nav__item"><a class="nav__link" href="https://plainml-tpua.vercel.app/docs/">Docs</a></div>
+    </nav>
+    <div class="nav__actions">
+      <a class="nav__link" href="/runs/">Runs</a>
+      <a class="btn btn--primary" href="/new/">Upload a spreadsheet</a>
+    </div>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+<main id="top">
+  <section class="hero hero--triptych" data-enter aria-labelledby="hero-h">
+    <div class="wrap"><div class="hero-text grid hero__grid">
+      <div class="span-4">
+        <h1 id="hero-h">AutoML for spreadsheets</h1>
+        <p class="hero__lead">Drop in a CSV or Excel file. plainml compares up to 17 models, tests the best on rows it never saw and explains it in plain English.</p>
+      </div>
+      <div class="ly-collage span-5 start-5" role="img" aria-label="Three plainml results: customers sorted into three groups in 3D, every model's score against a baseline with the key findings, and a sales forecast for three stores">
+        <div class="ly-collage__set is-on">
+          <div class="ly-piece" style="left: 4%; top: 6%; width: 64%; height: 46%"><img src="/img/points-light.webp" alt="" style="object-position: 50% 60%" fetchpriority="high" data-source="client" data-subject="plainml clustering result, 3D view"></div>
+          <div class="ly-piece pc" style="left: 6%; top: 57%; width: 52%">
+            <span class="pc__lbl">Groups in customers.csv</span>
+            <ul>
+              <li style="--dot: #b3261e"><span><span class="pc__title">Group 0, 45%</span><span class="pc__more"> · app, lower spend</span></span></li>
+              <li style="--dot: #2a78d6"><span><span class="pc__title">Group 1, 35%</span><span class="pc__more"> · store, higher spend</span></span></li>
+              <li style="--dot: #c98500"><span><span class="pc__title">Group 2, 20%</span><span class="pc__more"> · web, most visits</span></span></li>
+            </ul>
+          </div>
+          <div class="ly-piece pc" style="left: 62%; top: 60%; width: 34%; height: 36%">
+            <span class="pc__lbl">Silhouette</span>
+            <span class="pc__big">0.58</span>
+            <div class="pc__row"><span>Method</span><em>Gaussian mixture</em></div>
+          </div>
+        </div>
+        <div class="ly-collage__set" aria-hidden="true">
+          <div class="ly-piece pc" style="left: 4%; top: 6%; width: 50%">
+            <span class="pc__lbl">Key findings · churn.csv</span>
+            <ul>
+              <li><span>More support calls, churn more likely: 24% to 38%.</span></li>
+              <li><span>Monthly contracts churn most (37%), annual least (18%).</span></li>
+              <li class="pc__more"><span>Premium plans churn more than basic ones.</span></li>
+            </ul>
+          </div>
+          <div class="ly-piece pc" style="left: 58%; top: 10%; width: 38%">
+            <span class="pc__lbl">Test F1, on 300 unseen rows</span>
+            <span class="pc__big">0.6358</span>
+            <div class="pc__row"><span>Baseline</span><em>0.4511</em></div>
+          </div>
+          <div class="ly-piece" style="left: 34%; top: 46%; width: 62%; height: 50%"><img src="/img/bars-light.webp" alt="" style="object-position: 50% 55%" data-source="client" data-subject="plainml model comparison, 3D view"></div>
+        </div>
+        <div class="ly-collage__set" aria-hidden="true">
+          <div class="ly-piece" style="left: 4%; top: 6%; width: 66%; height: 46%"><img src="/img/series-light.webp" alt="" style="object-position: 50% 50%" data-source="client" data-subject="plainml forecast result, 3D view"></div>
+          <div class="ly-piece pc" style="left: 6%; top: 58%; width: 40%">
+            <span class="pc__lbl">Weekly pattern</span>
+            <div class="pc__row"><span>Saturday</span><em>+26%</em></div>
+            <div class="pc__row"><span>Monday</span><em>−14%</em></div>
+          </div>
+          <div class="ly-piece pc" style="left: 52%; top: 58%; width: 44%; height: 38%">
+            <span class="pc__lbl">Forecast · store_sales.csv</span>
+            <span class="pc__big">14 days</span>
+            <div class="pc__row"><span>Average error</span><em>31.36</em></div>
+          </div>
+        </div>
+      </div>
+      <div class="span-3 start-10 hero__cta"><a class="btn btn--primary" href="/new/">Upload a spreadsheet<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a></div>
+    </div></div>
+  </section>
+
+  <section class="section" id="runs" aria-labelledby="runs-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <h2 class="span-5" id="runs-h">One results page for every spreadsheet you run</h2>
+        <div class="span-6 start-7 stack-4">
+          <p class="t-lead">Your runs are listed on the left. Open one for its score against a do-nothing baseline, the findings in plain English, a 3D view and every file it saved.</p>
+          <a class="link" href="https://plainml-tpua.vercel.app/docs/website/">Read the results guide</a>
+        </div>
+      </div>
+      <div class="ui app fill" role="img" aria-label="The plainml app: a list of runs beside the open churn prediction, with its scores, every model compared against the baseline and the key findings" data-ui-pause-host>
+        <div class="app__pane app__pane--list" data-ui-loop>
+          <div class="ui ui-panel ui-win" data-ui="window" data-open="Queued" data-work="Running" data-done="Done">
+            <div class="ui-win__bar">
+              <span class="ui-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="ui-win__crumb">plainml <i>/</i> <b>Runs</b></span>
+              <span class="ui-spacer"></span>
+              <span class="ui-win__search" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></svg><span class="ui-win__ph">Search</span><span class="ui-kbd">/</span></span>
+            </div>
+            <div class="ui-win__body">
+              <nav class="ui-win__side" aria-hidden="true">
+                <span class="ui-win__nav is-on">All<em>9</em></span>
+                <span class="ui-win__nav">Models<em>3</em></span>
+                <span class="ui-win__nav">Forecasts<em>2</em></span>
+                <span class="ui-win__nav">Groups<em>1</em></span>
+                <span class="ui-win__nav">Unusual<em>1</em></span>
+                <span class="ui-win__label">Data</span>
+                <span class="ui-win__nav"><span class="ui-win__hash">#</span>churn.csv</span>
+                <span class="ui-win__nav"><span class="ui-win__hash">#</span>store_sales.csv</span>
+              </nav>
+              <div class="ui-win__main">
+                <div class="ui-win__cols" aria-hidden="true"><span>Run</span><span>Data</span><span>Status</span><span>Age</span></div>
+                <ul class="ui-win__rows">
+                  <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="1">PR</span><span class="ui-win__who">Predicting price</span><span class="ui-win__sub">house_prices.csv</span><span class="ui-win__st" data-st>Queued</span><span class="ui-win__age">now</span></li>
+                  <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="3">FC</span><span class="ui-win__who">Forecasting units_sold</span><span class="ui-win__sub">daily_sales.csv · 30 days</span><span class="ui-win__st" data-st>Queued</span><span class="ui-win__age">now</span></li>
+                  <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="1">PC</span><span class="ui-win__who">Predicting churned</span><span class="ui-win__sub">churn.csv · F1 0.6456</span><span class="ui-win__st is-done" data-st>Done</span><span class="ui-win__age">2m</span></li>
+                  <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="3">FS</span><span class="ui-win__who">Forecasting sales</span><span class="ui-win__sub">store_sales.csv · 3 stores</span><span class="ui-win__st is-done" data-st>Done</span><span class="ui-win__age">6m</span></li>
+                  <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="4">GR</span><span class="ui-win__who">Groups in customers</span><span class="ui-win__sub">customers.csv · 3 groups</span><span class="ui-win__st is-done" data-st>Done</span><span class="ui-win__age">9m</span></li>
+                  <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="2">UR</span><span class="ui-win__who">Unusual rows</span><span class="ui-win__sub">transactions.csv · 30 of 3,000</span><span class="ui-win__st is-done" data-st>Done</span><span class="ui-win__age">12m</span></li>
+                  <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="5">CM</span><span class="ui-win__who">Columns that matter</span><span class="ui-win__sub">churn.csv · 5 worth keeping</span><span class="ui-win__st is-done" data-st>Done</span><span class="ui-win__age">15m</span></li>
+                  <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="4">DP</span><span class="ui-win__who">Data profile</span><span class="ui-win__sub">churn.csv · 1,500 rows</span><span class="ui-win__st is-done" data-st>Done</span><span class="ui-win__age">18m</span></li>
+                  <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="3">CL</span><span class="ui-win__who">Clean copy</span><span class="ui-win__sub">churn.csv</span><span class="ui-win__st is-done" data-st>Done</span><span class="ui-win__age">21m</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="app__pane app__pane--open">
+          <div class="ui-panel run">
+            <div class="run__crumb">Runs / 20261124-205857_churn</div>
+            <div>
+              <p class="run__title">Predicting churned</p>
+              <div class="run__sub">classification · churn.csv · 1,500 rows</div>
+            </div>
+            <div class="run__tiles">
+              <div class="run__tile is-hero"><span>Test F1</span><b>0.6358</b><span>on unseen rows</span></div>
+              <div class="run__tile"><span>Best model</span><b>Naive Bayes</b><span>of 9 tried</span></div>
+              <div class="run__tile"><span>Cross-validated</span><b>0.6456</b><span>± 0.0216</span></div>
+              <div class="run__tile"><span>Baseline</span><b>0.4511</b><span>to beat</span></div>
+            </div>
+            <p class="run__h">The top models against the baseline</p>
+            <div class="bars-mini">
+              <div class="bars-mini__row is-best"><span>Naive Bayes</span><i style="--v: .99"></i><em>0.6456</em></div>
+              <div class="bars-mini__row"><span>Random Forest</span><i style="--v: .953"></i><em>0.6218</em></div>
+              <div class="bars-mini__row"><span>Logistic Regression</span><i style="--v: .951"></i><em>0.6202</em></div>
+              <div class="bars-mini__row"><span>Linear Discriminant</span><i style="--v: .911"></i><em>0.5942</em></div>
+              <div class="bars-mini__row"><span>LightGBM</span><i style="--v: .897"></i><em>0.5854</em></div>
+              <div class="bars-mini__row is-base"><span>Baseline</span><i style="--v: .691"></i><em>0.4511</em></div>
+            </div>
+            <div class="run__findings">
+            <p class="run__h">Key findings</p>
+            <ul class="run__find">
+              <li>The model relies most on signup_date, support_calls and contract.</li>
+              <li>Higher support_calls, 'yes' more likely (24% to 38%).</li>
+            </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="tested" data-moment="letters-assemble" data-moment-opts='{"spread": 1}' aria-labelledby="tested-h">
+    <div class="wrap">
+      <h2 class="mo-la__type" id="tested-h">Tested on the 20% held back</h2>
+      <p class="mo-la__sub">plainml sets a fifth of your rows aside before training starts, then scores the winning model on them once.</p>
+      <div class="split" role="img" aria-label="churn.csv's 1,500 rows: 1,200 train and compare the models, 300 are kept back for the test">
+        <div class="split__bar"><i class="split__train"></i><i class="split__test"></i></div>
+        <div class="split__keys"><span>churn.csv · 1,200 rows train and compare</span><span class="split__key-test">300 kept for the test</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="checks" aria-labelledby="checks-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <div class="span-5 stack-6">
+          <h2 id="checks-h">Checks every spreadsheet column first</h2>
+          <p class="t-lead">plainml reads every column first. It leaves out ID columns, turns numbers stored as text into numbers and warns you when one class is rare.</p>
+          <ul class="stack-2">
+            <li>5-fold cross-validation on the training rows</li>
+            <li>A do-nothing baseline every model has to beat</li>
+            <li>Probabilities checked for calibration</li>
+          </ul>
+          <a class="link" href="https://plainml-tpua.vercel.app/docs/how-it-works/">Read how the checks work</a>
+        </div>
+        <div class="frame frame--split frame--lit span-6 start-7">
+          <div class="stage stage--fade-b">
+            <div class="at-rise fit" style="--fit-max: 460px; --ax: max(24px, 50% - 230px); --ay: 64px" data-ui-loop>
+              <div class="ui ui-panel ui-checks" data-ui="checklist">
+                <div class="ui-checks__head">
+                  <div class="ui-title">Data checks · churn.csv</div>
+                  <span class="ui-spacer"></span>
+                  <div class="ui-meta" data-checks-count>2 of 5</div>
+                </div>
+                <div class="ui-checks__bar"><i data-checks-bar style="--k:0.4"></i></div>
+                <ul class="ui-checks__list">
+                  <li class="ui-check is-done"><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span><span class="ui-check__label">Read 1,500 rows, 9 columns</span></li>
+                  <li class="ui-check is-done"><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span><span class="ui-check__label">Left out customer_id, an ID</span></li>
+                  <li class="ui-check"><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span><span class="ui-check__label">monthly_charges read as numbers</span></li>
+                  <li class="ui-check"><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span><span class="ui-check__label">Rare class weighted: 18% yes</span></li>
+                  <li class="ui-check"><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span><span class="ui-check__label">300 rows set aside for the test</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section g2 ground-inverse" id="tasks" data-moment="line-carries-colour" data-moment-opts='{"from": "base"}' aria-labelledby="tasks-h">
+    <div class="wrap">
+      <div class="group">
+        <div class="section-head">
+          <h2 id="tasks-h">Eight jobs from one upload. <span class="muted">Every result opens in 3D.</span></h2>
+        </div>
+        <div class="grid">
+          <article class="card card--row span-6">
+            <h3>Predicts any column</h3>
+            <p>Yes or no, a category or a number. The best of up to 17 models, explained column by column.</p>
+            <div class="panel panel--flush"><img class="frame__img" src="/img/bars-dark.webp" decoding="async" alt="plainml's 3D comparison of every model's score for predicting churn" data-source="client" data-subject="plainml model comparison, 3D, dark"></div>
+          </article>
+          <article class="card card--row span-6">
+            <h3>Forecasts sales over time</h3>
+            <p>One forecast per store or product with an 80% range, promotions and public holidays.</p>
+            <div class="panel panel--flush"><img class="frame__img" src="/img/series-dark.webp" decoding="async" alt="plainml's 3D forecast lanes for three stores, history and the next 14 days" data-source="client" data-subject="plainml forecast, 3D, dark"></div>
+          </article>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="card card--row span-6">
+          <h3>Finds customer groups</h3>
+          <p>Segments in your rows and what sets each one apart, in plain words.</p>
+          <div class="panel panel--flush"><img class="frame__img" src="/img/points-dark.webp" decoding="async" alt="plainml's 3D point cloud of customers in three groups" data-source="client" data-subject="plainml clustering, 3D, dark"></div>
+        </article>
+        <article class="card card--row span-6">
+          <h3>Ranks the columns that matter</h3>
+          <p>Up to 19 importance methods, combined into one ranking with the columns worth keeping.</p>
+          <div class="panel panel--flush"><img class="frame__img" src="/img/importance-dark.webp" decoding="async" alt="plainml's 3D bars of how much each column matters for churn" data-source="client" data-subject="plainml importance, 3D, dark"></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="files" aria-labelledby="files-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <h2 class="span-5" id="files-h">Reads your spreadsheets, saves a model you can use</h2>
+        <p class="span-6 start-7 t-lead">CSV, Excel, Parquet, JSON or a database table go in. Out come the model, an HTML report and the predictions, ready to serve as an API or ship in a Docker image.</p>
+      </div>
+      <div class="panel">
+        <div class="dg" data-dg-still data-diagram='{"layout":"bowtie","alt":"Excel, JSON and PostgreSQL go into plainml, which saves an HTML report, an API and a Docker image.","sources":[{"label":"Excel","icon":"xlsx","sub":".xlsx"},{"label":"JSON","icon":"json","sub":"records"},{"label":"PostgreSQL","icon":"postgres","sub":"one table"}],"core":{"label":"plainml"},"targets":[{"label":"Report","icon":"file:html","sub":"report.html"},{"label":"API","icon":"fastapi","sub":"plainml serve"},{"label":"Docker","icon":"docker","sub":"one image"}]}'></div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section" id="questions" aria-labelledby="questions-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <div class="span-5 stack-4">
+          <h2 id="questions-h">Questions</h2>
+          <p>Something not covered here? Ask on GitHub.</p>
+          <a class="link" href="https://github.com/pranay-obla/plainml/issues">Open an issue on GitHub</a>
+        </div>
+        <div class="faq span-6 start-7">
+          <div class="faq__item"><h3>Is there a price for plainml?</h3><p>No. It is free and open source under the MIT licence, and the website costs nothing to use.</p></div>
+          <div class="faq__item"><h3>Where does my spreadsheet go?</h3><p>Nowhere. In the browser version Python runs inside the page; with plainml web it stays on your machine.</p></div>
+          <div class="faq__item"><h3>Which spreadsheet files can I upload?</h3><p>CSV, Excel, Parquet, JSON and TSV, up to 200 MB in the browser. The command line also reads URLs and databases.</p></div>
+          <div class="faq__item"><h3>Do I need to know machine learning?</h3><p>No. Pick a column and a task; plainml chooses the methods and explains the result.</p></div>
+          <div class="faq__item"><h3>When is other machine learning software better?</h3><p>For the last fraction of accuracy on a very large dataset. AutoGluon or a cloud platform will do better there.</p></div>
+          <div class="faq__item"><h3>Can I use the model in my own apps?</h3><p>Yes. Download it, serve it as an API with plainml serve, or build a Docker image for it.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="private" aria-labelledby="private-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <div class="span-5 stack-6">
+          <h2 id="private-h">Your spreadsheet never leaves your computer</h2>
+          <p class="t-lead">On the website, Python, scikit-learn, LightGBM and XGBoost run inside the web page, so nothing is uploaded. Installed with pip, plainml web runs on your own machine.</p>
+          <a class="link" href="https://plainml-tpua.vercel.app/docs/website/#in-the-browser-with-no-server">Read how browser mode works</a>
+        </div>
+        <div class="panel span-6 start-7"><div class="dg" data-dg-still data-diagram='{"layout":"hub","alt":"Python, NumPy, pandas, SciPy, scikit-learn and plainml all run inside this browser tab.","center":{"label":"This browser tab","icon":"ui:monitor"},"spokes":[{"label":"Python","icon":"python"},{"label":"NumPy","icon":"logos:numpy"},{"label":"pandas","icon":"logos:pandas-icon"},{"label":"SciPy","icon":"si:scipy"},{"label":"scikit-learn","icon":"si:scikitlearn"},{"label":"plainml","icon":"ui:chart-column"}]}'></div></div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="footer closing footer--dark ground-inverse" id="contact" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--type">
+      <div class="section-head">
+        <h2 id="close-h">See what your spreadsheet can predict</h2>
+        <p>Free and open source. Six example datasets if you have none to hand.</p>
+      </div>
+      <a class="btn btn--primary btn--xl btn--wide" href="/new/">Upload a spreadsheet<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+    </div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-4 stack-4">
+          <a class="nav__logo" href="#top"><img src="/favicon.svg" alt="" width="28" height="28">plainml</a>
+          <p class="footer__lede">AutoML that explains itself, free and open source.</p>
+        </div>
+        <div class="span-2 footer__col"><h3>Product</h3><ul><li><a href="#tasks">Jobs</a></li><li><a href="#runs">Results</a></li><li><a href="#checks">Checks</a></li><li><a href="#files">Files</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>App</h3><ul><li><a href="/new/">New analysis</a></li><li><a href="/runs/">Runs</a></li><li><a href="/predict/">Predict</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Docs</h3><ul><li><a href="https://plainml-tpua.vercel.app/docs/">Guide</a></li><li><a href="https://plainml-tpua.vercel.app/docs/commands/">Commands</a></li><li><a href="https://plainml-tpua.vercel.app/docs/python-api/">Python API</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Project</h3><ul><li><a href="https://github.com/pranay-obla/plainml">GitHub</a></li><li><a href="https://pypi.org/project/plainml/">PyPI</a></li><li><a href="https://github.com/pranay-obla/plainml/releases">Releases</a></li></ul></div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; 2026 plainml &nbsp; MIT licence &nbsp; Product names and logos are trademarks of their owners</span>
+        <div class="socials"></div>
+      </div>
+    </div>
+  </div>
+</footer>
+<script type="module" src="assets/system.js"></script>
+<script type="module" src="assets/motion/motion.js"></script>
+<script type="module" src="assets/layout/layout.js"></script>
+<script type="module" src="assets/diagrams/mount.js"></script>
+</body>
+</html>

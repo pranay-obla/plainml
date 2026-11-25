@@ -15,7 +15,8 @@ the same `runs/` folder the command line uses, so both see the same history.
 
 ## Using it
 
-1. **Upload.** Drag a CSV, Excel, Parquet, JSON or TSV file onto the page. You see every column's type
+1. **Upload.** Press **Upload a spreadsheet** (or go to `/new/`) and drag a CSV, Excel, Parquet, JSON or
+   TSV file onto the page. You see every column's type
    (number, category, date, text, or not used) and a preview of the first rows.
 
     No data to hand? Next to the drop zone are six made-up example datasets (churn, house prices, store

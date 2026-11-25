@@ -64,7 +64,7 @@ function Analyze() {
 
   return (
     <main className="page">
-      <DatasetPanel upload={upload} onReplace={() => router.push("/#start")} />
+      <DatasetPanel upload={upload} onReplace={() => router.push("/new/")} />
       <div className="section">
         <div className="section-head">
           <h2>What do you want to find out?</h2>

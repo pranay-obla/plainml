@@ -48,7 +48,7 @@ export default function RunsPage() {
           <h2>Nothing here yet</h2>
           <p className="sub">Upload a file or try an example to run your first analysis.</p>
           <p style={{ marginTop: 20 }}>
-            <Link className="btn primary" href="/#start">
+            <Link className="btn primary" href="/new/">
               <Icon name="upload" />
               Get started
             </Link>

@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- **A redesigned landing page.** It shows real results: a results page with every run, the data checks,
+  the 3D views, the files plainml reads and saves, and what runs in your browser. Set in Geist.
+- **Uploading moved to `/new/`.** The upload box, the example datasets and your recent results are
+  there; every "New" and "Start over" link goes to it. The app pages use Geist too.
+
 ## 1.0.1 (November 22, 2026)
 
 - **Reports match the website.** The HTML reports use the same cardinal and gold, on cream or near-black,

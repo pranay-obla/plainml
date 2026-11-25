@@ -1,13 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Instrument_Sans, JetBrains_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import { AppProvider } from "@/components/AppContext";
 import { Gate } from "@/components/Gate";
 import { Footer, Header } from "@/components/Header";
 import "./globals.css";
 
-const display = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-display", display: "swap" });
-const body = Instrument_Sans({ subsets: ["latin"], variable: "--font-body", display: "swap" });
-const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
+// Geist for headings and text, as on the landing page (public/index.html).
+const body = Geist({ subsets: ["latin"], variable: "--font-body", display: "swap" });
+const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
 
 export const metadata: Metadata = {
   title: "plainml: upload a spreadsheet, get a model you understand",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fff9ec" },
+    { media: "(prefers-color-scheme: light)", color: "#fbf6ec" },
     { media: "(prefers-color-scheme: dark)", color: "#0c0505" },
   ],
 };
@@ -30,7 +30,7 @@ const THEME_SCRIPT = `try{var t=localStorage.getItem("plainml-theme");if(t==="li
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${body.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>

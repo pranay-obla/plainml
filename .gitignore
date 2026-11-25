@@ -33,3 +33,6 @@ plainml-output/
 .DS_Store
 .idea/
 .vscode/
+
+# the design kit's local check state and Chrome profiles
+frontend/.taste-skill/

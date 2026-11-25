@@ -26,7 +26,7 @@ export function Problem({ error }: { error: ApiError | Error }) {
         <h2>{error.message}</h2>
         {hint ? <p className="sub">{hint}</p> : null}
         <p style={{ marginTop: 20 }}>
-          <Link className="btn" href="/">
+          <Link className="btn" href="/new/">
             Start over
           </Link>
         </p>

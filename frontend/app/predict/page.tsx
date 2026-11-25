@@ -65,7 +65,7 @@ function Predict() {
           <h2>No models yet</h2>
           <p className="sub">Train a model, find groups, find anomalies or forecast first.</p>
           <p style={{ marginTop: 20 }}>
-            <Link className="btn primary" href="/#start">
+            <Link className="btn primary" href="/new/">
               <Icon name="upload" />
               Get started
             </Link>

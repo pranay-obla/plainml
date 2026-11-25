@@ -69,7 +69,7 @@ export function BootChip() {
 }
 
 const TABS = [
-  { href: "/", label: "New", match: (p: string) => p === "/" || p.startsWith("/analyze") },
+  { href: "/new/", label: "New", match: (p: string) => p.startsWith("/new") || p.startsWith("/analyze") },
   { href: "/runs/", label: "Runs", match: (p: string) => p.startsWith("/runs") || p.startsWith("/run/") },
   { href: "/predict/", label: "Predict", match: (p: string) => p.startsWith("/predict") },
 ];
@@ -79,14 +79,15 @@ export function Header() {
   const { info, browser } = useApp();
   return (
     <header className="bar">
-      <Link className="brand" href="/" aria-label="plainml home">
+      {/* The home page is the static public/index.html, outside the app, so a plain link. */}
+      <a className="brand" href="/" aria-label="plainml home">
         <span className="mark">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M6 17v-6M12 17V7M18 17v-4" />
           </svg>
         </span>
         <span className="word">plainml</span>
-      </Link>
+      </a>
       <nav className="tabs" aria-label="Sections">
         {TABS.map((tab) => (
           <Link key={tab.href} href={tab.href} className={cx(tab.match(pathname) && "on")} aria-current={tab.match(pathname) ? "page" : undefined}>

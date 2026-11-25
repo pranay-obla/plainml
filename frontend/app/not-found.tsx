@@ -1,5 +1,4 @@
-import Link from "next/link";
-
+// The home page is the static public/index.html, so this is a plain link (a full page load).
 export default function NotFound() {
   return (
     <main className="page">
@@ -7,9 +6,9 @@ export default function NotFound() {
         <h1>Page not found</h1>
         <p className="sub">There&apos;s nothing at this address.</p>
         <p style={{ marginTop: 20 }}>
-          <Link className="btn primary" href="/">
+          <a className="btn primary" href="/">
             Go to plainml
-          </Link>
+          </a>
         </p>
       </div>
     </main>
