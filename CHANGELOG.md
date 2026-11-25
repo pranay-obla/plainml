@@ -2,10 +2,16 @@
 
 ## Unreleased
 
-- **A redesigned landing page.** It shows real results: a results page with every run, the data checks,
-  the 3D views, the files plainml reads and saves, and what runs in your browser. Set in Geist.
+- **A new home page.** A personal project page, built on real results:
+  - The hero holds plainml's own **3D model comparison**, live, on a cardinal band; drag to turn it.
+  - **Before and after:** churn.csv's rows next to what plainml says about them.
+  - **The held-out test as a machine:** an animated card sorter locks every fifth row card in a drawer
+    that only the winning model opens, once.
+  - **The jobs:** pick one to turn its real 3D result.
+  - **Where it runs:** in the browser, with pip, or as an API.
+  - It ends with a short letter from the author.
 - **Uploading moved to `/new/`.** The upload box, the example datasets and your recent results are
-  there; every "New" and "Start over" link goes to it. The app pages use Geist too.
+  there, and every "New" and "Start over" link goes to it.
 
 ## 1.0.1 (November 22, 2026)
 

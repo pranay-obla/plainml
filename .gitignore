@@ -17,6 +17,7 @@ env/
 coverage.xml
 htmlcov/
 site/
+!frontend/components/site/
 .vercel/
 
 # The built website (from frontend/, `npm run build`); PyPI packages include it

@@ -1,0 +1,55 @@
+:root {
+  --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px; --space-4xl: 144px;
+  --text-xs: 0.8125rem; --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.25rem; --text-xl: 1.5625rem; --text-2xl: 1.953rem; --text-3xl: 2.441rem;
+  --text-display-s: clamp(2.25rem, 4vw + 0.5rem, 3.75rem); --text-display: clamp(2.75rem, 5vw + 1rem, 5.25rem);
+  --text-section: clamp(2rem, 2.5vw + 1rem, 3.5rem); --text-title: clamp(1.25rem, 0.75vw + 0.875rem, 1.625rem); --text-lead: clamp(1.125rem, 0.35vw + 1rem, 1.375rem);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms; --dur-short: 220ms; --dur-long: 420ms;
+  --color-error: oklch(52% 0.19 27); --color-success: oklch(50% 0.12 150);
+  --container: 1440px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
+  --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
+  /* plainml's brand: USC cardinal and gold on cream (light), on near-black (dark) */
+  --color-paper: #fff9ec; --color-paper-2: #fbf0d9; --color-paper-3: #f3e3c4;
+  --color-ink: #1d0808; --color-ink-2: #4f3a3a; --color-muted: #6f5858;
+  --color-rule: rgb(60 10 10 / 0.16);
+  --color-accent: #990000; --color-accent-ink: #fff9ec; --color-focus: #990000;
+  --color-gold: #ffcc00; --color-gold-ink: #1d0808;
+  --color-band: #990000; --color-band-2: #7a0000; --color-band-ink: #fff6e3; --color-band-ink-2: #f6d9c8; --color-band-rule: rgb(255 246 227 / 0.22);
+  --color-gold-hover: #ffd633; --color-accent-hover: #800000;
+  --color-shade-1: rgb(0 0 0 / 0.12); --color-shade-3: rgb(0 0 0 / 0.55);
+  --color-band-shade: rgb(0 0 0 / 0.2); --color-band-wash: rgb(255 246 227 / 0.12);
+  --color-surface: #ffffff; --color-code: #1d0808; --color-code-ink: #fff6e3; --color-code-muted: #c8a99a;
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif; --font-body: var(--font-instrument), ui-sans-serif, system-ui, sans-serif; --font-outlier: var(--font-jetbrains), ui-monospace, monospace;
+  --display-weight: 700;
+  --radius-card: 18px; --radius-pill: 999px; --rule-hair: 1px; --shadow-card: 0 1px 2px rgb(60 10 10 / 0.06), 0 18px 40px -22px rgb(60 10 10 / 0.35);
+  --tracking-display: -0.035em;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-paper: #0c0505; --color-paper-2: #170b0b; --color-paper-3: #231111;
+    --color-ink: #fff6e3; --color-ink-2: #e2cfc0; --color-muted: #b49f92;
+    --color-rule: rgb(255 236 200 / 0.14);
+    --color-accent: #ffcc00; --color-accent-ink: #1d0808; --color-focus: #ffcc00;
+    --color-band: #7a0000; --color-band-2: #5c0000;
+    --color-surface: #170b0b; --color-code: #050202; --color-code-ink: #fff6e3;
+    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.4), 0 18px 40px -22px rgb(0 0 0 / 0.8);
+  }
+}
+:root[data-theme="dark"] {
+  --color-paper: #0c0505; --color-paper-2: #170b0b; --color-paper-3: #231111;
+  --color-ink: #fff6e3; --color-ink-2: #e2cfc0; --color-muted: #b49f92;
+  --color-rule: rgb(255 236 200 / 0.14);
+  --color-accent: #ffcc00; --color-accent-ink: #1d0808; --color-focus: #ffcc00;
+  --color-band: #7a0000; --color-band-2: #5c0000;
+  --color-surface: #170b0b; --color-code: #050202; --color-code-ink: #fff6e3;
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.4), 0 18px 40px -22px rgb(0 0 0 / 0.8);
+}
+/* the held-out figure (Anatomy kit) on the page's paper: its own theme block, over the kit's .iso defaults */
+.iso.fig[data-theme] {
+  --anatomy-card: var(--color-surface); --anatomy-paper: #fffdf8; --anatomy-face: #fffdf8; --anatomy-top: #ffffff;
+  --anatomy-shade-0: #e6dccb; --anatomy-shade-1: #ede4d4; --anatomy-shade-2: #f3ecdf; --anatomy-shade-3: #f8f3ea;
+  --anatomy-lit-top: #ffcc00; --anatomy-lit-shade: #e0a800; --anatomy-lit: #990000;
+  --anatomy-hi: #2a1414; --anatomy-mid: #8e7a72; --anatomy-lo: #bfae9f; --anatomy-faint: #dccfbf; --anatomy-dot: #2a1414;
+  --anatomy-halo: #8a6f55; --anatomy-halo-opacity: 0.28; --anatomy-text: #5c4a45; --anatomy-strong: #1d0808;
+  --fig-ink: #1d0808; --fig-muted: #6f5858; --fig-accent: #990000;
+}

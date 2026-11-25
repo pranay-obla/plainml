@@ -31,8 +31,13 @@ function isDark(): boolean {
   return window.matchMedia("(prefers-color-scheme: dark)").matches;
 }
 
-function palette(): Palette {
-  const dark = isDark();
+export type Tone = "light" | "dark" | "band";
+
+function palette(tone?: Tone): Palette {
+  // "band": drawn on the home page's cardinal hero, cream bars and a gold winner on a deeper red floor
+  if (tone === "band")
+    return { dark: true, bg: "#990000", surface: "#7a0000", ink: "#fff6e3", ink2: "#f6d9c8", muted: "#d9a493", line: "#6a0000", highlight: "#ffcc00", gold: "#ffcc00", warn: "#ffb020", bad: "#ffb4a8", series: SERIES.dark, other: "#f3d9c9" };
+  const dark = tone ? tone === "dark" : isDark();
   return dark
     ? { dark, bg: "#0c0505", surface: "#1d0e0e", ink: "#fff6e3", ink2: "#cdb9aa", muted: "#6e5a52", line: "#3a2420", highlight: "#ffcc00", gold: "#ffcc00", warn: "#ffb020", bad: "#ff6b5e", series: SERIES.dark, other: "#8a7a72" }
     : { dark, bg: "#fff9ec", surface: "#fbf4e6", ink: "#1d0808", ink2: "#5f4747", muted: "#c9b8a6", line: "#e6d8c2", highlight: "#990000", gold: "#e0a800", warn: "#9a5b00", bad: "#b3261e", series: SERIES.light, other: "#a39588" };
@@ -42,11 +47,12 @@ export function seriesColor(p: Palette, index: number): string {
   return index < p.series.length ? p.series[index] : p.other;
 }
 
-/** The current theme's colors, updated when the theme changes. */
-export function usePalette(): Palette | null {
+/** The current theme's colors, updated when the theme changes; `tone` fixes them (a scene drawn on a
+ *  coloured ground, like the home page's cardinal hero). */
+export function usePalette(tone?: Tone): Palette | null {
   const [value, setValue] = useState<Palette | null>(null);
   useEffect(() => {
-    const update = () => setValue(palette());
+    const update = () => setValue(palette(tone));
     update();
     const media = window.matchMedia("(prefers-color-scheme: dark)");
     media.addEventListener("change", update);
@@ -55,7 +61,7 @@ export function usePalette(): Palette | null {
       media.removeEventListener("change", update);
       window.removeEventListener("plainml-theme", update);
     };
-  }, []);
+  }, [tone]);
   return value;
 }
 

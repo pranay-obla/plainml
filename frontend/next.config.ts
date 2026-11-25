@@ -14,16 +14,7 @@ const config: NextConfig = {
   poweredByHeader: false,
   turbopack: { root: __dirname },
   agentRules: false, // `next dev` would otherwise write an AGENTS.md here
-  // In dev, / serves the static landing page (public/index.html); the export copies it to out/ as is.
-  ...(dev
-    ? {
-        rewrites: async () => ({
-          beforeFiles: [{ source: "/", destination: "/index.html" }],
-          afterFiles: [{ source: "/api/:path*", destination: `${api}/api/:path*` }],
-          fallback: [],
-        }),
-      }
-    : {}),
+  ...(dev ? { rewrites: async () => [{ source: "/api/:path*", destination: `${api}/api/:path*` }] } : {}),
 };
 
 export default config;

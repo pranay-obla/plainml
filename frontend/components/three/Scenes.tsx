@@ -9,7 +9,7 @@ import { useLayoutEffect, useMemo, useRef, useState, type MutableRefObject } fro
 import * as THREE from "three";
 import type { Bar, Visual } from "@/lib/types";
 import { num } from "@/lib/format";
-import { seriesColor, usePalette, useReducedMotionPref, type Palette } from "./theme";
+import { seriesColor, usePalette, useReducedMotionPref, type Palette, type Tone } from "./theme";
 
 type Bars = Extract<Visual, { type: "bars" }>;
 type Points = Extract<Visual, { type: "points" }>;
@@ -298,13 +298,14 @@ function SeriesView({ visual, palette }: { visual: Series; palette: Palette }) {
   );
 }
 
-export default function Scenes({ visual }: { visual: Visual }) {
-  const palette = usePalette();
+export default function Scenes({ visual, tone, spin, far = 1 }: { visual: Visual; tone?: Tone; spin?: boolean; far?: number }) {
+  const palette = usePalette(tone);
   const still = useReducedMotionPref();
   const labels = useMemo(() => (visual.type === "bars" ? barLabels(visual) : visual.type === "series" ? seriesLabels(visual) : []), [visual]);
   const labelRefs = useRef<(HTMLDivElement | null)[]>([]);
   if (!palette) return null;
-  const camera: [number, number, number] = visual.type === "series" ? [0, 2.6, 7.5] : visual.type === "points" ? [4.8, 3.2, 6.4] : [0, 2.2, 8.2];
+  const base: [number, number, number] = visual.type === "series" ? [0, 2.6, 7.5] : visual.type === "points" ? [4.8, 3.2, 6.4] : [0, 2.2, 8.2];
+  const camera = base.map((v) => v * far) as [number, number, number]; // `far` > 1 backs the camera off (a narrow stage)
   return (
     <div style={{ position: "absolute", inset: 0 }}>
     <Canvas camera={{ position: camera, fov: 42 }} dpr={[1, 2]} gl={{ antialias: true, alpha: true }}>
@@ -319,9 +320,9 @@ export default function Scenes({ visual }: { visual: Visual }) {
         makeDefault
         enablePan={false}
         minDistance={4}
-        maxDistance={16}
+        maxDistance={16 * far}
         maxPolarAngle={Math.PI / 2.05}
-        autoRotate={visual.type === "points" && !still}
+        autoRotate={(spin ?? visual.type === "points") && !still}
         autoRotateSpeed={0.6}
       />
     </Canvas>
