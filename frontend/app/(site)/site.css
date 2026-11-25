@@ -59,13 +59,23 @@
 
 /* the stage a 3D view sits in */
 .stage { position: relative; overflow: hidden; }
-.stage canvas { touch-action: none; cursor: grab; }
+.stage__view { position: absolute; inset: 0; }
+/* the still shows first and stays without WebGL; the live scene fades in over it */
+.stage__still { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity var(--dur-long) var(--ease-out); }
+.stage__live { position: absolute; inset: 0; opacity: 0; transition: opacity var(--dur-long) var(--ease-out); }
+.stage[data-shown="true"] .stage__live { opacity: 1; }
+.stage[data-shown="true"] .stage__still { opacity: 0; }
+/* a vertical swipe scrolls the page; a sideways drag turns the scene */
+.stage canvas { touch-action: pan-y; cursor: grab; }
 .stage canvas:active { cursor: grabbing; }
-.stage__still { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.stage__pause { position: absolute; right: var(--space-sm); bottom: var(--space-sm); z-index: var(--z-raised); min-height: 32px; padding: 0 var(--space-sm); border-radius: var(--radius-pill); border: 1px solid var(--color-band-rule); background: var(--color-band-shade); color: var(--color-band-ink); font: 600 var(--text-xs)/1 var(--font-body); cursor: pointer; transition: background-color var(--dur-short) var(--ease-out); }
+.stage__pause:hover { background: var(--color-band-wash); }
+.stage__pause:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 2px; }
 .stage--hero { aspect-ratio: 1 / 1; max-height: 66svh; width: 100%; border-radius: 28px; background: radial-gradient(80% 70% at 50% 60%, var(--color-band-shade), transparent 70%); }
 .stage--hero .axis-label { color: var(--color-band-ink-2); font: 600 11px/1.2 var(--font-outlier); }
-.stage--card { aspect-ratio: 4 / 3; border-radius: var(--radius-card); background: var(--color-surface); color: var(--color-ink); border: 1px solid var(--color-rule); }
-.stage--card .axis-label { color: var(--color-ink-2); font: 600 11px/1.2 var(--font-outlier); }
+.stage--card { aspect-ratio: 4 / 3; border-radius: var(--radius-card); background: radial-gradient(120% 90% at 70% 35%, var(--color-band) 0%, var(--color-band-2) 100%); color: var(--color-band-ink); }
+.stage--card .axis-label { color: var(--color-band-ink-2); font: 600 11px/1.2 var(--font-outlier); }
+.stage--card .tip { background: var(--color-band-ink); color: var(--color-gold-ink); }
 .stage .axis-label { pointer-events: none; white-space: nowrap; transform: translate(-50%, 0); }
 .stage .axis-label.left { transform: translate(-100%, -50%); padding-right: var(--space-xs); }
 .stage .tip { pointer-events: none; transform: translate(-50%, calc(-100% - 12px)); white-space: nowrap; background: var(--color-ink); color: var(--color-paper); padding: var(--space-xs) var(--space-sm); border-radius: 10px; font-size: var(--text-xs); }
@@ -130,8 +140,10 @@ main > .row:first-child { border-top: 0; padding-top: var(--section-gap); }
 .jobs__item:hover { background: var(--color-paper-2); color: var(--color-ink); }
 .jobs__item[aria-selected="true"] { background: var(--color-surface); border-color: var(--color-rule); color: var(--color-ink); box-shadow: var(--shadow-card); }
 .jobs__item:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
-.jobs__title { font: var(--display-weight) var(--text-md)/1.2 var(--font-display); letter-spacing: -0.01em; }
-.jobs__about { display: none; }
+.jobs__item { font: var(--display-weight) var(--text-md)/1.2 var(--font-display); letter-spacing: -0.01em; }
+.jobs__report { margin: 0; padding: var(--space-xl); list-style: none; display: grid; gap: var(--space-sm); border-radius: var(--radius-card); background: var(--color-surface); border: 1px solid var(--color-rule); aspect-ratio: 4 / 3; align-content: center; }
+.jobs__report li { font: var(--display-weight) var(--text-xl)/1.25 var(--font-display); letter-spacing: -0.02em; max-width: 26ch; }
+.jobs__report li + li { color: var(--color-ink-2); }
 .jobs__now { margin: 0; color: var(--color-ink-2); }
 .jobs__stage { display: grid; gap: var(--space-sm); }
 .jobs__stage .stage { animation: appear 600ms var(--ease-out) both; }
@@ -202,7 +214,9 @@ main > .row:first-child { border-top: 0; padding-top: var(--section-gap); }
   .hero h1 { font-size: clamp(2.5rem, 11vw, 3.25rem); }
   .hero__actions .btn, .hero__actions .cmd { width: 100%; justify-content: space-between; }
   .fig__stage { padding: var(--space-2xl) var(--space-2xs) var(--space-2xl); }
-  .fig__corners [data-corner="title"] { display: none; }
+  .fig__corners [data-corner="title"], .fig__corners [data-corner="hint"] { display: none; }
+  .jobs__report { aspect-ratio: auto; padding: var(--space-lg); }
+  .jobs__report li { font-size: var(--text-lg); }
   .letter__actions .btn, .letter__actions .cmd { width: 100%; justify-content: space-between; }
 }
 @media (prefers-reduced-motion: reduce) {

@@ -2,7 +2,7 @@
 
 // The before and after: churn.csv as it arrives, and what plainml wrote about it (the real run's words).
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const COLUMNS = ["customer_id", "plan", "contract", "monthly_charges", "support_calls", "churned"];
 // The first five rows of plainml/datasets/churn.csv, these columns only.
@@ -15,24 +15,56 @@ const ROWS = [
 ];
 // From the run's own findings (20261124-205857_churn).
 const FINDINGS = [
-  "The model relies most on signup_date, support_calls and contract.",
+  "This model leans most on signup_date, support_calls and contract.",
   "More support calls, more likely to leave: 24% rising to 38%.",
   "Monthly contracts leave most (37%), annual ones least (18%).",
   "Premium plans leave most (39%), basic ones least (22%).",
 ];
 
 export function BeforeAfter() {
-  const [after, setAfter] = useState(true);
+  const [after, setAfter] = useState(false);
   // without a script both panes stand in the flow; with one, they share a place and the switch picks
   const [live, setLive] = useState(false);
-  useEffect(() => setLive(true), []);
+  const ref = useRef<HTMLDivElement>(null);
+  const touched = useRef(false);
+  useEffect(() => {
+    setLive(true);
+    // it opens on the spreadsheet and turns into the findings once it is on screen, unless the
+    // visitor has already picked a side; with reduced motion it opens on the findings
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setAfter(true);
+      return;
+    }
+    const el = ref.current;
+    if (!el) return;
+    let timer = 0;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        io.disconnect();
+        timer = window.setTimeout(() => {
+          if (!touched.current) setAfter(true);
+        }, 1600);
+      },
+      { threshold: 0.6 },
+    );
+    io.observe(el);
+    return () => {
+      io.disconnect();
+      window.clearTimeout(timer);
+    };
+  }, []);
+  const pick = (value: boolean) => {
+    touched.current = true;
+    setAfter(value);
+  };
   return (
-    <div className={live ? "ba is-live" : "ba"}>
+    <div className={live ? "ba is-live" : "ba"} ref={ref}>
       <div className="switch" role="group" aria-label="Before or after plainml" hidden={!live}>
-        <button type="button" aria-pressed={!after} onClick={() => setAfter(false)}>
+        <button type="button" aria-pressed={!after} onClick={() => pick(false)}>
           Your spreadsheet
         </button>
-        <button type="button" aria-pressed={after} onClick={() => setAfter(true)}>
+        <button type="button" aria-pressed={after} onClick={() => pick(true)}>
           What plainml tells you
         </button>
       </div>
@@ -67,7 +99,7 @@ export function BeforeAfter() {
         <div className="ba__pane ba__after" data-on={after} aria-hidden={live && !after}>
           <p className="ba__file">Who is likely to leave, from churn.csv</p>
           <p className="ba__score">
-            It scores <b className="num">0.64</b> out of 1 on customers it never saw. A simple guess scores <b className="num">0.45</b>.
+            On customers it never saw it scores <b className="num">0.64</b> out of 1, where higher is better. A simple guess scores <b className="num">0.45</b>.
           </p>
           <ul className="ba__findings">
             {FINDINGS.map((f) => (

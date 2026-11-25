@@ -13,7 +13,7 @@ const O = ART.offsets as unknown as Record<string, Flat>;
 const STEP = 0.62; // seconds a card takes
 const SORT = ART.cards * STEP;
 const HOLD = 1.2; // after the last card, before the drawer opens
-const OPEN = 2.6; // the drawer read once
+const OPEN = 4.6; // the latch turns, the drawer slides out, is read once, and closes
 const RESET = 0.8;
 const LOOP = SORT + HOLD + OPEN + RESET;
 
@@ -39,9 +39,11 @@ function stateAt(t: number) {
   for (let i = 0; i < done; i++) (ART.test[i] ? test++ : train++);
   const isTest = index >= 0 && ART.test[index];
   const trainSlot = train; // the slab this card lands on
-  const opening = clamp01((time - SORT - HOLD) / 0.5) * (1 - clamp01((time - SORT - HOLD - OPEN + 0.5) / 0.5));
+  const openT = time - SORT - HOLD;
+  const opening = clamp01(openT / 0.4) * (1 - clamp01((openT - (OPEN - 0.4)) / 0.4)); // the latch
+  const slide = ease(clamp01((openT - 0.45) / 0.7)) * (1 - ease(clamp01((openT - (OPEN - 1.1)) / 0.7))); // the drawer
   const resetting = clamp01((time - SORT - HOLD - OPEN) / RESET);
-  return { time, done, u, index, isTest, train, test, trainSlot, opening, resetting };
+  return { time, done, u, index, isTest, train, test, trainSlot, opening, slide, resetting };
 }
 
 export function HeldOut() {
@@ -62,6 +64,9 @@ export function HeldOut() {
     const flapTurn = part("flap-turn");
     const latchLocked = part("latch-locked");
     const latchOpen = part("latch-open");
+    const drawer = part("drawer");
+    const drawerBox = part("drawer-box");
+    const out = ART.drawerOut as unknown as Flat;
     const hop = Array.from(svg.querySelectorAll<SVGGElement>("[data-hop]"));
     const tray = Array.from(svg.querySelectorAll<SVGGElement>("[data-tray]"));
     const trayLift = ART.trayLift as unknown as Flat[];
@@ -81,6 +86,9 @@ export function HeldOut() {
       // the latch turns while the drawer is read
       latchLocked?.style.setProperty("opacity", String(1 - s.opening));
       latchOpen?.style.setProperty("opacity", String(s.opening));
+      // the drawer slides out to show the test cards, then back in
+      drawer?.setAttribute("transform", `translate(${(out[0] * s.slide).toFixed(2)} ${(out[1] * s.slide).toFixed(2)})`);
+      drawerBox?.style.setProperty("opacity", String(clamp01(s.slide * 3)));
       // the pusher strokes at the start of every step
       if (pusher) {
         const stroke = s.index >= 0 ? Math.sin(Math.PI * clamp01(s.u / 0.3)) : 0;
@@ -107,8 +115,10 @@ export function HeldOut() {
       }
       const rows = (n: number) => (n * ART.perCard).toLocaleString("en-US");
       const text =
-        s.opening > 0.2
+        s.slide > 0.25
           ? "The winning model meets the 300 locked rows, once."
+          : s.opening > 0.2
+            ? "Unlocking the drawer"
           : s.resetting > 0
             ? "Next spreadsheet."
             : `${rows(s.train)} rows to train, ${rows(s.test)} locked away`;

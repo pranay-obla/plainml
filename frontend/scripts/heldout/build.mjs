@@ -244,10 +244,31 @@ function cabinet() {
   const slot = { x: GAP[0] + 2, y: CAB.y + 5, w: GAP[1] - GAP[0] - 4, d: 4, r: 1.2 };
   out.push(S(k.slabOf(slot, CAB_H, 0.2, P, 3), { tone: "lo", crease: "none", flat: true }));
   out.push(D(k.corners(CAB, 4).map(([x, y]) => at([x, y, CAB_H])), { size: 0.4 }));
-  // the drawer front, proud of the cabinet face
+  // the opening the drawer runs in, a shade darker than the face
+  out.push(S(k.slabOf({ x: CAB.x + 3.4, y: FRONT_Y - 0.2, w: CAB.w - 6.8, d: 0.2, r: 0.4 }, 2.4, CAB_H - 4.8, P, 3), { tone: "lo", crease: "none", flat: true }));
+  return out.join("");
+}
+
+// the drawer: an open box holding the test cards, behind a front with its pull and lock
+const DRAWER_OUT = 30; // how far it slides out when it is read
+function drawerBox() {
+  const out = [];
+  const box = { x: CAB.x + 6, y: CAB.y + 4, w: CAB.w - 12, d: FRONT_Y - CAB.y - 4, r: 1 };
+  out.push(S(slab(box, 3, 1.4, 3, 0.2), { tone: "mid" }));
+  out.push(S(slab({ x: box.x, y: box.y, w: box.w, d: 2, r: 0.4 }, 4.4, CAB_H - 12, 3, 0.2), { tone: "mid" }));
+  out.push(S(slab({ x: box.x, y: box.y, w: 2, d: box.d, r: 0.4 }, 4.4, CAB_H - 12, 3, 0.2), { tone: "mid" }));
+  out.push(S(slab({ x: box.x + box.w - 2, y: box.y, w: 2, d: box.d, r: 0.4 }, 4.4, CAB_H - 12, 3, 0.2), { tone: "mid" }));
+  // the six test cards, gold: what no model trains on
+  for (let i = 0; i < TEST_N; i++) {
+    const plan = { x: box.x + (box.w - CARD.w) / 2 + ((i * 3) % 3) - 1, y: box.y + 2 + ((i * 7) % 3) * 0.4, w: CARD.w, d: Math.min(CARD.d, box.d - 4), r: 1 };
+    out.push(S(k.slabOf(plan, 4.6 + i * (CARD_T + 0.3), CARD_T, P, 3, 0.2), { tone: "hi", lit: true }));
+  }
+  return out.join("");
+}
+function drawerFront() {
+  const out = [];
   const front = { x: CAB.x + 4, y: FRONT_Y, w: CAB.w - 8, d: 2.2, r: 0.6 };
   out.push(S(slab(front, 3, CAB_H - 6, 3, 0.3), { tone: "hi", crease: "lo" }));
-  // its pull, and the lock ring with a keyhole
   out.push(S(slab({ x: CAB.x + 12, y: FRONT_Y + 2.2, w: 18, d: 2.4, r: 0.8 }, 9, 3, 3, 0.3), { tone: "mid" }));
   const lock = [CAB.x + CAB.w - 16, FRONT_Y + 2.25, 13];
   out.push(L(k.sideRing(lock, 4, "y", P, 28), { tone: "mid" }));
@@ -294,8 +315,7 @@ const svg = k.figureSvg({
     channelFront(),
     trayFront(),
     cabinet(),
-    `<g data-part="latch-locked">${latch("locked")}</g>`,
-    `<g data-part="latch-open" style="opacity:0">${latch("open")}</g>`,
+    `<g data-part="drawer"><g data-part="drawer-box" style="opacity:0">${drawerBox()}</g>${drawerFront()}<g data-part="latch-locked">${latch("locked")}</g><g data-part="latch-open" style="opacity:0">${latch("open")}</g></g>`,
   ],
 });
 
@@ -329,6 +349,7 @@ const art = {
   trayLift,
   push: { from: pushAt(PUSH_FROM), to: pushAt(CARD_AT.x - 2) },
   cardLift: lift(1),
+  drawerOut: k.axisVector(P, [0, DRAWER_OUT, 0]),
   svg,
 };
 

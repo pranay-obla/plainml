@@ -262,41 +262,46 @@ def run_tiles(run: dict[str, Any], evaluation: dict[str, Any]) -> list[dict[str,
     data = run.get("data") or {}
     rows = f"{data.get('rows', 0):,} rows"
     if kind in ("train", "tune"):
+        # plain labels first; the technical name and its direction stay in the line under each
         metric = run.get("metric_label", run.get("metric", "score"))
+        better = "lower" if str(run.get("metric", "")).lower() in LOWER_IS_BETTER else "higher"
         holdout = (best.get("holdout") or {}).get(run.get("metric"))
+        spread = f", ± {fmt_num(best.get('cv_std'))}" if best.get("cv_std") is not None else ""
         tiles = [
-            _tile(f"Test {metric}", fmt_num(holdout), "on rows the model never saw"),
+            _tile("Score on unseen rows", fmt_num(holdout), f"{metric}, {better} is better"),
             _tile("Best model", best.get("name")),
             _tile(
-                f"Cross-validated {metric}",
+                "Score while comparing",
                 fmt_num(best.get("cv_score")),
-                f"± {fmt_num(best.get('cv_std'))}" if best.get("cv_std") is not None else None,
+                f"{metric}, cross-validated{spread}",
             ),
         ]
         baseline = run.get("baseline") or {}
         if baseline.get("cv_score") is not None:
             tiles.append(
-                _tile(
-                    "Simple baseline", fmt_num(baseline["cv_score"]), "every model should beat this"
-                )
+                _tile("A simple guess", fmt_num(baseline["cv_score"]), "every model should beat it")
             )
         return tiles
     if kind == "forecast":
         options = run.get("options") or {}
         tiles = [
-            _tile("Average error (MAE)", fmt_num(best.get("score")), "in backtests"),
+            _tile("Typical error", fmt_num(best.get("score")), "off by this much on average (MAE)"),
             _tile("Best model", best.get("name")),
-            _tile("Horizon", f"{options.get('horizon')} {evaluation.get('unit', 'period')}s"),
+            _tile("Looks ahead", f"{options.get('horizon')} {evaluation.get('unit', 'period')}s"),
         ]
         if options.get("groups"):
-            tiles.append(_tile("Series", str(options["groups"]), f"one per {options.get('group')}"))
+            tiles.append(
+                _tile("Forecasts", str(options["groups"]), f"one per {options.get('group')}")
+            )
         return tiles
     if kind == "cluster":
         return [
             _tile("Groups found", str(best.get("k"))),
             _tile("Method", best.get("name")),
             _tile(
-                "Silhouette", fmt_num(best.get("score")), "separation, −1 to 1 (higher is clearer)"
+                "How distinct they are",
+                fmt_num(best.get("score")),
+                "silhouette, −1 to 1, higher is clearer",
             ),
             _tile("Rows", f"{data.get('rows', 0):,}"),
         ]
@@ -318,7 +323,11 @@ def run_tiles(run: dict[str, Any], evaluation: dict[str, Any]) -> list[dict[str,
                 str(len(selected)),
                 ", ".join(selected[:4]) + (" …" if len(selected) > 4 else ""),
             ),
-            _tile(f"{run.get('metric_label', 'Score')} with them", fmt_num(best.get("score"))),
+            _tile(
+                "Score with only them",
+                fmt_num(best.get("score")),
+                str(run.get("metric_label") or "") or None,
+            ),
             _tile("Methods compared", str(len(run.get("methods") or []))),
             _tile("Data", rows),
         ]
@@ -384,7 +393,7 @@ def run_visual(
             baseline = _finite((run.get("baseline") or {}).get("cv_score"))
             return _bars_visual(
                 "Every model, side by side",
-                f"Cross-validated {label} for each model ({'lower' if lower else 'higher'} is better)."
+                f"Each model's score while comparing ({label}, cross-validated; {'lower' if lower else 'higher'} is better)."
                 + (" The dashed line is a do-nothing baseline." if baseline is not None else ""),
                 str(label),
                 [
@@ -396,7 +405,7 @@ def run_visual(
                     }
                     for _, row in board.iterrows()
                 ],
-                lines=[{"value": baseline, "label": "Baseline"}] if baseline is not None else [],
+                lines=[{"value": baseline, "label": "A simple guess"}] if baseline is not None else [],
                 lower_is_better=lower,
             )
         if kind == "importance" and (folder / "rankings.csv").is_file():

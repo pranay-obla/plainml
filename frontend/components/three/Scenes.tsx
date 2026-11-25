@@ -91,7 +91,7 @@ function barColor(p: Palette, bar: Bar) {
   return p.other;
 }
 
-function shortLabel(text: string, max = 16) {
+function shortLabel(text: string, max = 22) {
   return text.length > max ? `${text.slice(0, max - 1)}…` : text;
 }
 

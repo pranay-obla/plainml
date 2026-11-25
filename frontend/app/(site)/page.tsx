@@ -24,6 +24,13 @@ const ME = "https://github.com/pranay-obla";
 const models = visuals.models as unknown as Visual;
 const best = (models.type === "bars" && (models.bars.find((b) => b.tone === "best") || models.bars[0])) || null;
 const baseline = models.type === "bars" ? models.lines?.[0]?.value : undefined;
+// the run's test score: the winner on the 300 customers it never saw (run 20261124-205857_churn, "Test F1")
+const TEST = 0.6358;
+// the hero shows the simple guess as a bar of its own, so the gap to it is the picture
+const heroVisual: Visual =
+  models.type === "bars" && baseline != null
+    ? { ...models, value_label: "Score", lines: [], bars: [...models.bars, { label: "A simple guess", value: baseline, tone: "bad" }] }
+    : models;
 
 function Arrow() {
   return (
@@ -78,22 +85,22 @@ export default function Home() {
               </a>
               <CopyCommand command="pip install plainml" tone="band" />
             </div>
-            <p className="hero__runs">Free and open source. Runs in your browser, nothing to install.</p>
+            <p className="hero__runs">Free and open source. The website needs nothing installed.</p>
           </div>
           <figure className="hero__visual">
             <SceneStage
               className="stage--hero"
-              visual={models}
+              visual={heroVisual}
               tone="band"
               spin
               far={1.3}
-              still="/img/bars-dark.webp"
-              label="plainml's 3D comparison of eight models predicting which customers leave, each bar against a dashed do-nothing baseline"
+              still="/img/still-hero.jpg"
+              label="plainml's 3D comparison of eight models predicting which customers leave, beside a ninth, shorter bar for a simple guess"
             />
             <figcaption className="readout readout--band">
               <span className="readout__file">churn.csv</span>
               <span>
-                {best ? `${best.label} wins with ${best.value.toFixed(2)}` : ""}
+                {best ? `${best.label} comes out on top. ` : ""}On customers it never saw it scores {TEST.toFixed(2)} out of 1
                 {baseline != null ? `; a simple guess scores ${baseline.toFixed(2)}.` : "."} Drag to turn it.
               </span>
             </figcaption>
@@ -134,7 +141,7 @@ export default function Home() {
         <section className="row container" id="jobs" aria-labelledby="jobs-h">
           <div className="row__text">
             <h2 id="jobs-h">Eight jobs from one upload</h2>
-            <p className="lead">Pick one and turn its real result. It can also check for drift, profile your data and clean it.</p>
+            <p className="lead">Pick one. Five show their real result in 3D; drag to turn it.</p>
           </div>
           <div className="row__proof">
             <Jobs />
@@ -155,7 +162,7 @@ export default function Home() {
           <ol className="row__proof ways">
             <li className="way">
               <h3>In your browser</h3>
-              <p>Python, scikit-learn, LightGBM and XGBoost load into the page.</p>
+              <p>Python, pandas, NumPy, scikit-learn, LightGBM and XGBoost load into the page.</p>
               <ul className="way__icons" aria-label="What loads into the page">
                 <li>
                   <img src="/icons/python.svg" alt="Python" width="28" height="28" />

@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 const SERIES = {
   light: ["#b3261e", "#2a78d6", "#c98500", "#1baf7a", "#6250d6", "#e87ba4"],
   dark: ["#e66767", "#3987e5", "#c98500", "#199e70", "#9085e9", "#d55181"],
+  // on the cardinal band: no reds; gold, cream and cool hues that read on #990000
+  band: ["#ffcc00", "#fff6e3", "#8fd0ff", "#7be0b0", "#d4b8ff", "#ffb4a8"],
 };
 
 export interface Palette {
@@ -36,7 +38,7 @@ export type Tone = "light" | "dark" | "band";
 function palette(tone?: Tone): Palette {
   // "band": drawn on the home page's cardinal hero, cream bars and a gold winner on a deeper red floor
   if (tone === "band")
-    return { dark: true, bg: "#990000", surface: "#7a0000", ink: "#fff6e3", ink2: "#f6d9c8", muted: "#d9a493", line: "#6a0000", highlight: "#ffcc00", gold: "#ffcc00", warn: "#ffb020", bad: "#ffb4a8", series: SERIES.dark, other: "#f3d9c9" };
+    return { dark: true, bg: "#990000", surface: "#7a0000", ink: "#fff6e3", ink2: "#f6d9c8", muted: "#d9a493", line: "#6a0000", highlight: "#ffcc00", gold: "#ffcc00", warn: "#ffb020", bad: "#4a0000", series: SERIES.band, other: "#f3d9c9" };
   const dark = tone ? tone === "dark" : isDark();
   return dark
     ? { dark, bg: "#0c0505", surface: "#1d0e0e", ink: "#fff6e3", ink2: "#cdb9aa", muted: "#6e5a52", line: "#3a2420", highlight: "#ffcc00", gold: "#ffcc00", warn: "#ffb020", bad: "#ff6b5e", series: SERIES.dark, other: "#8a7a72" }
