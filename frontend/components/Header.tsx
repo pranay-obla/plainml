@@ -109,7 +109,11 @@ export function Footer() {
     <footer className="site-footer">
       <div className="container">
         <span>
-          <b>plainml</b> {info ? `v${info.version}` : ""} · free and open source (MIT) · made at USC
+          <b>plainml</b> {info ? `v${info.version}. ` : ""}Free and open source (MIT), made at USC by{" "}
+          <a className="by" href="https://github.com/pranay-obla">
+            Pranay Obla
+          </a>
+          .
         </span>
         <nav aria-label="More">
           <a href="https://plainml-tpua.vercel.app/docs/">Docs</a>
