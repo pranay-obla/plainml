@@ -21,8 +21,6 @@
 .btn--sm { min-height: 40px; padding: 0 var(--space-md); font-size: var(--text-sm); }
 .btn--gold { background: var(--color-gold); color: var(--color-gold-ink); box-shadow: 0 1px 0 var(--color-shade-1), 0 10px 24px -12px var(--color-shade-3); }
 .btn--gold:hover { background: var(--color-gold-hover); }
-.btn--accent { background: var(--color-accent); color: var(--color-accent-ink); }
-.btn--accent:hover { background: var(--color-accent-hover); }
 .btn:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
 .band .btn:focus-visible, .band .cmd:focus-visible { outline-color: var(--color-gold); }
 
@@ -50,7 +48,7 @@
 .nav__links a:hover { color: var(--color-band-ink); background-size: 100% 1px; }
 .nav__links a:focus-visible, .nav__by:focus-visible, .nav__mark:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 4px; border-radius: 4px; }
 
-.hero { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: var(--space-2xl); align-items: center; min-height: calc(100svh - 76px); max-height: 980px; padding-block: var(--space-xl) var(--space-3xl); }
+.hero { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: var(--space-2xl); align-items: center; min-height: min(calc(100svh - 76px), 820px); padding-block: var(--space-xl) var(--space-2xl); }
 .hero h1 { font-size: clamp(2.5rem, 3.5vw + 0.6rem, 4.25rem); line-height: 1; max-width: 16ch; color: var(--color-band-ink); }
 .hero__lead { margin-top: var(--space-lg); color: var(--color-band-ink-2); max-width: 30ch; }
 .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: var(--space-xl); }

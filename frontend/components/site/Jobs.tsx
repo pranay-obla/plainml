@@ -118,7 +118,7 @@ export function Jobs() {
             />
             <p className="readout">
               <span className="readout__file">{job.file}</span>
-              <span>{readout(on, data?.[on])}</span>
+              <span>{failed ? "The 3D view didn't load; this is a still of it." : data ? readout(on, data[on]) : "Loading the 3D view…"}</span>
             </p>
           </>
         )}

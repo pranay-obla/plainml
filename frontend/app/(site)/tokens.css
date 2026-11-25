@@ -15,7 +15,7 @@
   --color-accent: #990000; --color-accent-ink: #fff9ec; --color-focus: #990000;
   --color-gold: #ffcc00; --color-gold-ink: #1d0808;
   --color-band: #990000; --color-band-2: #7a0000; --color-band-ink: #fff6e3; --color-band-ink-2: #f6d9c8; --color-band-rule: rgb(255 246 227 / 0.22);
-  --color-gold-hover: #ffd633; --color-accent-hover: #800000;
+  --color-gold-hover: #ffd633;
   --color-shade-1: rgb(0 0 0 / 0.12); --color-shade-3: rgb(0 0 0 / 0.55);
   --color-band-shade: rgb(0 0 0 / 0.2); --color-band-wash: rgb(255 246 227 / 0.12);
   --color-surface: #ffffff; --color-code: #1d0808; --color-code-ink: #fff6e3; --color-code-muted: #c8a99a;
@@ -52,4 +52,23 @@
   --anatomy-hi: #2a1414; --anatomy-mid: #8e7a72; --anatomy-lo: #bfae9f; --anatomy-faint: #dccfbf; --anatomy-dot: #2a1414;
   --anatomy-halo: #8a6f55; --anatomy-halo-opacity: 0.28; --anatomy-text: #5c4a45; --anatomy-strong: #1d0808;
   --fig-ink: #1d0808; --fig-muted: #6f5858; --fig-accent: #990000;
+}
+/* the figure in dark mode: a warm dark plate, gold for what moves */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .iso.fig[data-theme] {
+  --anatomy-card: var(--color-surface); --anatomy-paper: #170b0b; --anatomy-face: #1d0e0e; --anatomy-top: #241212;
+    --anatomy-shade-0: #120808; --anatomy-shade-1: #160a0a; --anatomy-shade-2: #1a0c0c; --anatomy-shade-3: #1e0e0e;
+    --anatomy-lit-top: #ffcc00; --anatomy-lit-shade: #c99a00; --anatomy-lit: #ffcc00;
+    --anatomy-hi: #f3e2d4; --anatomy-mid: #8f7468; --anatomy-lo: #5a4038; --anatomy-faint: #3a2420; --anatomy-dot: #f3e2d4;
+    --anatomy-halo: #000000; --anatomy-halo-opacity: 0.6; --anatomy-text: #b49f92; --anatomy-strong: #fff6e3;
+    --fig-ink: #fff6e3; --fig-muted: #b49f92; --fig-accent: #ffcc00;
+  }
+}
+:root[data-theme="dark"] .iso.fig[data-theme] {
+  --anatomy-card: var(--color-surface); --anatomy-paper: #170b0b; --anatomy-face: #1d0e0e; --anatomy-top: #241212;
+  --anatomy-shade-0: #120808; --anatomy-shade-1: #160a0a; --anatomy-shade-2: #1a0c0c; --anatomy-shade-3: #1e0e0e;
+  --anatomy-lit-top: #ffcc00; --anatomy-lit-shade: #c99a00; --anatomy-lit: #ffcc00;
+  --anatomy-hi: #f3e2d4; --anatomy-mid: #8f7468; --anatomy-lo: #5a4038; --anatomy-faint: #3a2420; --anatomy-dot: #f3e2d4;
+  --anatomy-halo: #000000; --anatomy-halo-opacity: 0.6; --anatomy-text: #b49f92; --anatomy-strong: #fff6e3;
+  --fig-ink: #fff6e3; --fig-muted: #b49f92; --fig-accent: #ffcc00;
 }
