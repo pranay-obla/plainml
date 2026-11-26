@@ -27,6 +27,22 @@ export function BeforeAfter() {
   const [live, setLive] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const touched = useRef(false);
+  // the thumb behind the pressed option: measured from the buttons, so it slides between them
+  const sw = useRef<HTMLDivElement>(null);
+  const [thumb, setThumb] = useState<{ l: number; r: number } | null>(null);
+  useEffect(() => {
+    const el = sw.current;
+    if (!el || !live) return;
+    const measure = () => {
+      const on = el.querySelector<HTMLButtonElement>('button[aria-pressed="true"]');
+      if (!on) return;
+      setThumb({ l: on.offsetLeft, r: el.clientWidth - on.offsetLeft - on.offsetWidth });
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [after, live]);
   useEffect(() => {
     setLive(true);
     // it opens on the spreadsheet and turns into the findings once it is on screen, unless the
@@ -60,7 +76,17 @@ export function BeforeAfter() {
   };
   return (
     <div className={live ? "ba is-live" : "ba"} ref={ref}>
-      <div className="switch" role="group" aria-label="Before or after plainml" hidden={!live}>
+      <div
+        ref={sw}
+        className={thumb ? "switch has-thumb" : "switch"}
+        role="group"
+        aria-label="Before or after plainml"
+        hidden={!live}
+        style={thumb ? ({ "--l": `${thumb.l}px`, "--r": `${thumb.r}px` } as React.CSSProperties) : undefined}
+      >
+        <span className="switch__thumb" aria-hidden="true">
+          <i />
+        </span>
         <button type="button" aria-pressed={!after} onClick={() => pick(false)}>
           Your spreadsheet
         </button>

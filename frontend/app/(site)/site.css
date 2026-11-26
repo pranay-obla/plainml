@@ -111,6 +111,13 @@ main > .row:first-child { border-top: 0; padding-top: var(--section-gap); }
 .switch button:hover { color: var(--color-ink); }
 .switch button[aria-pressed="true"] { background: var(--color-surface); color: var(--color-ink); box-shadow: var(--shadow-card); }
 .switch button:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+/* the thumb slides between the two options: a full-width layer clipped to the pressed one */
+.switch { position: relative; }
+.switch button { position: relative; z-index: 1; }
+.switch__thumb { display: none; position: absolute; inset: 0; pointer-events: none; filter: drop-shadow(0 1px 2px var(--color-shade-1)); }
+.switch__thumb i { position: absolute; inset: var(--space-2xs) 0; background: var(--color-thumb); clip-path: inset(0 var(--r) 0 var(--l) round var(--radius-pill)); transition: clip-path 380ms var(--ease-out); }
+.switch.has-thumb .switch__thumb { display: block; }
+.switch.has-thumb button[aria-pressed="true"] { background: transparent; box-shadow: none; }
 
 .ba { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-md); justify-items: start; }
 .ba > .ba__panes { justify-self: stretch; grid-template-columns: minmax(0, 1fr); }
@@ -194,6 +201,20 @@ main > .row:first-child { border-top: 0; padding-top: var(--section-gap); }
 .colophon a { color: var(--color-ink-2); }
 .colophon a:hover { color: var(--color-ink); }
 .colophon a:focus-visible, .letter a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; border-radius: 4px; }
+
+/* the hero's bars grow from an empty floor: with a script and motion, the finished still waits in the wings
+   and a still of the empty floor (the scene's first frame) holds the stage until the canvas replaces it with
+   a cut. The finished still comes back if WebGL is missing, if three.js is slow, or if no script answers in 1.5s */
+.stage__floor { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity var(--dur-short) var(--ease-out); }
+@keyframes still-late { to { opacity: 1; } }
+@media (prefers-reduced-motion: no-preference) {
+  :root[data-js] .stage--grow:not([data-gl]) .stage__floor,
+  :root[data-js] .stage--grow[data-gl="grow"] .stage__floor { opacity: 1; transition: none; }
+  :root[data-js] .stage--grow[data-gl="grow"][data-shown="true"] .stage__floor { opacity: 0; }
+  :root[data-js] .stage--grow[data-gl="grow"] .stage__live { transition: none; }
+  :root[data-js] .stage--grow:not([data-gl]) .stage__still { opacity: 0; animation: still-late var(--dur-long) 1.5s var(--ease-out) forwards; }
+  :root[data-js] .stage--grow[data-gl="grow"] .stage__still { opacity: 0; transition: none; }
+}
 
 /* ---- smaller screens ------------------------------------------------------------------------------- */
 /* landscape tablets keep the split: the 3D bars stay on the first screen beside the headline */

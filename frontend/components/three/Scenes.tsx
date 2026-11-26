@@ -120,18 +120,56 @@ function barLabels(visual: Bars): Label[] {
   return labels;
 }
 
-function BarsView({ visual, palette }: { visual: Bars; palette: Palette }) {
+// The grow-in on the home page: every model's bar rises from the floor in turn, as a plain bar, and
+// once the last score is in, the winner takes its colour. It runs once, on the render clock.
+const RISE_DELAY = 0.2; // seconds before the first bar moves
+const RISE_STEP = 0.065; // between one bar and the next
+const RISE = 0.7; // one bar's rise
+const CROWN = 0.55; // the winner's colour change, starting as the last bar settles
+const CROWN_LEAD = 0.3; // how long before the last bar lands the crown begins
+const easeOut = (u: number) => 1 - Math.pow(1 - u, 4);
+const clamp01 = (u: number) => Math.min(1, Math.max(0, u));
+
+function BarsView({ visual, palette, grow, begin }: { visual: Bars; palette: Palette; grow?: boolean; begin?: boolean }) {
   const [hover, setHover] = useState<number | null>(null);
+  const [grown, setGrown] = useState(false);
   const bars = visual.bars;
   const { gap, width, origin, scale } = barLayout(visual);
+  const meshes = useRef<(THREE.Mesh | null)[]>([]);
+  const start = useRef<number | null>(null);
+  const plain = useMemo(() => new THREE.Color(palette.other), [palette.other]);
+  const crown = useMemo(() => new THREE.Color(palette.highlight), [palette.highlight]);
+  useFrame(({ clock }) => {
+    if (!grow || grown || !begin) return; // the clock starts once the scene is on screen
+    if (start.current === null) start.current = clock.elapsedTime;
+    const t = clock.elapsedTime - start.current;
+    const landed = RISE_DELAY + (bars.length - 1) * RISE_STEP + RISE;
+    const crowned = landed - CROWN_LEAD;
+    bars.forEach((bar, i) => {
+      const mesh = meshes.current[i];
+      if (!mesh) return;
+      const k = Math.max(0.001, easeOut(clamp01((t - RISE_DELAY - i * RISE_STEP) / RISE)));
+      mesh.scale.y = k;
+      mesh.position.y = (scale(bar.value) * k) / 2;
+      if (bar.tone === "best") {
+        (mesh.material as THREE.MeshStandardMaterial).color.lerpColors(plain, crown, easeOut(clamp01((t - crowned) / CROWN)));
+      }
+    });
+    if (t >= Math.max(landed, crowned + CROWN)) setGrown(true);
+  });
   return (
     <group position={origin}>
       {bars.map((bar, i) => {
         const h = scale(bar.value);
+        const waiting = Boolean(grow && !grown); // before the first frame moves it, a growing bar sits flat on the floor
         return (
           <group key={bar.label} position={[i * gap, 0, 0]}>
             <mesh
-              position={[0, h / 2, 0]}
+              ref={(m) => {
+                meshes.current[i] = m;
+              }}
+              position={[0, waiting ? 0 : h / 2, 0]}
+              scale={[1, waiting ? 0.001 : 1, 1]}
               onPointerOver={(e: ThreeEvent<PointerEvent>) => {
                 e.stopPropagation();
                 setHover(i);
@@ -139,7 +177,7 @@ function BarsView({ visual, palette }: { visual: Bars; palette: Palette }) {
               onPointerOut={() => setHover((v) => (v === i ? null : v))}
             >
               <boxGeometry args={[0.5, h, 0.5]} />
-              <meshStandardMaterial color={barColor(palette, bar)} roughness={0.55} metalness={0.05} emissive={hover === i ? barColor(palette, bar) : "#000000"} emissiveIntensity={hover === i ? 0.35 : 0} />
+              <meshStandardMaterial color={waiting && bar.tone === "best" ? palette.other : barColor(palette, bar)} roughness={0.55} metalness={0.05} emissive={hover === i ? barColor(palette, bar) : "#000000"} emissiveIntensity={hover === i ? 0.35 : 0} />
             </mesh>
             {hover === i ? <Tip position={[0, h + 0.2, 0]} title={bar.label} detail={`${visual.value_label}: ${num(bar.value)}${bar.note ? ` · ${bar.note}` : ""}`} /> : null}
           </group>
@@ -298,7 +336,7 @@ function SeriesView({ visual, palette }: { visual: Series; palette: Palette }) {
   );
 }
 
-export default function Scenes({ visual, tone, spin, far = 1 }: { visual: Visual; tone?: Tone; spin?: boolean; far?: number }) {
+export default function Scenes({ visual, tone, spin, far = 1, grow, begin = true, onReady }: { visual: Visual; tone?: Tone; spin?: boolean; far?: number; grow?: boolean; begin?: boolean; onReady?: () => void }) {
   const palette = usePalette(tone);
   const still = useReducedMotionPref();
   const labels = useMemo(() => (visual.type === "bars" ? barLabels(visual) : visual.type === "series" ? seriesLabels(visual) : []), [visual]);
@@ -308,12 +346,12 @@ export default function Scenes({ visual, tone, spin, far = 1 }: { visual: Visual
   const camera = base.map((v) => v * far) as [number, number, number]; // `far` > 1 backs the camera off (a narrow stage)
   return (
     <div style={{ position: "absolute", inset: 0 }}>
-    <Canvas camera={{ position: camera, fov: 42 }} dpr={[1, 2]} gl={{ antialias: true, alpha: true }}>
+    <Canvas camera={{ position: camera, fov: 42 }} dpr={[1, 2]} gl={{ antialias: true, alpha: true }} onCreated={() => onReady?.()}>
       <Projector labels={labels} refs={labelRefs} />
       <ambientLight intensity={palette.dark ? 0.7 : 0.95} />
       <directionalLight position={[4, 8, 6]} intensity={palette.dark ? 1.4 : 1.1} />
       <directionalLight position={[-6, 3, -4]} intensity={0.35} />
-      {visual.type === "bars" ? <BarsView visual={visual} palette={palette} /> : null}
+      {visual.type === "bars" ? <BarsView visual={visual} palette={palette} grow={grow && !still} begin={begin} /> : null}
       {visual.type === "points" ? <PointsView visual={visual} palette={palette} /> : null}
       {visual.type === "series" ? <SeriesView visual={visual} palette={palette} /> : null}
       <OrbitControls

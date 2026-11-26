@@ -4,6 +4,7 @@
 
 - **A new home page.** A personal project page, built on real results:
   - The hero holds plainml's own **3D model comparison**, live, on a cardinal band; drag to turn it.
+    Each model's bar rises in turn, then the winner turns gold (still, with reduced motion).
   - **Before and after:** churn.csv's rows next to what plainml says about them.
   - **The held-out test as a machine:** an animated card sorter locks every fifth row card in a drawer
     that only the winning model opens, once.

@@ -93,8 +93,10 @@ export default function Home() {
               visual={heroVisual}
               tone="band"
               spin
+              grow
               far={1.3}
               still="/img/still-hero.jpg"
+              floor="/img/still-hero-floor.jpg"
               label="plainml's 3D comparison of eight models predicting which customers leave, beside a ninth, shorter bar for a simple guess"
             />
             <figcaption className="readout readout--band">

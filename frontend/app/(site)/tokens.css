@@ -18,7 +18,7 @@
   --color-gold-hover: #ffd633;
   --color-shade-1: rgb(0 0 0 / 0.12); --color-shade-3: rgb(0 0 0 / 0.55);
   --color-band-shade: rgb(0 0 0 / 0.2); --color-band-wash: rgb(255 246 227 / 0.12);
-  --color-surface: #ffffff; --color-code: #1d0808; --color-code-ink: #fff6e3; --color-code-muted: #c8a99a;
+  --color-surface: #ffffff; --color-thumb: #ffffff; --color-code: #1d0808; --color-code-ink: #fff6e3; --color-code-muted: #c8a99a;
   --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif; --font-body: var(--font-instrument), ui-sans-serif, system-ui, sans-serif; --font-outlier: var(--font-jetbrains), ui-monospace, monospace;
   --display-weight: 700;
   --radius-card: 18px; --radius-pill: 999px; --rule-hair: 1px; --shadow-card: 0 1px 2px rgb(60 10 10 / 0.06), 0 18px 40px -22px rgb(60 10 10 / 0.35);
@@ -31,7 +31,7 @@
     --color-rule: rgb(255 236 200 / 0.14);
     --color-accent: #ffcc00; --color-accent-ink: #1d0808; --color-focus: #ffcc00;
     --color-band: #7a0000; --color-band-2: #5c0000;
-    --color-surface: #170b0b; --color-code: #050202; --color-code-ink: #fff6e3;
+    --color-surface: #170b0b; --color-thumb: #2e1717; --color-code: #050202; --color-code-ink: #fff6e3;
     --shadow-card: 0 1px 2px rgb(0 0 0 / 0.4), 0 18px 40px -22px rgb(0 0 0 / 0.8);
   }
 }
@@ -41,7 +41,7 @@
   --color-rule: rgb(255 236 200 / 0.14);
   --color-accent: #ffcc00; --color-accent-ink: #1d0808; --color-focus: #ffcc00;
   --color-band: #7a0000; --color-band-2: #5c0000;
-  --color-surface: #170b0b; --color-code: #050202; --color-code-ink: #fff6e3;
+  --color-surface: #170b0b; --color-thumb: #2e1717; --color-code: #050202; --color-code-ink: #fff6e3;
   --shadow-card: 0 1px 2px rgb(0 0 0 / 0.4), 0 18px 40px -22px rgb(0 0 0 / 0.8);
 }
 /* the held-out figure (Anatomy kit) on the page's paper: its own theme block, over the kit's .iso defaults */
