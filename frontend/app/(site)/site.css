@@ -196,26 +196,49 @@ main > .row:first-child { border-top: 0; padding-top: var(--section-gap); }
 .colophon a:focus-visible, .letter a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; border-radius: 4px; }
 
 /* ---- smaller screens ------------------------------------------------------------------------------- */
+/* landscape tablets keep the split: the 3D bars stay on the first screen beside the headline */
 @media (max-width: 64rem) {
+  .hero, .row, .letter__grid { gap: var(--space-xl); }
+  .hero { min-height: min(calc(100svh - 76px), 720px); }
+}
+@media (max-width: 60rem) {
   .nav__links { display: none; }
   .nav .btn { margin-left: auto; }
+}
+/* portrait tablets and phones stack; the stage gets shorter so the bars follow the actions closely */
+@media (max-width: 56rem) {
   .hero, .row, .row--lead, .letter__grid { grid-template-columns: minmax(0, 1fr); }
-  .hero { min-height: 0; max-height: none; gap: var(--space-xl); padding-block: var(--space-lg) var(--space-2xl); }
-  .stage--hero { max-height: none; }
+  .hero { min-height: 0; padding-block: var(--space-lg) var(--space-2xl); }
+  .hero h1 { font-size: clamp(2.5rem, min(7vw, 10svh), 4rem); max-width: 14ch; }
+  .hero__lead { max-width: 36ch; }
+  .stage--hero { aspect-ratio: 16 / 10; max-height: 70svh; }
   .row__text { position: static; }
-  .jobs { grid-template-columns: minmax(0, 1fr); }
+  .row__text h2 { max-width: 18ch; }
 }
 @media (max-width: 40rem) {
   .nav { gap: var(--space-sm); min-height: 64px; }
   .nav__by { display: none; }
   .nav .btn { padding: 0 var(--space-sm); }
   .hero h1 { font-size: clamp(2.5rem, 11vw, 3.25rem); }
+  .stage--hero { aspect-ratio: 1 / 1; }
   .hero__actions .btn, .hero__actions .cmd { width: 100%; justify-content: space-between; }
+  .code { white-space: pre-wrap; overflow-wrap: anywhere; padding: var(--space-md); }
   .fig__stage { padding: var(--space-2xl) var(--space-2xs) var(--space-2xl); }
   .fig__corners [data-corner="title"], .fig__corners [data-corner="hint"] { display: none; }
+  .jobs__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .jobs__report { aspect-ratio: auto; padding: var(--space-lg); }
   .jobs__report li { font-size: var(--text-lg); }
   .letter__actions .btn, .letter__actions .cmd { width: 100%; justify-content: space-between; }
+}
+/* touch: every link and control is at least 44px tall to the finger, without changing how it looks */
+@media (pointer: coarse) {
+  .nav__mark, .nav__by, .more, .letter__sign a, .colophon a { display: inline-flex; align-items: center; min-height: 44px; }
+  .nav__by { align-self: stretch; }
+  .letter__sign a { justify-self: start; }
+  .colophon ul { gap: 0 var(--space-lg); }
+  .stage__pause { min-height: 44px; padding: 0 var(--space-md); }
+  .jobs__item { min-height: 48px; }
+  .btn--sm, .switch button { min-height: 44px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .hero h1, .hero__lead, .hero__actions, .hero__runs, .hero__visual, .jobs__stage .stage { animation: none; }
