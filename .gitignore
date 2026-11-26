@@ -37,3 +37,7 @@ plainml-output/
 
 # the design kit's local check state and Chrome profiles
 frontend/.taste-skill/
+.playwright-cli/
+frontend/.playwright-cli/
+frontend/.hallmark/
+frontend/.impeccable/
