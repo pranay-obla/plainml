@@ -13,6 +13,15 @@
   - It ends with a short letter from the author.
 - **Uploading moved to `/new/`.** The upload box, the example datasets and your recent results are
   there, and every "New" and "Start over" link goes to it.
+- **Scores in plain words.** A run page's headline tiles now read "Score on unseen rows", "Score while
+  comparing" and "A simple guess", each with a line saying what the number is and whether higher or
+  lower is better, instead of "Test F1", "Cross-validated F1" and "Simple baseline". The 3D chart's
+  caption and baseline line use the same words.
+- **Clearer upload errors.** An empty file or one that doesn't read as a table now says so in plain words,
+  with what to do next, and no longer shows the server's path to the file.
+- **Calmer app pages.** The glows behind buttons, badges and selected cards are gone, and the footer
+  names the author.
+- **Fix:** a long column name no longer makes an app page wider than a phone's screen.
 
 ## 1.0.1 (November 22, 2026)
 
