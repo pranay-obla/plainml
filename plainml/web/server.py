@@ -405,7 +405,9 @@ def run_visual(
                     }
                     for _, row in board.iterrows()
                 ],
-                lines=[{"value": baseline, "label": "A simple guess"}] if baseline is not None else [],
+                lines=[{"value": baseline, "label": "A simple guess"}]
+                if baseline is not None
+                else [],
                 lower_is_better=lower,
             )
         if kind == "importance" and (folder / "rankings.csv").is_file():
@@ -913,7 +915,11 @@ def _upload_error(name: str, exc: PlainMLError) -> PlainMLError:
     """The reader's error, for a browser: the file's own name (never the server's path to it),
     what is wrong in plain words, and what to do next."""
     cause = exc.__cause__
-    if isinstance(cause, pd.errors.EmptyDataError) or "no columns" in str(exc).lower() or "is empty" in str(exc).lower():
+    if (
+        isinstance(cause, pd.errors.EmptyDataError)
+        or "no columns" in str(exc).lower()
+        or "is empty" in str(exc).lower()
+    ):
         return PlainMLError(
             f"'{name}' is empty: it has no columns or rows.",
             hint="Check that the sheet was saved with its data, then upload it again.",
