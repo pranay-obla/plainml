@@ -15,7 +15,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
 
-__version__ = "1.0.1"
+__version__ = "1.1.0"
 
 # Public API, imported lazily so `plainml --help` doesn't pay for importing scikit-learn.
 _API = {

@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.1.0 (November 25, 2026)
 
 - **A new home page.** A personal project page, built on real results:
   - The hero holds plainml's own **3D model comparison**, live, on a cardinal band; drag to turn it.
